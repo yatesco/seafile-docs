@@ -36,7 +36,7 @@ sudo yum install poppler-utils
 
 ### Install Libreoffice/UNO ###
 
-Libreoffice 4.0+ and Python-uno library are needed to enable office files online preview. If you don't install them, the office documents online preview will be disabled.
+Libreoffice 4.1+ and Python-uno library are needed to enable office files online preview. If you don't install them, the office documents online preview will be disabled.
 
 On Ubuntu/Debian:
 ```
@@ -62,7 +62,7 @@ sudo apt-get install ttf-wqy-microhei ttf-wqy-zenhei xfonts-wqy
 
 ### Install Python libraries ###
 
-First make sure your have installed python 2.6 or 2.7
+First make sure your have installed python 2.6.5+ or 2.7
 ```
 sudo easy_install pip
 sudo pip install boto
