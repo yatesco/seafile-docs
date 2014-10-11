@@ -56,7 +56,6 @@
    * [Configurable Options](deploy_win_pro/seafile_win_pro_configure_options.md)
    * [Details about File Search](deploy_pro/details_about_file_search.md)
 * [Server Configuration and Customization](config/README.md)
-   * [Config and customize Email notifications](config/email.md)
    * [ccnet.conf](config/ccnet-conf.md)
    * [seafile.conf](config/seafile-conf.md)
    * [seahub_settings.py](config/seahub_settings_py.md)
