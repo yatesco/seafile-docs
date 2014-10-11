@@ -19,7 +19,7 @@ There is one additional config file in the pro edition:
 Email:
 
 * [Sending email notifications](sending_email.md)
-* [Customize email notifications](customize_email.md)
+* [Customize email notifications](customize_email_notifications.md)
 
 User management
 
