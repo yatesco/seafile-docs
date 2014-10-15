@@ -1,11 +1,12 @@
 # Enable search and background tasks in a cluster
+
 In the seafile cluster, only one server should run the background tasks, including:
 
 - indexing files for search
 - email notification
 
 
-You need to choose one node to run the background tasks. 
+You need to choose one node to run the background tasks. Note: office file preview is not supported in a cluster environment yet.
 
 Let's assume you have three nodes in your cluster, namely A, B, and C, and you decide that:
 
