@@ -10,6 +10,8 @@ Config Options
 
 - [Configurable Options](seafile_win_pro_configure_options.md)
 
+Notice: Seafile windows pro server does not support preview for DOC/PPT/EXCEL
+
 ## Search
 
 * [Details about File Search](../deploy_pro/details_about_file_search.md)
