@@ -6,20 +6,13 @@ Following options should be set in file **seafevents.conf**, and need to restart
 ```
 [INDEX FILES]
 ...
-# Whether search office/pdf files. Defaults to false.
-index_office_pdf = true
+# Seafile does not support search contents of PDF/DOC on Windows system 
+index_office_pdf = false
 
 # Set search language.
 lang = german
 ```
 
-Following options should be set in file **seahub_settings.py**, and need to restart seahub to take affect.
-
-```
-# Whether highlight the keywords in the file when the visit is via clicking a link in 'search result' page. 
-# Defaults to false. Since v3.0.5.
-HIGHLIGHT_KEYWORD = True
-```
 
 ## <a id="wiki-faq"></a>Common problems
 
@@ -27,35 +20,7 @@ HIGHLIGHT_KEYWORD = True
 ### <a id="wiki-search-office-pdf"></a>I can't search Office/PDF files
 
 
-First, make sure you have `index_office_pdf = true` in the file **seafevents.conf**:
-
-```
-[INDEX FILES]
-...
-index_office_pdf = true
-
-```
-
-Second, check whether the program **pdftotext** has been installed.
-
-If you have not installed **pdftotext**, you can't extract text from PDF files.
-
-```
-which pdftotext
-```
-
-Run the above command, if there is no output, then you need to install it:
-
-```
-sudo apt-get install poppler-utils
-```
-
-After installed **pdftotext**, you need to re-build your search index:
-
-```
-./pro/pro.py search --clear
-./pro/pro.py search --update
-```
+Seafile does not support search contents of PDF/DOC on Windows system 
 
 
 ### <a id="wiki-search-no-result"></a>I get no result when I search a keyword
