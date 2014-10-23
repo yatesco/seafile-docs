@@ -114,6 +114,9 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 # Syncing via desktop clients is always encrypted on the clients side.
 FORCE_SERVER_CRYPTO = True
 
+# Whether a user can make group as public. Default is False.
+ENABLE_MAKE_GROUP_PUBLIC = False
+
 </pre>
 
 
