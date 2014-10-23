@@ -29,7 +29,8 @@ SERVER_EMAIL = EMAIL_HOST_USER
 
 **Note**: If your Email service still can not work, you may checkout the log file <code>logs/seahub.log</code> to see what may cause the problem. For complete email notification list, please refer to [Email notification list](customize_email_notifications.md).
 
-**Note2**: If you want to use the Email service without authentication leaf <code>EMAIL_HOST_USER</code> and <code>EMAIL_HOST_PASSWORD</code> **blank** (<code>''</code>). (But notice that the emails then will be sent without a <code>From:</code> address.)
+**Note2**: If you want to use the Email service without authentication leaf <code>EMAIL_HOST_PASSWORD</code> **blank** (<code>''</code>).
+
 
 ## Memcached
 
@@ -40,7 +41,7 @@ After install **python-memcache**, add the following lines to **seahub_settings.
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-	'LOCATION': '127.0.0.1:11211',
+        'LOCATION': '127.0.0.1:11211',
     }
 }
 ```
