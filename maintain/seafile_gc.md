@@ -1,14 +1,6 @@
 # Seafile GC
 
-Seafile uses storage de-duplication technology to reduce storage usage.
-Simply put, there would be two implications:
-
-* Different versions of a file may share some data blocks;
-* Different libraries may also share some data blocks.
-
-The net result is that the underlying data blocks will not be removed
-immediately after you delete a file library. As a result, the number of
-unused data blocks will increase on Seafile server.
+Seafile uses storage de-duplication technology to reduce storage usage. The underlying data blocks will not be removed immediately after you delete a file or a library. As a result, the number of unused data blocks will increase on Seafile server.
 
 To release the storage space occupied by unused blocks, you have to run a
 "garbage collection" program to clean up unused blocks on your server.
@@ -18,9 +10,7 @@ The GC program cleans up two types of unused blocks:
 1. Blocks that no library references to;
 2. If you set history length limit on some libraries, the out-dated blocks in those libraries will also be removed.
 
-**Before running GC, you must shutdown the seafile program on your server.**
-This is because new blocks written into Seafile while GC is running may be
-mistakenly deleted by the GC program.
+**Before running GC, you must shutdown the Seafile program on your server if you use the community edition. (For Seafile professional edition, from version 3.1.10, you don't need to shutdown the Seafile program.)**  This is because new blocks written into Seafile while GC is running may be mistakenly deleted by the GC program. 
 
 
 ## Run GC in version 3.1.2 and later
