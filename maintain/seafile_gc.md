@@ -10,7 +10,7 @@ The GC program cleans up two types of unused blocks:
 1. Blocks that no library references to;
 2. If you set history length limit on some libraries, the out-dated blocks in those libraries will also be removed.
 
-**Before running GC, you must shutdown the Seafile program on your server if you use the community edition. (For Seafile professional edition, from version 3.1.10, you don't need to shutdown the Seafile program.)**  This is because new blocks written into Seafile while GC is running may be mistakenly deleted by the GC program. 
+**Before running GC, you must shutdown the Seafile program on your server if you use the community edition. (For professional edition, from version 3.1.10, you don't need to shutdown the Seafile program.)**  This is because new blocks written into Seafile while GC is running may be mistakenly deleted by the GC program. 
 
 
 ## Run GC in version 3.1.2 and later
