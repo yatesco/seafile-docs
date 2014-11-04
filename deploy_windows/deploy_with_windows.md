@@ -18,7 +18,7 @@ For more information on Seafile server, check the documents on [Seafile Linux ve
 
 ## Server Administration
 
-- [Garbage Collecting Unused Blocks on Seafile Server](../maintain/seafile_gc.md)
+- [Garbage Collecting Unused Blocks on Seafile Server](windows_gc.md)
 
 ## Common Issues
 
