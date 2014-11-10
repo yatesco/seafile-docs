@@ -14,6 +14,7 @@
    * [Enabling Https with Nginx](deploy/https_with_nginx.md)
    * [Config Seahub with Apache](deploy/deploy_with_apache.md)
    * [Enabling Https with Apache](deploy/https_with_apache.md)
+   * [Enable syncing via HTTP/HTTPS](deploy/deploy_http_sync.md)
    * [Configure Seafile to use LDAP](deploy/using_ldap.md)
    * [Start Seafile at System Bootup](deploy/start_Seafile_at_system_bootup.md)
    * [Firewall settings](deploy/using_firewall.md)

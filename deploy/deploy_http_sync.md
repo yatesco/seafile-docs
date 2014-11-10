@@ -1,6 +1,6 @@
 # Configure Syncing via HTTP Protocol
 
-Starting from version 4.0.0, Seafile supports file syncing via HTTP protocol. To use this feature, you must configure Nginx or Apache on the server.
+Starting from version 4.0.0, Seafile supports file syncing via HTTP protocol. To use this feature, you must configure Nginx or Apache on the server. (If you have already configured Nginx/Apache in version 3.x and your configuration matches the following, you don't need to do further modifications to enable HTTP/HTTPS syncing.)
 
 ## Nginx
 
