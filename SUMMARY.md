@@ -3,6 +3,7 @@
 * [Introduction](README.md)
 * [Overview](overview/README.md)
    * [Seafile Components](overview/components.md)
+   * [File permission management](overview/file_permission_management.md)
    * [Roadmap](roadmap.md)
    * [FAQ](faq.md)
    * [Changelog](changelog.md)
