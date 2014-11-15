@@ -40,9 +40,10 @@
    * [Download and Setup Seafile Professional Server](deploy_pro/download_and_setup_seafile_professional_server.md)
    * [Migrate from Seafile Community Server](deploy_pro/migrate_from_seafile_community_server.md)
    * [Upgrading Seafile Professional Server](deploy_pro/upgrading_seafile_professional_server.md)
-   * [Setup With Amazon S3](deploy_pro/setup_with_mazon_S3.md)
+   * [Setup With Amazon S3](deploy_pro/setup_with_amazon_S3.md)
    * [Setup With OpenStackSwift](deploy_pro/setup_with_OpenStackSwift.md)
    * [Setup With Ceph](deploy_pro/setup_with_Ceph.md)
+   * [Setup with MariaDB and Ceph](deploy_pro/clustering_with_mariadb_ceph.md)
    * [Configurable Options](deploy_pro/configurable_options.md)
    * Other Deployment Issues
        * [Use existing ElasticSearch server](deploy_pro/use_existing_ElasticSearch_server.md)
