@@ -14,10 +14,12 @@ sudo apt-get install default-jre
 
 On CentOS/Red Hat:
 ```
-sudo yum install java-1.6.0-openjdk
+sudo yum install java-1.7.0-openjdk
 ```
 
 *Note*: You can use either the JRE of openJDK or Oracle JRE, but not the GCJ(GNU Java) package.
+
+*Note*: Since version 3.1.12, java 1.7 is required, please check your java version by `java -version`
 
 ### Install poppler-utils ###
 
