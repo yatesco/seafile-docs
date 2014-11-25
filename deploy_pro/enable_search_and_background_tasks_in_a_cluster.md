@@ -23,8 +23,7 @@ On this node, you need:
 
 On Ubuntu/Debian:
 ```
-sudo apt-get install default-jre
-sudo apt-get libreoffice python-uno # or python3-uno for ubuntu 14.04+
+sudo apt-get install default-jre libreoffice python-uno # or python3-uno for ubuntu 14.04+
 ```
 
 On CentOS/Red Hat:
