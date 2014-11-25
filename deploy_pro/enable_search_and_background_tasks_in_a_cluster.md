@@ -4,38 +4,46 @@ In the seafile cluster, only one server should run the background tasks, includi
 
 - indexing files for search
 - email notification
+- office documents converts service
 
 
-You need to choose one node to run the background tasks. Note: office file preview is not supported in a cluster environment yet.
+You need to choose one node to run the background tasks.
 
-Let's assume you have three nodes in your cluster, namely A, B, and C, and you decide that:
+Let's assume you have three nodes in your cluster: A, B, and C. And you decide that:
 
-* Node A would run the background tasks
-* Node B and Node C are normal nodes
+* All three nodes would run seafile server and seahub server
+* Node A would run the background tasks.
+
+![cluster-nodes](../images/cluster-nodes.png)
 
 
 ## Configuring Node A (the background-tasks node)
 
 On this node, you need:
 
-### Install Java
+### Install Java and LibreOffice
 
 On Ubuntu/Debian:
 ```
-sudo apt-get install default-jre
+sudo apt-get install default-jre libreoffice python-uno # or python3-uno for ubuntu 14.04+
 ```
 
 On CentOS/Red Hat:
 ```
 sudo yum install java-1.6.0-openjdk
+sudo yum install libreoffice libreoffice-headless libreoffice-pyuno
 ```
 
-### Edit pro-data/seafevents.conf
-
-REMOVE the line:
+Edit **pro-data/seafevents.conf** and ensure this line does NOT exist:
 
 ```
 external_es_server = true
+```
+
+Edit **seahub_settings.py** and add a line:
+
+```
+OFFICE_CONVERTOR_NODE = True
 ```
 
 ### Edit the firewall rules
@@ -52,6 +60,12 @@ On nodes B and C, you need to:
 external_es_server = true
 es_host = <ip of node A>
 es_port = 9500
+```
+
+Edit **seahub_settings.py** and add a line:
+
+```
+OFFICE_CONVERTOR_ROOT = http://<ip of node A>
 ```
 
 ## Start the background tasks
