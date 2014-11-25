@@ -34,7 +34,7 @@ sudo yum install java-1.6.0-openjdk
 sudo yum install libreoffice libreoffice-headless libreoffice-pyuno
 ```
 
-Edit **pro-data/seafevents.conf** and **REMOVE** the line:
+Edit **pro-data/seafevents.conf** and ensure this line does NOT exist:
 
 ```
 external_es_server = true
