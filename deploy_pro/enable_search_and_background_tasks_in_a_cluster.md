@@ -9,10 +9,12 @@ In the seafile cluster, only one server should run the background tasks, includi
 
 You need to choose one node to run the background tasks.
 
-Let's assume you have three nodes in your cluster, namely A, B, and C, and you decide that:
+Let's assume you have three nodes in your cluster: A, B, and C. And you decide that:
 
-* Node A would run the background tasks
-* Node B and Node C are normal nodes
+* All three nodes would run seafile server and seahub server
+* Node A would run the background tasks.
+
+![cluster-nodes](../images/cluster-nodes.png)
 
 
 ## Configuring Node A (the background-tasks node)
