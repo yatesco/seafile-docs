@@ -12,14 +12,16 @@ That is, if you are using Community Server 1.6, and want to switch to the Profes
 
 ### Install Java Runtime Environment (JRE) ###
 
+Java 7 or higher is required.
+
 On Ubuntu/Debian:
 ```
-sudo apt-get install default-jre
+sudo apt-get install openjdk-7-jre
 ```
 
 On CentOS/Red Hat:
 ```
-sudo yum install java-1.6.0-openjdk
+sudo yum install java-1.7.0-openjdk
 ```
 
 *Note*: You can use either the JRE of openJDK or Oracle JRE, but not the GCJ(GNU Java) package.

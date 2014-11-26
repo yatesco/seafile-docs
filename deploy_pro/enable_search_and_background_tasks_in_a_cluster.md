@@ -30,7 +30,7 @@ sudo apt-get install default-jre libreoffice python-uno # or python3-uno for ubu
 
 On CentOS/Red Hat:
 ```
-sudo yum install java-1.6.0-openjdk
+sudo yum install java-1.7.0-openjdk
 sudo yum install libreoffice libreoffice-headless libreoffice-pyuno
 ```
 
