@@ -25,7 +25,7 @@ On this node, you need:
 
 On Ubuntu/Debian:
 ```
-sudo apt-get install default-jre libreoffice python-uno # or python3-uno for ubuntu 14.04+
+sudo apt-get install openjdk-7-jre libreoffice python-uno # or python3-uno for ubuntu 14.04+
 ```
 
 On CentOS/Red Hat:
@@ -33,6 +33,9 @@ On CentOS/Red Hat:
 sudo yum install java-1.7.0-openjdk
 sudo yum install libreoffice libreoffice-headless libreoffice-pyuno
 ```
+
+*Note*: Since version 3.1.12, java 1.7 is required, please check your java version by `java -version`. If not, please [change the default java version](./change_default_java.md).
+
 
 Edit **pro-data/seafevents.conf** and ensure this line does NOT exist:
 
