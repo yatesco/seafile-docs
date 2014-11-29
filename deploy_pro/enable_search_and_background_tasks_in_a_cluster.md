@@ -11,8 +11,8 @@ You need to choose one node to run the background tasks.
 
 Let's assume you have three nodes in your cluster: A, B, and C. And you decide that:
 
-* All three nodes would run seafile server and seahub server
-* Node A would run the background tasks.
+* Node A would run background tasks.
+* Node B and C would be normal nodes.
 
 ![cluster-nodes](../images/cluster-nodes.png)
 
