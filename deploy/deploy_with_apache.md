@@ -67,6 +67,11 @@ Second, modify Apache config file:
 
     RewriteEngine On
 
+    # For apache2.2, you may need to change to
+    #  <Location /media>
+    #    Order allow,deny
+    #    Allow from all
+    #  </Location>
     <Location /media>
         Require all granted
     </Location>
