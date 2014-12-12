@@ -109,11 +109,6 @@ SESSION_SAVE_EVERY_REQUEST = False
 # Whether a user's session cookie expires when the Web browser is closed.
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 
-# Using server side crypto by default, otherwise, let user choose crypto method. 
-# This option only controls files upload/download via web browser.
-# Syncing via desktop clients is always encrypted on the clients side.
-FORCE_SERVER_CRYPTO = True
-
 # Whether a user can make group as public. Default is False.
 ENABLE_MAKE_GROUP_PUBLIC = False
 
