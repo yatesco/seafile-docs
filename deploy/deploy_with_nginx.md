@@ -87,7 +87,7 @@ FILE_SERVER_ROOT = 'http://www.myseafile.com/seafhttp'
 
 ## Notes when Upgrading Seafile Server
 
-When [[upgrading seafile server]], besides the normal steps you should take, there is one extra step to do: '''Update the path of the static files in your nginx/apache configuration'''. For example, assume your are upgrading seafile server 1.3.0 to 1.4.0, then:
+When [upgrading seafile server](upgrade.md), besides the normal steps you should take, there is one extra step to do: '''Update the path of the static files in your nginx/apache configuration'''. For example, assume your are upgrading seafile server 1.3.0 to 1.4.0, then:
 
 <pre>
     location /media {
