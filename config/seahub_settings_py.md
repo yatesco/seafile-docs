@@ -71,7 +71,7 @@ USER_STRONG_PASSWORD_REQUIRED = False
 
 ## Cloud Mode
 
-You should enable cloud mode if you use Seafile with an unknown user base. It disables the organization tab in Seahub's website to ensure that users can't access the user list. Also cloud mode provides some nice features like sending invitation to unregistered users. Therefore you also want to enable user registration.
+You should enable cloud mode if you use Seafile with an unknown user base. It disables the organization tab in Seahub's website to ensure that users can't access the user list. Cloud mode provides some nice features like sharing content with unregistered users and sending invitations to them. Therefore you also want to enable user registration.
 
 <pre>
 
