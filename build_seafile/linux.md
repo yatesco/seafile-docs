@@ -83,6 +83,7 @@ cd libsearpc-3.0-latest
 ./configure --prefix=$PREFIX
 make
 sudo make install
+cd ..
 ```
 
 ##### ccnet #####
@@ -93,6 +94,7 @@ cd ccnet-${version}
 ./configure --prefix=$PREFIX
 make
 sudo make install
+cd ..
 ```
 
 ##### seafile
@@ -103,6 +105,7 @@ cd seafile-${version}/
 ./configure --prefix=$PREFIX --disable-gui
 make
 sudo make install
+cd ..
 ```
 
 #### seafile-client
@@ -112,6 +115,7 @@ cd seafile-client-${version}
 cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PREFIX .
 make
 sudo make install
+cd ..
 ```
 
 #### custom prefix
