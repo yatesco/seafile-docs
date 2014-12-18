@@ -60,7 +60,7 @@ wget https://github.com/haiwen/seafile-client/archive/v${version}.tar.gz
 Now uncompress them:
 
 ```sh
-tar xf libsearpc-v3.0-latest.tar.gz
+tar xf libsearpc-3.0-latest.tar.gz
 tar xf ccnet-${version}.tar.gz
 tar xf seafile-${version}.tar.gz
 tar xf seafile-client-${version}.tar.gz
