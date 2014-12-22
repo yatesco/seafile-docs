@@ -69,6 +69,22 @@ USER_STRONG_PASSWORD_REQUIRED = False
 
 </pre>
 
+## Cloud Mode
+
+You should enable cloud mode if you use Seafile with an unknown user base. It disables the organization tab in Seahub's website to ensure that users can't access the user list. Cloud mode provides some nice features like sharing content with unregistered users and sending invitations to them. Therefore you also want to enable user registration.
+
+<pre>
+
+# Enable cloude mode and hide `Organization` tab.
+CLOUD_MODE = True
+
+# Enalbe registration on web.
+ENABLE_SIGNUP = True
+
+</pre>
+
+If you want to use Seafile within your organization just disable cloud mode.
+
 ## Other options
 
 You may change seahub website's settings by adding variables in `seahub_settings.py`.
@@ -115,10 +131,6 @@ SEND_EMAIL_ON_ADDING_SYSTEM_MEMBER = True
  # Whether to send email when a system admin resetting a user's password. Default is `True`.
 # NOTE: since version 1.4.
 SEND_EMAIL_ON_RESETTING_USER_PASSWD = True
-
-# Hide `Organization` tab.
-# If you want your private seafile behave exactly like https://cloud.seafile.com/, you can set this flag.
-CLOUD_MODE = True
 
 # Online preview maximum file size, defaults to 30M.
 FILE_PREVIEW_MAX_SIZE = 30 * 1024 * 1024
