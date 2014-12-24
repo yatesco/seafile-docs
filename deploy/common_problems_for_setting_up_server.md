@@ -4,10 +4,13 @@
 
 Seafile uses Django 1.5, which requires Python 2.6.5+. Make sure your Python version is 2.7.
 
-#### "Could not import settings 'seahub.settings'"
+#### Seahub.sh can't start, the error message contains: "Could not import settings 'seahub.settings', libpython2.7.so.1.0: can not open shared object file"
 
-Make sure you have installed all the python module dependancy for Seafile and make sure your Python version is 2.7.
+You probably encounter this problem in Ubuntu 14.04. Seafile pro edition requires libpython2.7. Install it by:
 
+```
+sudo apt-get install libpython2.7
+```
 
 #### Failed to upload/download file online
 
