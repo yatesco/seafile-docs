@@ -1,5 +1,14 @@
 # Common Problems for Setting up Server
 
+#### "Error when calling the metaclass bases" during Seafile initialization
+
+Seafile uses Django 1.5, which requires Python 2.6.5+. Make sure your Python version is 2.7.
+
+#### "Could not import settings 'seahub.settings'"
+
+Make sure you have installed all the python module dependancy for Seafile and make sure your Python version is 2.7.
+
+
 #### Failed to upload/download file online
 
 * Check your SERVICE_URL setting in ccnet.conf and FILE_SERVER_ROOT setting in seahub_settings.py
@@ -35,6 +44,3 @@ Solutions:
 1. Run installation script as non-root user
 2. Copy /media folder to var/www/ and edit the Alias location in /etc/apache2/sites-enabled/000-default
 
-#### "Error when calling the metaclass bases" during Seafile initialization
-
-Seafile uses Django 1.5, which requires Python 2.6.5+. Make sure your Python version >= 2.6.5.
