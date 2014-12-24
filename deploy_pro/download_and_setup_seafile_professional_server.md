@@ -120,6 +120,8 @@ You should notice the difference between the names of the Community Server and P
 
 The setup process of Seafile Professional Server is the same as the Seafile Community Server. See [Download and Setup Seafile Server With MySQL](../deploy/using_mysql.md).
 
+If you have any problem in setting up the service, please check [Common problems in setting up Seafile server](../deploy/common_problems_for_setting_up_server.md).
+
 After you have succesfully setup Seafile Professional Server, you would have a directory layout like this:
 
 ```
