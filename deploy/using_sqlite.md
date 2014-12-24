@@ -59,16 +59,15 @@ The benefit of this layout is that
 
 The Seafile server package requires the following packages have been installed in your system
 
-- python 2.6.5+ or 2.7
+- python 2.7
 - python-setuptools
-- python-simplejson
 - python-imaging
 - sqlite3
 
 ```
 #on Debian
 apt-get update
-apt-get install python2.7 python-setuptools python-simplejson python-imaging sqlite3
+apt-get install python2.7 python-setuptools python-imaging sqlite3
 ```
 
 #### Setup
