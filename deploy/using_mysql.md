@@ -100,14 +100,13 @@ The Seafile server package requires the following packages have been installed i
 
 * python 2.7
 * python-setuptools
-* python-simplejson
 * python-imaging
 * python-mysqldb
 
 <pre>
 #on Debian/Ubuntu
 apt-get update
-apt-get install python2.7 python-setuptools python-simplejson python-imaging python-mysqldb
+apt-get install python2.7 python-setuptools python-imaging python-mysqldb
 </pre>
 
 ### Setup
