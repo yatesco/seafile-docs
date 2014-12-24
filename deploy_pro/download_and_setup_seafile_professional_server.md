@@ -62,7 +62,7 @@ sudo apt-get install ttf-wqy-microhei ttf-wqy-zenhei xfonts-wqy
 
 ### Install Python libraries ###
 
-First make sure your have installed python 2.6.5+ or 2.7
+First make sure your have installed python 2.7
 ```
 sudo easy_install pip
 sudo pip install boto
@@ -71,6 +71,12 @@ sudo pip install boto
 If you receive an error about "Wheel installs require setuptools >= ...", run this between the pip and boto lines above
 ```
 sudo pip install setuptools --no-use-wheel --upgrade
+```
+
+### Install libpython2.7 if you use Ubuntu 14.04
+
+```
+sudo apt-get install libpython2.7
 ```
 
 ### Install other libraries as required in the community edition
