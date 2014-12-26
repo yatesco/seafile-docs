@@ -1,6 +1,8 @@
 # Download and Setup Seafile Professional Server
 ## <a id="wiki-preparation"></a>Preparation ##
 
+The following document is tested in Ubuntu 14.04, so we recommend that you use Ubuntu 14.04 as your server.
+
 ### Minimum System Requirement ###
 
 - A Linux server with 2GB RAM
@@ -40,8 +42,9 @@ Libreoffice 4.1+ and Python-uno library are needed to enable office files online
 
 On Ubuntu/Debian:
 ```
-sudo apt-get install libreoffice python-uno
+sudo apt-get install libreoffice libreoffice-script-provider-python
 ```
+> For older version of Ubuntu: `sudo apt-get install libreoffice python-uno`
 
 On Centos/RHEL:
 ```
