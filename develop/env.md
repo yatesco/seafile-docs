@@ -61,8 +61,9 @@ Compile seafile with
     cd ~/dev/seafile
     ./autogen.sh
     ./configure --disable-client --enable-server
-    make
+    make     # in Mac, use `make LDFLAGS=-liconv`
     make install
+    
 
 ## Run seafile
 
@@ -73,9 +74,8 @@ Run seafile with
 
 Or you can start ccnet, seafile and fileserver manually by:
 
-    ccnet-server -c ~/dev/seafile/test/basic/conf2/ -D all -f -
-    seaf-server -c ~/dev/seafile/test/basic/conf2/ -d ~/dev/seafile/test/basic/conf2/seafile-data/ -f -l -
-    fileserver -c ~/dev/seafile/test/basic/conf2/ -d ~/dev/seafile/test/basic/conf2/seafile-data/ -f
+    ccnet-server -c ~/dev/seafile/tests/basic/conf2/ -D all -f -
+    seaf-server -c ~/dev/seafile/tests/basic/conf2/ -d ~/dev/seafile/tests/basic/conf2/seafile-data/ -f -l -
 
 ## Prepare seahub
 
