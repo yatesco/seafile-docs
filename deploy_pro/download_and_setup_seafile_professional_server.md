@@ -8,7 +8,9 @@ The following document is tested in Ubuntu 14.04, so we recommend that you use U
 > If you are using Ubuntu 14.04, you can use the following command to install all the dependency that Seafile requires at one time.
 > 
 > ```
-> sudo apt-get install openjdk-7-jre poppler-utils libreoffice libreoffice-script-provider-python libpython2.7 python-pip mysql-server python-setuptools python-imaging python-mysqldb
+> sudo apt-get install openjdk-7-jre poppler-utils libreoffice \
+> libreoffice-script-provider-python libpython2.7 python-pip mysql-server \
+> python-setuptools python-imaging python-mysqldb
 > 
 > sudo pip install boto
 > ```
