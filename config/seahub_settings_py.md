@@ -128,7 +128,7 @@ ACTIVATE_AFTER_REGISTRATION = False
 # NOTE: since version 1.4.
 SEND_EMAIL_ON_ADDING_SYSTEM_MEMBER = True
 
- # Whether to send email when a system admin resetting a user's password. Default is `True`.
+# Whether to send email when a system admin resetting a user's password. Default is `True`.
 # NOTE: since version 1.4.
 SEND_EMAIL_ON_RESETTING_USER_PASSWD = True
 
@@ -146,6 +146,16 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 
 # Whether a user can make group as public. Default is False.
 ENABLE_MAKE_GROUP_PUBLIC = False
+
+# Enable or disable thumbnails
+# NOTE: since version 4.0.2 
+ENABLE_THUMBNAIL = True
+
+# Absolute filesystem path to the directory that will hold thumbnail files.
+THUMBNAIL_ROOT = '/haiwen/seahub-data/thumbnail/thumb/'
+THUMBNAIL_EXTENSION = 'png'
+THUMBNAIL_DEFAULT_SIZE = '24'
+PREVIEW_DEFAULT_SIZE = '100'
 
 </pre>
 
