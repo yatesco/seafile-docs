@@ -87,9 +87,9 @@ create database `seahub-db` character set = 'utf8';
 
 create user 'seafile'@'localhost' identified by 'seafile';
 
-GRANT ALL PRIVILEGES ON `ccnet-db`.* to `seafile`;
-GRANT ALL PRIVILEGES ON `seafile-db`.* to `seafile`;
-GRANT ALL PRIVILEGES ON `seahub-db`.* to `seafile`;
+GRANT ALL PRIVILEGES ON `ccnet-db`.* to `seafile`@localhost;
+GRANT ALL PRIVILEGES ON `seafile-db`.* to `seafile`@localhost;
+GRANT ALL PRIVILEGES ON `seahub-db`.* to `seafile`@localhost;
 </pre>
 
 ## Setting Up Seafile Server
