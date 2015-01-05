@@ -82,7 +82,12 @@ Second, modify Apache config file:
     ProxyPass /seafhttp http://127.0.0.1:8082
     ProxyPassReverse /seafhttp http://127.0.0.1:8082
     RewriteRule ^/seafhttp - [QSA,L]
-
+    # For apache2.2, you may need to add
+    #  <Location /seafhttp>
+    #    Order allow,deny
+    #    Allow from all
+    # </Location>
+    
     #
     # seahub
     #
@@ -96,6 +101,10 @@ If you are running Apache 2.2 then you will need to [update your access control 
 
 ```
     <Location /media>
+        Order allow,deny
+        Allow from all
+    </Location>
+    <Location /seafhttp>
         Order allow,deny
         Allow from all
     </Location>
