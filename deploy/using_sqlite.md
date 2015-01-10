@@ -209,4 +209,4 @@ pkill -f "manage.py run_gunicorn"
 ## That's it!
 
 That's it! Now you may want read more about seafile.
-- [Adminintration](../maintain/README.md)
+- [Administration](../maintain/README.md)
