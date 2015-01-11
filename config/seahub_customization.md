@@ -31,7 +31,7 @@ Assume that you are using version 2.1.0. Create a folder `custom` under `seafile
 
 **Note:** Since version 2.1.
 
-Create a foler ``templates`` under ``<seafile-install-path>/seahub-data/custom``
+Create a folder ``templates`` under ``<seafile-install-path>/seahub-data/custom``
 
 ### Customize footer
 
