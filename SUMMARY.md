@@ -35,6 +35,7 @@
    * [Install Seafile Server as a Windows Service](deploy_windows/install_seafile_server_as_a_windows_service.md)
    * [Ports used by Seafile Windows Server](deploy_windows/ports_used_by_seafile_windows_server.md)
    * [Upgrading Seafile Windows Server](deploy_windows/upgrading_seafile_windows_server.md)
+   * [Migrate Seafile From Windows To Linux](deploy_windows/migrate_from_win_to_linux.md)
    * [Garbage Collecting Unused Blocks on Seafile Server](deploy_windows/windows_gc.md)
 * [Deploy Seafile Pro Edition under Linux](deploy_pro/README.md)
    * [Download and Setup Seafile Professional Server](deploy_pro/download_and_setup_seafile_professional_server.md)
