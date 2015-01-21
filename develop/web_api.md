@@ -1407,9 +1407,14 @@ check if a dir has a corresponding sub_repo, if it does not have, create one
 
 **GET** https://cloud.seafile.com/api2/search/
 
+**Request parameters**
+
+* q
+* per_page (optional)
+
 **Sample request**
 
-    curl -G -H ‘Authorization: Token 24fd3c026886e3121b2ca630805ed425c272cb96’ -H ‘Accept: application/json; indent=4’ https://cloud.seafile.com/api2/search/?q=keyword
+    curl -G -H 'Authorization: Token 24fd3c026886e3121b2ca630805ed425c272cb96' -H 'Accept: application/json; indent=4' https://cloud.seafile.com/api2/search/?q=keyword
 
 **Sample response**
 
