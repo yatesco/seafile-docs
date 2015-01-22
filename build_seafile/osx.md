@@ -44,15 +44,15 @@ Setup macports environment
 
 4. Install python
 
-        sudo port select --set python python27
         sudo port install py27-pip
+        sudo port select --set python python27
 
 5. Set pkg config environment
 
         export PKG_CONFIG_PATH=/opt/local/lib/pkgconfig:/usr/local/lib/pkgconfig
         export LIBTOOL=glibtool
         export LIBTOOLIZE=glibtoolize
-        export CFLAGS="-I/opt/local/include"
+        export CPPFLAGS="-I/opt/local/include"
         export LDFLAGS="-L/opt/local/lib -L/usr/local/lib -Wl,-headerpad_max_install_names"
 
 
@@ -83,32 +83,18 @@ Compiling seafile
 2. Compile
 
         ./autogen.sh
-        ./configure
+        ./configure --disable-fuse
         make
         sudo make install
 
 Compiling seafile-client and packaging it
 ---------
 
-1. prepare for building:
+1. execute the building script:
 
-        ./genapp.sh xcode
+        ./scripts/build.py
 
-    Generate xcode project from cmake
-
-2. Compile seafile-applet.app：
-
-        ./genapp.sh build
-
-3. Package seafile-applet.app:
-
-        ./genapp.sh otool
-        ./genapp.sh package
-
-    This will copy ccnet, seaf-daemon and other libraries to seafile-client, and use `install_name_tool` to modify the library paths in ccnet, seaf-daemon.
-    After compiling, it will copy seafile.app to `${top_dir}/../seafile-${VERSION}`. You can also compiling seafile.app in xcode.
-
-4. Go to seafile-applet.app and see if it can run correctly.
+2. Go to Release directory and see if `seafile-applet.app` can run correctly.
 
 Problem you may encounter
 -------------------------
