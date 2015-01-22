@@ -16,7 +16,7 @@ Package names are according to Ubuntu 12.04. For other Linux distros, please fin
 * libjansson-dev
 * valac
 * libfuse-dev
-* python-dateutil
+
 
 The following libraries need to be compiled from source.
 
@@ -34,7 +34,7 @@ libevhtp can be build by <code>cmake .; make; sudo make install</code>.  libevht
 * simplejson (python-simplejson)
 * PIL (aka. python imaging library, python-image) or Pillow
 * chardet
-
+* python-dateutil
 
 ## Download & Compile
 
