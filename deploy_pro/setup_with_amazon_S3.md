@@ -65,6 +65,13 @@ use_v4_signature = true
 aws_region = eu-central-1
 ```
 
+For file search and webdav to work with the v4 signature mechanism, you need to add following lines to ~/.boto
+
+```
+[s3]
+use-sigv4 = True
+```
+
 ### Using memcached cluster
 
 In a cluster environment, you may want to use a memcached cluster. In the above configuration, you have to specify all the memcached server node addresses in seafile.conf
