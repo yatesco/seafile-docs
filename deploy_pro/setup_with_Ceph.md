@@ -9,6 +9,20 @@ Seafile acts as a client to Ceph/RADOS, so it needs to access ceph cluster's con
 seafile-machine# sudo scp user@ceph-admin-node:/etc/ceph/ /etc
 ```
 
+## Install and enable memcached
+
+For best performance, Seafile requires install memcached and enable memcache for objects. 
+
+We recommend to allocate 128MB memory for memcached. Edit /etc/memcached.conf
+
+```
+# Start with a cap of 64 megs of memory. It's reasonable, and the daemon default
+# Note that the daemon will grow to this size, but does not start out holding this much
+# memory
+# -m 64
+-m 128
+```
+
 ## Edit seafile configuration
 
 Edit `seafile-data/seafile.conf`, add the following lines:
@@ -41,18 +55,12 @@ ceph-admin-node# rados mkpool seafile-commits
 ceph-admin-node# rados mkpool seafile-fs
 ```
 
-## Install and enable memcached
+### Using memcached cluster
 
-For best performance, Seafile requires install memcached and enable memcache for objects. 
-
-We recommend to allocate 128MB memory for memcached. Edit /etc/memcached.conf
+In a cluster environment, you may want to use a memcached cluster. In the above configuration, you have to specify all the memcached server node addresses in seafile.conf
 
 ```
-# Start with a cap of 64 megs of memory. It's reasonable, and the daemon default
-# Note that the daemon will grow to this size, but does not start out holding this much
-# memory
-# -m 64
--m 128
+memcached_options = --SERVER=192.168.1.134 --SERVER=192.168.1.135 --SERVER=192.168.1.136 --POOL-MIN=10 --POOL-MAX=100
 ```
 
 ## Use arbitary Ceph user
