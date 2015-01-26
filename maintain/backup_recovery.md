@@ -88,15 +88,13 @@ If you have a lot of data, copying the whole data directory would take long. You
 
 This command backup the data directory to `/backup/data/haiwen`.
 
-Important: The ID in `ccnet/ccnet.conf` must be consistent with the SHA1 value of `ccnet/mykey.peer`. So do not forget to copy `ccnet/mykey.peer`.
-
 ## Restore from backup ##
 
 Now supposed your primary seafile server is broken, you're switching to a new machine. Using the backup data to restore your Seafile instance:
 
 1. Copy `/backup/data/haiwen` to the new machine. Let's assume the seafile deployment location new machine is also `/data/haiwen`.
 2. Restore the database.
-3. Run seaf-fsck tool to check data integrity on the new machine. See [seaf-fsck documentation](seafile_fsck.md).
+3. Since database and data are backed up separately, they may become a little inconsistent with each other. To correct the potential inconsistency, run seaf-fsck tool to check data integrity on the new machine. See [seaf-fsck documentation](seafile_fsck.md).
 
 ### Restore the databases
 
