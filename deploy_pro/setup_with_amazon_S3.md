@@ -53,6 +53,26 @@ The key_id and key are required to authenticate you to S3. You can find the key_
 
 When creating your buckets on S3, please first read [S3 bucket naming rules][1]. Note especially not to use **UPPERCASE** letters in bucket names (don't use camel style names, such as MyCommitOjbects).
 
+### Use S3 in newer regions
+
+After Januaray 2014, new regions of AWS will only support authentication signature version 4 for S3. At this time, new region includes Frankfurt and China.
+
+To use S3 backend in these regions, add following options to commit_object_backend, fs_object_backend and block_backend section in seafile.conf
+
+```
+use_v4_signature = true
+# eu-central-1 for Frankfurt region
+aws_region = eu-central-1
+```
+
+### Using memcached cluster
+
+In a cluster environment, you may want to use a memcached cluster. In the above configuration, you have to specify all the memcached server node addresses in seafile.conf
+
+```
+memcached_options = --SERVER=192.168.1.134 --SERVER=192.168.1.135 --SERVER=192.168.1.136 --POOL-MIN=10 --POOL-MAX=100
+```
+
 ## Run and Test ##
 
 Now you can start Seafile by `./seafile.sh start` and `./seahub.sh start` and visit the website.
