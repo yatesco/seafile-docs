@@ -81,6 +81,14 @@ path_style_request = true
 memcached_options = --SERVER=localhost --POOL-MIN=10 --POOL-MAX=100
 ```
 
+### Using memcached cluster
+
+In a cluster environment, you may want to use a memcached cluster. In the above configuration, you have to specify all the memcached server node addresses in seafile.conf
+
+```
+memcached_options = --SERVER=192.168.1.134 --SERVER=192.168.1.135 --SERVER=192.168.1.136 --POOL-MIN=10 --POOL-MAX=100
+```
+
 ## Run and Test ##
 
 Now you can start Seafile by `./seafile.sh start` and `./seahub.sh start` and visit the website.
