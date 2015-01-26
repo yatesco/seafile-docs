@@ -1,28 +1,42 @@
 # Configure Seafile to use LDAP
 The current code of seahub assumes that user name to be email address, so it's not possible to log in with UNIX user names or Windows Domain user names now. The support may be added later.
 
-Seafile will find a user both from database and LDAP. LDAP will be tried first. Note that the Seafile admin  account created during setup is always stored in sqlite/mysql database.
+Seafile will find a user both from database and LDAP. LDAP will be tried first. Note that the Seafile admin  accounts are always stored in sqlite/mysql database.
 
 ## Connect to LDAP/AD from Linux
 
-To use LDAP to authenticate user, please add the following lines to ccnet.conf
+To use LDAP to authenticate user, please add the following lines to ccnet.conf. Note that the values in the following config are just examples. You need to change the values for your own use.
 
     [LDAP]
-    # LDAP URL for the host, ldap://, ldaps:// and ldapi:// are supported
-    # To use TLS, you should configure the LDAP server to listen on LDAPS
-    # port and specify ldaps:// here.
     HOST = ldap://ldap.example.com
-    # base DN from where all the users can be reached.
     BASE = ou=users,dc=example,dc=com
-    # LDAP admin user DN to bind to. If not set, will use anonymous login.
     USER_DN = cn=seafileadmin,dc=example,dc=com
-    # Password for the admin user DN
     PASSWORD = secret
-    # The attribute to be used as user login id.
-    # By default it's the 'mail' attribute.
     LOGIN_ATTR = mail
 
-Example config for LDAP:
+Meaning of each config options:
+
+* HOST: LDAP URL for the host. ldap://, ldaps:// and ldapi:// are supported. You can also include port number in the URL, like ldap://ldap.example.com:389. To use TLS, you should configure the LDAP server to listen on LDAPS port and specify ldaps:// here. More details about TLS will be covered below.
+* BASE: The root distinguished name (DN) to use when running queries against the directory server.
+* USER_DN: The distinguished name of the user that Seafile will use when connecting to the directory server. This user should have sufficient privilege to access all the nodes under BASE. It's recommended to use a user in the administrator group.
+* PASSWORD: Password of the above user.
+* LOGIN_ATTR: The attribute to be used as user login id. By default it's the 'mail' attribute.
+
+Tips for connecting to Active Directory:
+
+* On a Windows Server, you can use the ldp.exe GUI tool to browse your directory server tree. It's easy in this way to locate your DN for BASE option.
+* AD supports 'user@domain.name' format for the USER_DN option. For example you can use administrator@example.com for USER_DN.
+
+Example config for Active Directory:
+
+    [LDAP]
+    HOST = ldap://192.168.1.123/
+    BASE = cn=users,dc=example,dc=com
+    USER_DN = administrator@example.local
+    PASSWORD = secret
+    LOGIN_ATTR = mail
+
+Example config for OpenLDAP or other LDAP servers:
 
     [LDAP]
     HOST = ldap://192.168.1.123/
@@ -31,21 +45,12 @@ Example config for LDAP:
     PASSWORD = secret
     LOGIN_ATTR = mail
 
-Example config for Active Directory:
-
-    [LDAP]
-    HOST = ldap://192.168.1.123/
-    BASE = cn=users,dc=example,dc=com
-    USER_DN = cn=admin,cn=users,dc=example,dc=com # or use admin@example.local etc
-    PASSWORD = secret
-    LOGIN_ATTR = mail
-
 If you're using Active Directory but don't have email address for the users, you can use the following config:
 
     [LDAP]
     HOST = ldap://192.168.1.123/
     BASE = cn=users,dc=example,dc=com
-    USER_DN = cn=admin,cn=users,dc=example,dc=com # or use admin@example.local etc
+    USER_DN = administrator@example.local
     PASSWORD = secret
     LOGIN_ATTR = userPrincipalName
 
@@ -53,26 +58,43 @@ The `userPrincipalName` is an user attribute provided by AD. It's usually of the
 
 ## Connect to LDAP/AD from Windows server
 
-The config syntax on Windows is slightly different from Linux. **You should not add ldap:// prefix to the HOST field.**
+The config syntax on Windows is slightly different from Linux. 
 
 To use LDAP to authenticate user, please add the following lines to ccnet.conf
 
     [LDAP]
-    # You can optionally specify the port of LDAP/AD server in the HOST field
     HOST = ldap.example.com[:port]
-    # Default 'false'. Set to true if you want Seafile to communicate with the LDAP server via SSL connection.
+    # Default 'false'. Set to true if you want Seafile to communicate with the LDAP server via TLS connection.
     USE_SSL = true | false
-    # base DN from where all the users can be reached.
     BASE = ou=users,dc=example,dc=com
-    # LDAP admin user DN to bind to. If not set, will use anonymous login.
     USER_DN = cn=seafileadmin,dc=example,dc=com
-    # Password for the admin user DN
     PASSWORD = secret
-    # The attribute to be used as user login id.
-    # By default it's the 'mail' attribute.
     LOGIN_ATTR = mail
 
-Example config for LDAP:
+Meaning of each config options:
+
+* HOST: LDAP server address and port. **You should not add ldap:// prefix to the HOST field.**.
+* USE_SSL: To use TLS, set this option to true. More details about TLS will be covered below.
+* BASE: The root distinguished name (DN) to use when running queries against the directory server.
+* USER_DN: The distinguished name of the user that Seafile will use when connecting to the directory server. This user should have sufficient privilege to access all the nodes under BASE. It's recommended to use a user in the administrator group.
+* PASSWORD: Password of the above user.
+* LOGIN_ATTR: The attribute to be used as user login id. By default it's the 'mail' attribute.
+
+Tips for connecting to Active Directory:
+
+* On a Windows Server, you can use the ldp.exe GUI tool to browse your directory server tree. It's easy in this way to locate your DN for BASE option.
+* AD supports 'user@domain.name' format for the USER_DN option. For example you can use administrator@example.com for USER_DN.
+
+Example config for Active Directory:
+
+    [LDAP]
+    HOST = 192.168.1.123
+    BASE = cn=users,dc=example,dc=com
+    USER_DN = administrator@example.local
+    PASSWORD = secret
+    LOGIN_ATTR = mail
+
+Example config for OpenLDAP or other LDAP servers:
 
     [LDAP]
     HOST = 192.168.1.123
@@ -81,21 +103,12 @@ Example config for LDAP:
     PASSWORD = secret
     LOGIN_ATTR = mail
 
-Example config for Active Directory:
-
-    [LDAP]
-    HOST = 192.168.1.123
-    BASE = cn=users,dc=example,dc=com
-    USER_DN = cn=admin,cn=users,dc=example,dc=com # or use admin@example.local etc
-    PASSWORD = secret
-    LOGIN_ATTR = mail
-
 If you're using Active Directory but don't have email address for the users, you can use the following config:
 
     [LDAP]
     HOST = 192.168.1.123
     BASE = cn=users,dc=example,dc=com
-    USER_DN = cn=admin,cn=users,dc=example,dc=com # or use admin@example.local etc
+    USER_DN = administrator@example.local
     PASSWORD = secret
     LOGIN_ATTR = userPrincipalName
 
@@ -119,16 +132,31 @@ Here is another example:
 FILTER = &(!(UserAccountControl:1.2.840.113556.1.4.803:=2))
 ```
 
-## Known Issues
+## Using TLS connection to LDAP/AD server
 
-### ldaps (LDAP over SSL) doesn't work on Ubuntu/Debian
+To use TLS connection to the directory server, you should install a valid SSL certificate on the directory server.
 
-Please see https://github.com/haiwen/seafile/issues/274
+The current version of Seafile Linux server package is compiled on CentOS. We include the ldap client library in the package to maintain compatibility with older Linux distributions. But since different Linux distributions have different path or configuration for OpenSSL library, sometimes Seafile is unable to connect to the directory server with TLS.
 
-This is because the pre-compiled package is built on CentOS. The libldap we distribute is from CentOS so it search for config files on /etc/openldap/ldap.conf. But Ubuntu/Debian uses /etc/ldap/ldap.conf. So the path to the CA files can't be found on the client.
+The ldap library (libldap) bundled in the Seafile package is of version 2.4. If your Linux distribution is new enough (like CentOS 6, Debian 7 or Ubuntu 12.04 or above), you can use system's libldap instead.
 
-The work around is
+To do this, just run the following command
 
 ```
-mkdir /etc/openldap && ln -s /etc/ldap/ldap.conf /etc/openldap/
+cd ${SEAFILE_INSTALLATION_DIR}/seafile-server-latest/seafile/lib
+mv liblber-2.4.so.2 libldap-2.4.so.2 libsasl2.so.2 ..
+```
+
+This effectively remove the bundled ldap library from the library path. When the server runs, it'll look for ldap library from the system paths.
+
+## Advanced LDAP options for Professional Edition
+
+### Use paged results extension
+
+LDAP protocol version 3 supports "paged results" (PR) extension. When you have large number of users, this option can greatly improve the performance of listing users. Most directory server nowadays support this extension.
+
+In Seafile Pro Edition, add this option to LDAP section of ccnet.conf to enable PR:
+
+```
+USE_PAGED_RESULT = true
 ```
