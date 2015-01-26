@@ -73,6 +73,12 @@ OFFICE_CONVERTOR_ROOT = http://<ip of node A>
 
 ## Start the background tasks
 
+Before starting background tasks, you have to start seafile on the background node too.
+
+```
+./seafile.sh start
+```
+
 On node A (the background tasks node), you can star/stop background tasks by:
 
 ```
