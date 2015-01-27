@@ -1,6 +1,6 @@
 # Firewall settings
 
-By default, you should open 4 ports in your firewall settings.
+By default, you should open 4 ports (for TCP) in your firewall settings.
 
      |
      | Seahub
@@ -15,6 +15,9 @@ By default, you should open 4 ports in your firewall settings.
         | Seafile Daemon
         | 12001
         |
+        
+
+
 
 If you run Seafile behind Nginx/Apache with HTTPS, you should open ports
 
@@ -29,3 +32,4 @@ If you run Seafile behind Nginx/Apache with HTTPS, you should open ports
         | 12001
         |
 
+If you run Seafile behind Nginx/Apache with HTTPS and only use HTTPS syncing (which is added in version 4.0 and work be make as the default syncing protocol in version 4.1), you only need to open port 443.
