@@ -118,11 +118,17 @@ The `userPrincipalName` is an user attribute provided by AD. It's usually of the
 
 Multiple base DN is useful when your company has more than one OUs to use Seafile. You can specify a list of base DN in the "BASE" config. The DNs are separated by ";", e.g. `cn=developers,dc=example,dc=com;cn=marketing,dc=example,dc=com`
 
-Search filter is very useful when you have a large organization but only a portion of people want to use Seafile. The filter can be given by setting "FILTER" config. For example, add the following line to LDAP config:
+Search filter is very useful when you have a large organization but only a portion of people want to use Seafile. The filter can be given by setting "FILTER" config. The value of this option follows standard LDAP search filter syntax (https://msdn.microsoft.com/en-us/library/aa746475(v=vs.85).aspx).
+
+The final filter used for searching for users is `(&($LOGIN_ATTR=*)($FILTER))`. `$LOGIN_ATTR` and `$FILTER` will be replaced by your option values.
+
+For example, add the following line to LDAP config:
 
 ```
 FILTER = memberOf=CN=group,CN=developers,DC=example,DC=com
 ```
+
+The final search filter would be `(&(mail=*)(memberOf=CN=group,CN=developers,DC=example,DC=com))`
 
 Note that the cases in the above example is significant. The `memberOf` attribute is only available in Active Directory.
 
