@@ -127,6 +127,12 @@ AVATAR_FILE_STORAGE = 'seahub.base.database_storage.DatabaseStorage'
 
 ```
 
+If you enable thumbnail feature, you'd better set thumbnail storage path to a **Shared Folder**, so that every node will create/get thumbnail through the same **Shared Folder** instead respectively.
+
+```
+THUMBNAIL_ROOT = 'path/to/shared/folder/'
+```
+
 #### pro-data/seafevents.conf
 
 Add following to `pro-data/seafevents.conf` to disable file indexing service:
