@@ -131,6 +131,10 @@
 <li><a href="#get-group-avatar">Get Group Avatar</a></li>
 </ul>
 </li>
+<li><a href="#get-thumbnail">Get Thumbnail</a><ul>
+<li><a href="#get-thumbnail-image">Get Thumbnail Image</a></li>
+</ul>
+</li>
 <li><a href="#list-group-and-contacts">List Group And Contacts</a></li>
 <li><a href="#get-file-events">Get File Activities</a></li>
 </ul>
@@ -2136,6 +2140,22 @@ A sample request looks like `curl -X DELETE https://cloud.seafile.com/api2/repos
         "is_default": true,
         "mtime": 0
     }
+
+## <a id="get-thumbnail"></a>Get Thumbnail##
+
+### <a id="get-thumbnail-image"></a>Get Thumbnail Image ##
+
+**GET** https://cloud.seafile.com/api2/repos/{repo_id}/thumbnail/{path}
+
+**Request parameters**
+
+* repo_id
+* path
+* size
+
+**Sample request**
+
+    curl -H 'Authorization: Token 40f9a510a0629430865dc199a3880898ad2e48fc' https://cloud.seafile.com/api2/repos/fbead5d0-4817-4446-92f3-7ac8e6a8e5f5/thumbnail/5.jpg?s=123 > thumbnail.png
 
 ## <a id="list-group-and-contacts"></a>List Group And Contacts ##
 
