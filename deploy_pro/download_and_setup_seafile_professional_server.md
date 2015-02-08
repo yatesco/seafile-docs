@@ -185,7 +185,7 @@ haiwen
 ├── seahub_settings.py   # seahub config file
 ```
 
-## 
+## Performance turning
 
 If you have more than 50 users in your Seafile system, we highly recommand you to [add memcached](../deploy/add_memcached.md). This will make the web 10x faster.  
 
