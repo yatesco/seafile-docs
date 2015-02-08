@@ -317,7 +317,12 @@ pkill -f seafile-controller
 pkill -f "manage.py run_gunicorn"
 </pre>
 
-##That's it!##
+## Performance turning
+
+If you have more than 50 users in your Seafile system, we highly recommand you to [add memcached](../deploy/add_memcached.md). This will make the web 10x faster.  
+
+## That's it!
+
 That's it! Now you may want read more about seafile.
 
 
