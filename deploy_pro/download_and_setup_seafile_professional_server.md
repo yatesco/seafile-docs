@@ -10,7 +10,7 @@ The following document is tested in Ubuntu 14.04, so we recommend that you use U
 > ```
 > sudo apt-get install openjdk-7-jre poppler-utils libreoffice \
 > libreoffice-script-provider-python libpython2.7 python-pip mysql-server \
-> python-setuptools python-imaging python-mysqldb
+> python-setuptools python-imaging python-mysqldb python-memcached
 > 
 > sudo pip install boto
 > ```
@@ -20,7 +20,10 @@ The following document is tested in Ubuntu 14.04, so we recommend that you use U
 > ```
 > wget https://bootstrap.pypa.io/get-pip.py
 > sudo python get-pip.py
-> sudo yum install java-1.7.0-openjdk poppler-utils libreoffice libreoffice-headless libreoffice-pyuno python-dev python-setuptools python-imaging MySQL-python mysql-server.x86_64
+> sudo yum install java-1.7.0-openjdk poppler-utils libreoffice \
+> libreoffice-headless libreoffice-pyuno python-dev python-setuptools \
+> python-imaging MySQL-python mysql-server.x86_64 python-memcached
+>
 > sudo pip install boto
 > sudo /etc/init.d/mysqld start
 > ```
@@ -182,11 +185,14 @@ haiwen
 ├── seahub_settings.py   # seahub config file
 ```
 
+## 
+
+If you have more than 50 users in your Seafile system, we highly recommand you to [add memcached](../deploy/add_memcached.md). This will make the web 10x faster.  
+
 ## <a id="wiki-done"></a>Done
 
 At this point, the basic setup of Seafile Professional Server is done. 
 
 You may want to read more about Seafile Professional Server:
 
-- [Setup Seafile Professional Server With Amazon S3](setup_with_mazon_S3.md)
 - [FAQ For Seafile Professional Server](FAQ_for_seafile_pro_server.md)
