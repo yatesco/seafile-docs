@@ -166,3 +166,13 @@ In Seafile Pro Edition, add this option to LDAP section of ccnet.conf to enable 
 ```
 USE_PAGED_RESULT = true
 ```
+
+### Follow referrals
+
+Starting from Pro Edition 4.0.4, Seafile supports auto following referrals in LDAP search. This is useful for partitioned LDAP or AD servers, where users may be spreaded on multiple directory servers. For more information about referrals, you can refer to [this article](https://technet.microsoft.com/en-us/library/cc978014.aspx).
+
+To configure, add following option to ccnet.conf in the [LDAP] section:
+
+```
+FOLLOW_REFERRALS = true
+```
