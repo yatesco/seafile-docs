@@ -74,3 +74,9 @@ Steps to migrate Seafile from SQLite to MySQL:
 6. Restart seafile and seahub
 
 
+**NOTE**
+
+User notifications will be cleared during migration due to the slight difference between MySQL and SQLite, if you only see the busy icon when click the notitfications button beside your avatar, please remove `user_notitfications` table manually by:
+
+    use seahub-db
+    delete from notifications_usernotification;
