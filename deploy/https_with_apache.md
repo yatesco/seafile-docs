@@ -84,7 +84,7 @@ The picture at the end of [this document](components.md) may help you understand
 
 There are two components in Seafile server, Seahub and FileServer. FileServer only servers for raw file uploading/downloading, it listens on 8082. Seahub, that serving all the other pages, is still listen on 8000. But under https, Seahub should listen as in fastcgi mode on 8000 (run as ./seahub.sh start-fastcgi). And as in fastcgi mode, when you visit  http://domain:8000 directly, it should return an error page.
 
-When a user visit https://domain.com/home/my/, Apache receives this request and sends it to Seahub via fastcgi. This is controlled by the following config items:
+When a user visit https://example.com/home/my/, Apache receives this request and sends it to Seahub via fastcgi. This is controlled by the following config items:
 
     #
     # seahub
@@ -98,9 +98,9 @@ and
     FastCGIExternalServer /var/www/seahub.fcgi -host 127.0.0.1:8000
 
 
-When a user click a file download link in Seahub, Seahub reads the value of `FILE_SERVER_ROOT` and redirects the user to address `https://domain.com/seafhttp/xxxxx/`. `https://domain.com/seafhttp` is the value of FILE_SERVER_ROOT. Here, the `FILE_SERVER` means the FileServer component of Seafile, which only serves for raw file downloading/uploading.
+When a user click a file download link in Seahub, Seahub reads the value of `FILE_SERVER_ROOT` and redirects the user to address `https://example.com/seafhttp/xxxxx/`. `https://example.com/seafhttp` is the value of FILE_SERVER_ROOT. Here, the `FILE_SERVER` means the FileServer component of Seafile, which only serves for raw file downloading/uploading.
 
-When Apache receives the request at 'https://domain.com/seafhttp/xxxxx/', it proxies the request to FileServer, which is listening at 127.0.0.1:8082. This is controlled by the following config items:
+When Apache receives the request at 'https://example.com/seafhttp/xxxxx/', it proxies the request to FileServer, which is listening at 127.0.0.1:8082. This is controlled by the following config items:
 
     ProxyPass /seafhttp http://127.0.0.1:8082
     ProxyPassReverse /seafhttp http://127.0.0.1:8082
