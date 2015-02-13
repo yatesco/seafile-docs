@@ -18,6 +18,13 @@ Assume that you are using version 2.1.0. Create a folder `custom` under `seafile
    LOGO_URL = 'http://your-seafile.com'
    </pre>
 
+4. Default width and height for log is 149px and 32px, you may need to change that according to yours.
+
+   <pre>
+   LOGO_WIDTH = 149
+   LOGO_HEIGHT = 32
+   </pre>
+   
 ### Customize Seahub CSS
 
 1. Add your css file to `seahub/media/custom/`, for example, `custom.css`
