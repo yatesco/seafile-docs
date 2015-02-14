@@ -25,8 +25,7 @@ The "source code" of this manual is hosted on Github https://github.com/haiwen/s
 ## Contact information
 
 * Twitter: @seafile https://twitter.com/seafile
-* IRC: #seafile on freenode
-* Google Group: https://groups.google.com/forum/?fromgroups#!forum/seafile
+* Forum: https://forum.seafile-server.org
 
 ## More Documents
 
