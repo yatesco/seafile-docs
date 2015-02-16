@@ -2,7 +2,7 @@
 
 ## Encrypted Library
 
-Seafile provides an advanced feature called encrypted library to protect your privacy. The file encryption/decryption is performed in the client-side when using the desktop client for file syncing The password of an encrypted library is not stored in the server. **Even the system admin of the server can't view the file contents**. (For mobile client and browser access, the server will cache the hash value of the password).
+Seafile provides an advanced feature called encrypted library to protect your privacy. The file encryption/decryption is performed in the client-side when using the desktop client for file syncing The password of an encrypted library is not stored in the server. **Even the system admin of the server can't view the file contents**. (For mobile client and browser access, the server will cache the password in memory. From version 4.1, the server will cache the hash value of the password, not the original password in memory).
 
 ## How does an encrypted library work?
 
