@@ -1,4 +1,4 @@
-# Security Features
+# Security Questions
 
 ## How is the connection between client and server encrypted?
 
@@ -10,9 +10,9 @@ From version 4.1, Seafile uses HTTP syncing protocol by default.
 
 ## Encrypted Library
 
-Seafile provides an advanced feature called encrypted library to protect your privacy. The file encryption/decryption is performed in the client-side when using the desktop client for file syncing. The password of an encrypted library is not stored in the server. **Even the system admin of the server can't view the file contents**. 
+Seafile provides a feature called encrypted library to protect your privacy. The file encryption/decryption is performed in the client-side when using the desktop client for file syncing. The password of an encrypted library is not stored in the server. **Even the system admin of the server can't view the file contents**. 
 
-Note: The client side encryption is not work currently for mobile client, web browser and the cloud file browser of the desktop client. When you browsing encrypted libraries via the mobile client, web browser and the cloud file browser, you will need to input the password. And the server will cache the password in memory for 1 hour. From version 4.1, the server will cache the hash value of the password, not the original password in memory.
+CAUTION: The client side encryption is not work currently for mobile client, web browser and the cloud file browser of the desktop client. When you browsing encrypted libraries via the mobile client, web browser and the cloud file browser, you will need to input the password. And the server will cache the password in memory for 1 hour. From version 4.1, the server will cache the hash value of the password, not the original password in memory.
 
 ## How does an encrypted library work?
 
