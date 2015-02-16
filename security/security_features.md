@@ -2,7 +2,7 @@
 
 ## Encrypted Library
 
-Seafile provides an advanced feature called encrypted library to protect your privacy. The file encryption/decryption is performed in the client-side when using the desktop client (For mobile client and browser access, the server will cache the hash value of the password). The password of an encrypted library is not stored in the server. **Even the system admin of the server can't view the file contents**.
+Seafile provides an advanced feature called encrypted library to protect your privacy. The file encryption/decryption is performed in the client-side when using the desktop client for file syncing The password of an encrypted library is not stored in the server. **Even the system admin of the server can't view the file contents**. (For mobile client and browser access, the server will cache the hash value of the password).
 
 ## How does an encrypted library work?
 
@@ -22,7 +22,9 @@ For maximum security, the plain-text password won't be saved on the client side 
 
 ## How is the connection between client and server encrypted?
 
-Every seafile desktop client has a unique private key. When a client and a server connect, they will exchange public key and negotiate a session key. The session key is derived from cryptographically secure random number with PDKDF2 algorithm. And it's exchanged between the client and the server with RSA encryption. This session key will be used to encrypt the data transfer with AES-256/CBC algorithm.
+Every seafile desktop client has a unique private key. When a client and a server connect, they will exchange public key and negotiate a session key. The session key is derived from cryptographically secure random number with PDKDF2 algorithm. And it's exchanged between the client and the server with RSA encryption. This session key will be used to encrypt the data transfer with AES-256/CBC algorithm. 
+
+From version 4.0, Seafile supports syncing via HTTPs protocol, which is a more standard approach.
 
 
 ## Why fileserver delivers every content to everybody knowing the content URL of an unshared private file?
