@@ -2,7 +2,7 @@
 
 ## Preparation
 
-The following list is all the libraries you need to install on your machine. '''You should install all of them before you build seafile'''.
+The following list is all the libraries you need to install on your machine. **You should install all of them before you build seafile**.
 
 Package names are according to Ubuntu 12.04. For other Linux distros, please find their corresponding names yourself.
 
@@ -21,23 +21,36 @@ Package names are according to Ubuntu 12.04. For other Linux distros, please fin
 
 The following libraries need to be compiled from source.
 
-* libzdb [http://www.tildeslash.com/libzdb/dist/libzdb-2.12.tar.gz]
-* libevhtp [https://github.com/ellzey/libevhtp/archive/1.1.6.zip]
+### libzdb
 
-libzdb relies on two packages: <code>re2c</code> and <code>flex</code>.
-libevhtp can be build by <code>cmake -DEVHTP_DISABLE_SSL=on .; make; sudo make install</code>.  libevhtp's version should be 1.1.6 or 1.1.7.
+* Install `re2c` and `flex`
+* Download [libzdb](http://www.tildeslash.com/libzdb/dist/libzdb-2.12.tar.gz)
 
-'''Seahub''' is the web front end of Seafile. It's written in the [http://djangoproject.com django] framework. Seahub requires Python 2.6(2.7) installed on your server, and it needs the following python libraries:
+#### libevhtp
 
-* [https://www.djangoproject.com/download/1.5.2/tarball/ django 1.5]
-* [https://github.com/djblets/djblets/tarball/release-0.6.14 djblets]
+* Download [libevhtp](https://github.com/ellzey/libevhtp/archive/1.1.6.zip). libevhtp's version should be 1.1.6 or 1.1.7.
+* Build libevhtp by:
+
+```
+cmake -DEVHTP_DISABLE_SSL=ON -DEVHT_BUILD_SHARED=ON .
+make
+sudo make install
+
+```
+
+### Seahub dependencies
+
+**Seahub** is the web front end of Seafile. It's written in the [django](http://djangoproject.com) framework. Seahub requires Python 2.6(or 2.7) installed on your server, and it needs the following python libraries:
+
+* [django 1.5](https://www.djangoproject.com/download/1.5.2/tarball/)
+* [djblets](https://github.com/djblets/djblets/tarball/release-0.6.14)
 * sqlite3
 * simplejson (python-simplejson)
 * PIL (aka. python imaging library, python-image)
 * chardet
 * gunicorn
 
-The module '''argparser''' is required by the <code>seafile-admin</code> script which you'll see later. If you use Python 2.7, '''argparser''' is distributed with python's standard library, so you don't need to install it. But if you use Python 2.6, you should install it manually.
+The module **argparser** is required by the <code>seafile-admin</code> script which you'll see later. If you use Python 2.7, **argparser** is distributed with python's standard library, so you don't need to install it. But if you use Python 2.6, you should install it manually.
 
 Before continue, make sure you have all the above libraries available in your system.
 
@@ -70,12 +83,12 @@ First you should get the latest source of libsearpc/ccnet/seafile/seahub
 
 Download the source tarball of the latest tag from
 
-* [https://github.com/haiwen/libsearpc/tags]
-* [https://github.com/haiwen/ccnet/tags]
-* [https://github.com/haiwen/seafile/tags]
-* [https://github.com/haiwen/seahub/tags]
+* https://github.com/haiwen/libsearpc/tags
+* https://github.com/haiwen/ccnet/tags
+* https://github.com/haiwen/seafile/tags
+* https://github.com/haiwen/seahub/tags
 
-For example, if the latest released seafile client is 2.0.3, then just use the '''v2.0.3-server''' tags of the four projects. You should get four tarballs:
+For example, if the latest released seafile client is 2.0.3, then just use the **v2.0.3-server** tags of the four projects. You should get four tarballs:
 
 * libsearpc-2.0.3-server.tar.gz
 * ccnet-2.0.3-server.tar.gz
@@ -116,7 +129,7 @@ haiwen/
 
 ### Building
 
-To build seafile server, you need first build '''libsearpc''' and '''ccnet'''.
+To build seafile server, you need first build **libsearpc** and **ccnet**.
 
 ##### libsearpc
 
@@ -174,17 +187,17 @@ The seafile server consists of the following components:
 
 [[images/server-arch.png]]
 
-* '''ccnet''' stores its configuration and metadata is a directory named <code>ccnet</code>.
-* '''seaf-server''' store its configuration and data in a directory, normally named <code>seafile-data</code>.
-* '''seahub''' is written in Django. If you have any experience with Django, you should know the <code>syncdb</code> command must be run to create all the database tables.
-* An '''admin account''' has to be created, so that you, the admin, can login with this account to manage the server.
+* **ccnet** stores its configuration and metadata is a directory named <code>ccnet</code>.
+* **seaf-server** store its configuration and data in a directory, normally named <code>seafile-data</code>.
+* **seahub** is written in Django. If you have any experience with Django, you should know the <code>syncdb</code> command must be run to create all the database tables.
+* An **admin account** has to be created, so that you, the admin, can login with this account to manage the server.
 
 These are the essential steps to create the configuration:
 
 * ensure seafile is already installed and all the python libraries seahub needs are installed.
-* create the ccnet configuration with the '''ccnet-init''' program
-* create the seafile configuration with '''seaf-server-init''' program
-* run Django '''syncdb''' command for seahub
+* create the ccnet configuration with the **ccnet-init** program
+* create the seafile configuration with **seaf-server-init** program
+* run Django **syncdb** command for seahub
 * create an admin account for the seafile server
 
 To create the configurations, you can either:
@@ -211,7 +224,7 @@ subcommands:
     reset-admin         reset seafile admin account
 </pre>
 
-Go to the top level directory(in this guide it's '''/data/haiwen/'''), and run '''seafile-admin setup''' to create all the configuration:
+Go to the top level directory(in this guide it's **/data/haiwen/**), and run **seafile-admin setup** to create all the configuration:
 <pre>
 cd /data/haiwen
 export PYTHONPATH=/data/haiwen/seafile-server/seahub/thirdpart
@@ -268,7 +281,7 @@ The script would ask you a series of questions, and create all the configuration
   </tr>
 </table>
 
-This is a screenshot of the '''seafile-admin setup''' command:
+This is a screenshot of the **seafile-admin setup** command:
 [[images/seafile-admin-1.png]]
 
 And a screenshot after setup is finished successfully:
@@ -291,20 +304,20 @@ haiwen/
 
 ### Start the Seafile Server
 
-After configuration successfully created, run '''seafile-admin start''' in the top directory to start the all components of Seafile. ( '''You should always run the seafile-admin script in the top directory''' ).
+After configuration successfully created, run **seafile-admin start** in the top directory to start the all components of Seafile. ( **You should always run the seafile-admin script in the top directory** ).
 
 <pre>
 cd /data/haiwen # go to the top level directory
 seafile-admin start
 </pre>
 
-At this moment, all the components should be running and seahub can be visited at '''http://yourserver-ip-or-domain:8000'''
+At this moment, all the components should be running and seahub can be visited at **http://yourserver-ip-or-domain:8000**
 
-'''Note''' You may want to deploy seahub with nginx or apache. In this case, follow the instructions on [[Deploy Seafile Web With Nginx/Apache]].
+**Note** You may want to deploy seahub with nginx or apache. In this case, follow the instructions on [[Deploy Seafile Web With Nginx/Apache]].
 
 ### Stop the Seafile Server
 
-To stop seafile server, run '''seafile-admin stop'''.
+To stop seafile server, run **seafile-admin stop**.
 
 <pre>
 cd /data/haiwen # go to the top level directory
@@ -327,7 +340,7 @@ seafile-admin stop
 
 ### Get and compile the latest libsearpc/ccnet/seafile
 
-See the '''Building''' section above.
+See the **Building** section above.
 
 ### Get the new seahub tarball and uncompress it
 
@@ -343,7 +356,7 @@ mv seahub-x.x.x-server seahub
 
 * copy the scripts/upgrade/ subdir outside
 
-The upgrade scripts is distributed in the <code>scripts/upgrade</code> subdir of seafile source code, we need to copy it to '''seafile-server''' directory before run the scripts.
+The upgrade scripts is distributed in the <code>scripts/upgrade</code> subdir of seafile source code, we need to copy it to **seafile-server** directory before run the scripts.
 
 <pre>
 cd /data/haiwen/seafile-server
@@ -354,9 +367,9 @@ cp -rf seafile-{version}/scripts/upgrade .
 
 Continuous upgrade means to upgrade from one version of seafile server to the next version. For example, upgrading from 1.1.0 to 1.2.0 is a continuous upgrade.
 
-'''Note:''' Minor upgrade, like upgrade from 1.3.0 to 1.3.1, is documented in a separate section below.
+**Note:** Minor upgrade, like upgrade from 1.3.0 to 1.3.1, is documented in a separate section below.
 
-Say you are upgrading from 1.1.0 to 1.2.0, you should run the script '''upgrade_1.1_1.2.sh''' in <code>seafile-server</code> directory.
+Say you are upgrading from 1.1.0 to 1.2.0, you should run the script **upgrade_1.1_1.2.sh** in <code>seafile-server</code> directory.
 
 <pre>
 cd /data/haiwen/seafile-server
@@ -385,5 +398,5 @@ ln -s ../../../seahub-data/avatars
 
 ## Problems Report
 
-If you encounter any problem when building/deploying Seafile, please leave us a message or [https://github.com/haiwen/seafile/issues open an issue].
+If you encounter any problem when building/deploying Seafile, please leave us a message or [open an issue](https://github.com/haiwen/seafile/issues).
 
