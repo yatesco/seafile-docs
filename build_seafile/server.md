@@ -28,11 +28,11 @@ The following libraries need to be compiled from source.
 
 #### libevhtp
 
-* Download [libevhtp](https://github.com/ellzey/libevhtp/archive/1.1.6.zip). libevhtp's version should be 1.1.6 or 1.1.7.
+* Download [libevhtp](https://github.com/haiwen/libevhtp/archive/master.zip).
 * Build libevhtp by:
 
 ```
-cmake -DEVHTP_DISABLE_SSL=ON -DEVHT_BUILD_SHARED=ON .
+cmake -DEVHTP_DISABLE_SSL=ON -DEVHTP_BUILD_SHARED=ON .
 make
 sudo make install
 
