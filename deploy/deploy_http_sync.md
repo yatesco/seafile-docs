@@ -39,3 +39,10 @@ The section in Apache config file related to HTTP sync is
 ```
 
 Note that you must use the path "/seafhttp" for http syncing. This is hard coded in the client.
+
+## Notes on certificates chain
+Whether or not you are using self-signed certificates or "official" ones released by well known certificate authorities (CA), be sure to include the full certificate chain in the configuration.
+
+If you only use the server certificate in the ```cacert.pem``` file, the browser interface will work anyway but the browser will complain about unknown certificate authorities. However, the Seafile desktop client won't work unless you set the ```Do not verify server certificate in HTTP syncing``` option in the Advanced settings, which is annoying to say at least.
+
+When creating the ```cacert.pem``` file, be sure to concatenate the certificate authorities' certificates **after** the server certificate. Detailed information can be found, for example, in the [SSL certificate chains section of the Nginx documentation site](http://nginx.org/en/docs/http/configuring_https_servers.html#chains).
