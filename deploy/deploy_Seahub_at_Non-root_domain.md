@@ -117,13 +117,13 @@ FILE_SERVER_ROOT = 'http://www.myseafile.com/seafhttp'
 
 ## Clear the cache
 
-Seafile stores for example the link to the avatar icon in /tmp/seahub_cache/ as long as memcache is not used. We suggest to clear the cache after seafile has been stopped:
+By default, Seahub caches some data like the link to the avatar icon in `/tmp/seahub_cache/` (unless memcache is used). We suggest to clear the cache after seafile has been stopped:
 
 <pre>
 rm -rf /tmp/seahub_cache/
 </pre>
 
-For memcache users, please purge the cache there instead.
+For memcache users, please purge the cache there instead by restarting your memcached server.
 
 ## Start Seafile and Seahub
 
