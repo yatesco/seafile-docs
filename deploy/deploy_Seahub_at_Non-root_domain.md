@@ -115,6 +115,16 @@ You need to add a line in <code>seahub_settings.py</code> to set the value of `F
 FILE_SERVER_ROOT = 'http://www.myseafile.com/seafhttp'
 ```
 
+## Clear the cache
+
+Seafile stores for example the link to the avatar icon in /tmp/seahub_cache/ as long as memcache is not used. We suggest to clear the cache after seafile has been stopped:
+
+<pre>
+rm -rf /tmp/seahub_cache/
+</pre>
+
+For memcache users, please purge the cache there instead.
+
 ## Start Seafile and Seahub
 
 <pre>
