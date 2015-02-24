@@ -1,7 +1,9 @@
 # Mac OS X
 
-Setup homebrew environment
-----------------------------
+## Option 1: Homebrew (conflicting with macports)
+
+###Setup homebrew environment
+
 1. Install xcode
 
   - Download Xcode from [website](https://developer.apple.com/xcode/downloads/) or
@@ -11,9 +13,11 @@ Setup homebrew environment
 2. Install homebrew
 
   - Execute this from Terminal
-  ``ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"``
+  ``ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
   - Make sure you have a clean homebrew environment. You can double-check it
     by ``brew doctor``
+
+> visit http://brew.sh/ for more
 
 Then install seafile from homebrew
   ```
@@ -27,25 +31,32 @@ If you face any installation issue, please report it with your homebrew logs
 If it is an issue while using homebrewed seafile, please report it with your seafile logs
 - [Seafile FAQ](../faq.md)
 
-Setup macports environment
------------------------------
+## Option 2: Macports (conflicting with homebrew)
+
+###Setup macports environment
 
 1. Install xcode
   - Download Xcode from [website](https://developer.apple.com/xcode/downloads/) or
   [App Store](http://itunes.apple.com/us/app/xcode/id497799835?ls=1&mt=12)
 
 2. Install macports
-  - Visit macports [website](https://www.macports.org/)
+
+  - Quick start https://www.macports.org/install.php
+
+> visit https://www.macports.org/ for more
 
 3. Install following libraries and tools using `port`
 
         sudo port install autoconf automake pkgconfig libtool glib2 \
-        libevent vala openssl git qt4-mac python27 jansson
+        libevent vala openssl git qt4-mac jansson
 
 4. Install python
 
-        sudo port install py27-pip
+        sudo port install python27
         sudo port select --set python python27
+
+        sudo port install py27-pip
+        sudo port select --set pip pip27
 
 5. Set pkg config environment
 
