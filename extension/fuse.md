@@ -30,7 +30,7 @@ Note: Before start seaf-fuse, you should have started seafile server with `./sea
 ./seaf-fuse.sh start /data/seafile-fuse
 </pre>
 
-#### Stop seaf-fuse
+##### Stop seaf-fuse
 
 <pre>
 ./seaf-fuse.sh stop
