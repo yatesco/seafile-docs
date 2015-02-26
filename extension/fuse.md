@@ -44,15 +44,14 @@ Now you can list the content of `/data/seafile-fuse`.
 <pre>
 $ ls -lhp /data/seafile-fuse
 
-drwxr-xr-x 2 root root 4.0K Jan  1  1970 abc@abc.com/
-drwxr-xr-x 2 root root 4.0K Jan  1  1970 foo@foo.com/
-drwxr-xr-x 2 root root 4.0K Jan  1  1970 plus@plus.com/
-drwxr-xr-x 2 root root 4.0K Jan  1  1970 sharp@sharp.com/
-drwxr-xr-x 2 root root 4.0K Jan  1  1970 test@test.com/
+drwxr-xr-x 2 root root 4.0K Jan  1  2015 abc@abc.com/
+drwxr-xr-x 2 root root 4.0K Jan  4  2015 foo@foo.com/
+drwxr-xr-x 2 root root 4.0K Jan  1  2015 plus@plus.com/
+drwxr-xr-x 2 root root 4.0K Jan  1  2015 sharp@sharp.com/
+drwxr-xr-x 2 root root 4.0K Jan  3  2015 test@test.com/
 </pre>
 
 * The top level folder contains many subfolders, each of which corresponds to a user
-* The time stamp of files and folders is not preserved.
 
 #### The folder for each user
 
@@ -70,8 +69,8 @@ From the above list you can see, under the folder of a user there are subfolders
 <pre>
 $ ls -lhp /data/seafile-fuse/abc@abc.com/5403ac56-5552-4e31-a4f1-1de4eb889a5f_Photos/
 
--rw-r--r-- 1 root root 501K Jan  1  1970 image.png
--rw-r--r-- 1 root root 501K Jan  1  1970 sample.jpng
+-rw-r--r-- 1 root root 501K Jan  1  2015 image.png
+-rw-r--r-- 1 root root 501K Jan  1  2015 sample.jpng
 </pre>
 
 #### If you get a "Permission denied" error
