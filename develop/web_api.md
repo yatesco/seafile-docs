@@ -2145,17 +2145,17 @@ A sample request looks like `curl -X DELETE https://cloud.seafile.com/api2/repos
 
 ### <a id="get-thumbnail-image"></a>Get Thumbnail Image ##
 
-**GET** https://cloud.seafile.com/api2/repos/{repo_id}/thumbnail/{path}
+**GET** https://cloud.seafile.com/api2/repos/{repo_id}/thumbnail/
 
 **Request parameters**
 
 * repo_id
-* path
+* p
 * size
 
 **Sample request**
 
-    curl -H 'Authorization: Token 40f9a510a0629430865dc199a3880898ad2e48fc' https://cloud.seafile.com/api2/repos/fbead5d0-4817-4446-92f3-7ac8e6a8e5f5/thumbnail/5.jpg?s=123 > thumbnail.png
+    curl -H 'Authorization: Token 40f9a510a0629430865dc199a3880898ad2e48fc' https://cloud.seafile.com/api2/repos/fbead5d0-4817-4446-92f3-7ac8e6a8e5f5/thumbnail/?p=/5.jpg\&size=123 > thumbnail.png
 
 ## <a id="list-group-and-contacts"></a>List Group And Contacts ##
 
