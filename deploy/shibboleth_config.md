@@ -1,6 +1,8 @@
 ## Overview
 
-[Shibboleth](https://shibboleth.net/) is a widely used single sign on (SSO) protocol. Seafile server (Community Edition >= 4.0.6, Pro Edition >= 4.0.4) supports authentication via Shibboleth. It allows users from another organization to log in to Seafile without registering an account on the service provider.
+Note: The following document valid for Seafile server versions not published yet. (Just wait a few days)
+
+[Shibboleth](https://shibboleth.net/) is a widely used single sign on (SSO) protocol. Seafile server (Community Edition >= 4.0.7, Pro Edition >= 4.0.6) supports authentication via Shibboleth. It allows users from another organization to log in to Seafile without registering an account on the service provider.
 
 In this documentation, we assume the reader is familiar with Shibboleth installation and configuration. For introduction to Shibboleth concepts, please refer to https://wiki.shibboleth.net/confluence/display/SHIB2/UnderstandingShibboleth .
 
