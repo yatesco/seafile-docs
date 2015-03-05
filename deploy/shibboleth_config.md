@@ -6,9 +6,14 @@ In this documentation, we assume the reader is familiar with Shibboleth installa
 
 Shibboleth Service Provider (SP) should be installed on the same server as the Seafile server. The official SP from https://shibboleth.net/ is implemented as an Apache module. The module handles all Shibboleth authentication details. Seafile server receives authentication information (username) from fastcgi. The username then can be used as login name for the user.
 
-Assume your seafile is deployed at https://seafile.example.com/ according [this](http://manual.seafile.com/deploy/https_with_apache.html), in order to enable shibboleth integration, you need to use a different url (e.g. https://seafile-shib.example.com) which need a new Apache vhost and also modify `seahub_settings.py`.
+Seahub provides a special URL to handle Shibboleth login. The URL is `https://your-server/shib-login`. Only this URL needs to be configured under Shibboleth protection. All other URLs don't go through the Shibboleth module. The overall workflow for a user to login with Shibboleth is as follows:
 
-Since Shibboleth support requires Apache, if you want to use Nginx, you need two servers, one for non-Shibboleth access, another for Shibboleth access. In a cluster environment, you can configure your load balancer to direct traffic to different server according to URL.
+1. In the Seafile login page, there is a separate "Shibboleth" login button. When the user clicks the button, she/he will be redirected to `https://your-server/shib-login`.
+2. Since that URL is controlled by Shibboleth, the user will be redirected to IdP for login. After the user logs in, she/he will be redirected back to `https://your-server/shib-login`.
+3. This time the Shibboleth module passes the request to Seahub. Seahub reads the user information from the request and brings the user to her/his home page.
+4. All later access to Seahub will not pass through the Shibboleth module. Since Seahub keeps session information internally, the user doesn't need to login again until the session expires.
+
+Since Shibboleth support requires Apache, if you want to use Nginx, you need two servers, one for non-Shibboleth access, another configured with Apache to allow Shibboleth login. In a cluster environment, you can configure your load balancer to direct traffic to different server according to URL. Only the URL `https://your-server/shib-login` needs to be directed to Apache.
 
 The configuration includes 3 steps:
 
@@ -32,7 +37,7 @@ You should create a new virtual host configuration for Shibboleth.
 ```
 <IfModule mod_ssl.c>
     <VirtualHost _default_:443>
-        ServerName seafile-shib.example.com
+        ServerName seafile.example.com
         DocumentRoot /var/www
         #Alias /seafmedia  /home/ubuntu/dev/seahub/media
         Alias /media /home/user/seafile-server-latest/seahub/media
@@ -46,6 +51,9 @@ You should create a new virtual host configuration for Shibboleth.
 
         <Location /Shibboleth.sso>
         SetHandler shib
+        AuthType shibboleth
+        ShibRequestSetting requireSession true
+        Require valid-user
         </Location>
 
         <Location /api2>
@@ -60,11 +68,10 @@ You should create a new virtual host configuration for Shibboleth.
         Require all granted
         </Location>
 
-        <Location />
+        <Location /shib-login>
         AuthType shibboleth
         ShibRequestSetting requireSession true
         Require valid-user
-        #ShibUseHeaders On
         </Location>
 
         #
@@ -86,7 +93,7 @@ You should create a new virtual host configuration for Shibboleth.
 
 ```
 
-After restarting Apache, you should be able to get the Service Provider metadata by accessing https://seafile-shib.example.com/Shibboleth.sso/Metadata . This metadata should be uploaded to the Identity Provider (IdP) server.
+After restarting Apache, you should be able to get the Service Provider metadata by accessing https://seafile.example.com/Shibboleth.sso/Metadata . This metadata should be uploaded to the Identity Provider (IdP) server.
 
 ## Configure Seahub
 
@@ -104,10 +111,12 @@ EXTRA_MIDDLEWARE_CLASSES = (
 SHIBBOLETH_ATTRIBUTE_MAP = {
     "eppn": (True, "username"),
 }
+
+ENABLE_SHIB_LOGIN = True
 ```
 
 In the above configuration, the Shibboleth attribute `eppn` (short for Edu Person Principal Name) is mapped into Seahub's username. You can use other reasonable Shibboleth attribute returned by your IdP for username. The username should have format similar to an email address.
 
 ## Verify
 
-After restarting Apache and Seafile services, when user visit https://seafile-shib.example.com/, he/she will be redirected to the IdP authentication page which is configured in your SP config file.
+After restarting Apache and Seafile services, you can then test the shibboleth login workflow.
