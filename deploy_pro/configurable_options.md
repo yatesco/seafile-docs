@@ -28,6 +28,7 @@ outputdir = /tmp/
 max-pages = 50
 
 ## the max size of documents to allow to be previewed online, in MB. Default is 2 MB
+## Preview a large file (for example >30M) online will freeze the browser. 
 max-size = 2
 
 [SEAHUB EMAIL]
