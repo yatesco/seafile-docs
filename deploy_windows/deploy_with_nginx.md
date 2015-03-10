@@ -12,6 +12,9 @@ This is a sample Nginx config file.
 server {
     listen 80;
     server_name www.myseafile.com;
+
+    proxy_set_header X-Forwarded-For $remote_addr;
+
     location / {
         fastcgi_pass    127.0.0.1:8000;
         fastcgi_param   SCRIPT_FILENAME     $document_root$fastcgi_script_name;
