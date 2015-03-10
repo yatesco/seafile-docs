@@ -1,4 +1,5 @@
 # Details about File Search
+
 ## <a id="search-opt"></a>Search Options
 
 Following options should be set in file **seafevents.conf**, and need to restart seafile and seahub to take affect.
@@ -16,6 +17,14 @@ lang = german
 
 ## <a id="wiki-faq"></a>Common problems
 
+### <a id="how-to-rebuild-search-index"></a>How to rebuild index if something goes wrong
+
+You can rebuild search index by:
+
+```
+./pro/pro.py search --clear
+./pro/pro.py search --update
+```
 
 ### <a id="wiki-search-office-pdf"></a>I can't search Office/PDF files
 
