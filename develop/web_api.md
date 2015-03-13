@@ -11,6 +11,7 @@
 <li><a href="#create-account">Create Account</a></li>
 <li><a href="#update-account">Update Account</a></li>
 <li><a href="#delete-account">Delete Account</a></li>
+<li><a href="#server-info>Get Server Information</a></li>
 </ul>
 </li>
 <li><a href="#starred-files">Starred Files</a><ul>
@@ -328,6 +329,41 @@ If scope parameter is passed then accounts will be searched inside the specific 
 **Errors**
 
 * 403 Permission error, only administrator can perform this action
+
+### <a id="server-info"></a>Get Server Information ###
+
+**GET** https://cloud.seafile.com/api2/server-info
+
+*Note*:
+
+- Not authentication required.
+- Added in seafile community edition server `4.0.5` or pro edition server `4.0.3`
+
+**Sample request**
+
+    curl https://cloud.seafile.com/api2/server-info/
+
+**Sample response**
+
+Sample response from a seafile community edition server:
+
+    {
+        "version": "4.0.6",
+        "features": [
+        "seafile-basic",
+        ]
+    }
+
+Sample response from a seafile pro edition server:
+
+    {
+        "version": "4.0.6",
+        "features": [
+        "seafile-basic",
+        "seafile-pro",
+        "office-preview"
+        ]
+    }
 
 ## <a id="starred-files"></a>Starred Files ##
 
