@@ -11,7 +11,7 @@
 <li><a href="#create-account">Create Account</a></li>
 <li><a href="#update-account">Update Account</a></li>
 <li><a href="#delete-account">Delete Account</a></li>
-<li><a href="#server-info>Get Server Information</a></li>
+<li><a href="#server-info">Get Server Information</a></li>
 </ul>
 </li>
 <li><a href="#starred-files">Starred Files</a><ul>
