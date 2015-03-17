@@ -161,6 +161,9 @@ make
 make install
 </pre>
 
+
+*Note*: You need to run `sudo ldconfig` to refresh the system libraries cache after you compiles all the components.
+
 ## Deploy Seafile Server
 
 ### Components of the Seafile Server
