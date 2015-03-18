@@ -8,22 +8,84 @@ Note: If you store the seafile-data directory in a battery-backed NAS (like EMC 
 
 Starting from version 2.0, Seafile server comes with a seaf-fsck tool to help you recover from this corruption (similar to git-fsck tool). This tool recovers any corrupted library back to its last consistent and usable state.
 
-The seaf-fsck tool accepts the following arguments:
+Starting from version 4.1, we provide a seaf-fsck.sh script. The seaf-fsck tool accepts the following arguments:
 
 ```
-seaf-fsck [-c config_dir] [-d seafile_dir] [repo_id_1 [repo_id_2 ...]]
+cd seafile-server-latest
+./seaf-fsck.sh [--repair|-r] [--enable-sync|-e] [repo_id_1 [repo_id_2 ...]]
 ```
 
-Supposed you follow the standard installation and directory layout, and your seafile installation directory is `/data/haiwen`, you should run the command as
+There are two modes of operation for seaf-fsck: checking integrity of libraries and repairing corrupted libraries.
+
+## Checking Integrity of Libraries
+
+Running seaf-fsck.sh without any arguments will run a '''read-only''' integrity check for all libraries.
 
 ```
-cd /data/haiwen/seafile-server-{version}/seafile
-export LD_LIBRARY_PATH=./lib:${LD_LIBRARY_PATH}
-./bin/seaf-fsck -c ../../ccnet -d ../../seafile-data
+cd seafile-server-latest
+./seaf-fsck.sh
 ```
 
-This will check and recover all libraries on the server.
+If you want to check integrity for specific libraries, just append the library id's as arguments:
 
-If you know exactly which library is corrupt, you can also specify the library's id in the command line. A library's id can be obtained by navigating into the library on seahub. In the browser's address bar, you should see something like: `https://seafile.example.com/repo/601c4f2f-5209-47a0-b939-1f8c7fae9ff2`. `601c4f2f-5209-47a0-b939-1f8c7fae9ff2` is the library id.
+```
+cd seafile-server-latest
+./seaf-fsck.sh [library-id1] [library-id2] ...
+```
 
-After the recovery, a few latest changes to the files may be lost, but you can access the full library now. Also note that some clients synced with the library can fail to sync. If this happens, you can unsync the library on the client and resync with the library's folder.
+The output looks like:
+
+```
+[02/13/15 16:21:07] fsck.c(470): Running fsck for repo ca1a860d-e1c1-4a52-8123-0bf9def8697f.
+[02/13/15 16:21:07] fsck.c(413): Checking file system integrity of repo fsck(ca1a860d)...
+[02/13/15 16:21:07] fsck.c(35): Dir 9c09d937397b51e1283d68ee7590cd9ce01fe4c9 is missing.
+[02/13/15 16:21:07] fsck.c(200): Dir /bf/pk/(9c09d937) is curropted.
+[02/13/15 16:21:07] fsck.c(105): Block 36e3dd8757edeb97758b3b4d8530a4a8a045d3cb is corrupted.
+[02/13/15 16:21:07] fsck.c(178): File /bf/02.1.md(ef37e350) is curropted.
+[02/13/15 16:21:07] fsck.c(85): Block 650fb22495b0b199cff0f1e1ebf036e548fcb95a is missing.
+[02/13/15 16:21:07] fsck.c(178): File /01.2.md(4a73621f) is curropted.
+[02/13/15 16:21:07] fsck.c(514): Fsck finished for repo ca1a860d.
+```
+
+The corrupted files and directories are reported.
+
+Sometimes you can see output like the following:
+
+```
+[02/13/15 16:36:11] Commit 6259251e2b0dd9a8e99925ae6199cbf4c134ec10 is missing
+[02/13/15 16:36:11] fsck.c(476): Repo ca1a860d HEAD commit is corrupted, need to restore to an old version.
+[02/13/15 16:36:11] fsck.c(314): Scanning available commits...
+[02/13/15 16:36:11] fsck.c(376): Find available commit 1b26b13c(created at 2015-02-13 16:10:21) for repo ca1a860d.
+```
+
+This means the "head commit" (current state of the library) recorded in database is not consistent with the library data. In such case, fsck will try to find the last consistent state and check the integrity in that state.
+
+Tips: '''If you have many libraries, it's helpful to save the fsck output into a log file for later analysis.'''
+
+## Repairing Corruption
+
+Corruption repair in seaf-fsck basically works in two steps:
+
+1. If the library state (commit) recorded in database is not found in data directory, find the last available state from data directory.
+2. Check data integrity in that specific state. If files or directories are corrupted, set them to empty files or empty directories. The corrupted paths will be reported, so that the user can recover them from somewhere else.
+
+Running the following command repairs all the libraries:
+
+```
+cd seafile-server-latest
+./seaf-fsck.sh --repair
+```
+
+Most of time you run the read-only integrity check first, to find out which libraries are corrupted. And then you repair specific libraries with the following command:
+
+```
+cd seafile-server-latest
+./seaf-fsck.sh --repair [library-id1] [library-id2] ...
+```
+
+Because corrupted files and directories are emptied after repair, syncing the library after repair may result in data lost in the clients. The good copies on the clients may be replaced by the empty copies. To prevent this from happening, the system prevents a "repaired" library from syncing to clients. The system admin should inform the users to recover the corrupted files and folders. And then run the following command to enable syncing for the library again:
+
+```
+cd seafile-server-latest
+./seaf-fsck.sh --enable-sync [library-id1] [library-id2] ...
+```
