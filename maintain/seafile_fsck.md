@@ -19,7 +19,7 @@ There are two modes of operation for seaf-fsck: checking integrity of libraries 
 
 ## Checking Integrity of Libraries
 
-Running seaf-fsck.sh without any arguments will run a '''read-only''' integrity check for all libraries.
+Running seaf-fsck.sh without any arguments will run a **read-only** integrity check for all libraries.
 
 ```
 cd seafile-server-latest
@@ -60,7 +60,7 @@ Sometimes you can see output like the following:
 
 This means the "head commit" (current state of the library) recorded in database is not consistent with the library data. In such case, fsck will try to find the last consistent state and check the integrity in that state.
 
-Tips: '''If you have many libraries, it's helpful to save the fsck output into a log file for later analysis.'''
+Tips: **If you have many libraries, it's helpful to save the fsck output into a log file for later analysis.**
 
 ## Repairing Corruption
 
