@@ -21,7 +21,7 @@ and **seafile\_dir** accordingly)
 
     # Change the value of "seafile_dir" to your path of seafile installation
     # usually the home directory of $user
-    seafile_dir=`grep ^${user}: /etc/passwd | awk  -F: ' { print $6 } '`
+    seafile_dir=/data/haiwen
     script_path=${seafile_dir}/seafile-server-latest
     seafile_init_log=${seafile_dir}/logs/seafile.init.log
     seahub_init_log=${seafile_dir}/logs/seahub.init.log
@@ -136,7 +136,7 @@ and **script\_path** accordingly)
 
     # Change the value of "script_path" to your path of seafile installation
     # usually the home directory of $user
-    seafile_dir=`grep ^${user}: /etc/passwd | awk  -F: ' { print $6 } '`
+    seafile_dir=/data/haiwen
     script_path=${seafile_dir}/seafile-server-latest
     seafile_init_log=${seafile_dir}/logs/seafile.init.log
     seahub_init_log=${seafile_dir}/logs/seahub.init.log
@@ -236,7 +236,7 @@ is executed by the system at bootup, so we start seafile/seahub there.
 
     # Change the value of "script_path" to your path of seafile installation
     # usually the home directory of $user
-    seafile_dir=`grep ^${user}: /etc/passwd | awk  -F: ' { print $6 } '`
+    seafile_dir=/data/haiwen
     script_path=${seafile_dir}/seafile-server-latest
 
     sudo -u ${user} ${script_path}/seafile.sh start > /tmp/seafile.init.log 2>&1
@@ -262,7 +262,7 @@ seafile/seahub at system boot as service.
 
     # Change the value of "script_path" to your path of seafile installation
     # usually the home directory of $user
-    seafile_dir=`grep ^${user}: /etc/passwd | awk  -F: ' { print $6 } '`
+    seafile_dir=/data/haiwen
     script_path=${seafile_dir}/seafile-server-latest
     seafile_init_log=${seafile_dir}/logs/seafile.init.log
     seahub_init_log=${seafile_dir}/logs/seahub.init.log
