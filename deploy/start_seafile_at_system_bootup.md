@@ -20,6 +20,7 @@ and **seafile\_dir** accordingly)
     user=haiwen
 
     # Change the value of "seafile_dir" to your path of seafile installation
+    # usually the home directory of $user
     seafile_dir=/data/haiwen
     script_path=${seafile_dir}/seafile-server-latest
     seafile_init_log=${seafile_dir}/logs/seafile.init.log
@@ -29,29 +30,33 @@ and **seafile\_dir** accordingly)
     fastcgi=false
     # Set the port of fastcgi, default is 8000. Change it if you need different.
     fastcgi_port=8000
-
+    #
+    # Write a polite log message with date and time
+    #
+    echo -e "\n \n About to perform $1 for seafile at `date -Iseconds` \n " >> ${seafile_init_log}
+    echo -e "\n \n About to perform $1 for seahub at `date -Iseconds` \n " >> ${seahub_init_log}
     case "$1" in
             start)
-                    sudo -u ${user} ${script_path}/seafile.sh start >> ${seafile_init_log}
+                    sudo -u ${user} ${script_path}/seafile.sh ${1} >> ${seafile_init_log}
                     if [  $fastcgi = true ];
                     then
-                            sudo -u ${user} ${script_path}/seahub.sh start-fastcgi ${fastcgi_port} >> ${seahub_init_log}
+                            sudo -u ${user} ${script_path}/seahub.sh ${1}-fastcgi ${fastcgi_port} >> ${seahub_init_log}
                     else
-                            sudo -u ${user} ${script_path}/seahub.sh start >> ${seahub_init_log}
+                            sudo -u ${user} ${script_path}/seahub.sh ${1} >> ${seahub_init_log}
                     fi
             ;;
             restart)
-                    sudo -u ${user} ${script_path}/seafile.sh restart >> ${seafile_init_log}
+                    sudo -u ${user} ${script_path}/seafile.sh ${1} >> ${seafile_init_log}
                     if [  $fastcgi = true ];
                     then
-                            sudo -u ${user} ${script_path}/seahub.sh restart-fastcgi ${fastcgi_port} >> ${seahub_init_log}
+                            sudo -u ${user} ${script_path}/seahub.sh ${1}-fastcgi ${fastcgi_port} >> ${seahub_init_log}
                     else
-                            sudo -u ${user} ${script_path}/seahub.sh restart >> ${seahub_init_log}
+                            sudo -u ${user} ${script_path}/seahub.sh ${1} >> ${seahub_init_log}
                     fi
             ;;
             stop)
-                    sudo -u ${user} ${script_path}/seafile.sh $1 >> ${seafile_init_log}
-                    sudo -u ${user} ${script_path}/seahub.sh $1 >> ${seahub_init_log}
+                    sudo -u ${user} ${script_path}/seahub.sh ${1} >> ${seahub_init_log}
+                    sudo -u ${user} ${script_path}/seafile.sh ${1} >> ${seafile_init_log}
             ;;
             *)
                     echo "Usage: /etc/init.d/seafile {start|stop|restart}"
@@ -130,6 +135,7 @@ and **script\_path** accordingly)
     user=haiwen
 
     # Change the value of "script_path" to your path of seafile installation
+    # usually the home directory of $user
     seafile_dir=/data/haiwen
     script_path=${seafile_dir}/seafile-server-latest
     seafile_init_log=${seafile_dir}/logs/seafile.init.log
@@ -140,28 +146,34 @@ and **script\_path** accordingly)
     # Set the port of fastcgi, default is 8000. Change it if you need different.
     fastcgi_port=8000
 
+    #
+    # Write a polite log message with date and time
+    #
+    echo -e "\n \n About to perform $1 for seafile at `date -Iseconds` \n " >> ${seafile_init_log}
+    echo -e "\n \n About to perform $1 for seahub at `date -Iseconds` \n " >> ${seahub_init_log}
+
     case "$1" in
             start)
-                    sudo -u ${user} ${script_path}/seafile.sh start >> ${seafile_init_log}
+                    sudo -u ${user} ${script_path}/seafile.sh ${1} >> ${seafile_init_log}
                     if [  $fastcgi = true ];
                     then
-                            sudo -u ${user} ${script_path}/seahub.sh start-fastcgi ${fastcgi_port} >> ${seahub_init_log}
+                            sudo -u ${user} ${script_path}/seahub.sh ${1}-fastcgi ${fastcgi_port} >> ${seahub_init_log}
                     else
-                            sudo -u ${user} ${script_path}/seahub.sh start >> ${seahub_init_log}
+                            sudo -u ${user} ${script_path}/seahub.sh ${1} >> ${seahub_init_log}
                     fi
             ;;
             restart)
-                    sudo -u ${user} ${script_path}/seafile.sh restart >> ${seafile_init_log}
+                    sudo -u ${user} ${script_path}/seafile.sh ${1} >> ${seafile_init_log}
                     if [  $fastcgi = true ];
                     then
-                            sudo -u ${user} ${script_path}/seahub.sh restart-fastcgi ${fastcgi_port} >> ${seahub_init_log}
+                            sudo -u ${user} ${script_path}/seahub.sh ${1}-fastcgi ${fastcgi_port} >> ${seahub_init_log}
                     else
-                            sudo -u ${user} ${script_path}/seahub.sh restart >> ${seahub_init_log}
+                            sudo -u ${user} ${script_path}/seahub.sh ${1} >> ${seahub_init_log}
                     fi
             ;;
             stop)
-                    sudo -u ${user} ${script_path}/seafile.sh $1 >> ${seafile_init_log}
-                    sudo -u ${user} ${script_path}/seahub.sh $1 >> ${seahub_init_log}
+                    sudo -u ${user} ${script_path}/seahub.sh ${1} >> ${seahub_init_log}
+                    sudo -u ${user} ${script_path}/seafile.sh ${1} >> ${seafile_init_log}
             ;;
             *)
                     echo "Usage: /etc/init.d/seafile {start|stop|restart}"
@@ -223,6 +235,7 @@ is executed by the system at bootup, so we start seafile/seahub there.
     user=haiwen
 
     # Change the value of "script_path" to your path of seafile installation
+    # usually the home directory of $user
     seafile_dir=/data/haiwen
     script_path=${seafile_dir}/seafile-server-latest
 
@@ -248,7 +261,8 @@ seafile/seahub at system boot as service.
     user=haiwen
 
     # Change the value of "script_path" to your path of seafile installation
-    seafile_dir=/home/haiwen
+    # usually the home directory of $user
+    seafile_dir=/data/haiwen
     script_path=${seafile_dir}/seafile-server-latest
     seafile_init_log=${seafile_dir}/logs/seafile.init.log
     seahub_init_log=${seafile_dir}/logs/seahub.init.log
@@ -258,6 +272,7 @@ seafile/seahub at system boot as service.
 
     # Set the port of fastcgi, default is 8000. Change it if you need different.
     fastcgi_port=8000
+
 
 ### Create a script **/etc/init.d/seafile**
 
@@ -303,6 +318,11 @@ seafile/seahub at system boot as service.
             [ $RETVAL -eq 0 ] && rm -f /var/lock/subsys/seafile
             return $RETVAL
     }
+
+    #
+    # Write a polite log message with date and time
+    #
+    echo -e "\n \n About to perform $1 for seafile at `date -Iseconds` \n " >> ${seafile_init_log}
 
     # See how we were called.
     case "$1" in
@@ -366,13 +386,18 @@ seafile/seahub at system boot as service.
     }
 
     stop() {
-            echo -n $"Shutting down seafile: "
+            echo -n $"Shutting down seahub: "
             su - ${user} -c"${script_path}/seahub.sh stop >> ${seahub_init_log} 2>&1"
             RETVAL=$?
             echo
             [ $RETVAL -eq 0 ] && rm -f /var/lock/subsys/seahub
             return $RETVAL
     }
+
+    #
+    # Write a polite log message with date and time
+    #
+    echo -e "\n \n About to perform $1 for seahub at `date -Iseconds` \n " >> ${seahub_init_log}
 
     # See how we were called.
     case "$1" in
