@@ -16,10 +16,12 @@ The GC program cleans up two types of unused blocks:
 
 In community edition 4.1.1 and Pro edition 4.1.0, GC program's command line and output are improved.
 
+### Dry-run Mode
+
 To see how much garbage can be collected without actually removing any garbage, use the dry-run option:
 
 ```
-seafserv-gc -c ccnet-dir -d seafile-dir --dry-run [repo-id1] [repo-id2] ...
+seaf-gc.sh --dry-run [repo-id1] [repo-id2] ...
 ```
 
 The output should look like:
@@ -65,16 +67,22 @@ repo-id3
 
 If you give specific library ids, only those libraries will be checked; otherwise all libraries will be checked.
 
+Notice that at the end of the output there is a "repos have blocks to be removed" section. It contains the list of librareis that have garbage blocks. Later when you run GC without --dry-run option, you can use these libraris ids as input arguments to GC program.
+
+### Removing Garbage
+
 To actually remove garbage blocks, run without the --dry-run option:
 
 ```
-seafserv-gc -c ccnet-dir -d seafile-dir [repo-id1] [repo-id2] ...
+seaf-gc.sh [repo-id1] [repo-id2] ...
 ```
+
+If libraries ids are specified, only those libraries will be checked for garbage.
 
 As described before, there are two types of garbage blocks to be removed. Sometimes just removing the first type (those belong to deleted libraries) of unused blocks is good enough. In this case, the GC program won't bother to check the libraries for outdated historic blocks. The "-r" option implements this feature:
 
 ```
-seafserv-gc -c ccnet-dir -d seafile-dir -r
+seaf-gc.sh -r
 ```
 
 ** In Seafile version 4.1.1 and later, libraries deleted by the users are not immediately removed from the system. Instead, they're moved into a "trash" in the system admin page. Before they're cleared from the trash, their blocks won't be garbage collected.**
