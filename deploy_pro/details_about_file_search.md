@@ -10,8 +10,6 @@ Following options should be set in file **seafevents.conf**, and need to restart
 # Seafile does not support search contents of PDF/DOC on Windows system 
 index_office_pdf = false
 
-# Set search language.
-lang = german
 ```
 
 
@@ -49,28 +47,6 @@ The search index is updated every 10 minutes by default. So before the first ind
 
 This is because the server can't index encrypted files, since, they are encrypted.
 
-### <a id="wiki-set-search-lang"></a>Handle your language more gracefully
-
-**Note**: Added in seafile pro server 3.0.3.
-
-Say your files are mainly in German, you can specify it in `seafevents.conf`:
-
-```
-[INDEX FILES]
-...
-lang = german
-```
-
-This way, the text of your files can be handled more gracefully when you search them.
-
-*Anytime you change the value of `lang`, you have to delete the search index and recreate it:*
-
-```
-./pro/pro.py search --clear
-./pro/pro.py search --update
-```
-
-Supported languages include: `arabic`, `armenian`, `basque`, `brazilian`, `bulgarian`, `catalan`, `chinese`, `cjk`, `czech`, `danish`, `dutch`, `english`, `finnish`, `french`, `galician`, `german`, `greek`, `hindi`, `hungarian`, `indonesian`, `italian`, `norwegian`, `persian`, `portuguese`, `romanian`, `russian`, `spanish`, `swedish`, `turkish`, `thai`
 
 
 
