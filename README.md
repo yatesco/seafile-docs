@@ -1,7 +1,6 @@
 # Introduction
 
-Seafile is an open source cloud storage system with advanced
-support for file syncing, privacy protection and teamwork.
+Seafile is an open source cloud storage system with file encryption and group sharing.
 
 Collections of files are called libraries, and each library can be synced
 separately. A library can be encrypted with a user chosen password. This
