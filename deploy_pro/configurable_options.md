@@ -2,6 +2,10 @@
 In the file `/data/haiwen/pro-data/seafevents.conf`:
 
 ```
+[Audit]
+## Audit log is disabled default.
+enable = True
+
 [INDEX FILES]
 ## must be "true" to enable search
 enabled = true
