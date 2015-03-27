@@ -10,5 +10,5 @@ Read-only libraries can be synced to local desktop. The modifications at the cli
 
 In Seafile, most permission management are done at the library level. This makes syncing very efficient without needing to check permission for every file. This is enough for most cases. But there are occasional cases where users want to set different permissions on sub-folders.
 
-Suppose you share a library as read-only to a group and then want specific sub-folder to be read-write by a few users. Currently, you can share the the sub-folder as read-write to these users. From the view of the latter, they will see a library (with the name of the sub-folder) appear in the shared libraries. And they can modify that library. From Seafile pro edition version 4.1, you can set permissions on sub-folders for shared users and groups.
+Suppose you share a library as read-only to a group and then want specific sub-folder to be read-write by a few users. From Seafile pro edition version 4.1, you can set permissions on sub-folders for shared users and groups.
 
