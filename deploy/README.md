@@ -21,6 +21,7 @@ Basic:
 Advanced:
 
 * [Configure Seafile to use LDAP](using_ldap.md)
+* [Importing Groups from LDAP](ldap_group_sync.md)
 * [Start Seafile at System Bootup](start_Seafile_at_system_bootup.md)
 * [Firewall settings](using_firewall.md)
 * [Logrotate](using_logrotate.md)

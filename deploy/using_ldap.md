@@ -185,3 +185,7 @@ To configure, add following option to ccnet.conf in the [LDAP] section:
 ```
 FOLLOW_REFERRALS = true
 ```
+
+### Importing Groups from LDAP
+
+Since 4.1.0 of Pro Edition, Seafile supports importing groups from LDAP. Please see [importing groups from LDAP](ldap_group_sync.md).
