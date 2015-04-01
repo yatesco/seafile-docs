@@ -155,6 +155,15 @@ mv liblber-2.4.so.2 libldap-2.4.so.2 libsasl2.so.2 ..
 
 This effectively remove the bundled ldap library from the library path. When the server runs, it'll look for ldap library from the system paths.
 
+## Password reset page redirection
+
+"forgot password" link on login page redirect to a form that don't allow to reset password of LDAP user. (They are notified to contact their LDAP administrator). If you have a web service that allows your users reset their password, it is possible to setup a redirect in the apache configuration.
+Add this line just after "RewriteEngine On" :
+
+```
+RewriteRule ^/accounts/password/reset/$ https://selfservice.mycompany.com/password_reset [R,L]
+```
+
 ## Advanced LDAP options for Professional Edition
 
 ### Use paged results extension
