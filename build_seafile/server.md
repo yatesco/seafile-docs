@@ -42,7 +42,7 @@ sudo make install
 
 **Seahub** is the web front end of Seafile. It's written in the [django](http://djangoproject.com) framework. Seahub requires Python 2.6(or 2.7) installed on your server, and it needs the following python libraries:
 
-* [django 1.5](https://www.djangoproject.com/download/1.5.2/tarball/)
+* [django 1.5](https://www.djangoproject.com/download/1.5.12/tarball/)
 * [djblets](https://github.com/djblets/djblets/tarball/release-0.6.14)
 * sqlite3
 * simplejson (python-simplejson)
