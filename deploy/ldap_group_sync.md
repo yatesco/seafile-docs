@@ -17,6 +17,22 @@ There are two modes of operation:
 * Periodical: the syncing process will be executed in a fixed interval
 * Manual: there is a script you can run to trigger the syncing once
 
+## Prerequisite
+
+You have to install python-ldap library in your system.
+
+For Debian or Ubuntu
+
+```
+sudo apt-get install python-ldap
+```
+
+For CentOS or RedHat
+
+```
+sudo yum install python-ldap
+```
+
 ## Configuration
 
 Before enabling LDAP group sync, you should have configured LDAP authentication. See [Configure Seafile to use LDAP](using_ldap.md) for details.
