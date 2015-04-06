@@ -1,14 +1,31 @@
 # How to Build Seafile Server Release Package for Raspberry Pi
 
-## Setup the build environment
+*Table of contents*:
 
-### <a id="install-packages"></a> Install packages
+- [Setup the build environment](#wiki-setup-build-env)
+  - [Install packages](#wiki-install-packages)
+  - [Compile development libraries](#wiki-compile-dev-libs)
+  - [Install Python libraries](#wiki-install-python-libs)
+- [Prepare source code](#wiki-prepare-seafile-source-code)
+  - [Fetch git tags and prepare source tarballs](#wiki-fetch-tags-and-prepare-tarballs)
+  - [Run the packaging script](#wiki-run-pkg-script)
+- [Test the built package](#wiki-test-built-pkg)
+  - [Test a fresh install](#wiki-test-fresh-install)
+  - [Test upgrading](#wiki-test-upgrading)
+
+## <a id="wiki-setup-build-env"></a>Setup the build environment
+
+Requirements:
+
+- A raspberry pi with raspian distribution installed.
+
+### <a id="wiki-install-packages"></a> Install packages
 
 ```
 sudo apt-get install build-essential
 sudo apt-get install libevent-dev libcurl4-openssl-dev ibglib2.0-dev uuid-dev intltool libsqlite3-dev ibmysqlclient-dev libarchive-dev libtool libjansson-dev valac libfuse-dev re2c flex python-setuptools
 ```
-### <a id="compile-dev-libs"></a> Compile development libraries
+### <a id="wiki-compile-dev-libs"></a> Compile development libraries
 
 #### libevhtp
 
@@ -34,7 +51,7 @@ make
 sudo make install
 ```
 
-### <a id="install-python-libs"></a> Install python libraries
+### <a id="wiki-install-python-libs"></a> Install python libraries
 
 
 Create a new directory `/home/pi/dev/seahub_thirdpart`:
@@ -67,7 +84,7 @@ easy_install -d . /tmp/python-dateutil-1.5.tar.gz
 easy_install -d . /tmp/six-<version>.tar.gz
 ```
 
-## Prepare source code
+## <a id="wiki-prepare-seafile-source-code"></a>Prepare seafile source code
 
 To build seafile server, there are four sub projects involved:
 
@@ -81,7 +98,7 @@ The build process has two steps:
 - First, fetch the tags of each projects, and make a soruce tarball for each of them.
 - Then run a `build-server.py` script to build the server package from the source tarballs.
 
-### Fetch git tags and prepare source tarballs
+### <a id="wiki-fetch-tags-and-prepare-tarballs"></a> Fetch git tags and prepare source tarballs
 
 Seafile manages the releases in tags on github.
 
@@ -155,13 +172,34 @@ cp ~/dev/seafile/seafile-<version>-tar.gz ~/seafile-sources
 cp ~/dev/seahub/seahub-<version>-tar.gz ~/seafile-sources
 ```
 
-### Run the packaging script
+### <a id="wiki-run-pkg-script"></a> Run the packaging script
 
 Now we have all the tarballs prepared, we can run the `build-server.py` script to build the server package.
 
 ```
 mkdir ~/seafile-server-pkgs
-./build-server.py --libsearpc_version=<libsearpc_version> --ccnet_version=<ccnet_version> --seafile_version=<seafile_version> --seahub_version=<seahub_version> --srcdir=  --thidrpartdir=/home/pi/dev/seahub_thirdpart --srcdir=/home/pi/seafile-sources --outputdir=/home/pi/seafile-server-pkgs
+~/dev/seafile/scripts/build-server.py --libsearpc_version=<libsearpc_version> --ccnet_version=<ccnet_version> --seafile_version=<seafile_version> --seahub_version=<seahub_version> --srcdir=  --thidrpartdir=/home/pi/dev/seahub_thirdpart --srcdir=/home/pi/seafile-sources --outputdir=/home/pi/seafile-server-pkgs
 ```
 
 After the script finisheds, we would get a `seafile-server_4.1.1_pi.tar.gz` in `~/seafile-server-pkgs` folder.
+
+## <a id="wiki-test-built-pkg"></a> Test the built package
+
+### <a id="wiki-test-fresh-install"></a>Test a fresh install
+
+Use the built seafile server package to go over the steps of [Deploying Seafile with SQLite](http://manual.seafile.com/deploy/using_sqlite.html).
+
+The test should cover these steps at least:
+
+- The setup process is ok
+- After `seafile.sh start` and `seahub.sh start`, you can login from a browser.
+- Uploading/Downloading files through a web browser works correctly.
+- Seafile [WebDAV](http://manual.seafile.com/extension/webdav.html) server works correctly
+
+### <a id="wiki-test-upgrading"></a> Test upgrading from a previous version
+
+- Download the package of the previous version seafile server, and setup it.
+- Upgrading according to [the manual](http://manual.seafile.com/deploy/upgrade.html)
+- After the upgrade, check the functionality is ok:
+  - Uploading/Downloading files through a web browser works correctly.
+  - Seafile [WebDAV](http://manual.seafile.com/extension/webdav.html) server works correctly
