@@ -83,6 +83,7 @@
        * [Windows](build_seafile/windows.md)
        * [Max OS X](build_seafile/osx.md)
        * [Server](build_seafile/server.md)
+       * [Raspberry Pi](build_seafile/rpi.md)
    * [Develop env](develop/env.md)
    * [Code Standard](develop/code_standard.md)
    * [Web API](develop/web_api.md)
