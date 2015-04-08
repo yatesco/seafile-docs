@@ -10,7 +10,7 @@ The following document is tested in Ubuntu 14.04, so we recommend that you use U
 > ```
 > sudo apt-get install openjdk-7-jre poppler-utils libreoffice \
 > libreoffice-script-provider-python libpython2.7 python-pip mysql-server \
-> python-setuptools python-imaging python-mysqldb python-memcached
+> python-setuptools python-imaging python-mysqldb python-memcache
 > 
 > sudo pip install boto
 > ```
