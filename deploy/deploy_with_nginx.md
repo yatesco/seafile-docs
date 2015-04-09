@@ -1,5 +1,9 @@
 # Config Seahub with Nginx
 
+## Important
+
+According to the [security advisory](https://www.djangoproject.com/weblog/2013/aug/06/breach-and-django/) published by Django team, we recommend disable [GZip compression](http://wiki.nginx.org/HttpGzipModule) to mitigate [BREACH attack](http://breachattack.com/).
+
 ## Prepare
 
 Install <code>python-flup</code> library. On Ubuntu:
