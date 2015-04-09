@@ -1,5 +1,9 @@
 # Config Seahub with Apache
 
+## Important
+
+According to the [security advisory](https://www.djangoproject.com/weblog/2013/aug/06/breach-and-django/) published by Django team, we recommend disable [GZip compression](http://httpd.apache.org/docs/2.2/mod/mod_deflate.html) to mitigate [BREACH attack](http://breachattack.com/).
+
 ## Prepare
 
 1. Install <code>python-flup</code> library. On Ubuntu:
