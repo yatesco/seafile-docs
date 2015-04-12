@@ -197,4 +197,4 @@ At this point, the basic setup of Seafile Professional Server is done.
 
 You may want to read more about Seafile Professional Server:
 
-- [FAQ For Seafile Professional Server](FAQ_for_seafile_pro_server.md)
+- [FAQ For Seafile Professional Server](faq_for_seafile_pro_server.md)
