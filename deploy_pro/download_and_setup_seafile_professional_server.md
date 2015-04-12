@@ -1,7 +1,7 @@
 # Download and Setup Seafile Professional Server
 ## <a id="wiki-preparation"></a>Preparation ##
 
-The following document is tested in Ubuntu 14.04, so we recommend that you use Ubuntu 14.04 as your server.
+The following document is tested in Ubuntu 14.04. We recommend that you use Ubuntu 14.04 as your server.
 
 > NOTE: 
 > 
