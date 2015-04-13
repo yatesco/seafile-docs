@@ -46,6 +46,7 @@ sudo make install
 ```
 git clone https://www.github.com/haiwen/libzdb.git
 cd libzdb
+./autogen.sh
 ./configure
 make
 sudo make install
