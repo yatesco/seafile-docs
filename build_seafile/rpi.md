@@ -23,7 +23,7 @@ Requirements:
 
 ```
 sudo apt-get install build-essential
-sudo apt-get install libevent-dev libcurl4-openssl-dev ibglib2.0-dev uuid-dev intltool libsqlite3-dev ibmysqlclient-dev libarchive-dev libtool libjansson-dev valac libfuse-dev re2c flex python-setuptools
+sudo apt-get install libevent-dev libcurl4-openssl-dev libglib2.0-dev uuid-dev intltool libsqlite3-dev libmysqlclient-dev libarchive-dev libtool libjansson-dev valac libfuse-dev re2c flex python-setuptools cmake
 ```
 ### <a id="wiki-compile-dev-libs"></a> Compile development libraries
 
@@ -111,9 +111,9 @@ Assume we are packaging for seafile server 4.1.1, then the tags are:
 First setup the `PKG_CONFIG_PATH` enviroment variable (So we don't need to make and make install libsearpc/ccnet/seafile into the system):
 
 ```
-export PKG_CONFIG_PATH=/c/src/seafile/lib:$PKG_CONFIG_PATH
-export PKG_CONFIG_PATH=/c/src/libsearpc:$PKG_CONFIG_PATH
-export PKG_CONFIG_PATH=/c/src/ccnet:$PKG_CONFIG_PATH
+export PKG_CONFIG_PATH=/home/pi/dev/seafile/lib:$PKG_CONFIG_PATH
+export PKG_CONFIG_PATH=/home/pi/dev/libsearpc:$PKG_CONFIG_PATH
+export PKG_CONFIG_PATH=/home/pi/dev/ccnet:$PKG_CONFIG_PATH
 ```
 
 
