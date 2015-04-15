@@ -8,7 +8,7 @@ According to the [security advisory](https://www.djangoproject.com/weblog/2013/a
 
 Install <code>python-flup</code> library. On Ubuntu:
 
-```
+```bash
 sudo apt-get install python-flup
 ```
 
@@ -20,7 +20,7 @@ Here we deploy Seahub using [FastCGI](http://en.wikipedia.org/wiki/FastCGI), and
 
 This is a sample Nginx config file.
 
-<pre>
+```nginx
 server {
     listen 80;
     server_name www.myseafile.com;
@@ -58,7 +58,7 @@ server {
         root /home/user/haiwen/seafile-server-latest/seahub;
     }
 }
-</pre>
+```
 
 Nginx settings "client_max_body_size" is by default 1M. Uploading a file bigger than this limit will give you an error message HTTP error code 413 ("Request Entity Too Large").
 
@@ -71,9 +71,9 @@ You should use 0 to disable this feature or write the same value than for the pa
 You need to modify the value of <code>SERVICE_URL</code> in <code>/data/haiwen/ccnet/ccnet.conf</code>
 to let Seafile know the domain you choose.
 
-<pre>
+```python
 SERVICE_URL = http://www.myseafile.com
-</pre>
+```
 
 Note: If you later change the domain assigned to seahub, you also need to change the value of  <code>SERVICE_URL</code>.
 
@@ -87,30 +87,30 @@ FILE_SERVER_ROOT = 'http://www.myseafile.com/seafhttp'
 
 ## Start Seafile and Seahub
 
-<pre>
+```bash
 ./seafile.sh start
 ./seahub.sh start-fastcgi
-</pre>
+```
 
 ## Notes when Upgrading Seafile Server
 
 When [upgrading seafile server](upgrade.md), besides the normal steps you should take, there is one extra step to do: '''Update the path of the static files in your nginx/apache configuration'''. For example, assume your are upgrading seafile server 1.3.0 to 1.4.0, then:
 
-<pre>
+```nginx
     location /media {
         root /home/user/haiwen/seafile-server-1.4.0/seahub;
     }
-</pre>
+```
 
 **Tip:**
 You can create a symbolic link <code>seafile-server-latest</code>, and make it point to your current seafile server folder (Since seafile server 2.1.0, the <code>setup-seafile.sh</code> script will do this for your). Then, each time you run a upgrade script, it would update the <code>seafile-server-latest</code> symbolic link to keep it always point to the latest version seafile server folder.
 
 In this case, you can write:
 
-<pre>
+```nginx
     location /media {
         root /home/user/haiwen/seafile-server-latest/seahub;
     }
-</pre>
+```
 
 This way, you no longer need to update the nginx config file each time you upgrade your seafile server.
