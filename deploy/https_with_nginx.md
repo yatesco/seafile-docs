@@ -29,7 +29,7 @@ Assume you have configured nginx as
     server {
         listen 443;
         ssl on;
-        ssl_certificate /etc/ssl/cacert.pem;	# path to your cacert.pem
+        ssl_certificate /etc/ssl/cacert.pem;    	# path to your cacert.pem
         ssl_certificate_key /etc/ssl/privkey.pem;	# path to your privkey.pem
         server_name www.yourdoamin.com;
         # ......
@@ -52,17 +52,20 @@ Here is the sample configuration file:
     server {
         listen 443;
         ssl on;
-        ssl_certificate /etc/ssl/cacert.pem;            # path to your cacert.pem
+        ssl_certificate /etc/ssl/cacert.pem;        # path to your cacert.pem
         ssl_certificate_key /etc/ssl/privkey.pem;	# path to your privkey.pem
         server_name www.yourdoamin.com;
         proxy_set_header X-Forwarded-For $remote_addr;
+        
+        add_header Strict-Transport-Security "max-age=31536000; includeSubdomains";
+        server_tokens off;
 
         location / {
             fastcgi_pass    127.0.0.1:8000;
             fastcgi_param   SCRIPT_FILENAME     $document_root$fastcgi_script_name;
             fastcgi_param   PATH_INFO           $fastcgi_script_name;
 
-            fastcgi_param   SERVER_PROTOCOL	$server_protocol;
+            fastcgi_param   SERVER_PROTOCOL	    $server_protocol;
             fastcgi_param   QUERY_STRING        $query_string;
             fastcgi_param   REQUEST_METHOD      $request_method;
             fastcgi_param   CONTENT_TYPE        $content_type;
@@ -116,4 +119,16 @@ FILE_SERVER_ROOT = 'https://www.example.com/seafhttp'
 ```bash
 ./seafile.sh start
 ./seahub.sh start-fastcgi
+```
+
+## Additional security settings for nginx (optional)
+
+Add the HSTS header. If you already visited the https version the next time your browser will visit directly the https site and not the http. Prevent man-in-the-middle-attacks.
+```nginx
+add_header Strict-Transport-Security "max-age=31536000; includeSubdomains";
+```
+
+Disable exact server version in header. Prevent scans for vulnerable server.
+```nginx
+server_tokens off;
 ```
