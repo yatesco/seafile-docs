@@ -163,6 +163,26 @@ git reset --hard v4.1.1-server
 ./tools/gen-tarball.py --version=4.1.1 --branch=HEAD
 ```
 
+### seafobj
+
+```
+cd ~/dev
+git clone https://github.com/haiwen/seafobj.git
+cd seafobj
+git reset --hard v4.1.1-server
+make dist
+```
+
+### seafdav
+
+```
+cd ~/dev
+git clone https://github.com/haiwen/seafdav.git
+cd seafdav
+git reset --hard v4.1.1-server
+make
+```
+
 ### Copy the source tar balls to the same folder
 
 ```
@@ -171,6 +191,9 @@ cp ~/dev/libsearpc/libsearpc-<version>-tar.gz ~/seafile-sources
 cp ~/dev/ccnet/ccnet-<version>-tar.gz ~/seafile-sources
 cp ~/dev/seafile/seafile-<version>-tar.gz ~/seafile-sources
 cp ~/dev/seahub/seahub-<version>-tar.gz ~/seafile-sources
+
+cp ~/dev/seafobj/seafobj.tar.gz ~/seafile-sources
+cp ~/dev/seafdav/seafdav.tar.gz ~/seafile-sources
 ```
 
 ### <a id="wiki-run-pkg-script"></a> Run the packaging script
