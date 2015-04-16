@@ -65,7 +65,7 @@ sudo yum install poppler-utils
 
 ### Install Libreoffice/UNO (Optional) ###
 
-Note: preview of office file is not easy to setup. It is not officially supported. We suggest you to skip this step.
+Note: preview of office file is not easy to setup. We suggest you to skip this step if it is not a necessary feature for you.
 
 Libreoffice 4.1+ and Python-uno library are needed to enable office files online preview. If you don't install them, the office documents online preview will be disabled.
 
