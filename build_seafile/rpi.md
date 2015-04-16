@@ -52,6 +52,12 @@ make
 sudo make install
 ```
 
+After compiling all the libraries, run `ldconfig` to update the system libraries cache:
+
+```
+sudo ldconfig
+```
+
 ### <a id="wiki-install-python-libs"></a> Install python libraries
 
 
