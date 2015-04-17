@@ -288,13 +288,19 @@ If scope parameter is passed then accounts will be searched inside the specific 
 
 **Request parameters**
 
+At least one of followings: 
+
 * password
-* is_staff (defaults to False)
-* is_active (defaults to True)
+* is_staff
+* is_active
+* name
+* note
+* storage
+* sharing
 
 **Sample request**
 
-    curl -v -X PUT -d "password=654321&is_staff=true" -H "Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd" -H 'Accept: application/json; indent=4' https://cloud.seafile.com/api2/accounts/newaccount@gmail.com/
+    curl -v -X PUT -d "password=654321&is_staff=true&storage=1073741824&sharing=1073741824" -H "Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd" -H 'Accept: application/json; indent=4' https://cloud.seafile.com/api2/accounts/user@mail.com/
 
 **Sample response**
 
