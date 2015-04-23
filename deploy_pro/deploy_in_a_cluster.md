@@ -256,20 +256,6 @@ listen seahub-https 0.0.0.0:443
     option dontlognull
     server seahubserver01 192.168.1.165:443 check port 11001
     server seahubserver02 192.168.1.200:443 check port 11001
-
-listen ccnetserver :10001
-    mode tcp
-    option tcplog
-    balance leastconn
-    server seafserver01 192.168.1.165:10001 check port 11001
-    server seafserver02 192.168.1.200:10001 check port 11001
-
-listen seafserver :12001
-    mode tcp
-    option tcplog
-    balance leastconn
-    server seafserver01 192.168.1.165:12001 check port 11001
-    server seafserver02 192.168.1.200:12001 check port 11001
 ```
 
 ## See how it runs
