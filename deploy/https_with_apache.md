@@ -9,6 +9,8 @@ Here we use self-signed SSL digital certificate for free. If you use a paid ssl 
     openssl req -new -x509 -key privkey.pem -out cacert.pem -days 1095
 ```
 
+If you're using a custom CA to sign your SSL certificate, you have to enable certificate revocation list (CRL) in your certificate. Otherwise http syncing on Windows client may not work. See [this thread](https://forum.seafile-server.org/t/https-syncing-on-windows-machine-using-custom-ca/898) for more information.
+
 ## Enable https on Seahub
 
 Assume you have configured Apache as [Deploy Seafile with
