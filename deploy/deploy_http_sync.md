@@ -46,3 +46,21 @@ Whether or not you are using self-signed certificates or "official" ones release
 If you only use the server certificate in the ```cacert.pem``` file, the browser interface will work anyway but the browser will complain about unknown certificate authorities. However, the Seafile desktop client won't work unless you set the ```Do not verify server certificate in HTTP syncing``` option in the Advanced settings, which is annoying to say at least.
 
 When creating the ```cacert.pem``` file, be sure to concatenate the certificate authorities' certificates **after** the server certificate. Detailed information can be found, for example, in the [SSL certificate chains section of the Nginx documentation site](http://nginx.org/en/docs/http/configuring_https_servers.html#chains).
+
+## FAQ and Trouble Shooting
+
+### Certificate Revocation List and Custom CA
+
+When you use a custom CA to sign your certificate, you have to include certificate revocation list (CRL) in your certificate. See [this thread](https://forum.seafile-server.org/t/https-syncing-on-windows-machine-using-custom-ca/898) for more information.
+
+### Choosing Ciphers on Nginx/Apache
+
+You should choose strong ciphers on the server side. However some cipher list doesn't work with the SChannel TLS library on the Windows client. The following Nginx cipher list is tested to be working fine:
+
+```
+ssl_ciphers ECDH+AESGCM:DH+AESGCM:ECDH+AES256:DH+AES256:ECDH+AES128:DH+AES:ECDH+3DES:DH+3DES:RSA+AESGCM:RSA+AES:RSA+3DES:!aNULL:!MD5:!DSS;
+```
+
+You may fine tune the list to meet your needs.
+
+
