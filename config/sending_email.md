@@ -43,7 +43,7 @@ SERVER_EMAIL = EMAIL_HOST_USER
 
 ## Change the `sender` and `reply to` of email
 
-You can change the sender and reply to field of email by add the following settings to seahub_settings.py. This only affects email sending for file/folder share link
+You can change the sender and reply to field of email by add the following settings to seahub_settings.py. This only affects email sending for file/folder share link.
 
 <pre>
 # Replace default from email with user's email or not, defaults to ``False``
