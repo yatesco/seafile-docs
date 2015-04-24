@@ -1,6 +1,6 @@
 # Sending Email Notifications on Seahub
 
-## Options email sending
+## Options of email sending
 
 Please add the following lines to seahub_settings.py to enable Email sending.
 
@@ -29,3 +29,17 @@ SERVER_EMAIL = EMAIL_HOST_USER
 **Note**: If your Email service still can not work, you may checkout the log file <code>logs/seahub.log</code> to see what may cause the problem. For complete email notification list, please refer to [Email notification list](customize_email_notifications.md).
 
 **Note2**: If you want to use the Email service without authentication leaf <code>EMAIL_HOST_USER</code> and <code>EMAIL_HOST_PASSWORD</code> **blank** (<code>''</code>). (But notice that the emails then will be sent without a <code>From:</code> address.)
+
+## Change the `sender` and `reply to` of email
+
+You can change the sender and reply to field of email by add the following settings to seahub_settings.py
+
+<pre>
+# Replace default from email with user's email or not, defaults to ``False``
+REPLACE_FROM_EMAIL = True
+
+# Set reply-to header to user's email or not, defaults to ``False``. For details,
+# please refer to http://www.w3.org/Protocols/rfc822/
+ADD_REPLY_TO_HEADER = True
+</pre>
+
