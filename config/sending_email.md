@@ -1,5 +1,16 @@
 # Sending Email Notifications on Seahub
 
+## Types of email sending in Seafile
+
+There are currently five types of emails sent in Seafile:
+
+- User reset his/her password
+- System admin add new member
+- System admin reset user password
+- User send file/folder share link
+- Reminder of unread notifications (It is sent by a background task which is pro edition only)
+
+
 ## Options of email sending
 
 Please add the following lines to seahub_settings.py to enable Email sending.
@@ -32,7 +43,7 @@ SERVER_EMAIL = EMAIL_HOST_USER
 
 ## Change the `sender` and `reply to` of email
 
-You can change the sender and reply to field of email by add the following settings to seahub_settings.py
+You can change the sender and reply to field of email by add the following settings to seahub_settings.py. This only affects email sending for file/folder share link
 
 <pre>
 # Replace default from email with user's email or not, defaults to ``False``
