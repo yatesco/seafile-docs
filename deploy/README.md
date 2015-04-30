@@ -22,15 +22,15 @@ Advanced:
 
 * [Configure Seafile to use LDAP](using_ldap.md)
 * [Importing Groups from LDAP](ldap_group_sync.md)
-* [Start Seafile at System Bootup](start_Seafile_at_system_bootup.md)
+* [Start Seafile at System Bootup](start_seafile_at_system_bootup.md)
 * [Firewall settings](using_firewall.md)
 * [Logrotate](using_logrotate.md)
 * [Add Memcached](add_memcached.md)
 
 Other Deployment Issues
 
-* [Deploy Seafile behind NAT](deploy_Seafile_behind_NAT.md)
-* [Deploy Seahub at Non-root domain](deploy_Seahub_at_Non-root_domain.md)
+* [Deploy Seafile behind NAT](deploy_seafile_behind_nat.md)
+* [Deploy Seahub at Non-root domain](deploy_seahub_at_non-root_domain.md)
 * [Migrate From SQLite to MySQL](migrate_from_sqlite_to_mysql.md)
 
 Check [configuration options](../config/README.md) for server config options like enabling user registration.

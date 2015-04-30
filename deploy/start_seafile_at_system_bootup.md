@@ -38,7 +38,7 @@ and **seafile\_dir** accordingly)
     case "$1" in
             start)
                     sudo -u ${user} ${script_path}/seafile.sh ${1} >> ${seafile_init_log}
-                    if [  $fastcgi = true ];
+                    if [ $fastcgi = true ];
                     then
                             sudo -u ${user} ${script_path}/seahub.sh ${1}-fastcgi ${fastcgi_port} >> ${seahub_init_log}
                     else
@@ -47,7 +47,7 @@ and **seafile\_dir** accordingly)
             ;;
             restart)
                     sudo -u ${user} ${script_path}/seafile.sh ${1} >> ${seafile_init_log}
-                    if [  $fastcgi = true ];
+                    if [ $fastcgi = true ];
                     then
                             sudo -u ${user} ${script_path}/seahub.sh ${1}-fastcgi ${fastcgi_port} >> ${seahub_init_log}
                     else
@@ -59,7 +59,7 @@ and **seafile\_dir** accordingly)
                     sudo -u ${user} ${script_path}/seafile.sh ${1} >> ${seafile_init_log}
             ;;
             *)
-                    echo "Usage: /etc/init.d/seafile {start|stop|restart}"
+                    echo "Usage: /etc/init.d/seafile-server {start|stop|restart}"
                     exit 1
             ;;
     esac
@@ -73,7 +73,7 @@ and **seafile\_dir** accordingly)
 
 ### Create a file **/etc/init/seafile-server.conf**
 
-#### If you're not using MySQL
+#### If you're not using MySQL or an external MySQL server
 
     start on (runlevel [2345])
     stop on (runlevel [016])
@@ -155,7 +155,7 @@ and **script\_path** accordingly)
     case "$1" in
             start)
                     sudo -u ${user} ${script_path}/seafile.sh ${1} >> ${seafile_init_log}
-                    if [  $fastcgi = true ];
+                    if [ $fastcgi = true ];
                     then
                             sudo -u ${user} ${script_path}/seahub.sh ${1}-fastcgi ${fastcgi_port} >> ${seahub_init_log}
                     else
@@ -164,7 +164,7 @@ and **script\_path** accordingly)
             ;;
             restart)
                     sudo -u ${user} ${script_path}/seafile.sh ${1} >> ${seafile_init_log}
-                    if [  $fastcgi = true ];
+                    if [ $fastcgi = true ];
                     then
                             sudo -u ${user} ${script_path}/seahub.sh ${1}-fastcgi ${fastcgi_port} >> ${seahub_init_log}
                     else
@@ -176,7 +176,7 @@ and **script\_path** accordingly)
                     sudo -u ${user} ${script_path}/seafile.sh ${1} >> ${seafile_init_log}
             ;;
             *)
-                    echo "Usage: /etc/init.d/seafile {start|stop|restart}"
+                    echo "Usage: /etc/init.d/seafile-server {start|stop|restart}"
                     exit 1
             ;;
     esac
