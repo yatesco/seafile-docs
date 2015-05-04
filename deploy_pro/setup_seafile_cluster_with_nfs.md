@@ -1,6 +1,6 @@
 # Setup Seafile cluster with NFS
 
-In a Seafile cluster, one common way to share data among the Seafile server instances is to us NFS. You should only share the files objects on NFS. Here we'll provide a tutorial about how and what to share.
+In a Seafile cluster, one common way to share data among the Seafile server instances is to use NFS. You should only share the files objects on NFS. Here we'll provide a tutorial about how and what to share.
 
 How to setup nfs server and client is beyond the scope of this wiki. Here are few references:
 
