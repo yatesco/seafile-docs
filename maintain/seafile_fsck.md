@@ -12,10 +12,13 @@ Starting from version 4.1, we provide a seaf-fsck.sh script. The seaf-fsck tool 
 
 ```
 cd seafile-server-latest
-./seaf-fsck.sh [--repair|-r] [--enable-sync|-e] [repo_id_1 [repo_id_2 ...]]
+./seaf-fsck.sh [--repair|-r] [--enable-sync|-e] [--export|-E export_path] [repo_id_1 [repo_id_2 ...]]
 ```
 
-There are two modes of operation for seaf-fsck: checking integrity of libraries and repairing corrupted libraries.
+There are three modes of operation for seaf-fsck:
+1. checking integrity of libraries.
+2. repairing corrupted libraries.
+3. exporting libraries.
 
 ## Checking Integrity of Libraries
 
@@ -89,3 +92,18 @@ Because corrupted files and directories are emptied after repair, syncing the li
 cd seafile-server-latest
 ./seaf-fsck.sh --enable-sync [library-id1] [library-id2] ...
 ```
+
+## Exporting Libraries to File System
+
+Since version 4.2.0, you can use seaf-fsck to export all the files in libraries to external file system (such as Ext4). This procedure doesn't rely on the seafile database. As long as you have your seafile-data directory, you can always export your files from Seafile to external file system.
+
+The command syntax is
+
+```
+cd seafile-server-latest
+./seaf-fsck.sh --export top_export_path [library-id1] [library-id2] ...
+```
+
+The argument `top_export_path` is a directory to place the exported files. Each library will be exported as a sub-directory of the export path. If you don't specify library ids, all libraries will be exported.
+
+Currently only un-encrypted libraries can be exported. Encrypted libraries will be skipped.
