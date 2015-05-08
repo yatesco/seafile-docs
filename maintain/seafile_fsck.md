@@ -16,6 +16,7 @@ cd seafile-server-latest
 ```
 
 There are three modes of operation for seaf-fsck:
+
 1. checking integrity of libraries.
 2. repairing corrupted libraries.
 3. exporting libraries.
