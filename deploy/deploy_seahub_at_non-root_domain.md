@@ -1,7 +1,7 @@
 # Deploy Seahub at Non-root domain
 This documentation will talk about how to deploy Seafile Web using Apache/Nginx at Non-root directory of the website(e.g., www.example.com/seafile/).
 
-**Note:** We assume you have read [[Deploy Seafile with nginx]] or [[Deploy Seafile with apache]].
+**Note:** We assume you have read [Deploy Seafile with nginx](deploy_with_nginx.md) or [Deploy Seafile with apache](deploy_with_apache.md).
 
 ## Deploy with Nginx
 

@@ -64,7 +64,7 @@ We list them in the following table, as well as why we choose the default value.
 <td>index_office_pdf</td>
 <td>false</td>
 <td>
-The full text search of office/pdf documents is not enabled by default. This is because it may consume quite some space for the search index. To turn it on, set this value to "true" and recreate the search index. See the [[FAQ For Seafile Professional Server]] for detail.
+The full text search of office/pdf documents is not enabled by default. This is because it may consume quite some space for the search index. To turn it on, set this value to "true" and recreate the search index. See the [FAQ For Seafile Professional Server](faq_for_seafile_pro_server.md) for detail.
 </td>
 </tr>
 

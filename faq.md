@@ -8,7 +8,7 @@ Linux, ``C:/users/your_name/ccnet/logs/ccnet.log`` for Windows) to see what's wr
 Possible reasons:
 
 * Miss config of  <code>SERVICE_URL</code>: Check whether the value of is set correctly in server's <code>ccnet.conf</code>.
-* Firewall: Ensure the firewall is configured properly. See [[Firewall Settings for Seafile Server ]]
+* Firewall: Ensure the firewall is configured properly. See [Firewall Settings for Seafile Server](deploy/using_firewall.md)
 
 Trouble shooting:
 
@@ -36,7 +36,7 @@ There was an unconfirmed solution on the internet, which later has vanished.
 
 #### Avatar pictures vanished after upgrading server, what can I do?
 
-* You need to check whether the "avatars" symbolic link under seahub/media/ is correctly link to ../../../seahub-data/avatars. If not, you need to correct the link according to the "minor upgrade" section in [[Upgrading-Seafile-Server]]
+* You need to check whether the "avatars" symbolic link under seahub/media/ is correctly link to ../../../seahub-data/avatars. If not, you need to correct the link according to the "minor upgrade" section in [Upgrading-Seafile-Server](deploy/upgrade.md)
 
 * If your avatars link is correctly linked, and avatars are still broken, you may refresh seahub cache by <code>rm -rf /tmp/seahub_cache/*</code>
 
