@@ -188,7 +188,7 @@ The seafile server consists of the following components:
   </tr>
 </table>
 
-[[images/server-arch.png]]
+![server architecture](../images/server-arch.png "server architecture")
 
 * **ccnet** stores its configuration and metadata is a directory named <code>ccnet</code>.
 * **seaf-server** store its configuration and data in a directory, normally named <code>seafile-data</code>.
@@ -285,10 +285,10 @@ The script would ask you a series of questions, and create all the configuration
 </table>
 
 This is a screenshot of the **seafile-admin setup** command:
-[[images/seafile-admin-1.png]]
+![admin setup running](../images/seafile-admin-1.png)
 
 And a screenshot after setup is finished successfully:
-[[images/seafile-admin-2.png]]
+![admin setup finished](images/seafile-admin-2.png)
 
 At this time, the directory layout would be like this:
 <pre>
@@ -316,7 +316,7 @@ seafile-admin start
 
 At this moment, all the components should be running and seahub can be visited at **http://yourserver-ip-or-domain:8000**
 
-**Note** You may want to deploy seahub with nginx or apache. In this case, follow the instructions on [[Deploy Seafile Web With Nginx/Apache]].
+**Note** You may want to deploy seahub with nginx or apache. In this case, follow the instructions on Deploy Seafile Web With [Nginx](../deploy/deploy_with_nginx.md)/[Apache](../deploy/deploy_with_apache.md).
 
 ### Stop the Seafile Server
 

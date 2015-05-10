@@ -4,7 +4,7 @@ This article tries to give an overview on Seafile's file synchronization algorit
 For clarity, some details are deliberately omitted, but it should help you get the
 big picture.
 
-To better understand this article, you should first read [[Seafile data model]].
+To better understand this article, you should first read [Seafile data model](data_model.md).
 
 ## The Basic Work Flow
 

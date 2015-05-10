@@ -24,7 +24,7 @@ First, you can check the ccnet.log in client (~/.ccnet/logs/ccnet.log for Linux,
 
 Possible reasons:
 
-* Firewall: Ensure the firewall is configured properly. See [[Firewall Settings for Seafile Server ]]
+* Firewall: Ensure the firewall is configured properly. See [Firewall Settings for Seafile Server](using_firewall.md)
 
 Trouble shooting:
 
