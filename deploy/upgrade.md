@@ -120,7 +120,7 @@ Now upgrade to version 3.2.2.
 
 ## Tiny upgrade (like from 3.1.0 to 3.1.2)
 
-Minor upgrade is like an upgrade from 3.1.0 to 3.1.2.
+Tiny upgrade is like an upgrade from 3.1.0 to 3.1.2.
 
 
 1. Stop the current server first as for any upgrade
