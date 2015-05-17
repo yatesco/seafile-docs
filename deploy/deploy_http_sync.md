@@ -2,12 +2,17 @@
 
 Starting from version 4.0.0, Seafile supports file syncing via HTTP protocol. The server configuration depends on which version of Seafile client do you use.
 
-If you're using client version >= 4.2, the cases are
+Client version >= 4.2 use http syncing protocol exclusively, the cases are
 
 * If you're not using https, you don't have to configure Nginx or Apache to use http sync. The client can talk directly with the file server on port 8082.
 * If you're using https, you have to configure Nginx or Apahce. If you meet some certificate problems, the issues discussed in "FAQ and Trouble Shooting" section may be helpful.
 
-If you'are using clients version < 4.2, you have to configure Nginx or Apache.
+If you'are using clients version < 4.2,
+
+* If you want to use http(s) sync, you have to configure Nginx or Apache.
+* If you don't configure Nginx or Apache, the client falls back to use non-http syncing protocol (using port 10001 and 12001).
+
+Servers >= 4.0 are compatible with all syncing protocols, any version of client should work with the server.
 
 ## Nginx
 
@@ -50,6 +55,10 @@ Note that you must use the path "/seafhttp" for http syncing. This is hard coded
 ## FAQ and Trouble Shooting
 
 There are a few issues worth noting when you use a self-signed certificate for https sync.
+
+### My Client Doesn't Sync after Upgrading to 4.2.x
+
+Older clients fall back to non-http sync protocol if http sync fails. So you may get the false sense that the old client works with http sync. But actually it doesn't. Client 4.2 use http sync exclusively, so it doesn't sync any more. You have to correctly configure the server for http sync.
 
 ### Add Cutome CA to System CA repository
 
