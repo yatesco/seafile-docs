@@ -366,7 +366,8 @@ Sample response from a seafile pro edition server:
         "features": [
         "seafile-basic",
         "seafile-pro",
-        "office-preview"
+        "office-preview",
+        "file-search"
         ]
     }
 
