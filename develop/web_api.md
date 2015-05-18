@@ -341,7 +341,7 @@ At least one of followings:
 
 *Note*:
 
-- Not authentication required.
+- No authentication required.
 - Added in seafile community edition server `4.0.5` or pro edition server `4.0.3`
 
 **Sample request**
