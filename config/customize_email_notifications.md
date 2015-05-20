@@ -12,6 +12,8 @@ seahub/seahub/auth/forms.py line:103
 
 seahub/seahub/templates/registration/password_reset_email.html
 
+Note: You can copy password_reset_email.html to `seahub-data/custom/templates/registration/password_reset_email.html` and modify the new one. In this way, the customization will be maintained after upgrade. 
+
 ## System admin add new member ##
 
 **Subject**
@@ -22,6 +24,8 @@ seahub/seahub/views/sysadmin.py line:424
 
 seahub/seahub/templates/sysadmin/user_add_email.html
 
+Note: You can copy user_add_email.html to `seahub-data/custom/templates/sysadmin/user_add_email.html` and modify the new one. In this way, the customization will be maintained after upgrade. 
+
 ## System admin reset user password ##
 
 **Subject**
@@ -31,6 +35,8 @@ seahub/seahub/views/sysadmin.py line:368
 **Body**
 
 seahub/seahub/templates/sysadmin/user_reset_email.html
+
+Note: You can copy user_reset_email.html to `seahub-data/custom/templates/sysadmin/user_reset_email.html` and modify the new one. In this way, the customization will be maintained after upgrade. 
 
 ## User send file/folder share link ##
 
