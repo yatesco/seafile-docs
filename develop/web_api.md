@@ -341,7 +341,7 @@ At least one of followings:
 
 *Note*:
 
-- Not authentication required.
+- No authentication required.
 - Added in seafile community edition server `4.0.5` or pro edition server `4.0.3`
 
 **Sample request**
@@ -366,7 +366,8 @@ Sample response from a seafile pro edition server:
         "features": [
         "seafile-basic",
         "seafile-pro",
-        "office-preview"
+        "office-preview",
+        "file-search"
         ]
     }
 
