@@ -8,9 +8,8 @@ The following document is tested in Ubuntu 14.04. We recommend that you use Ubun
 > If you are using Ubuntu 14.04, you can use the following command to install all the dependency that Seafile requires at one time.
 > 
 > ```
-> sudo apt-get install openjdk-7-jre poppler-utils libreoffice \
-> libreoffice-script-provider-python libpython2.7 python-pip mysql-server \
-> python-setuptools python-imaging python-mysqldb python-memcache
+> sudo apt-get install openjdk-7-jre poppler-utils libpython2.7 python-pip \
+> mysql-server python-setuptools python-imaging python-mysqldb python-memcache
 > 
 > sudo pip install boto
 > ```
@@ -20,8 +19,7 @@ The following document is tested in Ubuntu 14.04. We recommend that you use Ubun
 > ```
 > wget https://bootstrap.pypa.io/get-pip.py
 > sudo python get-pip.py
-> sudo yum install java-1.7.0-openjdk poppler-utils libreoffice \
-> libreoffice-headless libreoffice-pyuno python-dev python-setuptools \
+> sudo yum install java-1.7.0-openjdk poppler-utils python-dev python-setuptools \
 > python-imaging MySQL-python mysql-server.x86_64 python-memcached
 >
 > sudo pip install boto
@@ -60,35 +58,6 @@ sudo apt-get install poppler-utils
 On CentOS/Red Hat:
 ```
 sudo yum install poppler-utils
-```
-
-
-### Install Libreoffice/UNO (Optional) ###
-
-Note: preview of office file is not easy to setup. We suggest you to skip this step if it is not a necessary feature for you.
-
-Libreoffice 4.1+ and Python-uno library are needed to enable office files online preview. If you don't install them, the office documents online preview will be disabled.
-
-On Ubuntu/Debian:
-```
-sudo apt-get install libreoffice libreoffice-script-provider-python
-```
-> For older version of Ubuntu: `sudo apt-get install libreoffice python-uno`
-
-On Centos/RHEL:
-```
-sudo yum install libreoffice libreoffice-headless libreoffice-pyuno
-```
-
-For other Linux distro: [Installation of LibreOffice on Linux](http://www.libreoffice.org/get-help/installation/linux/)
-
-Also, you may need to install fonts for your language, especially for Asians, otherwise the  office/pdf document may not display correctly. 
-
-For example, Chinese users may wish to install the WenQuanYi series of truetype fonts:
-
-```
-# For ubuntu/debian
-sudo apt-get install ttf-wqy-microhei ttf-wqy-zenhei xfonts-wqy
 ```
 
 

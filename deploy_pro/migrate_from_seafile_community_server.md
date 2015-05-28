@@ -40,32 +40,6 @@ On CentOS/Red Hat:
 sudo yum install poppler-utils
 ```
 
-
-### Install Libreoffice/UNO ###
-
-Libreoffice program and Python-uno library is needed to enable office files online preview. If you don't install them, the office documents online preview will be disabled.
-
-On Ubuntu/Debian:
-```
-sudo apt-get install libreoffice python-uno
-```
-
-On Centos/RHEL:
-```
-sudo yum install libreoffice libreoffice-headless libreoffice-pyuno
-```
-
-For other Linux distro: [Installation of LibreOffice on Linux](http://www.libreoffice.org/get-help/installation/linux/)
-
-Also, you may need to install fonts for your language, especially for Asians, otherwise the  office/pdf document may not display correctly. 
-
-For example, Chinese users may wish to install the WenQuanYi series of truetype fonts:
-
-```
-# For ubuntu/debian
-sudo apt-get install ttf-wqy-microhei ttf-wqy-zenhei xfonts-wqy
-```
-
 ## <a id="wiki-do-migration"></a>Do the migration ##
 
 We assume you have already deployed Seafile Community Server 1.8.0 under `/data/haiwen/seafile-server-1.8.0`. 

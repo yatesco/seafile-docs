@@ -54,6 +54,7 @@
        * [Details about File Search](deploy_pro/details_about_file_search.md)
        * [Deploy in a cluster](deploy_pro/deploy_in_a_cluster.md)
        * [Enable search and background tasks in a cluster](deploy_pro/enable_search_and_background_tasks_in_a_cluster.md)
+       * [Enable Office/PDF Documents Online Preview](deploy_pro/office_documents_preview.md)
        * [Setup Seafile cluster with NFS](deploy_pro/setup_seafile_cluster_with_nfs.md)
    * [License](deploy_pro/seafile_professional_sdition_software_license_agreement.md)
 * [Server Configuration and Customization](config/README.md)
