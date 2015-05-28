@@ -30,6 +30,14 @@ Note: Before start seaf-fuse, you should have started seafile server with `./sea
 ./seaf-fuse.sh start /data/seafile-fuse
 </pre>
 
+Since Community server version 4.2.1 and Pro server 4.2.0, the script supports standard mount options for FUSE. For example, you can specify ownership for the mounted folder:
+
+```
+./seaf-fuse.sh start -o uid=<uid> /data/seafile-fuse
+```
+
+You can find the complete list of supported options in `man fuse`.
+
 ##### Stop seaf-fuse
 
 <pre>
