@@ -17,24 +17,6 @@ interval=10m
 ## Note: If you change this option from "false" to "true", then you need to clear the search index and update the index again. See the FAQ for details.
 index_office_pdf=false
 
-[OFFICE CONVERTER]
-
-## must be "true" to enable office/pdf file online preview
-enabled = true
-
-## How many libreoffice worker process to run concurrenlty
-workers = 1
-
-## where to store the converted office/pdf files
-outputdir = /tmp/
-
-## how many pages are allowed to be previewed online. Default is 50 pages
-max-pages = 50
-
-## the max size of documents to allow to be previewed online, in MB. Default is 2 MB
-## Preview a large file (for example >30M) online will freeze the browser. 
-max-size = 2
-
 [SEAHUB EMAIL]
 
 ## must be "true" to enable user email notifications when there are new messages
