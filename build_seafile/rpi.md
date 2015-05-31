@@ -77,6 +77,7 @@ Download these tarballs to `/tmp/`:
 - [python-dateutil](https://labix.org/python-dateutil#head-2f49784d6b27bae60cde1cff6a535663cf87497b)
 - [six](https://pypi.python.org/pypi/six)
 - [django-statici18n](https://pypi.python.org/packages/source/d/django-statici18n/django-statici18n-1.1.3.tar.gz)
+- [django-compressor](https://pypi.python.org/packages/source/d/django_compressor/django_compressor-1.4.tar.gz)
 
 Install all these libaries to `/home/pi/dev/seahub_thirdpart`:
 
@@ -91,6 +92,7 @@ easy_install -d . /tmp/chardet-1.0.tar.gz
 easy_install -d . /tmp/python-dateutil-1.5.tar.gz
 easy_install -d . /tmp/six-<version>.tar.gz
 easy_install -d . /tmp/django-statici18n-1.1.3.tar.gz
+easy_install -d . /tmp/django_compressor-1.4.tar.gz
 ```
 
 ## <a id="wiki-prepare-seafile-source-code"></a>Prepare seafile source code
