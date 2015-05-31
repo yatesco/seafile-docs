@@ -76,6 +76,7 @@ Download these tarballs to `/tmp/`:
 - [chardet](https://pypi.python.org/pypi/chardet)
 - [python-dateutil](https://labix.org/python-dateutil#head-2f49784d6b27bae60cde1cff6a535663cf87497b)
 - [six](https://pypi.python.org/pypi/six)
+- [django-statici18n](https://pypi.python.org/packages/source/d/django-statici18n/django-statici18n-1.1.3.tar.gz)
 
 Install all these libaries to `/home/pi/dev/seahub_thirdpart`:
 
