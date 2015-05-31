@@ -90,6 +90,7 @@ easy_install -d . /tmp/flup-1.0.tar.gz
 easy_install -d . /tmp/chardet-1.0.tar.gz
 easy_install -d . /tmp/python-dateutil-1.5.tar.gz
 easy_install -d . /tmp/six-<version>.tar.gz
+easy_install -d . /tmp/django-statici18n-1.1.3.tar.gz
 ```
 
 ## <a id="wiki-prepare-seafile-source-code"></a>Prepare seafile source code
