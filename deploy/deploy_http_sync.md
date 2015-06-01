@@ -58,7 +58,7 @@ If you buy a valid SSL certificate, the syncing should work out of the box. If y
 
 The client loads trusted CA list from the system trusted CA store on start. It then combines those CA list with the user accepted certificates. The combined list is then used for certificate verification.
 
-When you generate self-signed certificate, it's recommended to not include certificate chain in it. That is, your server certificate and CA certificate should be the same. You should follow certificate generation instruction in [this guide](https_with_nginx.md).
+If you follow certificate generation instruction in [this guide](https_with_nginx.md) to generate your self-signed certificate, the syncing should work after confirmation.
 
 There may be cases when you can't establish https connection to the server. You can try two work-arounds:
 
