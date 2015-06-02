@@ -25,20 +25,78 @@ We recommend to allocate 128MB memory for memcached. Edit /etc/memcached.conf
 
 ## Swift Preparation
 
-You should enable S3 emulation middleware for Swift. For instructions please refer to the following links: 
+In a production environment, you'll configure Swift with S3 middleware and use Keystone for authentication. The following instructions assumes you've already setup Swift with Keystone authentication. We'll focus on the change you need to make Swift work with S3 middleware.
 
-* http://www.buildcloudstorage.com/2011/11/s3-apis-on-openstack-swift.html
-* http://docs.openstack.org/grizzly/openstack-compute/admin/content/configuring-swift-with-s3-emulation-to-use-keystone.html
+### Install Swift3
 
-After successfully setup S3 middleware, you should be able to access it with any S3 clients. The access key id is a user in Swift, and the secret key is the user's password. The next thing you need to do is to create buckets for Seafile. With Python boto library you can do as follows:
+This middleware implements S3 API for Swift.
+
+```
+git clone git clone https://github.com/fujita/swift3.git
+cd swift3
+sudo python setup.py install
+```
+
+### Install keystonmiddleware
+
+This middleware contains the `s3token` filter for authentication between S3 API and Keystone.
+
+```
+git clone https://github.com/openstack/keystonemiddleware.git
+cd keystonmiddleware
+sudo pip install -r requirements.txt
+sudo python setup.py install
+```
+
+### Modify proxy-server.conf for Swift
+
+On Ubuntu, the config file is `/etc/swift/proxy-server.conf`.
+
+First check whether you've replaced `tempauth` with `authtoken keystoneauth` in the main pipeline. This should have been done if you configured Swift to work with Keystone.
+
+Add `swift3 s3token` to `[pipeline:main]`:
+
+```
+ [pipeline:main]
+    pipeline = [...] swift3 s3token authtoken keystoneauth proxy-server
+```
+
+Add filters:
+
+```
+[filter:swift3]  
+use = egg:swift3#swift3
+
+[filter:s3token]  
+paste.filter_factory = keystonemiddleware.s3_token:filter_factory  
+auth_port = 35357  
+auth_host = [keystone-ip]  
+auth_protocol = http  
+```
+
+### Restart Swift
+
+```
+swift-init proxy restart
+```
+
+### Accessing Swift via S3 API
+
+To access it via S3 API, you'll need AWS-like access key id and secret access key. Generate it with the following command for your specific tenant and user (You should change the tenant-id and user-id):
+
+```
+keystone ec2-credentials-create --tenant-id=d6fdc8460c7b46d0ad24aa23667b85c3 --user-id=b66742a744eb4fc98abd945781bf969d
+```
+
+After successfully setup S3 middleware, you should be able to access it with any S3 clients. The next thing you need to do is to create buckets for Seafile. With Python boto library you can do as follows (replace `key_id` and `secret_key` with your own):
 
 ```
 import boto
 import boto.s3.connection
 
 connection = boto.connect_s3(
-    aws_access_key_id='swifttest:testuser',
-    aws_secret_access_key='testing',
+    aws_access_key_id='<key_id>',
+    aws_secret_access_key='<secret_key>',
     port=8080,
     host='swift-proxy-server-address',
     is_secure=False,
@@ -46,6 +104,12 @@ connection = boto.connect_s3(
 connection.create_bucket('seafile-commits')
 connection.create_bucket('seafile-fs')
 connection.create_bucket('seafile-blocks')
+```
+
+Each S3 bucket maps to a container in Swift. So you can use native Swift command line to check the containers. For example:
+
+```
+swift -V 2 -A http://[keyston_id]:5000/v2.0 -U [tenant]:[user] -K [pas] list
 ```
 
 ## Modify seafile.conf
