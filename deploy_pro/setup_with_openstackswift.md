@@ -32,14 +32,14 @@ In a production environment, you'll configure Swift with S3 middleware and use K
 This middleware implements S3 API for Swift.
 
 ```
-git clone git clone https://github.com/fujita/swift3.git
+git clone https://github.com/fujita/swift3.git
 cd swift3
 sudo python setup.py install
 ```
 
 ### Install keystonmiddleware
 
-This middleware contains the `s3token` filter for authentication between S3 API and Keystone.
+This middleware contains the `s3token` filter for authentication between S3 API and Keystone. If you've configured Swift to work with Keystone, you should have this middleware installed already.
 
 ```
 git clone https://github.com/openstack/keystonemiddleware.git
@@ -57,8 +57,8 @@ First check whether you've replaced `tempauth` with `authtoken keystoneauth` in 
 Add `swift3 s3token` to `[pipeline:main]`:
 
 ```
- [pipeline:main]
-    pipeline = [...] swift3 s3token authtoken keystoneauth proxy-server
+[pipeline:main]
+pipeline = [...] swift3 s3token authtoken keystoneauth proxy-server
 ```
 
 Add filters:
@@ -109,19 +109,19 @@ connection.create_bucket('seafile-blocks')
 Each S3 bucket maps to a container in Swift. So you can use native Swift command line to check the containers. For example:
 
 ```
-swift -V 2 -A http://[keyston_id]:5000/v2.0 -U [tenant]:[user] -K [pas] list
+swift -V 2 -A http://[keystone_ip]:5000/v2.0 -U [tenant]:[user] -K [pas] list
 ```
 
 ## Modify seafile.conf
 
-Append the following lines to `seafile-data/seafile.conf`
+Append the following lines to `seafile-data/seafile.conf` (replace `key_id` and `secret_key` with your own)
 
 ```
 [block_backend]
 name = s3
 bucket = seafile-blocks
-key_id = swifttest:testuser
-key = testing
+key_id = <key_id>
+key = <secret_key>
 host = <swift-proxy-server-address>:8080
 path_style_request = true
 memcached_options = --SERVER=localhost --POOL-MIN=10 --POOL-MAX=100
@@ -129,8 +129,8 @@ memcached_options = --SERVER=localhost --POOL-MIN=10 --POOL-MAX=100
 [commit_object_backend]
 name = s3
 bucket = seafile-commits
-key_id = swifttest:testuser
-key = testing
+key_id = <key_id>
+key = <secret_key>
 host = <swift-proxy-server-address>:8080
 path_style_request = true
 memcached_options = --SERVER=localhost --POOL-MIN=10 --POOL-MAX=100
@@ -138,8 +138,8 @@ memcached_options = --SERVER=localhost --POOL-MIN=10 --POOL-MAX=100
 [fs_object_backend]
 name = s3
 bucket = seafile-fs
-key_id = swifttest:testuser
-key = testing
+key_id = <key_id>
+key = <secret_key>
 host = <swift-proxy-server-address>:8080
 path_style_request = true
 memcached_options = --SERVER=localhost --POOL-MIN=10 --POOL-MAX=100
