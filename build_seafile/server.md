@@ -28,7 +28,7 @@ The following libraries need to be compiled from source.
 
 #### libevhtp
 
-* Download [libevhtp](https://github.com/haiwen/libevhtp/archive/master.zip).
+* Download [libevhtp](https://github.com/ellzey/libevhtp/archive/1.1.6.t).
 * Build libevhtp by:
 
 ```
@@ -49,6 +49,10 @@ sudo make install
 * PIL (aka. python imaging library, python-image)
 * chardet
 * gunicorn
+* django-compressor==1.4
+* django-statisi18n==1.1.2
+* six
+* python-dateutil
 
 The module **argparser** is required by the <code>seafile-admin</code> script which you'll see later. If you use Python 2.7, **argparser** is distributed with python's standard library, so you don't need to install it. But if you use Python 2.6, you should install it manually.
 
