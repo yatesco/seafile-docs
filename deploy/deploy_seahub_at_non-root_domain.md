@@ -12,7 +12,7 @@ SERVE_STATIC = False
 MEDIA_URL = '/seafmedia/'
 SITE_ROOT = '/seafile/'
 COMPRESS_URL = MEDIA_URL
-STATIC_URL = MEDIA_URL＋'assets/'
+STATIC_URL = MEDIA_URL + 'assets/'
 </pre>
 
 We will use Nginx to serve static files(js, css, etc), so we just disable <code>SERVE_STATIC</code>.
