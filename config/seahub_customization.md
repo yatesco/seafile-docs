@@ -1,24 +1,21 @@
 # Seahub customization
-## Customize Seahub Logo and Css
 
-Assume that you are using version 2.1.0. Create a folder `custom` under `seafile-server-2.1.0/seahub/media`. Put all the customization files here. The upgrade script will copy the folder to `seafile-server-2.1.1/seahub/media` when you upgrade to version 2.1.1.
+## Customize Seahub Logo and CSS
+
+Create a folder ``<seafile-install-path>/seahub-data/custom``. Create a symbolic link in `seafile-server-latest/seahub/media` by `ln -s ../../../seahub-data/custom custom`.
+
+During upgrading, Seafile upgrade script will create symbolic link automatically to preserve your customization.
 
 ### Customize Logo
 
-1. Add your logo file to `seahub/media/custom/`
+1. Add your logo file to `custom/`
 2. Overwrite `LOGO_PATH` in `seahub_settings.py`
 
    <pre>
    LOGO_PATH = 'custom/mylogo.png'
    </pre>
-
-3. Overwrite `LOGO_URL` in `seahub_settings.py`
-
-   <pre>
-   LOGO_URL = 'http://your-seafile.com'
-   </pre>
-
-4. Default width and height for logo is 149px and 32px, you may need to change that according to yours.
+   
+3. Default width and height for logo is 149px and 32px, you may need to change that according to yours.
 
    <pre>
    LOGO_WIDTH = 149
@@ -27,7 +24,7 @@ Assume that you are using version 2.1.0. Create a folder `custom` under `seafile
    
 ### Customize Seahub CSS
 
-1. Add your css file to `seahub/media/custom/`, for example, `custom.css`
+1. Add your css file to `custom/`, for example, `custom.css`
 2. Overwrite `BRANDING_CSS` in `seahub_settings.py`
 
    <pre>
