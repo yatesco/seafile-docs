@@ -18,6 +18,7 @@
    * [Enable syncing via HTTP/HTTPS](deploy/deploy_http_sync.md)
    * [Configure Seafile to use LDAP](deploy/using_ldap.md)
    * [Importing Groups from LDAP](deploy/ldap_group_sync.md)
+   * [Syncing Users from LDAP](deploy/ldap_user_sync.md)
    * [Configure Seafile to use Shibboleth Authentication](deploy/shibboleth_config.md)
    * [Start Seafile at System Bootup](deploy/start_seafile_at_system_bootup.md)
    * [Firewall settings](deploy/using_firewall.md)

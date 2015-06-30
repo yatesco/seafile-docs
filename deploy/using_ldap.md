@@ -3,6 +3,23 @@ The current code of seahub assumes that user name to be email address, so it's n
 
 Seafile will find a user both from database and LDAP. LDAP will be tried first. Note that the Seafile admin  accounts are always stored in sqlite/mysql database.
 
+## LDAP User Management
+
+Before 4.2 version, there are some limitation on admin operations to LDAP users. The system admin cannot deactivate a LDAP user, and cannot set a LDAP user as system admin.
+After 4.2 version, we introduce a more flexible design for LDAP user management. In this design,
+
+* When a LDAP user is used or logs in, it will be automatically imported from LDAP server into the database (table `LDAPUser` in the ccnet database).
+* Now the admin can change various properties about this user in the database, such as deactivating, setting as system admin.
+* The admin can manage imported LDAP users in the sysmtem admin page.
+* For Pro Edition, system user count only includes imported LDAP users. So customers can buy less licenses than all the users they have in LDAP server.
+
+In 4.2 Pro Edition, we introduced LDAP user sync feature, which brings even more management capabilities on LDAP users:
+
+* Periodically sync users from LDAP server to the database. Additional user properties can be synced too, such as full name, department.
+* Automatically detect changes to users in the LDAP server. These includes user password change, user deletion. Corresponding actions will be taken when user changes are detected, such as logging out the user or deactivating the user.
+
+For more information about LDAP user sync, please refer to [this documentation](ldap_user_sync.md).
+
 ## Connect to LDAP/AD from Linux
 
 To use LDAP to authenticate user, please add the following lines to ccnet.conf. Note that the values in the following config are just examples. You need to change the values for your own use.
