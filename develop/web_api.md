@@ -138,6 +138,7 @@
 </li>
 <li><a href="#list-group-and-contacts">List Group And Contacts</a></li>
 <li><a href="#get-file-events">Get File Activities</a></li>
+<li><a href="#add-organization">Add Organization</a></li>
 </ul>
 </li>
 </ul>
@@ -2247,3 +2248,24 @@ A sample request looks like `curl -X DELETE https://cloud.seafile.com/api2/repos
 **Sample response**
 
      {"more_offset": 16, "events":[{"repo_id": "6f3d28a4-73ae-4d01-a727-26774379dcb9", "author": "mysnowls@163.com", "nick": "lins05", "time": 1398078909, "etype": "repo-update", "repo_name": "Downloads", "desc": "Added \"seafile-cli_3.0.2_i386.tar.gz\"."},{"repo_id": "6f3d28a4-73ae-4d01-a727-26774379dcb9", "author": "mysnowls@163.com", "nick": "lins05", "time": 1398075540, "etype": "repo-update", "repo_name": "Downloads", "desc": "Added \"seafile-server_3.0.0_x86-64.tar.gz\"."}], "more": false}
+
+## <a id="add-organization"></a>Add Organization ##
+
+**POST** https://cloud.seafile.com/api2/organization/
+
+**Request parameters**
+
+* username
+* password
+* org_name
+* prefix
+* quota
+* member_limit
+
+**Sample request**
+
+    curl -v -X POST -d "username=example@example.com&password=example&org_name=example&prefix=example&quota=100&member_limit=10" -H "Authorization: Token ccdff90e4d1efe76b2b3d91c06b027a5cff189d4" -H 'Accept: application/json; indent=4' https://cloud.seafile.com/api2/organization/
+
+**Sample response**
+
+    "success"
