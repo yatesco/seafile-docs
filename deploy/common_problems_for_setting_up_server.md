@@ -22,18 +22,6 @@ sudo apt-get install libpython2.7
 
 First, you can check the ccnet.log in client (~/.ccnet/logs/ccnet.log for Linux, C:/users/your_name/ccnet/logs/ccnet.log for Windows) to see what's wrong.
 
-Possible reasons:
-
-* Firewall: Ensure the firewall is configured properly. See [Firewall Settings for Seafile Server](using_firewall.md)
-
-Trouble shooting:
-
-* Manually telnet to see if you can connect: <code>telnet your-server-IP-or-domain 10001</code>
-
-#### Failed to download blocks
-
-* Make sure port 12001 is open
-
 #### Error on Apache log: "File does not exist: /var/www/seahub.fcgi"
 
 Make sure you use "FastCGIExternalServer /var/www/seahub.fcgi -host 127.0.0.1:8000" in httpd.conf or apache2.conf, especially the "/var/www/seahub.fcgi" part.
