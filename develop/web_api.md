@@ -97,6 +97,8 @@
 <li><a href="#download-file-revision">Download File From a Revision</a></li>
 <li><a href="#create-file">Create File</a></li>
 <li><a href="#rename-file">Rename File</a></li>
+<li><a href="#lock-file">Lock File</a></li>
+<li><a href="#unlock-file">Unlock File</a></li>
 <li><a href="#move-file">Move File</a></li>
 <li><a href="#copy-file">Copy File</a></li>
 <li><a href="#revert-file">Revert File</a></li>
@@ -1698,6 +1700,70 @@ check if a dir has a corresponding sub_repo, if it does not have, create one
 * 404 NOT FOUND, repo not found
 * 409 CONFLICT, the newname is the same to the old
 * 520 OPERATION FAILED, fail to rename file
+
+#### <a id="lock-file"></a>Lock File  ###
+
+**PUT** https://cloud.seafile.com/api2/repos/{repo-id}/file/
+
+**Request parameters**
+
+* repo-id
+* p
+* operation
+
+**Sample request**
+
+    curl -v -X PUT -d "operation=lock&p=/foo.c" -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' -H 'Accept: application/json; charset=utf-8; indent=4' https://cloud.seafile.com/api2/repos/dae8cecc-2359-4d33-aa42-01b7846c4b32/file/
+
+**Sample response**
+
+    ...
+    < HTTP/1.0 200 OK
+    ...
+    "success"
+
+**Success**
+
+   Response code is 200, and a string `"success"` is returned.
+
+**Errors**
+
+* 400 BAD REQUEST, Path is missing or invalid(e.g. p=/)
+* 403 FORBIDDEN, You do not have permission to lock file
+* 404 NOT FOUND, repo not found
+* 520 OPERATION FAILED, fail to lock file
+
+#### <a id="unlock-file"></a>Unlock File  ###
+
+**PUT** https://cloud.seafile.com/api2/repos/{repo-id}/file/
+
+**Request parameters**
+
+* repo-id
+* p
+* operation
+
+**Sample request**
+
+    curl -v -X PUT -d "operation=unlock&p=/foo.c" -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' -H 'Accept: application/json; charset=utf-8; indent=4' https://cloud.seafile.com/api2/repos/dae8cecc-2359-4d33-aa42-01b7846c4b32/file/
+
+**Sample response**
+
+    ...
+    < HTTP/1.0 200 OK
+    ...
+    "success"
+
+**Success**
+
+   Response code is 200, and a string `"success"` is returned.
+
+**Errors**
+
+* 400 BAD REQUEST, Path is missing or invalid(e.g. p=/)
+* 403 FORBIDDEN, You do not have permission to lock file
+* 404 NOT FOUND, repo not found
+* 520 OPERATION FAILED, fail to unlock file
 
 #### <a id="move-file"></a>Move File  ###
 
