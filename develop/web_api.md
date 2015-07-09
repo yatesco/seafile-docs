@@ -6,11 +6,12 @@
 <li><a href="#status-code">Status Code</a></li>
 <li><a href="#quick-start">Quick Start</a></li>
 <li><a href="#account">Account</a><ul>
-<li><a href="#list-accounts">List Accounts</a></li>
+<li><a href="#list-accounts">List Accounts(Admin only)</a></li>
+<li><a href="#get-account">Get Account Info(Admin only)</a></li>
+<li><a href="#create-account">Create Account(Admin only)</a></li>
+<li><a href="#update-account">Update Account(Admin only)</a></li>
+<li><a href="#delete-account">Delete Account(Admin only)</a></li>
 <li><a href="#check-account-info">Check Account Info</a></li>
-<li><a href="#create-account">Create Account</a></li>
-<li><a href="#update-account">Update Account</a></li>
-<li><a href="#delete-account">Delete Account</a></li>
 <li><a href="#server-info">Get Server Information</a></li>
 </ul>
 </li>
@@ -230,6 +231,33 @@ If scope parameter is passed then accounts will be searched inside the specific 
 **Errors**
 
 * 403 Permission error, only administrator can perform this action
+
+### <a id="get-account"></a>Get Account Info ###
+
+**GET** https://cloud.seafile.com/api2/accounts/{email}/
+
+**Request parameters**
+
+**Sample request**
+
+    curl -v -H "Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd" -H 'Accept: application/json; indent=4' https://cloud.seafile.com/api2/accounts/user@mail.com/
+
+**Sample response**
+
+    {
+    "is_staff": false,
+    "is_active": true,
+    "id": 2,
+    "create_time": 1356061187741686,
+    "usage": 651463187,
+    "total": 107374182400,
+    "email": "user@mail.com"
+    }
+
+**Errors**
+
+* 403 Permission error, only administrator can perform this action
+
 
 ### <a id="check-account-info"></a>Check Account Info ###
 
