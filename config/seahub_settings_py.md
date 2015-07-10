@@ -157,6 +157,10 @@ THUMBNAIL_EXTENSION = 'png'
 THUMBNAIL_DEFAULT_SIZE = '24'
 PREVIEW_DEFAULT_SIZE = '100'
 
+# Disable sync with any folder. Default is `False`
+# NOTE: since version 4.2.4
+DISABLE_SYNC_WITH_ANY_FOLDER = True
+
 </pre>
 
 
