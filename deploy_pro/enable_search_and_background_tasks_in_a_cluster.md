@@ -21,17 +21,18 @@ Let's assume you have three nodes in your cluster: A, B, and C. And you decide t
 
 On this node, you need:
 
-### Install Java and LibreOffice
+### Install Dependencies (Java, LibreOffice, poppler)
 
 On Ubuntu/Debian:
 ```
-sudo apt-get install openjdk-7-jre libreoffice python-uno # or python3-uno for ubuntu 14.04+
+sudo apt-get install openjdk-7-jre libreoffice poppler-utils python-uno # or python3-uno for ubuntu 14.04+
 ```
 
 On CentOS/Red Hat:
 ```
 sudo yum install java-1.7.0-openjdk
 sudo yum install libreoffice libreoffice-headless libreoffice-pyuno
+sudo yum install poppler-utils
 ```
 
 *Note*: Since version 3.1.12, java 1.7 is required, please check your java version by `java -version`. If not, please [change the default java version](./change_default_java.md).
