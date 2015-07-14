@@ -45,6 +45,12 @@ Assume you have configured nginx as
 
 ### Sample configuration file
 
+#### Generate DH params
+(this takes some time)
+```bash
+    openssl dhparam 2048 > /etc/nginx/dhparam.pem
+```
+
 Here is the sample configuration file:
 
 ```nginx
@@ -60,6 +66,18 @@ Here is the sample configuration file:
         ssl_certificate /etc/ssl/cacert.pem;        # path to your cacert.pem
         ssl_certificate_key /etc/ssl/privkey.pem;	# path to your privkey.pem
         server_name seafile.example.com;
+        ssl_session_timeout 5m;
+        ssl_session_cache shared:SSL:5m;
+
+        # Diffie-Hellman parameter for DHE ciphersuites, recommended 2048 bits
+        ssl_dhparam /etc/nginx/dhparam.pem;
+
+        # secure settings (A+ at SSL Labs ssltest at time of writing)
+        # see https://wiki.mozilla.org/Security/Server_Side_TLS#Nginx
+        ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+        ssl_ciphers 'ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-AES128-SHA256:ECDHE-RSA-AES256-SHA:ECDHE-ECDSA-AES256-SHA:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES128-SHA:DHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES256-SHA256:DHE-RSA-AES256-SHA:DHE-RSA-CAMELLIA256-SHA:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA:DHE-RSA-SEED-SHA:DHE-RSA-CAMELLIA128-SHA:HIGH:!aNULL:!eNULL:!LOW:!3DES:!MD5:!EXP:!PSK:!SRP:!DSS';
+        ssl_prefer_server_ciphers on;
+
         proxy_set_header X-Forwarded-For $remote_addr;
 
         add_header Strict-Transport-Security "max-age=31536000; includeSubDomains";
