@@ -71,7 +71,7 @@ USER_STRONG_PASSWORD_REQUIRED = False
 
 ## Cloud Mode
 
-You should enable cloud mode if you use Seafile with an unknown user base. It disables the organization tab in Seahub's website to ensure that users can't access the user list. Cloud mode provides some nice features like sharing content with unregistered users and sending invitations to them. Therefore you also want to enable user registration.
+You should enable cloud mode if you use Seafile with an unknown user base. It disables the organization tab in Seahub's website to ensure that users can't access the user list. Cloud mode provides some nice features like sharing content with unregistered users and sending invitations to them. Therefore you also want to enable user registration. Through the global address book (since version 4.2.3) you can do a search for every user account. So you probably want to disable it.
 
 <pre>
 
@@ -80,6 +80,9 @@ CLOUD_MODE = True
 
 # Enalbe registration on web.
 ENABLE_SIGNUP = True
+
+# Disable global address book
+ENABLE_GLOBAL_ADDRESSBOOK = False
 
 </pre>
 
