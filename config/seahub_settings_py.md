@@ -99,7 +99,7 @@ You may change seahub website's settings by adding variables in `seahub_settings
 TIME_ZONE = 'UTC'
 
 # Set this to seahub website's URL. This URL is contained in email notifications.
-SITE_BASE = 'http://www.example.com/'
+SITE_BASE = 'https://www.example.com/'
 
 # Set this to your website's name. This is contained in email notifications.
 SITE_NAME = 'example.com'
@@ -160,6 +160,9 @@ PREVIEW_DEFAULT_SIZE = '100'
 # Disable sync with any folder. Default is `False`
 # NOTE: since version 4.2.4
 DISABLE_SYNC_WITH_ANY_FOLDER = True
+
+# Enable or disable repo history setting
+ENABLE_REPO_HISTORY_SETTING = True
 
 </pre>
 
