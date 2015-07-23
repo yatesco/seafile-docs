@@ -24,6 +24,13 @@ You can rebuild search index by:
 ./pro/pro.py search --update
 ```
 
+If this not work, you can try the following steps:
+
+1. Stop Seafile
+2. Remove old search index `rm -rf pro-data/search`
+3. Restart Seafile
+4. Wait one minute then run `./pro/pro.py search --update`
+
 ### <a id="wiki-search-office-pdf"></a>I can't search Office/PDF files
 
 
