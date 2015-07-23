@@ -52,6 +52,7 @@
 <li><a href="#list-file-share-links">List File Share Links</a></li>
 <li><a href="#create-file-share-link">Create File Share Link</a></li>
 <li><a href="#delete-file-share-link">Delete File Share Link</a></li>
+<li><a href="#list-direntry-in-dir-download-link">List Direntry in Dir Download Link</a></li>
 </ul>
 </li>
 <li><a href="#shared-libraries">Shared Libraries</a><ul>
@@ -902,18 +903,24 @@ None
 **Request parameters**
 
 * repo-id
-* type
 * p (Path to the file)
+* share_type (optional, `download` or `upload`, default `download`)
+* password (optional)
+* expire (optional)
 
 **Sample request**
 
 Create download link for file
 
-    curl -v  -X PUT -d "type=f&p=/foo.md" -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' -H 'Accept: application/json; indent=4' https://cloud.seafile.com/api2/repos/afc3b694-7d4c-4b8a-86a4-89c9f3261b12/file/shared-link/
+    curl -v  -X PUT -d "p=/foo.md" -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' -H 'Accept: application/json; indent=4' https://cloud.seafile.com/api2/repos/afc3b694-7d4c-4b8a-86a4-89c9f3261b12/file/shared-link/
 
-Create download link for directory
+Create download link for directory with password and expire date
 
-    curl -v  -X PUT -d "type=d&p=/123/" -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' -H 'Accept: application/json; indent=4' https://cloud.seafile.com/api2/repos/afc3b694-7d4c-4b8a-86a4-89c9f3261b12/file/shared-link/
+    curl -v  -X PUT -d "password=password&expire=6&p=/123/" -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' -H 'Accept: application/json; indent=4' https://cloud.seafile.com/api2/repos/afc3b694-7d4c-4b8a-86a4-89c9f3261b12/file/shared-link/
+
+Create upload link for directory
+
+    curl -v -X PUT -d "share_type=upload&p=/123/" -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' -H 'Accept: application/json; indent=4' https://cloud.seafile.com/api2/repos/afc3b694-7d4c-4b8a-86a4-89c9f3261b12/file/shared-link/
 
 **Sample response**
 
@@ -929,6 +936,7 @@ Create download link for directory
 **Errors**
 
 * 400 Path is missing
+* 400 Password(if link is encrypted) is missing
 * 500 Internal server error
 
 #### <a id="delete-file-share-link"></a>Delete File Share Link ####
@@ -948,6 +956,24 @@ Create download link for directory
     ...
     < HTTP/1.0 200 OK
     ...
+
+#### <a id="list-direntry-in-dir-download-link"></a>List Direntry in Dir Download Link ####
+
+**GET** https://cloud.seafile.com/api2/d/{token}/dir/
+
+**Request parameters**
+
+* token (upload link token)
+* p (sub folder path)
+* password (if link is encrypted)
+
+**Sample request**
+
+    curl -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' "https://cloud.seafile.com/api2/d/3af7c46595/dir/?p=/subfolder/"
+
+**Sample response**
+
+    [{"mtime": 1436846750, "type": "dir", "name": "sadof", "id": "1806dbdb700b7bcd49e6275107c7ccf7b3ea1776"}, {"id": "bdb06f6de972c42893fda590ac954988b562429c", "mtime": 1436431020, "type": "file", "name": "test.mdert", "size": 20}]
 
 ### <a id="shared-libs"></a>Shared Libraries ###
 
