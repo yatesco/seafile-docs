@@ -150,8 +150,6 @@ Which one to choose depends on if you have the root password.
 
 If you choose "[1] Create new ccnet/seafile/seahub databases", you would be asked these questions:
 
-You'll see these output:
-![mysql-create-new](../images/mysql-create-new.png)
 
 | Question | Description | Note
 | -- | -- | ---- |
@@ -167,8 +165,6 @@ You'll see these output:
 
 If you choose "[2] Use existing ccnet/seafile/seahub databases", you would be asked these questions:
 
-You'll see these output:
-![mysql-use-existing](../images/mysql-use-existing.png)
 
 ** related questions for "Use existing ccnet/seafile/seahub databases" **
 
