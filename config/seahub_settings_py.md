@@ -156,9 +156,7 @@ ENABLE_THUMBNAIL = True
 
 # Absolute filesystem path to the directory that will hold thumbnail files.
 THUMBNAIL_ROOT = '/haiwen/seahub-data/thumbnail/thumb/'
-THUMBNAIL_EXTENSION = 'png'
-THUMBNAIL_DEFAULT_SIZE = '24'
-PREVIEW_DEFAULT_SIZE = '100'
+
 
 # Disable sync with any folder. Default is `False`
 # NOTE: since version 4.2.4
