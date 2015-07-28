@@ -165,6 +165,9 @@ DISABLE_SYNC_WITH_ANY_FOLDER = True
 # Enable or disable repo history setting
 ENABLE_REPO_HISTORY_SETTING = True
 
+# Remember days for login. Default is 7
+LOGIN_REMEMBER_DAYS = 7
+
 </pre>
 
 
