@@ -1,6 +1,6 @@
 # Syncing Users from LDAP/AD
 
-In community edition, a LDAP/AD user is imported into Seafile database upon first time login. There are a few drawbacks:
+In community edition, a LDAP/AD user is imported into Seafile database upon first time login or first time used (like listing all users in API). There are a few drawbacks:
 
 * User name, department and other information are not imported into Seafile
 * If an user is deleted in LDAP/AD, it is not deactivated in Seafile. He/She is still able to access files via syncing or via existing browser session.
