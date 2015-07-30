@@ -5,10 +5,10 @@ You may change Seafile's network options by modifying `ccnet/ccnet.conf` file. L
 <pre>
 [General]
 
-# This option is not used by Seafile server
+# Not used anymore 
 USER_NAME=example
 
-# Please don't change this ID.
+# Not used anymore
 ID=eb812fd276432eff33bcdde7506f896eb4769da0
 
 # This is the name of this Seafile server. Currenlty it is only used in Seafile client's log.
@@ -21,16 +21,11 @@ SERVICE_URL=http://www.example.com:8000
 
 
 [Network]
-
-# Ccnet waits for client connections on this port. If it's used by other services, please change it.
-# This is only useful for the seafile server.
+# Not used anymore
 PORT=10001
 
 [Client]
-# Start from version 3.1.2, this option is not used in Linux server and client. Unix socket is used instead.
-# Ccnet listens to this port on localhost for internal RPC calls.
-# If it's been used by other services, ccnet and seafile would not be able to run.
-# If you want to run seafile client and server on the same machine, change this port for the client.
+# Not used anymore
 PORT=13419
 
 </pre>
