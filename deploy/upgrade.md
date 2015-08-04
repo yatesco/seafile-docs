@@ -118,13 +118,13 @@ Now upgrade to version 3.2.2.
    ```
 
 
-## Tiny upgrade (like from 3.1.0 to 3.1.2)
+## Maintenance version upgrade (like from 3.1.0 to 3.1.2)
 
-Tiny upgrade is like an upgrade from 3.1.0 to 3.1.2.
+Maintenance upgrade is like an upgrade from 3.1.0 to 3.1.2.
 
 
 1. Stop the current server first as for any upgrade
-2. For this type of upgrade, you only need to update the avatar link. We provide a script for you, just run it (For history reason, the script called `minor-upgrade.sh`):
+2. For this type of upgrade, you only need to update the symbolic links (for avatar and a few other folders). We provide a script for you, just run it (For history reason, the script called `minor-upgrade.sh`):
 
    ```sh
    cd seafile-server-3.1.2
