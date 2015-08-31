@@ -234,9 +234,10 @@ http://192.168.1.111:8000/
 </pre>
 you will be redirected to the Login page. Enter the username and password you were provided during the Seafile setup. You will then be returned to the <code>My Home</code> page where you can create libraries.
 
-'''Congratulations!''' Now you have successfully setup your private Seafile server.
+Congratulations! Now you have successfully setup your private Seafile server.
 
-#### Run Seahub on another port
+
+### Run Seahub on another port
 
 If you want to run seahub in a port other than the default 8000, say 8001, you must:
 
