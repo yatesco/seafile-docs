@@ -222,17 +222,18 @@ Under seafile-server-1.8.2 directory, run the following commands
 
 * Start seahub
 
-<pre>
+```
 ./seahub.sh start <port>  # Start seahub website, port defaults to 8000
-</pre>
+```
 
 '''Note:''' The first time you start seahub, the script would prompt you to create an admin account for your seafile server.
 
-After starting the services, you may open a web browser and types
-<pre>
+After starting the services, you may open a web browser and visit Seafile web interface at (assume your server IP is 192.168.1.111):
+
+```
 http://192.168.1.111:8000/
-</pre>
-you will be redirected to the Login page. Enter the username and password you were provided during the Seafile setup. You will then be returned to the <code>My Home</code> page where you can create libraries.
+```
+
 
 Congratulations! Now you have successfully setup your private Seafile server.
 
@@ -247,9 +248,9 @@ If you want to run seahub in a port other than the default 8000, say 8001, you m
 ./seafile.sh stop
 </pre>
 
-* modify the value of <code>SERVICE_URL</code> in the file <code>haiwen/ccnet/ccnet.conf</code>, like this: (assume your ip or domain is <code>192.168.1.100</code>)
+* modify the value of `SERVICE_URL` in the file `haiwen/ccnet/ccnet.conf`, like this: (assume your ip or domain is `192.168.1.111`)
 <pre>
-SERVICE_URL = http://192.168.1.100:8001
+SERVICE_URL = http://192.168.1.111:8001
 </pre>
 
 * restart seafile server
