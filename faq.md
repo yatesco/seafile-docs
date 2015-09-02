@@ -2,21 +2,18 @@
 
 #### When downloading a library, the client hangs at "connecting server"
 
-First, you can check the ccnet.log in client (``~/.ccnet/logs/ccnet.log`` for
-Linux, ``C:/users/your_name/ccnet/logs/ccnet.log`` for Windows) to see what's wrong.
+First, you can check the seafile.log in client (``~/.ccnet/logs/seafile.log`` for
+Linux, ``C:/users/your_name/ccnet/logs/seafile.log`` for Windows) to see what's wrong.
 
 Possible reasons:
 
-* Miss config of  <code>SERVICE_URL</code>: Check whether the value of is set correctly in server's <code>ccnet.conf</code>.
 * Firewall: Ensure the firewall is configured properly. See [Firewall Settings for Seafile Server](deploy/using_firewall.md)
 
-Trouble shooting:
-
-* Manually telnet to see if you can connect: <code>telnet your-server-IP-or-domain 10001</code>
 
 #### Failed to upload/download file online
 
 * Make sure you firewall for seafile fileserver is opened.
+* Make `SERVICE_URL` in ccnet.conf and `FILE_SERVER_ROOT` in seahub_settings.py are set correctly.
 * Using chrome/firefox debug mode to find which link is given when click download button and what's wrong with this link
 
 #### Does Seafile server support Python 3?
@@ -53,6 +50,4 @@ There are some common mistakes:
 1. Check whether there are some typos in the config, e.g., forget single quote, EMAIL_HOST_USER = XXX, which should be EMAIL_HOST_USER = 'XXX'
 1. Your mail server is not available.
 
-#### Client stops syncing, needs download library again
 
-Please check issue https://github.com/haiwen/seafile/issues/730
