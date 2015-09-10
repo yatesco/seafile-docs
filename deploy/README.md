@@ -20,12 +20,13 @@ Basic:
 
 Advanced:
 
+* [Add Memcached](add_memcached.md), adding memcached is very important if you have more than 50 users.
 * [Configure Seafile to use LDAP](using_ldap.md)
 * [Importing Groups from LDAP](ldap_group_sync.md)
 * [Start Seafile at System Bootup](start_seafile_at_system_bootup.md)
 * [Firewall settings](using_firewall.md)
 * [Logrotate](using_logrotate.md)
-* [Add Memcached](add_memcached.md)
+
 
 Other Deployment Issues
 
