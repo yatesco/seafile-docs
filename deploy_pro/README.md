@@ -18,7 +18,6 @@ Config Options
 
 ## Search
 
-- [Use existing ElasticSearch server](use_existing_ElasticSearch_server.md)
 - [Details about File Search](details_about_file_search.md)
 
 ## Cluster
