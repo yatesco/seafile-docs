@@ -38,7 +38,7 @@
    * [Upgrading Seafile Windows Server](deploy_windows/upgrading_seafile_windows_server.md)
    * [Migrate Seafile From Windows To Linux](deploy_windows/migrate_from_win_to_linux.md)
    * [Garbage Collecting Unused Blocks on Seafile Server](deploy_windows/windows_gc.md)
-* [Deploy Seafile Pro Edition under Linux](deploy_pro/README.md)
+* [Deploy Seafile Pro Edition](deploy_pro/README.md)
    * [Download and Setup Seafile Professional Server](deploy_pro/download_and_setup_seafile_professional_server.md)
    * [Enable Office/PDF Documents Online Preview](deploy_pro/office_documents_preview.md)
    * [Details about File Search](deploy_pro/details_about_file_search.md)
