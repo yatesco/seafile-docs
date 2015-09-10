@@ -20,6 +20,10 @@ Config Options
 
 - [Details about File Search](details_about_file_search.md)
 
+## Preview office files
+
+- [Enable Office/PDF Documents Online Preview](office_documents_preview.md)
+
 ## Cluster
 
 - [Deploy seafile servers in a cluster](deploy_in_a_cluster.md)
