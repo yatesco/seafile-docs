@@ -101,9 +101,6 @@ You may change seahub website's settings by adding variables in `seahub_settings
 # system time zone.
 TIME_ZONE = 'UTC'
 
-# Set this to seahub website's URL. This URL is contained in email notifications.
-SITE_BASE = 'https://www.example.com/'
-
 # Set this to your website's name. This is contained in email notifications.
 SITE_NAME = 'example.com'
 
