@@ -39,7 +39,7 @@ Check [configuration options](../config/README.md) for server config options lik
 
 1. Read [Seafile Server Components Overview](../overview/components.md) to understand how Seafile server works. This will save you a lot of time.
 2. [Common Problems for Setting up Server](common_problems_for_setting_up_server.md)
-3. Use our google group forum or IRC to get help.
+3. Go to our [forum](https://forum.seafile-server.org/) for help.
 
 ## Upgrade Seafile Server
 
