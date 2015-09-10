@@ -18,9 +18,6 @@ sudo apt-get install libpython2.7
 * Make sure you firewall for seafile fileserver is opened.
 * Using chrome/firefox debug mode to find which link is given when click download button and what's wrong with this link
 
-#### When syncing a library, the client hangs at "connecting server"
-
-First, you can check the ccnet.log in client (~/.ccnet/logs/ccnet.log for Linux, C:/users/your_name/ccnet/logs/ccnet.log for Windows) to see what's wrong.
 
 #### Error on Apache log: "File does not exist: /var/www/seahub.fcgi"
 
