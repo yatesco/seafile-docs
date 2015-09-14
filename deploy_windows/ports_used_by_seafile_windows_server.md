@@ -19,14 +19,14 @@ In the following section we list the TCP ports used by each of seafile component
 
 **Note**: If you change any of the ports, you have to restart seafile server.
 
-### seafile fileserver
+## seafile fileserver
 
 seafile fileserver handles raw file upload/download for Seahub
 
 - default: 8082
 - How to change: The Seafile desktop client will try to connect this port for file syncing. Don't change this port.
 
-### seahub
+## seahub
 
 seahub is the web interface of seafile server.
 
