@@ -17,40 +17,14 @@ All ports related configuration are recorded in ``ccnet.conf`` and ``seafile.con
 In the following section we list the TCP ports used by each of seafile components, as well as how to change them (For example, some port may have already been used by some other application).
 
 **Note**: If you change any of the ports, you have to restart seafile server.
-## ccnet
 
-ccnet is the networking service for seafile server
-
-- default: 10001
-- How to change: Edit the file ccnet.conf. Change the value of PORT under the Network section.
-
-```
-[Network]
-PORT = 10001
-```
-## seaf-server
-
-seaf-server provides the data service for seafile server
-
-- default: 12001
-- How to change: Edit the file ``seafile.conf``. Change the value of port under the network section.
-
-
-```
-[network]
-port=22001
-```
 ### seafile fileserver
 
 seafile fileserver handles raw file upload/download for Seahub
 
 - default: 8082
-- How to change: Edit the file ``seafile.conf``. Change the value of port under the fileserver section.
+- How to change: The Seafile desktop client will try to connect this port for file syncing. Don't change this port.
 
-```
-[fileserver]
-port=8082
-```
 ### seahub
 
 seahub is the web interface of seafile server.
