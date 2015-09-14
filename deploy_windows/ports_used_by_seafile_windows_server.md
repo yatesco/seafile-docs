@@ -1,6 +1,7 @@
 # Ports used by Seafile Windows Server
 
-Seafile server has several components, so several TCP ports are used.
+Seafile server has two components, so two TCP ports are used.
+
 ## The two configuration files
 
 All ports related configuration are recorded in ``ccnet.conf`` and ``seafile.conf``.
