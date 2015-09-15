@@ -12,7 +12,7 @@ enable easy collaboration around documents within a team.
 
 ## LICENSE
 
-Seafile and its desktop and mobile clients are published under the GPLv3.
+Seafile server is public under GPLv2.
 
 The Seafile server's web end, i.e. Seahub, is published under the Apache
 License.
