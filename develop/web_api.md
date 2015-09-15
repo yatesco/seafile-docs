@@ -21,12 +21,6 @@
 <li><a href="#unstar-a-file">Unstar A File</a></li>
 </ul>
 </li>
-<li><a href="#user-messages">User Messages</a><ul>
-<li><a href="#list-user-messages">List User Messages</a></li>
-<li><a href="#reply-a-user-message">Reply A User Message</a></li>
-<li><a href="#count-unseen-messages">Count Unseen Messages</a></li>
-</ul>
-</li>
 <li><a href="#group">Group</a><ul>
 <li><a href="#list-groups">List Groups</a></li>
 <li><a href="#add-a-group">Add A Group</a></li>
@@ -60,15 +54,6 @@
 <li><a href="#list-be-shared-libraries">List Be Shared Libraries</a></li>
 <li><a href="#share-a-library">Share A Library</a></li>
 <li><a href="#unshare-a-library">Unshare A Library</a></li>
-</ul>
-</li>
-<li><a href="#shared-files">Shared Files</a><ul>
-<li><a href="#list-shared-files">List Shared Files</a></li>
-<li><a href="#download-shared-file">Download Shared File</a></li>
-<li><a href="#get-shared-file-detail">Get Shared File Detail</a></li>
-<li><a href="#delete-shared-file">Delete Shared File</a></li>
-<li><a href="#download-private-shared-file">Download Private Shared File</a></li>
-<li><a href="#get-private-shared-file-detail">Get Private Shared File Detail</a></li>
 </ul>
 </li>
 </ul>
@@ -492,91 +477,7 @@ Sample response from a seafile pro edition server:
 
 * 400 `repo_id` or `p` is missing, or `p` is not valid file path(e.g. /foo/bar/).
 
-## <a id="user-messages"></a>User Messages ##
 
-### <a id="list-user-messages"></a>List User Messages ###
-
-**GET** https://cloud.seafile.com/api2/user/msgs/{id_or_email}/
-
-**Request parameters**
-
-* id_or_email
-
-**Sample request**
-
-    curl -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' "https://cloud.seafile.com/api2/user/msgs/2/"
-
-**Sample response**
-
-    {
-        "to_email": "user@example.com",
-        "next_page": -1,
-        "msgs": [
-            {
-                "attachments": [
-                    {
-                        "path": "/123.md",
-                        "repo_id": "c7436518-5f46-4296-97db-2fcba4c8c8db"
-                    }
-                ],
-                "timestamp": 1398233096,
-                "from_email": "user@example.com",
-                "msgid": 3,
-                "msg": "another test msg",
-                "nickname": "user"
-            },
-            {
-                "attachments": [],
-                "timestamp": 1398233067,
-                "from_email": "user@example.com",
-                "msgid": 2,
-                "msg": "a test msg",
-                "nickname": "user"
-            }
-        ]
-    }
-
-**Errors**
-
-* 404 user not found
-
-### <a id="reply-a-user-message"></a>Reply A User Message ###
-
-**POST** https://cloud.seafile.com/api2/user/msgs/{id_or_email}/
-
-**Request parameters**
-
-* id_or_email
-* message
-
-**Sample request**
-
-    curl -d "message=this is a user msg reply" -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' "https://cloud.seafile.com/api2/user/msgs/2/"
-
-**Sample response**
-
-    {
-        "msgid": 4
-    }
-
-**Errors**
-
-* 404 user not found
-
-### <a id="count-unseen-messages"></a>Count Unseen Messages ##
-
-**GET** https://cloud.seafile.com/api2/unseen_messages/
-
-
-**Sample request**
-
-    curl -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' "https://cloud.seafile.com/api2/unseen_messages/"
-
-**Sample response**
-
-    {
-        "count": 1
-    }
 
 ## <a id="group"></a>Group ##
 
@@ -1047,121 +948,6 @@ If share_type is 'personal' then 'user' param is required, if share_type is 'gro
 
     "success"
 
-### <a id="shared-files"></a>Shared Files ###
-
-#### <a id="list-shared-files"></a>List Shared Files ####
-
-**GET** https://cloud.seafile.com/api2/shared-files/
-
-**Sample request**
-
-    curl -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' "https://cloud.seafile.com/api2/shared-files/"
-
-**Sample response**
-
-    {"priv_share_in": [{"s_type": "f", "repo_id": "989e3952-9d6f-4427-ab16-4bf9b53212eb", "permission": "r", "to_user": "user@example.com", "token": "94aace406a", "from_user": "user@example.com", "path": "/lib.md"}], "priv_share_out": [{"s_type": "f", "repo_id": "affc837f-7fdd-4e91-b88a-32caf99897f2", "permission": "r", "to_user": "user@example.com", "token": "b7b31bc39b", "from_user": "user@example.com", "path": "/lian123.md"}]}
-
-#### <a id="download-shared-file"></a>Download Shared File ####
-
-**GET** https://cloud.seafile.com/api2/f/{token}/
-
-**Request parameters**
-
-* token(file share token)
-
-**Sample request**
-
-    curl -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' "https://cloud.seafile.com/api2/f/ad93cd0d66/"
-
-**Sample response**
-
-    "http://192.168.1.101:8082/files/89223601/lib.md"
-
-**Errors**
-
-* 404 repo/token/file not found
-* 520 OPERATION FAILED, fail to get file id by path
-
-#### <a id="get-shared-file-detail"></a>Get Shared File Detail ####
-
-**GET** https://cloud.seafile.com/api2/f/{token}/detail/
-
-**Request parameters**
-
-* token(file share token)
-
-**Sample request**
-
-    curl -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' "https://cloud.seafile.com/api2/f/ad93cd0d66/detail/"
-
-**Sample response**
-
-    {"repo_id": "989e3952-9d6f-4427-ab16-4bf9b53212eb", "name": "lib.md", "mtime": 1398218747, "path": "/lib.md", "type": "file", "id": "0000000000000000000000000000000000000000", "size": 0}
-
-**Errors**
-
-* 404 repo/token/file not found
-* 520 OPERATION FAILED, fail to get file id by path
-
-#### <a id="delete-shared-file"></a>Delete Shared File ####
-
-**DELETE** https://cloud.seafile.com/api2/shared-files/?t=0ae587a7d1
-
-**Request parameters**
-
-* t
-
-**Sample request**
-
-    curl -v -X DELETE -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' "https://cloud.seafile.com/api2/shared-files/?t=94aace406a"
-
-**Sample response**
-
-    ...
-    < HTTP/1.0 200 OK
-    ...
-
-#### <a id="download-private-shared-file"></a>Download Private Shared File ####
-
-**GET** https://cloud.seafile.com/api2/s/f/{token}/
-
-**Request parameters**
-
-* token(private file share token)
-
-**Sample request**
-
-    curl -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' "https://cloud.seafile.com/api2/s/f/c5aa5f0219/"
-
-**Sample response**
-
-    "http://192.168.1.101:8082/files/6960d5a4/lib.md"
-
-**Errors**
-
-* 404 repo/token/file not found
-* 520 OPERATION FAILED, fail to get file id by path
-
-#### <a id="get-private-shared-file-detail"></a>Get Private Shared File Detail ###
-
-**GET** https://cloud.seafile.com/api2/s/f/{token}/detail/
-
-**Request parameters**
-
-* token(private file share token)
-
-**Sample request**
-
-    curl -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' "https://cloud.seafile.com/api2/s/f/c5aa5f0219/detail/"
-
-**Sample response**
-
-    {"repo_id": "989e3952-9d6f-4427-ab16-4bf9b53212eb", "name": "lib.md", "shared_by": "user@example.com", "mtime": 1398218747, "path": "/lib.md", "type": "file", "id": "0000000000000000000000000000000000000000", "size": 0}
-
-**Errors**
-
-* 404 repo/token/file not found
-* 520 OPERATION FAILED, fail to get file id by path
 
 ## <a id="library"></a>Library ##
 
