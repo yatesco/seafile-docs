@@ -51,9 +51,6 @@ You should create a new virtual host configuration for Shibboleth.
 
         <Location /Shibboleth.sso>
         SetHandler shib
-        AuthType shibboleth
-        ShibRequestSetting requireSession true
-        Require valid-user
         </Location>
 
         <Location /api2>
@@ -86,6 +83,7 @@ You should create a new virtual host configuration for Shibboleth.
         #
         RewriteRule ^/(media.*)$ /$1 [QSA,L,PT]
         RewriteCond %{REQUEST_FILENAME} !-f
+        RewriteCond %{REQUEST_URI} !^/Shibboleth.sso
         RewriteRule ^(.*)$ /seahub.fcgi$1 [QSA,L,E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 
     </VirtualHost>
