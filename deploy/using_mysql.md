@@ -84,7 +84,7 @@ GRANT ALL PRIVILEGES ON `seahub-db`.* to `seafile`@localhost;
 
 The Seafile server package requires the following packages have been installed in your system
 
-* python 2.7
+* python 2.7 or 2.6.5+
 * python-setuptools
 * python-imaging
 * python-mysqldb
