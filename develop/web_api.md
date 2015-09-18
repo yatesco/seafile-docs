@@ -2157,6 +2157,8 @@ A sample request looks like `curl -X DELETE https://cloud.seafile.com/api2/repos
 
 ## <a id="add-organization"></a>Add Organization ##
 
+This API is only used internally to create an organization account in seacloud.cc.
+
 **POST** https://cloud.seafile.com/api2/organization/
 
 **Request parameters**
