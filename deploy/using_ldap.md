@@ -41,8 +41,10 @@ Meaning of each config options:
 
 Tips for connecting to Active Directory:
 
-* On a Windows Server, you can use the ldp.exe GUI tool to browse your directory server tree. It's easy in this way to locate your DN for BASE option.
-* AD supports 'user@domain.name' format for the USER_DN option. For example you can use administrator@example.com for USER_DN.
+* To determine the BASE, you first have to navigate your organization hierachy on the domain controller GUI.
+    * If you want to allow all users to use Seafile, you can use 'cn=users,dc=yourdomain,dc=com' as BASE (with proper adjustment for your own needs).
+    * If you want to limit users to a certain OU (Organization Unit), you run `dsquery` command on the domain controller to find out the DN for this OU. For example, if the OU is 'staffs', you can run 'dsquery ou -name staff'. More information can be found [here](https://technet.microsoft.com/en-us/library/cc770509.aspx).
+* AD supports 'user@domain.name' format for the USER_DN option. For example you can use administrator@example.com for USER_DN. Sometime the domain controller doesn't recognize this format. You can still use `dsquery` command to find out user's DN. For example, if the user name is 'seafileuser', run `dsquery user -name seafileuser`. More information [here](https://technet.microsoft.com/en-us/library/cc725702.aspx).
 
 Example config for Active Directory:
 
@@ -99,8 +101,10 @@ Meaning of each config options:
 
 Tips for connecting to Active Directory:
 
-* On a Windows Server, you can use the ldp.exe GUI tool to browse your directory server tree. It's easy in this way to locate your DN for BASE option.
-* AD supports 'user@domain.name' format for the USER_DN option. For example you can use administrator@example.com for USER_DN.
+* To determine the BASE, you first have to navigate your organization hierachy on the domain controller GUI.
+    * If you want to allow all users to use Seafile, you can use 'cn=users,dc=yourdomain,dc=com' as BASE (with proper adjustment for your own needs).
+    * If you want to limit users to a certain OU (Organization Unit), you run `dsquery` command on the domain controller to find out the DN for this OU. For example, if the OU is 'staffs', you can run 'dsquery ou -name staff'. More information can be found [here](https://technet.microsoft.com/en-us/library/cc770509.aspx).
+* AD supports 'user@domain.name' format for the USER_DN option. For example you can use administrator@example.com for USER_DN. Sometime the domain controller doesn't recognize this format. You can still use `dsquery` command to find out user's DN. For example, if the user name is 'seafileuser', run `dsquery user -name seafileuser`. More information [here](https://technet.microsoft.com/en-us/library/cc725702.aspx).
 
 Example config for Active Directory:
 
@@ -153,6 +157,17 @@ Here is another example:
 
 ```
 FILTER = &(!(UserAccountControl:1.2.840.113556.1.4.803:=2))
+```
+
+## Limiting Seafile Users to a Group in Active Directory
+
+You can use the FILTER option to limit user scope to a certian AD group.
+
+1. First, you should find out the DN for the group. Again, we'll use `dsquery` command on the domain controller. For example, if group name is 'seafilegroup', run `dsquery group -name seafilegroup`.
+2. Add following line to LDAP config:
+
+```
+FILTER = memberOf={output of dsquery command}
 ```
 
 ## Using TLS connection to LDAP/AD server
