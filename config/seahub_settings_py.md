@@ -103,6 +103,7 @@ TIME_ZONE = 'UTC'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
+# Default language for sending emails.
 LANGUAGE_CODE = 'en'
 
 # Set this to your website's name. This is contained in email notifications.
