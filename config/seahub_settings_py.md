@@ -101,6 +101,10 @@ You may change seahub website's settings by adding variables in `seahub_settings
 # system time zone.
 TIME_ZONE = 'UTC'
 
+# Language code for this installation. All choices can be found here:
+# http://www.i18nguy.com/unicode/language-identifiers.html
+LANGUAGE_CODE = 'en'
+
 # Set this to your website's name. This is contained in email notifications.
 SITE_NAME = 'example.com'
 
