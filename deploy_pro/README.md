@@ -24,6 +24,10 @@ Config Options
 
 - [Enable Office/PDF Documents Online Preview](office_documents_preview.md)
 
+## Office Web App
+
+- [Integrating with Office Web App](office_web_app.md)
+
 ## Cluster
 
 - [Deploy seafile servers in a cluster](deploy_in_a_cluster.md)
