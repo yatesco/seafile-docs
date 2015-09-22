@@ -55,6 +55,9 @@ With these settings you can ensure strong passwords for Libraries and user accou
 # mininum length for password of encrypted library
 REPO_PASSWORD_MIN_LENGTH = 8
 
+# mininum length for password for share link (since version 4.4)
+SHARE_LINK_PASSWORD_MIN_LENGTH = 8
+
 # mininum length for user's password
 USER_PASSWORD_MIN_LENGTH = 6
 
