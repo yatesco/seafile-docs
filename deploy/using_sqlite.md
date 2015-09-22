@@ -67,7 +67,7 @@ The Seafile server package requires the following packages have been installed i
 ```
 #on Debian
 apt-get update
-apt-get install python2.7 python-setuptools python-imaging sqlite3
+apt-get install python2.7 libpython2.7 python-setuptools python-imaging sqlite3
 ```
 
 #### Setup
