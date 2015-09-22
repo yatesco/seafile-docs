@@ -1873,6 +1873,8 @@ The id of the updated file
 * repo-id
 * p (optional): The path to a directory. If `p` is missing, then defaults to '/' which is the top directory.
 * oid (optional)
+* t (optional): If set `t` argument as `f`, will only return file entries, and `d` for only dir entries.
+* recursive (optional): If set `t` argument as `d` **AND** `recursive` argument as `1`, return all dir entries recursively
 
 **Sample request**
 
