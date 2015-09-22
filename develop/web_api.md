@@ -1353,10 +1353,11 @@ check if a dir has a corresponding sub_repo, if it does not have, create one
 
 * repo-id
 * p
+* reuse (optional): Set `resue` to `1` if you want the generated download link can be accessed more than once in one hour.
 
 **Sample request**
 
-    curl  -v  -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' -H 'Accept: application/json; charset=utf-8; indent=4' https://cloud.seafile.com/api2/repos/dae8cecc-2359-4d33-aa42-01b7846c4b32/file/?p=/foo.c
+    curl  -v  -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' -H 'Accept: application/json; charset=utf-8; indent=4' 'https://cloud.seafile.com/api2/repos/dae8cecc-2359-4d33-aa42-01b7846c4b32/file/?p=/foo.c&reuse=1'
 
 **Sample response**
 
