@@ -92,7 +92,7 @@ The Seafile server package requires the following packages have been installed i
 <pre>
 #on Debian/Ubuntu
 apt-get update
-apt-get install python2.7 python-setuptools python-imaging python-mysqldb
+apt-get install python2.7 libpython2.7 python-setuptools python-imaging python-mysqldb 
 </pre>
 
 ### Setup
