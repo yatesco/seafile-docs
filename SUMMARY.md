@@ -43,6 +43,8 @@
    * [Enable Office/PDF Documents Online Preview](deploy_pro/office_documents_preview.md)
    * [Details about File Search](deploy_pro/details_about_file_search.md)
    * [Configurable Options](deploy_pro/configurable_options.md)
+   * [Virus Scan](deploy_pro/virus_scan.md)
+   * [Web Resumable File Upload](deploy_pro/web_resumable_upload.md)
    * [Migrate from Seafile Community Server](deploy_pro/migrate_from_seafile_community_server.md)
    * [Upgrading Seafile Professional Server](deploy_pro/upgrading_seafile_professional_server.md)
    * [Setup With Amazon S3](deploy_pro/setup_with_amazon_s3.md)
