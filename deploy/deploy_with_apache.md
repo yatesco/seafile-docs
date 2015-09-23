@@ -29,6 +29,9 @@ According to the [security advisory](https://www.djangoproject.com/weblog/2013/a
     deb http://security.debian.org/ wheezy/updates main non-free
     deb-src http://security.debian.org/ wheezy/updates main non-free
     ```
+    
+    On CentOS/Redhat, you will need to compile mod_fastcgi from source, please refer to [this](http://www.cyberciti.biz/tips/rhel-centos-fedora-apache2-fastcgi-php-configuration.html).
+    
 3. Enable apache proxy
 
     ```bash
