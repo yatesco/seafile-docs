@@ -65,6 +65,7 @@
    * [sending_email](config/sending_email.md)
    * [Customize Email Notifications](config/customize_email_notifications.md)
    * [User management options](config/user_options.md)
+   * [Storage Quota and File size limits](quota_and_size_options.md)
 * [Administration](maintain/README.md)
    * [Account management](maintain/account.md)
    * [Logs](maintain/logs.md)
