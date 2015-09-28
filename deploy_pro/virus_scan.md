@@ -31,3 +31,6 @@ To test whether your configuration works, you can trigger a scan manually:
 cd seafile-server-latest
 ./pro/pro.py virus_scan
 ```
+
+If virus is detected, you can see scan records and delete infected files in Virus Scan page.
+![virus-scan](../images/virus-scan.png)
