@@ -240,9 +240,9 @@ defaults
     mode http
     retries 3
     maxconn 2000
-    timeout connect 5000
-    timeout client 50000
-    timeout server 50000
+    timeout connect 10000
+    timeout client 300000
+    timeout server 300000
 
 listen seahub 0.0.0.0:80
     mode http
