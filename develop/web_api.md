@@ -1872,7 +1872,7 @@ The id of the updated file
 
 * repo-id
 * p (optional): The path to a directory. If `p` is missing, then defaults to '/' which is the top directory.
-* oid (optional)
+* oid (optional): The object id of the directory. The object id is the checksum of the directory contents.
 * t (optional): If set `t` argument as `f`, will only return file entries, and `d` for only dir entries.
 * recursive (optional): If set `t` argument as `d` **AND** `recursive` argument as `1`, return all dir entries recursively
 
@@ -1882,7 +1882,7 @@ The id of the updated file
 
 **Sample response**
 
-   If oid is the latest oid of the directory, returns `"uptodate"` , else returns
+   If oid is the same as the current oid of the directory, returns `"uptodate"` , else returns
 
     [
     {
