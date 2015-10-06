@@ -20,6 +20,11 @@ You need to create:
 - databases for ccnet/seafile/seahub
 - a new user to access these databases
 
+Open a termial (cmd, Win + R, cmd) and login to mysql with a privileged user:
+```
+mysql -u root -p
+```
+
 Execute these SQL setences on your mysql server:
 
 ```
@@ -27,7 +32,7 @@ create database `ccnet-db` character set = 'utf8';
 create database `seafile-db` character set = 'utf8';
 create database `seahub-db` character set = 'utf8';
 
-create user 'seafile'@'localhost' identified by 'seafile';
+create user 'seafile'@'localhost' identified by 'your secure password';
 
 GRANT ALL PRIVILEGES ON `ccnet-db`.* to `seafile`;
 GRANT ALL PRIVILEGES ON `seafile-db`.* to `seafile`;
@@ -43,7 +48,7 @@ GRANT ALL PRIVILEGES ON `seahub-db`.* to `seafile`;
 ENGINE=mysql
 HOST=localhost
 USER=seafile
-PASSWD=seafile
+PASSWD=your secure password
 DB=ccnet-db
 ```
 
@@ -54,7 +59,7 @@ DB=ccnet-db
 type=mysql
 host=localhost
 user=seafile
-password=seafile
+password=your secure password
 db_name=seafile-db
 ```
 
@@ -66,22 +71,10 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME' : 'seahub-db',
         'USER' : 'seafile',
-        'PASSWORD' : 'seafile',
+        'PASSWORD' : 'your secure password',
         'HOST' : 'localhost',
     }
 }
-```
-
-* Edit the `DATABASE` section of **seafile-server/pro-data/seafevents.conf**
-
-```
-[DATABASE]
-type=mysql
-username=seafile
-password=seafile
-name=seahub-db
-host=127.0.0.1
-port=3306
 ```
 
 ### Create Database Tables for Seahub
@@ -93,7 +86,7 @@ Assume you have uncompressed seafile server to `C:/SeafileProgram/seafile-pro-se
 Open a window command line prompt, and execute the following command:
 
 ```
-mysql seahub-db < C:/SeafileProgram/seafile-server-3.1.3/seahub/sql/mysql.sql
+mysql -u seafile -p seahub-db < C:/SeafileProgram/seafile-server-3.1.3/seahub/sql/mysql.sql
 ```
 
 ## Done
