@@ -20,7 +20,7 @@ Click the tarball link and save it.
 
 NOTE: If you place the Seafile data directory in external storage, such as NFS, CIFS mount, you should not use SQLite as the database, but use MySQL instead.
 
-Supposed your organization's name is "haiwen", and you've downloaded seafile-server_1.4.0_* into your home directory. We suggest you to layout your deployment as follows :
+Supposed your organization's name is "haiwen", and you've downloaded seafile-server_1.4.0_* into your home directory. We suggest you to use the following layout for your deployment:
 ```sh
 mkdir haiwen
 mv seafile-server_* haiwen
@@ -48,7 +48,7 @@ Now you should have the following directory layout
     └── upgrade
 ```
 
-The benefit of this layout is that
+Benefits of this layout are
 
  - We can place all the config files for Seafile server inside "haiwen" directory, making it easier to manage.
  - When you upgrade to a new version of Seafile, you can simply untar the latest package into "haiwen" directory. In this way you can reuse the existing config files in "haiwen" directory and don't need to configure again.
@@ -77,7 +77,7 @@ cd seafile-server-*
 ./setup-seafile.sh  #run the setup script & answer prompted questions
 ```
 
-If some of the prerequisites are not installed, the seafile initialization script will ask you to install them.
+If some of the prerequisites are not installed, the Seafile initialization script will ask you to install them.
 
 The script will guide you through the settings of various configuration options.
 
@@ -85,13 +85,13 @@ The script will guide you through the settings of various configuration options.
 
 | Option | Description | Note |
 | -- | -- | ---- |
-| server name | Name of this seafile server | 3-15 characters, only English letters, digits and underscore ('_') are allowed |
+| server name | Name of this Seafile server | 3-15 characters, only English letters, digits and underscore ('_') are allowed |
 | server ip or domain  | The IP address or domain name used by this server  | Seafile client program will access the server with this address |
-| seafile data dir  | Seafile stores your data in this directory. By default it'll be placed in the current directory.  | The size of this directory will increase as you put more and more data into Seafile. Please select a disk partition with enough free space. |
+| Seafile data dir  | Seafile stores your data in this directory. By default it'll be placed in the current directory.  | The size of this directory will increase as you put more and more data into Seafile. Please select a disk partition with enough free space. |
 | fileserver port | The TCP port used by Seafile fileserver  | Default is 8082. If it's been used by other service, you can set it to another port. |
 
 
-Now you should have the following directory layout :
+Now you should have the following directory layout:
 
 ```sh
 #tree haiwen -L 2
@@ -122,43 +122,43 @@ haiwen
 └── seahub_settings.pyc
 ```
 
-The folder seafile-server-latest is a symbolic link to the current seafile server folder. When later you upgrade to a new version, the upgrade scripts would update this link to keep it always point to the latest seafile server folder.
+The folder seafile-server-latest is a symbolic link to the current Seafile server folder. When later you upgrade to a new version, the upgrade scripts would update this link to keep it always point to the latest Seafile server folder.
 
 ## Running Seafile Server
 
 #### Before Running
 
-Since Seafile uses persistent connection between client and server, if you have a large number of clients , you should increase Linux file descriptors by ulimit before start seafile, like:
+Since Seafile uses persistent connections between client and server, you should increase Linux file descriptors by ulimit if you have a large number of clients before start Seafile, like:
 
 ``ulimit -n 30000``
 
 #### Starting Seafile Server and Seahub Website
 
-- Start seafile:
+- Start Seafile:
 ```
-./seafile.sh start # Start seafile service
-```
-
-- Start seahub:
-```
-./seahub.sh start <port>  # Start seahub website, port defaults to 8000
+./seafile.sh start # Start Seafile service
 ```
 
-**Note**: The first time you start seahub, the script would prompt you to create an admin account for your seafile server.
+- Start Seahub:
+```
+./seahub.sh start <port>  # Start Seahub website, port defaults to 8000
+```
 
-After starting the services, you may open a web browser and types
+**Note**: The first time you start Seahub, the script is going to prompt you to create an admin account for your Seafile server.
+
+After starting the services, you may open a web browser and type in
 
 ``http://192.168.1.111:8000``
 
-you will be redirected to the Login page. Enter the username and password you were provided during the Seafile setup. You will then be returned to the `Myhome` page where you can create libraries.
+you will be redirected to the Login page. Enter the username and password you were provided during the Seafile setup. You are going to be returned to the `Myhome` page then, where you can create libraries.
 
 **Congratulations!** Now you have successfully setup your private Seafile server.
 
 #### Run Seahub on another port
 
-If you want to run seahub in a port other than the default 8000, say 8001, you must:
+If you want to run Seahub on a port other than the default 8000, say 8001, you must:
 
-- stop the seafile server
+- stop the Seafile server
 ```
 ./seahub.sh stop
 ./seafile.sh stop
@@ -169,33 +169,33 @@ If you want to run seahub in a port other than the default 8000, say 8001, you m
 SERVICE_URL = http://192.168.1.100:8001
 ```
 
-- restart seafile server
+- restart Seafile server
 ```
 ./seafile.sh start
 ./seahub.sh start 8001
 ```
 
-see Seafile [Server Configuration Manual](deploy/server_configuration.md) for more details about ``ccnet.conf``.
+See Seafile [Server Configuration Manual](deploy/server_configuration.md) for more details about ``ccnet.conf``.
 
 ## Manage Seafile and Seahub
-####Stopping
+#### Stopping
 ```
 ./seahub.sh stop # stop seahub website
 ./seafile.sh stop # stop seafile processes
 ```
-####Restarting
+#### Restarting
 ```
 ./seafile.sh restart
 ./seahub.sh restart
 ```
 #### When the Scripts Fail
 
-Most of the time, seafile.sh and seahub.sh work fine. But if they fail, you may
+Most of the time, `seafile.sh` and `seahub.sh` work fine. But if they fail, you might want to
 
-- Use pgrep command to check if seafile/seahub processes are still running
+- Use pgrep command to check if Seafile/Seahub processes are still running
 ```
-pgrep -f seafile-controller # check seafile processes
-pgrep -f "manage.py run_gunicorn" # check seahub process
+pgrep -f seafile-controller # check Seafile processes
+pgrep -f "manage.py run_gunicorn" # check Seahub process
 ```
 
 - Use pkill to kill the processes
@@ -205,6 +205,7 @@ pkill -f "manage.py run_gunicorn"
 ```
 
 ## That's it!
+For a production server we highly recommend to setup with Nginx/Apache and enable SSL/TLS.
 
-That's it! Now you may want read more about seafile.
+That's it! Now you might want read more about Seafile.
 - [Administration](../maintain/README.md)
