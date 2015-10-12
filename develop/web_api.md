@@ -343,7 +343,7 @@ At least one of followings:
 **Request parameters**
 
 * op
-* to_user
+* to_user this user must exist
 
 **Sample request**
 
