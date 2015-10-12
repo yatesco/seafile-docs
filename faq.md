@@ -51,3 +51,6 @@ There are some common mistakes:
 1. Your mail server is not available.
 
 
+### How to migrate libraries and groups from one account to another ?
+
+Since version 4.4.2, system admin can migrate libraries and groups from one account to another exsiting account using [RESTful web api](https://github.com/haiwen/seafile-docs/blob/master/develop/web_api.md#migrate-account).
