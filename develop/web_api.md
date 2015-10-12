@@ -10,6 +10,7 @@
 <li><a href="#get-account">Get Account Info(Admin only)</a></li>
 <li><a href="#create-account">Create Account(Admin only)</a></li>
 <li><a href="#update-account">Update Account(Admin only)</a></li>
+<li><a href="#migrate-account">Migrate Account(Admin only)</a></li>
 <li><a href="#delete-account">Delete Account(Admin only)</a></li>
 <li><a href="#check-account-info">Check Account Info</a></li>
 <li><a href="#server-info">Get Server Information</a></li>
@@ -334,6 +335,37 @@ At least one of followings:
 
 * 400 Bad Request, keyword password is required
 * 403 Permission error, only administrator can perform this action
+
+### <a id="migrate-account"></a>Migrate Account ###
+
+**POST** https://cloud.seafile.com/api2/accounts/{email}/
+
+**Request parameters**
+
+* op
+* to_user
+
+**Sample request**
+
+    curl -v -d "op=migrate&to_user=user2@mail.com" -H "Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd" -H 'Accept: application/json; indent=4' https://cloud.seafile.com/api2/accounts/user@mail.com/
+
+**Sample response**
+
+    ...
+    < HTTP/1.0 200 OK
+    ...
+
+    "success"
+
+**Success**
+
+    Response code 200(OK) is returned.
+
+**Errors**
+
+* 400 Bad Request, arguments are missing or invalid
+* 403 Permission error, only administrator can perform this action
+
 
 ### <a id="delete-account"></a>Delete Account ###
 
