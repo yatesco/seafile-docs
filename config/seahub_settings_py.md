@@ -177,7 +177,12 @@ SITE_ROOT = '/'
 ENABLE_MAKE_GROUP_PUBLIC = False
 </pre>
 
+## Pro edition only options
 
+```
+# Whether to show the used traffic in user's profile popup dialog. Default is True
+SHOW_TRAFFIC = True
+```
 
 **Note**:
 
