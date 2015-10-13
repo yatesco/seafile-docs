@@ -121,6 +121,9 @@ Options for online file preview:
 USE_PDFJS = True
 
 # Online preview maximum file size, defaults to 30M.
+# Note, this option controls files that can be previewed online, like pictures, txt, pdf.
+# In pro edition, for preview doc/ppt/excel/pdf, there is another option `max-size` 
+# in seafevents.conf that controls the limit of files that can be previewed.
 FILE_PREVIEW_MAX_SIZE = 30 * 1024 * 1024
 
 # Enable or disable thumbnails
