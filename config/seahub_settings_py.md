@@ -46,18 +46,30 @@ CACHES = {
 }
 ```
 
-## Password Options
+## User management options
 
-With these settings you can ensure strong passwords for Libraries and user accounts.
+The following options affect user registration, password and session.
 
-<pre>
+```
+# Enalbe or disalbe registration on web. Default is `False`.
+ENABLE_SIGNUP = False
 
-# mininum length for password of encrypted library
-REPO_PASSWORD_MIN_LENGTH = 8
+# Activate or deactivate user when registration complete. Default is `True`.
+# If set to `False`, new users need to be activated by admin in admin panel.
+ACTIVATE_AFTER_REGISTRATION = False
 
-# mininum length for password for share link (since version 4.4)
-SHARE_LINK_PASSWORD_MIN_LENGTH = 8
+# Whether to send email when a system admin adding a new member. Default is `True`.
+SEND_EMAIL_ON_ADDING_SYSTEM_MEMBER = True
 
+# Whether to send email when a system admin resetting a user's password. Default is `True`.
+SEND_EMAIL_ON_RESETTING_USER_PASSWD = True
+
+# Remember days for login. Default is 7
+LOGIN_REMEMBER_DAYS = 7
+
+# Attempt limit before showing a captcha when login.
+LOGIN_ATTEMPT_LIMIT = 3
+    
 # mininum length for user's password
 USER_PASSWORD_MIN_LENGTH = 6
 
@@ -70,26 +82,68 @@ USER_PASSWORD_STRENGTH_LEVEL = 3
 # when True, check password strength level, STRONG(or above) is allowed
 USER_STRONG_PASSWORD_REQUIRED = False
 
+# Age of cookie, in seconds (default: 2 weeks).
+SESSION_COOKIE_AGE = 60 * 60 * 24 * 7 * 2
+
+# Whether a user's session cookie expires when the Web browser is closed.
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+
+# Whether to save the session data on every request. Default is `False`
+SESSION_SAVE_EVERY_REQUEST = False
+
+```
+
+
+## Library options
+
+Options for libraries:
+
+<pre>
+# mininum length for password of encrypted library
+REPO_PASSWORD_MIN_LENGTH = 8
+
+# mininum length for password for share link (since version 4.4)
+SHARE_LINK_PASSWORD_MIN_LENGTH = 8
+
+# Disable sync with any folder. Default is `False`
+# NOTE: since version 4.2.4
+DISABLE_SYNC_WITH_ANY_FOLDER = True
+
+# Enable or disable library history setting
+ENABLE_REPO_HISTORY_SETTING = True
 </pre>
+
+Options for online file preview:
+
+```
+# Whether to use pdf.js to view pdf files online. Default is `True`,  you can turn it off.
+# NOTE: since version 1.4.
+USE_PDFJS = True
+
+# Online preview maximum file size, defaults to 30M.
+FILE_PREVIEW_MAX_SIZE = 30 * 1024 * 1024
+
+# Enable or disable thumbnails
+# NOTE: since version 4.0.2 
+ENABLE_THUMBNAIL = True
+
+# Absolute filesystem path to the directory that will hold thumbnail files.
+THUMBNAIL_ROOT = '/haiwen/seahub-data/thumbnail/thumb/'
+```
+
 
 ## Cloud Mode
 
 You should enable cloud mode if you use Seafile with an unknown user base. It disables the organization tab in Seahub's website to ensure that users can't access the user list. Cloud mode provides some nice features like sharing content with unregistered users and sending invitations to them. Therefore you also want to enable user registration. Through the global address book (since version 4.2.3) you can do a search for every user account. So you probably want to disable it.
 
 <pre>
-
 # Enable cloude mode and hide `Organization` tab.
 CLOUD_MODE = True
 
-# Enalbe registration on web.
-ENABLE_SIGNUP = True
-
 # Disable global address book
 ENABLE_GLOBAL_ADDRESSBOOK = False
-
 </pre>
 
-If you want to use Seafile within your organization just disable cloud mode.
 
 ## Other options
 
@@ -119,60 +173,8 @@ SITE_TITLE = 'Seafile'
 # e.g. setting it to '/seahub/' would run seahub on http://example.com/seahub/.
 SITE_ROOT = '/'
 
-# Whether to use pdf.js to view pdf files online. Default is `True`,  you can turn it off.
-# NOTE: since version 1.4.
-USE_PDFJS = True
-
-# Enalbe or disalbe registration on web. Default is `False`.
-# NOTE: since version 1.4.
-ENABLE_SIGNUP = False
-
-# Activate or deactivate user when registration complete. Default is `True`.
-# If set to `False`, new users need to be activated by admin in admin panel.
-# NOTE: since version 1.8
-ACTIVATE_AFTER_REGISTRATION = False
-
-# Whether to send email when a system admin adding a new member. Default is `True`.
-# NOTE: since version 1.4.
-SEND_EMAIL_ON_ADDING_SYSTEM_MEMBER = True
-
-# Whether to send email when a system admin resetting a user's password. Default is `True`.
-# NOTE: since version 1.4.
-SEND_EMAIL_ON_RESETTING_USER_PASSWD = True
-
-# Online preview maximum file size, defaults to 30M.
-FILE_PREVIEW_MAX_SIZE = 30 * 1024 * 1024
-
-# Age of cookie, in seconds (default: 2 weeks).
-SESSION_COOKIE_AGE = 60 * 60 * 24 * 7 * 2
-
-# Whether to save the session data on every request.
-SESSION_SAVE_EVERY_REQUEST = False
-
-# Whether a user's session cookie expires when the Web browser is closed.
-SESSION_EXPIRE_AT_BROWSER_CLOSE = False
-
-# Whether a user can make group as public. Default is False.
+# Whether a user can make group as public. Default is False. (Deprecated)
 ENABLE_MAKE_GROUP_PUBLIC = False
-
-# Enable or disable thumbnails
-# NOTE: since version 4.0.2 
-ENABLE_THUMBNAIL = True
-
-# Absolute filesystem path to the directory that will hold thumbnail files.
-THUMBNAIL_ROOT = '/haiwen/seahub-data/thumbnail/thumb/'
-
-
-# Disable sync with any folder. Default is `False`
-# NOTE: since version 4.2.4
-DISABLE_SYNC_WITH_ANY_FOLDER = True
-
-# Enable or disable repo history setting
-ENABLE_REPO_HISTORY_SETTING = True
-
-# Remember days for login. Default is 7
-LOGIN_REMEMBER_DAYS = 7
-
 </pre>
 
 
