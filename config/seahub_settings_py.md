@@ -184,7 +184,7 @@ ENABLE_MAKE_GROUP_PUBLIC = False
 SHOW_TRAFFIC = True
 ```
 
-**Note**:
+## Note
 
 * You need to restart seahub so that your changes take effect.
 * If your changes don't take effect, You may need to delete 'seahub_setting.pyc'. (A cache file)
