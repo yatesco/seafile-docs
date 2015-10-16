@@ -17,9 +17,9 @@ In general, to upgrade a cluster, you need:
 3. Update configuration files at each node according to the documentation for each version
 4. Delete old search index in the backend node if needed
 
-## maintanence upgrade
+## Maintanence upgrade
 
-Doing maintanence upgrading is simple, you only need to run the script `./upgrade/minor_upgrade.sh` at each node to upgrade the symbolic links.
+Doing maintanence upgrading is simple, you only need to run the script `./upgrade/minor_upgrade.sh` at each node to update the symbolic links.
 
 ## Specific instructions for each version
 
