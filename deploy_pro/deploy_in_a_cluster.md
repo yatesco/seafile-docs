@@ -19,6 +19,14 @@ All Seafile app servers access the same set of user data. The user data has two 
 
 For database, all app servers have to connect to the same database or database cluster. We recommend to use MariaDB Galera Cluster if you need a database cluster.
 
+There are a few steps to deploy a Seafile cluster:
+
+1. Prepare hardware, operating systems, memcached and database
+2. Setup a single Seafile server node
+3. Copy the deployment to other Seafile nodes
+4. Setup Nginx/Apache and firewall rules
+5. Setup load balancer
+
 ## <a id="wiki-preparation"></a>Preparation
 
 ### Hardware
