@@ -73,9 +73,6 @@ Before starting background tasks, you have to start seafile and seahub on the ba
 
 ```
 ./seafile.sh start
-# depending on config without fastcgi:
-./seahub.sh start  
-# or with fastcgi:
 ./seahub.sh start-fastcgi
 ```
 
