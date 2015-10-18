@@ -11,11 +11,11 @@ This architecture scales horizontally. That is, you can handle more traffic by a
 
 ![seafile-cluster](../images/seafile-cluster.png)
 
-There are two main components on the Seafile server node: web server and Seafile app server. The web server passes requests from the clients to Seafile app server. The Seafile app servers work independently. They don't know about each other's state. That means each app server can fail independently without affecting other app server instances. The load balancer is responsible for detecting failure and re-routing requests.
+There are two main components on the Seafile server node: web server (Nginx/Apache) and Seafile app server. The web server passes requests from the clients to Seafile app server. The Seafile app servers work independently. They don't know about each other's state. That means each app server can fail independently without affecting other app server instances. The load balancer is responsible for detecting failure and re-routing requests.
 
 Even though Seafile app servers work independently, they still have to share some session information. All shared session information are stored in memcached. So all Seafile app servers have to connect to the same memcached (cluster). More details about memcached configuration will discussed later.
 
-All Seafile app servers access the same set of user data. The user data has two parts: in MySQL database and in backend storage cluster (S3, Ceph etc.). All app servers serves the data equally to the clients.
+All Seafile app servers access the same set of user data. The user data has two parts: in MySQL database and in backend storage cluster (S3, Ceph etc.). All app servers serve the data equally to the clients.
 
 For database, all app servers have to connect to the same database or database cluster. We recommend to use MariaDB Galera Cluster if you need a database cluster.
 
@@ -26,6 +26,7 @@ There are a few steps to deploy a Seafile cluster:
 3. Copy the deployment to other Seafile nodes
 4. Setup Nginx/Apache and firewall rules
 5. Setup load balancer
+6. [Setup backgroup task node](enable_search_and_background_tasks_in_a_cluster.md)
 
 ## <a id="wiki-preparation"></a>Preparation
 
