@@ -78,6 +78,8 @@ Download these tarballs to `/tmp/`:
 - [six](https://pypi.python.org/pypi/six)
 - [django-statici18n](https://pypi.python.org/packages/source/d/django-statici18n/django-statici18n-1.1.3.tar.gz)
 - [django-compressor](https://pypi.python.org/packages/source/d/django_compressor/django_compressor-1.4.tar.gz)
+- [django-picklefield](https://pypi.python.org/packages/source/d/django-picklefield/django-picklefield-0.3.2.tar.gz)
+- [django-constance](https://pypi.python.org/packages/source/d/django-constance/django-constance-1.0.1.tar.gz)
 
 Install all these libaries to `/home/pi/dev/seahub_thirdpart`:
 
