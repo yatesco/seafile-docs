@@ -9,7 +9,7 @@ The Pro Edition supports syncing users from LDAP or Active Directory to Seafile'
 
 A related feature is [importing groups from LDAP/AD](ladp_group_sync.md).
 
-Note, all the users synced to Seafile's internal database will be counted into the number of licenses (Unless you set the users' state to inactive via the admin panel).
+Note, newly imported users via synced will be set as active and counted into the number of licenses.
 
 ## How It Works
 
@@ -19,7 +19,7 @@ The syncing process imports users from LDAP directory server to Seafile's intern
 * If a user is deleted from LDAP server, the user will be deactivated in Seafile.
 * If an imported user is deleted in Seafile, it will be re-imported in the next sync operation.
 
-In addtion to syncing the user from LDAP, the syncing process provides more features:
+In addition to syncing the user from LDAP, the syncing process provides more features:
 
 * Addtional information, including user full name, department, can be synced to database. With these information in the database, the user experience of a few other functionalities can be improved. For example, when users share a folder to others, he/she can type in user's full name to search the user.
 * When a user was removed on LDAP server, the corresponding user in Seafile will be deactivated.
