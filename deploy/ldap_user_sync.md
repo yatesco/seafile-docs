@@ -5,9 +5,11 @@ In community edition, a LDAP/AD user is imported into Seafile database upon firs
 * User name, department and other information are not imported into Seafile
 * If an user is deleted in LDAP/AD, it is not deactivated in Seafile. He/She is still able to access files via syncing or via existing browser session.
 
-Since version 4.2.0, the Pro Edition supports syncing users from LDAP or Active Directory to Seafile's internal database.
+The Pro Edition supports syncing users from LDAP or Active Directory to Seafile's internal database (ccnet-db/LDAPUser).
 
 A related feature is [importing groups from LDAP/AD](ladp_group_sync.md).
+
+Note, all the users synced to Seafile's internal database will be counted into the number of licenses (Unless you set the users' state to inactive via the admin panel).
 
 ## How It Works
 
