@@ -10,6 +10,7 @@ Seafile Open API
 
 * [Seafile Web API](web_api.md)
 * [Seafile Python API](python_api.md)
+* [Seafile PHP API](https://github.com/rene-s/Seafile-PHP-SDK)
 
 Seafile Implement Detail
 

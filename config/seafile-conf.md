@@ -44,6 +44,17 @@ max_upload_size=200
 max_download_dir_size=200
 </pre>
 
+You can download a folder as a zip archive from seahub, but some zip software
+on windows doesn't support UTF-8, in which case you can use the "windows_encoding"
+settings to solve it.
+<pre>
+[zip]
+# The file name encoding of the downloaded zip file.
+windows_encoding = iso-8859-1
+</pre>
+
+
+
 **Note**: You need to restart seafile and seahub so that your changes take effect.
 <pre>
 ./seahub.sh restart

@@ -24,7 +24,7 @@ Assume you have configured nginx as
 ```nginx
     server {
         listen       80;
-        server_name  www.yourdoamin.com;
+        server_name  www.yourdomain.com;
         rewrite ^ https://$http_host$request_uri? permanent;	# force redirect http to https
     }
 
@@ -33,7 +33,7 @@ Assume you have configured nginx as
         ssl on;
         ssl_certificate /etc/ssl/cacert.pem;    	# path to your cacert.pem
         ssl_certificate_key /etc/ssl/privkey.pem;	# path to your privkey.pem
-        server_name www.yourdoamin.com;
+        server_name www.yourdomain.com;
         # ......
         fastcgi_param   HTTPS               on;
         fastcgi_param   HTTP_SCHEME         https;
@@ -48,7 +48,7 @@ Here is the sample configuration file:
 ```nginx
     server {
         listen       80;
-        server_name  www.yourdoamin.com;
+        server_name  www.yourdomain.com;
         rewrite ^ https://$http_host$request_uri? permanent;	# force redirect http to https
     }
     server {

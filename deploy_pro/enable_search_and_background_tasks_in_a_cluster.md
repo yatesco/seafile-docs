@@ -6,20 +6,17 @@ In the seafile cluster, only one server should run the background tasks, includi
 - email notification
 - office documents converts service
 
+Let's assume you have three nodes in your cluster: A, B, and C.
 
-You need to choose one node to run the background tasks.
-
-Let's assume you have three nodes in your cluster: A, B, and C. And you decide that:
-
-* Node A would run background tasks.
-* Node B and C would be normal nodes.
+* Node A is backend node that run background tasks.
+* Node B and C are frontend nodes that serving requests from clients.
 
 ![cluster-nodes](../images/cluster-nodes.png)
 
 
-## Configuring Node A (the background-tasks node)
+## Configuring Node A (the backend node)
 
-On this node, you need:
+If you following the steps on settings up a cluster, node B and node C should have already be configed as frontend node. You can copy the configuration of node B as a base for node A. Then do the following steps:
 
 ### Install Dependencies (Java, LibreOffice, poppler)
 
@@ -34,8 +31,6 @@ sudo yum install java-1.7.0-openjdk
 sudo yum install libreoffice libreoffice-headless libreoffice-pyuno
 sudo yum install poppler-utils
 ```
-
-*Note*: Since version 3.1.12, java 1.7 is required, please check your java version by `java -version`. If not, please [change the default java version](./change_default_java.md).
 
 
 Edit **pro-data/seafevents.conf** and ensure this line does NOT exist:
@@ -74,13 +69,10 @@ OFFICE_CONVERTOR_ROOT = http://<ip of node A>
 
 ## Start the background tasks
 
-Before starting background tasks, you have to start seafile and seahub on the background node, too.
+Before starting background tasks, you have to start seafile and seahub on the backend node, too.
 
 ```
 ./seafile.sh start
-# depending on config without fastcgi:
-./seahub.sh start  
-# or with fastcgi:
 ./seahub.sh start-fastcgi
 ```
 

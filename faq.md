@@ -2,7 +2,7 @@
 
 #### When downloading a library, the client hangs at "connecting server"
 
-First, you can check the seafile.log in client (``~/.ccnet/logs/seafile.log`` for
+First, you can check the Seafile client log (``~/.ccnet/logs/seafile.log`` for
 Linux, ``C:/users/your_name/ccnet/logs/seafile.log`` for Windows) to see what's wrong.
 
 Possible reasons:
@@ -27,7 +27,7 @@ There was an unconfirmed solution on the internet, which later has vanished.
 
 #### Website displays "Page unavailable", what can I do?
 
-* You can check the back trace in seahub log files('''installation folder/logs/seahub_django_request.log''')
+* You can check the back trace in seahub log files(`installation folder/logs/seahub_django_request.log`)
 
 * You can also turn on debug by adding <code>DEBUG = True</code> to seahub_settings.py and restart seahub by <code>./seahub.sh restart</code>, then refresh that page, all the debug infomations will be displayed. Make sure ./seahub.sh was started as: ./seahub.sh start-fastcgi
 
@@ -47,7 +47,10 @@ Please check logs/seahub.log.
 
 There are some common mistakes:
 
-1. Check whether there are some typos in the config, e.g., forget single quote, EMAIL_HOST_USER = XXX, which should be EMAIL_HOST_USER = 'XXX'
+1. Check whether there are some typos in the config, e.g., forget single quote, `EMAIL_HOST_USER = XXX`, which should be `EMAIL_HOST_USER = 'XXX'`
 1. Your mail server is not available.
 
 
+### How to migrate libraries and groups from one account to another ?
+
+Since version 4.4.2, system admin can migrate libraries and groups from one account to another exsiting account using [RESTful web api](https://github.com/haiwen/seafile-docs/blob/master/develop/web_api.md#migrate-account).

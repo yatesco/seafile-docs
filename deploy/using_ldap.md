@@ -26,8 +26,8 @@ To use LDAP to authenticate user, please add the following lines to ccnet.conf. 
 
     [LDAP]
     HOST = ldap://ldap.example.com
-    BASE = ou=users,dc=example,dc=com
-    USER_DN = cn=seafileadmin,dc=example,dc=com
+    BASE = base DN for searching users
+    USER_DN = admin user DN for accessing other user information
     PASSWORD = secret
     LOGIN_ATTR = mail
 
@@ -85,8 +85,8 @@ To use LDAP to authenticate user, please add the following lines to ccnet.conf
     HOST = ldap.example.com[:port]
     # Default 'false'. Set to true if you want Seafile to communicate with the LDAP server via TLS connection.
     USE_SSL = true | false
-    BASE = ou=users,dc=example,dc=com
-    USER_DN = cn=seafileadmin,dc=example,dc=com
+    BASE = base DN for searching users
+    USER_DN = admin user DN for accessing other user information
     PASSWORD = secret
     LOGIN_ATTR = mail
 
@@ -135,6 +135,17 @@ If you're using Active Directory but don't have email address for the users, you
 
 The `userPrincipalName` is an user attribute provided by AD. It's usually of the form `username@domain-name`, where `username` is Windows user login name. The the user can log in to seahub with `username@domain-name`, such as `poweruser@example.com`. Note that such login name is not actually an email address. So sending emails notifications from Seahub won't work with this setting.
 
+## Testing Your LDAP Configuration
+
+In Seafile Pro Edition, since version 4.4.4, we provide a command to test the LDAP configuration.
+
+```
+cd seafile-server-latest
+pro/pro.py ldapsync --test
+```
+
+This command will warn you if your `BASE`, `USER_DN` or `PASSWORD` settings are wrong. Otherwise it'll print out the first 10 user/group search results.
+
 ## Multiple base DN/Additional search filter
 
 Multiple base DN is useful when your company has more than one OUs to use Seafile. You can specify a list of base DN in the "BASE" config. The DNs are separated by ";", e.g. `cn=developers,dc=example,dc=com;cn=marketing,dc=example,dc=com`
@@ -152,12 +163,6 @@ FILTER = memberOf=CN=group,CN=developers,DC=example,DC=com
 The final search filter would be `(&(mail=*)(memberOf=CN=group,CN=developers,DC=example,DC=com))`
 
 Note that the cases in the above example is significant. The `memberOf` attribute is only available in Active Directory.
-
-Here is another example:
-
-```
-FILTER = &(!(UserAccountControl:1.2.840.113556.1.4.803:=2))
-```
 
 ## Limiting Seafile Users to a Group in Active Directory
 

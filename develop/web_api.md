@@ -10,6 +10,7 @@
 <li><a href="#get-account">Get Account Info(Admin only)</a></li>
 <li><a href="#create-account">Create Account(Admin only)</a></li>
 <li><a href="#update-account">Update Account(Admin only)</a></li>
+<li><a href="#migrate-account">Migrate Account(Admin only)</a></li>
 <li><a href="#delete-account">Delete Account(Admin only)</a></li>
 <li><a href="#check-account-info">Check Account Info</a></li>
 <li><a href="#server-info">Get Server Information</a></li>
@@ -334,6 +335,37 @@ At least one of followings:
 
 * 400 Bad Request, keyword password is required
 * 403 Permission error, only administrator can perform this action
+
+### <a id="migrate-account"></a>Migrate Account ###
+
+**POST** https://cloud.seafile.com/api2/accounts/{email}/
+
+**Request parameters**
+
+* op
+* to_user this user must exist
+
+**Sample request**
+
+    curl -v -d "op=migrate&to_user=user2@mail.com" -H "Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd" -H 'Accept: application/json; indent=4' https://cloud.seafile.com/api2/accounts/user@mail.com/
+
+**Sample response**
+
+    ...
+    < HTTP/1.0 200 OK
+    ...
+
+    "success"
+
+**Success**
+
+    Response code 200(OK) is returned.
+
+**Errors**
+
+* 400 Bad Request, arguments are missing or invalid
+* 403 Permission error, only administrator can perform this action
+
 
 ### <a id="delete-account"></a>Delete Account ###
 
@@ -1872,7 +1904,7 @@ The id of the updated file
 
 * repo-id
 * p (optional): The path to a directory. If `p` is missing, then defaults to '/' which is the top directory.
-* oid (optional)
+* oid (optional): The object id of the directory. The object id is the checksum of the directory contents.
 * t (optional): If set `t` argument as `f`, will only return file entries, and `d` for only dir entries.
 * recursive (optional): If set `t` argument as `d` **AND** `recursive` argument as `1`, return all dir entries recursively
 
@@ -1882,7 +1914,7 @@ The id of the updated file
 
 **Sample response**
 
-   If oid is the latest oid of the directory, returns `"uptodate"` , else returns
+   If oid is the same as the current oid of the directory, returns `"uptodate"` , else returns
 
     [
     {
