@@ -11,25 +11,25 @@ During upgrading, Seafile upgrade script will create symbolic link automatically
 1. Add your logo file to `custom/`
 2. Overwrite `LOGO_PATH` in `seahub_settings.py`
 
-   <pre>
+   ```python
    LOGO_PATH = 'custom/mylogo.png'
-   </pre>
+   ```
 
 3. Default width and height for logo is 149px and 32px, you may need to change that according to yours.
 
-   <pre>
+   ```python
    LOGO_WIDTH = 149
    LOGO_HEIGHT = 32
-   </pre>
+   ```
 
 ### Customize Seahub CSS
 
 1. Add your css file to `custom/`, for example, `custom.css`
 2. Overwrite `BRANDING_CSS` in `seahub_settings.py`
 
-   <pre>
+   ```python
    BRANDING_CSS = 'custom/custom.css'
-   </pre>
+   ```
 
 ## Customize footer and other Seahub Pages
 
@@ -62,7 +62,7 @@ By default, the text "Seafile" is displayed in the top of seafile desktop client
 
 The size of the image must be `24x24`, and generally you should put it in the `custom` folder.
 
-```
+```python
 DESKTOP_CUSTOM_LOGO = 'custom/desktop-custom-logo.png'
 DESKTOP_CUSTOM_BRAND = 'Seafile For My Company'
 ```
