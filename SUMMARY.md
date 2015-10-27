@@ -91,6 +91,7 @@
    * [Code Standard](develop/code_standard.md)
    * [Web API](develop/web_api.md)
    * [Python API](develop/python_api.md)
+   * [PHP API](https://github.com/rene-s/Seafile-PHP-SDK)
    * [Data Model](develop/data_model.md)
    * [Server Components](develop/server-components.md)
    * [Sync algorithm](develop/sync_algorithm.md)
