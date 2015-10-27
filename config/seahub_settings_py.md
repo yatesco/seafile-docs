@@ -3,9 +3,9 @@
 ##  Sending Email Notifications on Seahub
 
 A few features work better if it can send email notifications, such as notifying users about new messages.
-If you want to setup email notifications, please add the following lines to seahub_settings.py (and set your email server).
+If you want to setup email notifications, please add the following lines to `seahub_settings.py` (and set your email server).
 
-<pre>
+```python
 EMAIL_USE_TLS = False
 EMAIL_HOST = 'smtp.example.com'        # smpt server
 EMAIL_HOST_USER = 'username@example.com'    # username and domain
@@ -13,11 +13,11 @@ EMAIL_HOST_PASSWORD = 'password'    # password
 EMAIL_PORT = '25'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 SERVER_EMAIL = EMAIL_HOST_USER
-</pre>
+```
 
 If you are using Gmail as email server, use following lines:
 
-<pre>
+```python
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'username@gmail.com'
@@ -25,7 +25,7 @@ EMAIL_HOST_PASSWORD = 'password'
 EMAIL_PORT = 587
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 SERVER_EMAIL = EMAIL_HOST_USER
-</pre>
+```
 
 **Note**: If your Email service still can not work, you may checkout the log file <code>logs/seahub.log</code> to see what may cause the problem. For complete email notification list, please refer to [Email notification list](customize_email_notifications.md).
 
@@ -37,7 +37,7 @@ SERVER_EMAIL = EMAIL_HOST_USER
 Seahub caches items(avatars, profiles, etc) on file system by default(/tmp/seahub_cache/). You can replace with Memcached.
 After install **python-memcache**, add the following lines to **seahub_settings.py**.
 
-```
+```python
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
@@ -50,7 +50,7 @@ CACHES = {
 
 The following options affect user registration, password and session.
 
-```
+```python
 # Enalbe or disalbe registration on web. Default is `False`.
 ENABLE_SIGNUP = False
 
@@ -98,7 +98,7 @@ SESSION_SAVE_EVERY_REQUEST = False
 
 Options for libraries:
 
-<pre>
+```python
 # mininum length for password of encrypted library
 REPO_PASSWORD_MIN_LENGTH = 8
 
@@ -111,11 +111,11 @@ DISABLE_SYNC_WITH_ANY_FOLDER = True
 
 # Enable or disable library history setting
 ENABLE_REPO_HISTORY_SETTING = True
-</pre>
+```
 
 Options for online file preview:
 
-```
+```python
 # Whether to use pdf.js to view pdf files online. Default is `True`,  you can turn it off.
 # NOTE: since version 1.4.
 USE_PDFJS = True
@@ -139,20 +139,20 @@ THUMBNAIL_ROOT = '/haiwen/seahub-data/thumbnail/thumb/'
 
 You should enable cloud mode if you use Seafile with an unknown user base. It disables the organization tab in Seahub's website to ensure that users can't access the user list. Cloud mode provides some nice features like sharing content with unregistered users and sending invitations to them. Therefore you also want to enable user registration. Through the global address book (since version 4.2.3) you can do a search for every user account. So you probably want to disable it.
 
-<pre>
+```python
 # Enable cloude mode and hide `Organization` tab.
 CLOUD_MODE = True
 
 # Disable global address book
 ENABLE_GLOBAL_ADDRESSBOOK = False
-</pre>
+```
 
 
 ## Other options
 
 You may change seahub website's settings by adding variables in `seahub_settings.py`.
 
-<pre>
+```python
 
 # Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -178,11 +178,11 @@ SITE_ROOT = '/'
 
 # Whether a user can make group as public. Default is False. (Deprecated)
 ENABLE_MAKE_GROUP_PUBLIC = False
-</pre>
+```
 
 ## Pro edition only options
 
-```
+```python
 # Whether to show the used traffic in user's profile popup dialog. Default is True
 SHOW_TRAFFIC = True
 ```
@@ -192,6 +192,6 @@ SHOW_TRAFFIC = True
 * You need to restart seahub so that your changes take effect.
 * If your changes don't take effect, You may need to delete 'seahub_setting.pyc'. (A cache file)
 
-<pre>
+```bash
 ./seahub.sh restart
-</pre>
+```
