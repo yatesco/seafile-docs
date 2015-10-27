@@ -46,7 +46,7 @@ max_download_dir_size=200
 
 You can download a folder as a zip archive from seahub, but some zip software
 on windows doesn't support UTF-8, in which case you can use the "windows_encoding"
-settings to sovle it.
+settings to solve it.
 <pre>
 [zip]
 # The file name encoding of the downloaded zip file.
