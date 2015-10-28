@@ -62,12 +62,13 @@ The Seafile server package requires the following packages have been installed i
 - python 2.7 or python 2.6.5+
 - python-setuptools
 - python-imaging
+- python-ldap
 - sqlite3
 
 ```
 #on Debian
 apt-get update
-apt-get install python2.7 libpython2.7 python-setuptools python-imaging sqlite3
+apt-get install python2.7 libpython2.7 python-setuptools python-imaging python-ldap sqlite3
 ```
 
 #### Setup
