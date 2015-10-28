@@ -1,6 +1,6 @@
 # Syncing Users from LDAP/AD
 
-In community edition, a LDAP/AD user is imported into Seafile database upon first time login or first time used (like listing all users in API). There are a few drawbacks:
+In community edition, a LDAP/AD user is imported into Seafile database upon first time login. There are a few drawbacks:
 
 * User name, department and other information are not imported into Seafile
 * If an user is deleted in LDAP/AD, it is not deactivated in Seafile. He/She is still able to access files via syncing or via existing browser session.
@@ -9,14 +9,12 @@ The Pro Edition supports syncing users from LDAP or Active Directory to Seafile'
 
 A related feature is [importing groups from LDAP/AD](ladp_group_sync.md).
 
-Note, newly imported users via synced will be set as active and counted into the number of licenses.
-
 ## How It Works
 
 The syncing process imports users from LDAP directory server to Seafile's internal database. This process is one-way.
 
+* All existing users on LDAP server will be created as new users in Seafile database. **The new users will be active by default. They'll be counted as licensed users.**
 * Any changes to user's property in the database won't propagate back to LDAP.
-* If a user is deleted from LDAP server, the user will be deactivated in Seafile.
 * If an imported user is deleted in Seafile, it will be re-imported in the next sync operation.
 
 In addition to syncing the user from LDAP, the syncing process provides more features:
@@ -24,7 +22,15 @@ In addition to syncing the user from LDAP, the syncing process provides more fea
 * Addtional information, including user full name, department, can be synced to database. With these information in the database, the user experience of a few other functionalities can be improved. For example, when users share a folder to others, he/she can type in user's full name to search the user.
 * When a user was removed on LDAP server, the corresponding user in Seafile will be deactivated.
 
-There are two modes of operation:
+Since Pro Edition 4.4.4, we introduce a new syncing mode, that the user syncing process won't create new users in the database. New users are only created when the user logs in for the first time (the same behavior as in Community Edition). This way the syncing process won't add new licensed users automatically, which is more convenient for some user cases. Below is how it works:
+
+* New users are only created on first login.
+* Any changes to user's property in the database won't propagate back to LDAP.
+* If a user is deleted from LDAP server, the user will be deactivated in Seafile.
+* If an imported user is deleted in Seafile, it **won't** re-imported in the next sync operation. But the user will be re-imported on next login.
+* Addtional information for existing users in the database, including user full name, department, can be synced to database.
+
+There are two ways to trigger user sync:
 
 * Periodical: the syncing process will be executed in a fixed interval
 * Manual: there is a script you can run to trigger the syncing once
@@ -109,6 +115,15 @@ There are a lot more information in the LDAP server that can be useful for Seafi
 * **DEPT_ATTR**: Attribute for user's department. It's "department" by default.
 
 You should set these options in the "[LDAP_SYNC]" section of ccnet.conf.
+
+### Don't Import New Users
+
+Since Pro Edition 4.4.4, we introduce a new syncing mode, that the user syncing process won't create new users in the database. More details was described in the "How It Works" section above. To enable this mode, add following line to [LDAP_SYNC] section in ccnet.conf:
+
+```
+[LDAP_SYNC]
+IMPORT_NEW_USER = false
+```
 
 ## Manually Trigger Syncing
 
