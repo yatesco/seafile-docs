@@ -2,17 +2,19 @@
 
 ## Config Files
 
+**Important**: Since Seafile Server 5.0.0, all config files are moved to the central **conf** folder. [Read More](../deploy/new_directory_layout_5_0_0.md).
+
 This section explains how to change various config options for Seafile server.
 
 There are three config files in the community edition:
 
-- [ccnet/ccnet.conf](ccnet-conf.md): contains the network settings
-- [seafile-data/seafile.conf](seafile-conf.md): contains settings for seafile daemon and fileserver.
+- [ccnet.conf](ccnet-conf.md): contains the network settings
+- [seafile.conf](seafile-conf.md): contains settings for seafile daemon and fileserver.
 - [seahub_settings.py](seahub_settings_py.md): contains settings for Seahub
 
 There is one additional config file in the pro edition:
 
-- `pro-data/seafevents.conf`: contains settings for search and documents preview
+- `seafevents.conf`: contains settings for search and documents preview
 
 ## Config Items
 
@@ -32,4 +34,3 @@ User quota and download/upload size limits
 ## Customize Web
 
 * [Customize web inferface](seahub_customization.md)
-

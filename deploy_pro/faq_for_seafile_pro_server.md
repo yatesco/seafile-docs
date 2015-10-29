@@ -23,7 +23,7 @@
 - I want to enable full text search for office/pdf documents, so I set `index_office_pdf` to `true` in the configuration file, but it doesn't work.
 
   In this case, you need to:
-  1. Edit the value of `index_office_pdf` option in `/data/haiwen/pro-data/seafevents.conf` to `true`
+  1. Edit the value of `index_office_pdf` option in `seafevents.conf` to `true`
   2. Restart seafile server
   ```
   cd /data/haiwen/seafile-pro-server-1.7.0/

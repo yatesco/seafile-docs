@@ -1,5 +1,8 @@
 # Configurable Options
-In the file `/data/haiwen/pro-data/seafevents.conf`:
+
+**Note**: Since Seafile Server 5.0.0, all config files are moved to the central **conf** folder. [Read More](../deploy/new_directory_layout_5_0_0.md).
+
+In the file `seafevents.conf`:
 
 ```
 [Audit]
@@ -48,7 +51,7 @@ max-size = 2
 
 ### <a id="wiki-options-you-may-want-to-modify"></a>Options you may want to modify
 
-The section above listed all the options in `/data/haiwen/pro-data/seafevents.conf`. Most of the time you can use the default settings. But you may want to modify some of them to fit your own use case. 
+The section above listed all the options in `seafevents.conf`. Most of the time you can use the default settings. But you may want to modify some of them to fit your own use case. 
 
 We list them in the following table, as well as why we choose the default value.
 

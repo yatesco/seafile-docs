@@ -129,7 +129,7 @@ If you are running ModSecurity with Apache 2.2 then you will need to disable Mod
 
 ### Modify ccnet.conf
 
-You need to modify the value of <code>SERVICE_URL</code> in <code>/data/haiwen/ccnet/ccnet.conf</code>
+You need to modify the value of <code>SERVICE_URL</code> in [ccnet.conf](../config/ccnet-conf.md)
 to let Seafile know the domain you choose.
 
 ```python

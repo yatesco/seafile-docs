@@ -1,5 +1,7 @@
 # Details about File Search
 
+**Note**: Since Seafile Server 5.0.0, all config files are moved to the central **conf** folder. [Read More](../deploy/new_directory_layout_5_0_0.md).
+
 ## <a id="search-opt"></a>Search Options
 
 Following options should be set in file **seafevents.conf**, and need to restart seafile and seahub to take affect.
@@ -33,10 +35,10 @@ Restart your ES server after this.
 
 ### Change the config file
 
-- Edit `pro-data/seafevents.conf`, add settings in the section **[INDEX FILES]** to specify your ES server host and port:
+- Edit `seafevents.conf`, add settings in the section **[INDEX FILES]** to specify your ES server host and port:
 
 ```
-vim pro-data/seafevents.conf
+vim seafevents.conf
 ```
 
 ```

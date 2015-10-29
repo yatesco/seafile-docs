@@ -1,8 +1,10 @@
 # Virus Scan
 
+**Note**: Since Seafile Server 5.0.0, all config files are moved to the central **conf** folder. [Read More](../deploy/new_directory_layout_5_0_0.md).
+
 In Seafile Pro Edition 4.4.0 (or above), Seafile can scan virus for uploaded files in the background. When configured to run periodically, the scan process scans all existing libraries on the server. In each scan, the process only scans newly uploaded/updated files since the last scan. For each file, the process executes a user-specified virus scan command to check whether the file is a virus or not. Most anti-virus programs provide command line utility for Linux.
 
-To enable this feature, add the following options to seafile-data/seafile.conf:
+To enable this feature, add the following options to `seafile.conf`:
 
 ```
 [virus_scan]

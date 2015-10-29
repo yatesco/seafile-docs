@@ -28,7 +28,7 @@ sudo apt-get install ttf-wqy-microhei ttf-wqy-zenhei xfonts-wqy
 
 ### Enable Office Preview
 
-1. Open file `pro-data/seafevents.conf`, in the `OFFICE CONVERTER` section:
+1. Open file `seafevents.conf`, in the `OFFICE CONVERTER` section:
 ```conf
 [OFFICE CONVERTER]
 enabled = true
@@ -70,7 +70,7 @@ max-size = 2
 
 - How can I change max size and max pages of documents that can be previewed online ?
 
- 1. Locate the `OFFICE CONVERTER` section in `/data/haiwen/pro-data/seafevents.conf`.
+ 1. Locate the `OFFICE CONVERTER` section in `seafevents.conf`.
  2. Append following lines to the section
 ```
 # the max size of documents to allow to be previewed online, in MB. Default is 2 MB

@@ -103,7 +103,7 @@ We use Alias to let Apache serve static files, please change the second argument
 
 ### Modify ccnet.conf
 
-You need to modify the value of <code>SERVICE_URL</code> in <code>/data/haiwen/ccnet/ccnet.conf</code>
+You need to modify the value of <code>SERVICE_URL</code> in [ccnet.conf](../config/ccnet-conf.md)
 to let Seafile know the domain you choose.
 
 <pre>

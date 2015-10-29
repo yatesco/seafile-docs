@@ -1,4 +1,7 @@
 # Setup With Ceph
+
+**Note**: Since Seafile Server 5.0.0, all config files are moved to the central **conf** folder. [Read More](../deploy/new_directory_layout_5_0_0.md).
+
 Ceph is a scalable distributed storage system. Seafile can use Ceph's RADOS object storage layer for storage backend.
 
 ## Copy ceph conf file and client keyring
@@ -25,7 +28,7 @@ We recommend to allocate 128MB memory for memcached. Edit /etc/memcached.conf
 
 ## Edit seafile configuration
 
-Edit `seafile-data/seafile.conf`, add the following lines:
+Edit `seafile.conf`, add the following lines:
 
 ```
 [block_backend]

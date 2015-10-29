@@ -1,8 +1,10 @@
 # Seafile.conf settings
 
+**Note**: Since Seafile Server 5.0.0, all config files are moved to the central **conf** folder. [Read More](../deploy/new_directory_layout_5_0_0.md).
+
 ## Storage Quota Setting (seafile.conf)
 
-You may set a default quota (e.g. 2GB) for all users. To do this, just add the following lines to `seafile-data/seafile.conf` file
+You may set a default quota (e.g. 2GB) for all users. To do this, just add the following lines to `seafile.conf` file
 
 <pre>
 [quota]
@@ -23,7 +25,7 @@ keep_days = days of history to keep
 
 ## Seafile fileserver configuration (seafile.conf)
 
-The configuration of seafile fileserver is in the <code>[fileserver]</code> section of the file <code>seafile-data/seafile.conf</code>
+The configuration of seafile fileserver is in the <code>[fileserver]</code> section of the file `seafile.conf`
 
 <pre>
 [fileserver]

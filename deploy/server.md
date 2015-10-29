@@ -206,7 +206,7 @@ If you want to run seahub in a port other than the default 8000, say 8001, you m
 ./seafile.sh stop
 </pre>
 
-* modify the value of <code>SERVICE_URL</code> in the file <code>haiwen/ccnet/ccnet.conf</code>, like this: (assume your ip or domain is <code>192.168.1.100</code>)
+* modify the value of <code>SERVICE_URL</code> in the file [ccnet.conf](../config/ccnet-conf.md), like this: (assume your ip or domain is <code>192.168.1.100</code>)
 <pre>
 SERVICE_URL = http://192.168.1.100:8001
 </pre>

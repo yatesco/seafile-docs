@@ -34,7 +34,7 @@ Steps to migrate Seafile from SQLite to MySQL:
 
 5. Modify configure files
 
-  Append following lines to `ccnet/ccnet.conf`:
+  Append following lines to [ccnet.conf](../config/ccnet-conf.md):
 
         [Database]
         ENGINE=mysql
@@ -46,7 +46,7 @@ Steps to migrate Seafile from SQLite to MySQL:
 
     Note: Use `127.0.0.1`, don't use `localhost`.
 
-    Replace the database section in `seafile-data/seafile.conf` with following lines:
+    Replace the database section in `seafile.conf` with following lines:
 
         [database]
         type=mysql
