@@ -135,17 +135,6 @@ If you're using Active Directory but don't have email address for the users, you
 
 The `userPrincipalName` is an user attribute provided by AD. It's usually of the form `username@domain-name`, where `username` is Windows user login name. The the user can log in to seahub with `username@domain-name`, such as `poweruser@example.com`. Note that such login name is not actually an email address. So sending emails notifications from Seahub won't work with this setting.
 
-## Testing Your LDAP Configuration
-
-In Seafile Pro Edition, since version 4.4.4, we provide a command to test the LDAP configuration.
-
-```
-cd seafile-server-latest
-pro/pro.py ldapsync --test
-```
-
-This command will warn you if your `BASE`, `USER_DN` or `PASSWORD` settings are wrong. Otherwise it'll print out the first 10 user/group search results.
-
 ## Multiple base DN/Additional search filter
 
 Multiple base DN is useful when your company has more than one OUs to use Seafile. You can specify a list of base DN in the "BASE" config. The DNs are separated by ";", e.g. `cn=developers,dc=example,dc=com;cn=marketing,dc=example,dc=com`
