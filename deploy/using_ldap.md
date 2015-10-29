@@ -8,7 +8,7 @@ Seafile will find a user both from database and LDAP. LDAP will be tried first. 
 Before 4.2 version, there are some limitation on admin operations to LDAP users. The system admin cannot deactivate a LDAP user, and cannot set a LDAP user as system admin.
 After 4.2 version, we introduce a more flexible design for LDAP user management. In this design,
 
-* When a LDAP user is used or logs in, it will be automatically imported from LDAP server into the database (table `LDAPUser` in the ccnet database).
+* When a LDAP user logs in, it will be automatically imported from LDAP server into the database (table `LDAPUser` in the ccnet database).
 * Now the admin can change various properties about this user in the database, such as deactivating, setting as system admin.
 * The admin can manage imported LDAP users in the sysmtem admin page.
 * For Pro Edition, system user count only includes imported LDAP users. So customers can buy less licenses than all the users they have in LDAP server.
