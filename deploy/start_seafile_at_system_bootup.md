@@ -66,10 +66,6 @@ and **seafile\_dir** accordingly)
 
 
 
-### Add Directory for Logfiles
-
-     mkdir /path/to/seafile/dir/logs
-
 ### Create a file **/etc/init/seafile-server.conf**
 
 #### If you're not using MySQL or an external MySQL server
