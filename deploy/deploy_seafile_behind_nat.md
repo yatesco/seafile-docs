@@ -45,14 +45,6 @@ Seafile server is composed of several components. You need to configure port for
   <th>default port</th>
 </tr>
 <tr>
-  <td>ccnet</td>
-  <td>10001</td>
-</tr>
-<tr>
-  <td>seaf-server</td>
-  <td>12001</td>
-</tr>
-<tr>
   <td>fileserver</td>
   <td>8082</td>
 </tr>
