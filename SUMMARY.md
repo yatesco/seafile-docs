@@ -26,7 +26,7 @@
    * [Deploy Seafile behind NAT](deploy/deploy_seafile_behind_nat.md)
    * [Deploy Seahub at Non-root domain](deploy/deploy_seahub_at_non-root_domain.md)
    * [Migrate From SQLite to MySQL](deploy/migrate_from_sqlite_to_mysql.md)
-   * [Common Problems for Setting up Server](deploy/common_problems_for_setting_up_server.md)
+   * [Common Problems for Setting up Server](faq.md)
    * [Upgrade Seafile server](deploy/upgrade.md)
 * [Deploy Seafile under Windows](deploy_windows/deploy_with_windows.md)
    * [Download and Setup Seafile Windows Server](deploy_windows/download_and_setup_seafile_windows_server.md)
