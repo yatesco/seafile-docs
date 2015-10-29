@@ -63,7 +63,7 @@ server {
 
 Nginx settings "client_max_body_size" is by default 1M. Uploading a file bigger than this limit will give you an error message HTTP error code 413 ("Request Entity Too Large").
 
-You should use 0 to disable this feature or write the same value than for the parameter max_upload_size in section [fileserver] of /seafile/seafile-data/seafile.conf
+You should use 0 to disable this feature or write the same value than for the parameter `max_upload_size` in section `[fileserver]` of [seafile.conf](../config/seafile-conf.md).
 
 Tip for uploading very large files (> 4GB): By default Nginx will buffer large request body in temp file. After the body is completely received, Nginx will send the body to the upstream server (seaf-server in our case). But it seems when file size is very large, the buffering mechanism dosen't work well. It may stop proxying the body in the middle. So if you want to support file upload larger for 4GB, we suggest you install Nginx version >= 1.8.0 and add the following options to Nginx config file:
 
@@ -78,7 +78,7 @@ Tip for uploading very large files (> 4GB): By default Nginx will buffer large r
 
 ### Modify ccnet.conf
 
-You need to modify the value of <code>SERVICE_URL</code> in <code>/data/haiwen/ccnet/ccnet.conf</code>
+You need to modify the value of <code>SERVICE_URL</code> in [ccnet.conf](../config/ccnet-conf.md)
 to let Seafile know the domain you choose.
 
 ```python

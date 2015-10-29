@@ -28,6 +28,7 @@
    * [Migrate From SQLite to MySQL](deploy/migrate_from_sqlite_to_mysql.md)
    * [Common Problems for Setting up Server](deploy/common_problems_for_setting_up_server.md)
    * [Upgrade Seafile server](deploy/upgrade.md)
+   * [New Directory Layout in Seafile Server 5.0.0](deploy/new_directory_layout_5_0_0.md)
 * [Deploy Seafile under Windows](deploy_windows/deploy_with_windows.md)
    * [Download and Setup Seafile Windows Server](deploy_windows/download_and_setup_seafile_windows_server.md)
    * [Deploy Seafile with MySQL](deploy_windows/deploy_with_mysql.md)

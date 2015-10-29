@@ -1,5 +1,7 @@
 # Enable search and background tasks in a cluster
 
+**Note**: Since Seafile Server 5.0.0, all config files are moved to the central **conf** folder. [Read More](../deploy/new_directory_layout_5_0_0.md).
+
 In the seafile cluster, only one server should run the background tasks, including:
 
 - indexing files for search
@@ -33,7 +35,7 @@ sudo yum install poppler-utils
 ```
 
 
-Edit **pro-data/seafevents.conf** and ensure this line does NOT exist:
+Edit **seafevents.conf** and ensure this line does NOT exist:
 
 ```
 external_es_server = true
@@ -53,7 +55,7 @@ In your firewall rules for node A, you should open the port 9500 (for search req
 
 On nodes B and C, you need to:
 
-* Edit pro-data/seafevents.conf, add the following lines:
+* Edit `seafevents.conf`, add the following lines:
 ```
 [INDEX FILES]
 external_es_server = true

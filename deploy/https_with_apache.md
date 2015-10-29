@@ -59,7 +59,7 @@ Then modify your Apache configuration file. Here is a sample:
 
 ### ccnet conf
 
-Since you change from http to https, you need to modify the value of "SERVICE_URL" in <code>ccnet/ccnet.conf</code>:
+Since you change from http to https, you need to modify the value of "SERVICE_URL" in [ccnet.conf](../config/ccnet-conf.md):
 ```python
 SERVICE_URL = https://www.myseafile.com
 ```

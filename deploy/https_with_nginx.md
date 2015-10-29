@@ -113,7 +113,7 @@ Tip for uploading very large files (> 4GB): By default Nginx will buffer large r
 
 ### ccnet conf
 
-Since you change from http to https, you need to modify the value of "SERVICE_URL" in `ccnet/ccnet.conf`:
+Since you change from http to https, you need to modify the value of "SERVICE_URL" in [ccnet.conf](../config/ccnet-conf.md):
 ```bash
 SERVICE_URL = https://www.example.com
 ```

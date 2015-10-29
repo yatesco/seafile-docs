@@ -1,4 +1,7 @@
 # Setup With OpenStackSwift
+
+**Note**: Since Seafile Server 5.0.0, all config files are moved to the central **conf** folder. [Read More](../deploy/new_directory_layout_5_0_0.md).
+
 Starting from professional server 2.0.5, Seafile can use S3-compatible cloud storage (such as OpenStack/Swift) as backend. This document will use Swift as example.
 
 ## Seafile Server Preparation
@@ -114,7 +117,7 @@ swift -V 2 -A http://[keystone_ip]:5000/v2.0 -U [tenant]:[user] -K [pas] list
 
 ## Modify seafile.conf
 
-Append the following lines to `seafile-data/seafile.conf` (replace `key_id` and `secret_key` with your own)
+Append the following lines to `seafile.conf` (replace `key_id` and `secret_key` with your own)
 
 ```
 [block_backend]

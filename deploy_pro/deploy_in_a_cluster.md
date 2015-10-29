@@ -1,4 +1,7 @@
 # Deploy in a cluster
+
+**Note**: Since Seafile Server 5.0.0, all config files are moved to the central **conf** folder. [Read More](../deploy/new_directory_layout_5_0_0.md).
+
 ## <a id="wiki-arch"></a> Architecture
 
 The Seafile cluster solution employs a 3-tier architecture:
@@ -118,9 +121,9 @@ Note: **Use the load balancer's address or domain name for the server address. D
 
 After the setup process is done, you still have to do a few manually changes to the config files.
 
-#### seafile-data/seafile.conf
+#### seafile.conf
 
-You have to add the following configuration to `seafile-data/seafile.conf`
+You have to add the following configuration to `seafile.conf`
 
 ```
 [cluster]
@@ -136,7 +139,7 @@ enabled = true
 memcached_options = --SERVER=192.168.1.134 --SERVER=192.168.1.135 --SERVER=192.168.1.136 --POOL-MIN=10 --POOL-MAX=100
 ```
 
-(Optional) The Seafile server also opens a port for the load balancers to run health checks. Seafile by default use port 11001. You can change this by adding the following config to seafile-data/seafile.conf
+(Optional) The Seafile server also opens a port for the load balancers to run health checks. Seafile by default use port 11001. You can change this by adding the following config to `seafile.conf`
 
 ```
 [cluster]
@@ -178,9 +181,9 @@ If you enable thumbnail feature, you'd better set thumbnail storage path to a **
 THUMBNAIL_ROOT = 'path/to/shared/folder/'
 ```
 
-#### pro-data/seafevents.conf
+#### seafevents.conf
 
-Add following to `pro-data/seafevents.conf` to disable file indexing service:
+Add following to `seafevents.conf` to disable file indexing service:
 
 ```
 [INDEX FILES]

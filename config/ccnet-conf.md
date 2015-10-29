@@ -1,6 +1,8 @@
 # Seafile Network Configurations (ccnet.conf)
 
-You may change Seafile's network options by modifying `ccnet/ccnet.conf` file. Let's walk through the options by an example.
+**Note**: Since Seafile Server 5.0.0, all config files are moved to the central **conf** folder. [Read More](../deploy/new_directory_layout_5_0_0.md).
+
+You may change Seafile's network options by modifying `ccnet.conf` file. Let's walk through the options by an example.
 
 <pre>
 [General]

@@ -37,7 +37,7 @@ sudo yum install python-ldap
 
 Before enabling LDAP group sync, you should have configured LDAP authentication. See [Configure Seafile to use LDAP](using_ldap.md) for details.
 
-The following are LDAP group sync related options. They're in the "[LDAP_SYNC]" section of ccnet/ccnet.conf.
+The following are LDAP group sync related options. They're in the "[LDAP_SYNC]" section of [ccnet.conf](../config/ccnet-conf.md).
 
 * **ENABLE_GROUP_SYNC**: set to "true" if you want to enable ldap group syncing
 * **SYNC_INTERVAL**: The interval to sync. Unit is minutes. Default to 60 minutes.
