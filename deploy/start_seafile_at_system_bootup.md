@@ -26,8 +26,8 @@ and **seafile\_dir** accordingly)
     seafile_init_log=${seafile_dir}/logs/seafile.init.log
     seahub_init_log=${seafile_dir}/logs/seahub.init.log
 
-    # Change the value of fastcgi to true if fastcgi is to be used
-    fastcgi=false
+    # Change the value of fastcgi to falst if fastcgi is not used
+    fastcgi=true
     # Set the port of fastcgi, default is 8000. Change it if you need different.
     fastcgi_port=8000
     #
@@ -64,8 +64,7 @@ and **seafile\_dir** accordingly)
             ;;
     esac
 
-**Note**: If you want to start seahub in fastcgi, just change the
-**fastcgi** variable to **true**
+
 
 ### Add Directory for Logfiles
 
