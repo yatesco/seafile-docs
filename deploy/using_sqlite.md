@@ -165,7 +165,7 @@ If you want to run Seahub on a port other than the default 8000, say 8001, you m
 ./seafile.sh stop
 ```
 
-- modify the value of SERVICE_URL in the file [ccnet.conf](../config/ccnet-conf.md), like this: (assume your ip or domain is 192.168.1.100)
+- modify the value of SERVICE_URL in the file [ccnet.conf](../config/ccnet-conf.md), like this: (assume your ip or domain is 192.168.1.100). For Seafile version 5.0+, you can modify SERVICE_URL via web UI in "System Admin->Settings"
 ```
 SERVICE_URL = http://192.168.1.100:8001
 ```
