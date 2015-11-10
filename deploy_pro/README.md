@@ -1,5 +1,13 @@
 # Deploy Seafile Pro Edition
 
+## Method 1: Deploy Seafile with an installation script
+
+The installer offer a quick and easy way to set up a production ready Seafile Server using MariaDB, Memcached and NGINX as a reverse proxy in under 5 minutes:
+
+https://forum.seafile-server.org/t/seafile-server-installer-for-production-ready-seafile-ce-and-pro-installations/1464
+
+## Method 2: Deploy Seafile step by step
+
 Basic
 
 - [Download and Setup Seafile Professional Server](download_and_setup_seafile_professional_server.md)
