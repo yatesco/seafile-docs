@@ -22,6 +22,33 @@ Doing maintanence upgrading is simple, you only need to run the script `./upgrad
 
 ## Specific instructions for each version
 
+### From v4.4 to v5.0
+
+v5.0 introduces some database schema change, and all configuration files (ccnet.conf, seafile.conf, seafevents.conf, seahub_settings.py) is moved to a central config directory.
+
+Perform the following steps to upgrade:
+
+- Run the upgrade script at one fronend node to upgrade the database.
+```
+./upgrade/upgrade_4.4_5.0.sh
+```
+- Then, on all other frontend nodes and the background node, run the upgrade script with `SEAFILE_SKIP_DB_UPGRADE` environmental variable turned on:
+```
+SEAFILE_SKIP_DB_UPGRADE=1 ./upgrade/upgrade_4.4_5.0.sh
+```
+
+After the upgrade, you should see the configuration files has been moved to the conf/ folder.
+
+```
+conf/
+  |__ ccnet.conf
+  |__ seafile.conf
+  |__ seafevent.conf
+  |__ seafdav.conf
+  |__ seahub_settings.conf
+```
+
+
 ### From v4.3 to v4.4
 
 There are no database and search index upgrade from v4.3 to v4.4. Perform the following steps to upgrade:
@@ -43,5 +70,3 @@ Perform the following steps to upgrade:
 3. Run the minor upgrade script at frontend and backend nodes
 4. Delete the old search index (the folder pro-data/search) at the backend node
 5. Delete the old office preview output folder (/tmp/seafile-office-output) at the backend node
-
-
