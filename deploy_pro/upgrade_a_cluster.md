@@ -24,7 +24,7 @@ Doing maintanence upgrading is simple, you only need to run the script `./upgrad
 
 ### From v4.4 to v5.0
 
-v5.0 introduces some database schema change, and all configuration files (ccnet.conf, seafile.conf, seafevents.conf, seahub_settings.py) is moved to a central config directory.
+v5.0 introduces some database schema change, and all configuration files (ccnet.conf, seafile.conf, seafevents.conf, seahub_settings.py) are moved to a central config directory.
 
 Perform the following steps to upgrade:
 
