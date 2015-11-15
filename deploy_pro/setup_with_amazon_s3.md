@@ -28,24 +28,24 @@ Edit `seafile.conf`, add the following lines:
 ```
 [commit_object_backend]
 name = s3
-# bucket name can only use lowercase characters, numbers, periods and dashes
-bucket = my.commit-objects
+# bucket name can only use lowercase characters, numbers, periods and dashes. Period cannot be used in Frankfurt region.
+bucket = my-commit-objects
 key_id = your-key-id
 key = your-secret-key
 memcached_options = --SERVER=localhost --POOL-MIN=10 --POOL-MAX=100
 
 [fs_object_backend]
 name = s3
-# bucket name can only use lowercase characters, numbers, periods and dashes
-bucket = my.fs-objects
+# bucket name can only use lowercase characters, numbers, periods and dashes. Period cannot be used in Frankfurt region.
+bucket = my-fs-objects
 key_id = your-key-id
 key = your-secret-key
 memcached_options = --SERVER=localhost --POOL-MIN=10 --POOL-MAX=100
 
 [block_backend]
 name = s3
-# bucket name can only use lowercase characters, numbers, periods and dashes
-bucket = my.block-objects
+# bucket name can only use lowercase characters, numbers, periods and dashes. Period cannot be used in Frankfurt region.
+bucket = my-block-objects
 key_id = your-key-id
 key = your-secret-key
 memcached_options = --SERVER=localhost --POOL-MIN=10 --POOL-MAX=100
