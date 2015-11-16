@@ -4,9 +4,9 @@
 
 Before version 4.0, Seafile only supports syncing via a self-designed protocol. Every seafile desktop client has a unique private key. When a client and a server connect, they will exchange public key and negotiate a session key. The session key is derived from cryptographically secure random number with PDKDF2 algorithm. And it's exchanged between the client and the server with RSA encryption. This session key will be used to encrypt the data transfer with AES-256/CBC algorithm. 
 
-From version 4.0, Seafile supports syncing via HTTPs protocol, which is a more standard approach.
+From version 4.0, Seafile supports syncing via HTTP(S) protocol, which is a more standard approach.
 
-From version 4.1, Seafile uses HTTP syncing protocol by default.
+From version 4.1, Seafile uses HTTP(S) syncing protocol by default.
 
 ## Encrypted Library
 
