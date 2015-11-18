@@ -74,6 +74,7 @@
    * [Backup and Recovery](maintain/backup_recovery.md)
    * [Seafile FSCK](maintain/seafile_fsck.md)
    * [Seafile GC](maintain/seafile_gc.md)
+   * [Clean database](maintain/clean_database.md)
 * [WebDAV and FUSE extensions](extension/README.md)
    * [WebDAV extension](extension/webdav.md)
    * [FUSE extension](extension/fuse.md)
