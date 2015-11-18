@@ -31,3 +31,7 @@ Recover corrupt files after server hard shutdown or system crash:
 You can run Seafile GC to remove unused files:
 
 * [Seafile GC](seafile_gc.md)
+
+### Clean database
+
+* [Clean database](clean_database.md)
