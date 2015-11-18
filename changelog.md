@@ -1,5 +1,9 @@
 # Changelog
 
+### Changelog for this manual
+
+* 2015.11.18: Add document for cleaning Seahub database.
+
 ### Changelogs
 - [Seafile Community Edition](https://seacloud.cc/group/3/wiki/server-changelog/)
 - [Seafile Professional Edition](https://seacloud.cc/group/3/wiki/changelog-for-seafile-professional-server/)
