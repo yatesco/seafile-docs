@@ -2,7 +2,7 @@
 
 ### Changelog for this manual
 
-* 2015.11.18: Add document for cleaning Seahub database.
+* 2015.11.18: Add document for [cleaning Seahub database](maintain/clean_database.md).
 
 ### Changelogs
 - [Seafile Community Edition](https://seacloud.cc/group/3/wiki/server-changelog/)
