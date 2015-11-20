@@ -114,6 +114,12 @@
 <li><a href="#share-directory">Share Directory</a></li>
 </ul>
 </li>
+<li><a href="#multiple-files-directories">Multiple Files / Directories</a><ul>
+<li><a href="#multiple-files-directories-copy">Copy</a></li>
+<li><a href="#multiple-files-directories-move">Move</a></li>
+<li><a href="#multiple-files-directories-delete">Delete</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#get-avatar">Get Avatar</a><ul>
@@ -199,7 +205,7 @@ For each API, we provide `curl` examples to illustrate the usage.
 
 To retrieve all users, just set both `start` and `limit` to `-1`.
 
-If scope parameter is passed then accounts will be searched inside the specific scope, otherwise it will be used the old approach: first LDAP and, if no account is found, DB. 
+If scope parameter is passed then accounts will be searched inside the specific scope, otherwise it will be used the old approach: first LDAP and, if no account is found, DB.
 
 **Sample request**
 
@@ -305,7 +311,7 @@ If scope parameter is passed then accounts will be searched inside the specific 
 
 **Request parameters**
 
-At least one of followings: 
+At least one of followings:
 
 * password
 * is_staff
@@ -576,7 +582,7 @@ None
 **Sample request**
 
     curl -X DELETE -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' "https://cloud.seafile.com/api2/groups/1/"
-    
+
 **Success**
 
 200 if everything is fine.
@@ -1673,29 +1679,36 @@ check if a dir has a corresponding sub_repo, if it does not have, create one
 
 #### <a id="copy-file"></a>Copy File ###
 
-**POST** https://cloud.seafile.com/api2/repos/{repo_id}/fileops/copy/
+**POST** https://cloud.seafile.com/api2/repos/{repo-id}/file/?p=/foo.c
 
 **Request parameters**
 
-* p: source folder path, defaults to `"/"`
-* file_names: list of file/folder names to copy. Multiple file/folder names can be seperated by `:`.
-* dst_repo: the destination repo id
-* dst_dir: the destination folder in `dst_repo`
+* repo-id
+* p
+* operation
+* dst_repo
+* dst_dir
 
 **Sample request**
 
-    curl -d "dst_repo=73ddb2b8-dda8-471b-b7a7-ca742b07483c&dst_dir=/&file_names=foo.c" -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' "https://cloud.seafile.com/api2/repos/c7436518-5f46-4296-97db-2fcba4c8c8db/fileops/copy/
+    curl -v -d "dst_repo=73ddb2b8-dda8-471b-b7a7-ca742b07483c&dst_dir=/&file_names=foo.c" -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' https://cloud.seafile.com/api2/repos/c7436518-5f46-4296-97db-2fcba4c8c8db/file/?p=/foo.c
 
 **Sample response**
 
+    ...
+    < HTTP/1.1 200 OK
+    ...
     "success"
+
+**Success**
+
+   Response code is 200, and a string `"success"` is returned.
 
 **Errors**
 
-* 400 missing argument
-* 403 You do not have permission to copy file
-* 404 repo not found
-* 502 failed to copy file
+* 400 BAD REQUEST, Path is missing or invalid(e.g. p=/)
+* 403 FORBIDDEN, You do not have permission to copy file
+* 500 INTERNAL SERVER ERROR
 
 #### <a id="revert-file"></a>Revert File ###
 
@@ -1968,7 +1981,7 @@ The id of the updated file
 **Notes**
 
    Newly created directory will be renamed if the name is duplicated.
-   
+
 #### <a id="rename-directory"></a>Rename Directory ###
 
 **POST** https://cloud.seafile.com/api2/repos/{repo-id}/dir/
@@ -2073,6 +2086,83 @@ The id of the updated file
 
    Response code is 200(OK).
 
+### <a id="multiple-files-directories">Multiple Files / Directories ##
+
+#### <a id="multiple-files-directories-copy"></a>Copy ###
+
+**POST** https://cloud.seafile.com/api2/repos/{repo_id}/fileops/copy/
+
+**Request parameters**
+
+* p: source folder path, defaults to `"/"`
+* file_names: list of file/folder names to copy. Multiple file/folder names can be seperated by `:`.
+* dst_repo: the destination repo id
+* dst_dir: the destination folder in `dst_repo`
+
+**Sample request**
+
+    curl -d "dst_repo=73ddb2b8-dda8-471b-b7a7-ca742b07483c&dst_dir=/&file_names=foo.c:bar.c:dir1:dir2" -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' https://cloud.seafile.com/api2/repos/c7436518-5f46-4296-97db-2fcba4c8c8db/fileops/copy/
+
+**Sample response**
+
+    "success"
+
+**Errors**
+
+* 400 missing argument
+* 403 You do not have permission to copy file
+* 404 repo not found
+* 502 failed to copy file
+
+#### <a id="multiple-files-directories-move"></a>Move ###
+
+**POST** https://cloud.seafile.com/api2/repos/{repo_id}/fileops/move/
+
+**Request parameters**
+
+* p: source folder path, defaults to `"/"`
+* file_names: list of file/folder names to move. Multiple file/folder names can be seperated by `:`.
+* dst_repo: the destination repo id
+* dst_dir: the destination folder in `dst_repo`
+
+**Sample request**
+
+    curl -d "dst_repo=73ddb2b8-dda8-471b-b7a7-ca742b07483c&dst_dir=/&file_names=foo.c:bar.c:dir1:dir2" -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' https://cloud.seafile.com/api2/repos/c7436518-5f46-4296-97db-2fcba4c8c8db/fileops/move/
+
+**Sample response**
+
+    "success"
+
+**Errors**
+
+* 400 missing argument
+* 403 You do not have permission to move file
+* 404 repo not found
+* 502 failed to move file
+
+#### <a id="multiple-files-directories-delete"></a>Delete ###
+
+**POST** https://cloud.seafile.com/api2/repos/{repo_id}/fileops/delete/
+
+**Request parameters**
+
+* p: source folder path, defaults to `"/"`
+* file_names: list of file/folder names to delete. Multiple file/folder names can be seperated by `:`.
+
+**Sample request**
+
+    curl -d "file_names=foo.c:bar.c:dir1:dir2" -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' https://cloud.seafile.com/api2/repos/c7436518-5f46-4296-97db-2fcba4c8c8db/fileops/delete/
+
+**Sample response**
+
+    "success"
+
+**Errors**
+
+* 400 missing argument
+* 403 You do not have permission to delete file
+* 404 repo not found
+* 502 failed to delete file
 
 ## <a id="get-avatar"></a>Get Avatar ##
 
