@@ -112,7 +112,6 @@
 <li><a href="#delete-directory">Delete Directory</a></li>
 <li><a href="#download-directory">Download Directory</a></li>
 <li><a href="#share-directory">Share Directory</a></li>
-<li><a href="#batch-delete">Batch Delete</a></li>
 </ul>
 </li>
 </ul>
@@ -2073,12 +2072,6 @@ The id of the updated file
 **Success**
 
    Response code is 200(OK).
-
-#### <a id="batch-delete"></a>Batch Delete ###
-
-Pipelining over HTTP/1.1 can be used to delete multiple files and directories without losing performance.
-
-A sample request looks like `curl -X DELETE https://cloud.seafile.com/api2/repos/{repo-id}/dir/?p=/foo http://cloud.seafile.com/api2/repos/{repo-id}/dir/?p=/bar`. This code snippet shows how to use Python client to batch delete multiple files and directories. See <http://cloud.seafile.com/f/f7fd5d5b9d/>
 
 
 ## <a id="get-avatar"></a>Get Avatar ##
