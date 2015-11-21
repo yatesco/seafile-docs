@@ -152,7 +152,7 @@ All API calls must be authenticated with a valid Seafile API key.
 
 The api key can be retrieved by the obtain auth api. See the <a href="#quick-start">Quick Start</a> for details.
 
-For each API, we provide `curl` examples to illustrate the usage.
+For each API, we provide `curl` examples to illustrate the usage. We also provide `python` and `javascript` examples, please refer to https://github.com/haiwen/webapi-examples for details.
 
 
 ## <a id="status-code"></a>Status Code ##
