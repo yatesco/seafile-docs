@@ -4,8 +4,7 @@ In pro version 4.4.0(or above), you can use Microsoft Office Web App to preview 
 
 Seafile's own Office file preview is still the default. To use Office Web App for preview, please add following config to seahub_settings.py.
 
-<pre>
-
+``` python
 # Enable Office Web App
 ENABLE_OFFICE_WEB_APP = True
 
@@ -22,17 +21,18 @@ WOPI_ACCESS_TOKEN_EXPIRATION = 30 * 60 # seconds
 
 # Tuple of file format that you want to view through Office Web App
 # You can change this value according to your preferences
+# And of course you should make sure your Office Web App support to preview
+# the specified extension file you add below
 OFFICE_WEB_APP_FILE_EXTENSION = ('ods', 'xls', 'xlsb', 'xlsm', 'xlsx','ppsx', 'ppt',
     'pptm', 'pptx', 'doc', 'docm', 'docx')
-
-</pre>
+```
 
 Then restart
 
-<pre>
+```
 ./seafile.sh restart
 ./seahub.sh restart
-</pre>
+```
 
 After you click the document you specified in seahub_settings.py, you will see the new preview page.
 
