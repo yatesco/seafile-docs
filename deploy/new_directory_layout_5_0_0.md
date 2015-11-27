@@ -1,6 +1,8 @@
 # Config files location change in Seafile Server 5.0.0
 
-Seafile server has various components, each of them has its own config files. These files used to be in different directories, which is incovenient to manage.
+Seafile server has various components, each of them has its own config files. These files used to be in different directories, which is inconvenient to manage.
+
+This is the layout before Seafile Server 5.0.0:
 
 ```sh
 └── seahub_settings.py
