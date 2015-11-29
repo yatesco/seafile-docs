@@ -151,7 +151,7 @@ After starting the services, you may open a web browser and type in
 
 ``http://192.168.1.111:8000``
 
-you will be redirected to the Login page. Enter the username and password you were provided during the Seafile setup. You are going to be returned to the `Myhome` page then, where you can create libraries.
+you will be redirected to the Login page. Just enter the admin username and password. 
 
 **Congratulations!** Now you have successfully setup your private Seafile server.
 
