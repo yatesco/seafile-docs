@@ -28,7 +28,7 @@ The following libraries need to be compiled from source.
 
 #### libevhtp
 
-* Download [libevhtp](https://github.com/ellzey/libevhtp/archive/1.1.6.t).
+* Download [libevhtp](https://github.com/ellzey/libevhtp/archive/1.1.6.tar.gz).
 * Build libevhtp by:
 
 ```
@@ -92,12 +92,12 @@ Download the source tarball of the latest tag from
 * https://github.com/haiwen/seafile/tags
 * https://github.com/haiwen/seahub/tags
 
-For example, if the latest released seafile client is 2.0.3, then just use the **v2.0.3-server** tags of the four projects. You should get four tarballs:
+For example, if the latest released seafile server is 4.4.7, then just use the **v4.4.7-server** tags of the projects (except for libsearpc, which uses the **v3.0-latest** tag). You should get four tarballs:
 
-* libsearpc-2.0.3-server.tar.gz
-* ccnet-2.0.3-server.tar.gz
-* seafile-2.0.3-server.tar.gz
-* seahub-2.0.3-server.tar.gz
+* libsearpc-3.0-latest.tar.gz
+* ccnet-4.4.7-server.tar.gz
+* seafile-4.4.7-server.tar.gz
+* seahub-4.4.7-server.tar.gz
 
 Create a folder <code>haiwen/src</code>, and uncompress libsearpc/ccnet/seafile source to it.
 
@@ -105,17 +105,17 @@ Create a folder <code>haiwen/src</code>, and uncompress libsearpc/ccnet/seafile 
 cd haiwen/seafile-server
 mkdir src
 cd src
-tar xf /path/to/libsearpc-2.0.3-server.tar.gz
-tar xf /path/to/ccnet-2.0.3-server.tar.gz
-tar xf /path/to/seafile-2.0.3-server.tar.gz
+tar xf /path/to/libsearpc-3.0-latest.tar.gz
+tar xf /path/to/ccnet-4.4.7-server.tar.gz
+tar xf /path/to/seafile-4.4.7-server.tar.gz
 </pre>
 
 And uncompress seahub tarball to <code>haiwen/seafile-server</code>:
 
 <pre>
 cd haiwen/seafile-server
-tar xf /path/to/seahub-2.0.3-server.tar.gz
-mv seahub-2.0.3-server seahub
+tar xf /path/to/seahub-4.4.7-server.tar.gz
+mv seahub-4.4.7-server seahub
 </pre>
 
 So far, The current directory layout is:
@@ -125,9 +125,9 @@ haiwen/
 └── seafile-server
     └── seahub
     └── src
-        ├── libsearpc-2.0.3-server
-        ├── ccnet-2.0.3-server
-        ├── seafile-2.0.3-server
+        ├── libsearpc-4.4.7-server
+        ├── ccnet-4.4.7-server
+        ├── seafile-4.4.7-server
         ├── ... (other files)
 </pre>
 
