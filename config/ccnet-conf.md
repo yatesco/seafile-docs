@@ -13,7 +13,7 @@ USER_NAME=example
 # Not used anymore
 ID=eb812fd276432eff33bcdde7506f896eb4769da0
 
-# This is the name of this Seafile server. Currenlty it is only used in Seafile client's log.
+# Not used anymore
 NAME=example
 
 # This is outside URL for Seahub(Seafile Web). 
