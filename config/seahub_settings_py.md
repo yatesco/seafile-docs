@@ -187,7 +187,7 @@ ENABLE_MAKE_GROUP_PUBLIC = False
 SHOW_TRAFFIC = True
 
 # Allow administrator to view user's file in UNENCRYPTED libraries
-# through Libraries page in System Admin
+# through Libraries page in System Admin. Default is False.
 ENABLE_SYS_ADMIN_VIEW_REPO = True
 ```
 
