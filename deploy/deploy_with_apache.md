@@ -6,13 +6,7 @@ According to the [security advisory](https://www.djangoproject.com/weblog/2013/a
 
 ## Prepare
 
-1. Install <code>python-flup</code> library. On Ubuntu:
-
-    ```bash
-    sudo apt-get install python-flup
-    ```
-
-2. Install and enable mod_fastcgi and also enable mod_rewrite. On Ubuntu:
+1. Install and enable mod_fastcgi and also enable mod_rewrite. On Ubuntu:
 
     ```bash
     sudo apt-get install libapache2-mod-fastcgi
@@ -32,7 +26,7 @@ According to the [security advisory](https://www.djangoproject.com/weblog/2013/a
     
     On CentOS/Redhat, you will need to compile mod_fastcgi from source, please refer to [this](http://www.cyberciti.biz/tips/rhel-centos-fedora-apache2-fastcgi-php-configuration.html).
     
-3. Enable apache proxy
+2. Enable apache proxy
 
     ```bash
     sudo a2enmod proxy_http
