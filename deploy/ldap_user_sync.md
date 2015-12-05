@@ -114,6 +114,11 @@ There are a lot more information in the LDAP server that can be useful for Seafi
 * **USER_NAME_REVERSE**: In some laguages, such as Chinese, the display order of first name and last name is reversed. Set this option if you need it.
 * **DEPT_ATTR**: Attribute for user's department. It's "department" by default.
 
+Since Pro edition 5.0.0, two new attributes can be synced:
+
+* **UID_ATTR**: Attribute for username or uid. If this is synced, users can also log in with their uid. In AD, the attribute `sAMAccountName` can be used as `UID_ATTR`; in OpenLDAP, the attribute `uid` or something similar can be used. This attribute is not synced by default.
+* **CONTACT_EMAIL_ATTR**: If synced, this email address will be used to send notification emails to users. Otherwise the `LOGIN_ATTR` attribute in `[LDAP]` section will be used for sending emails. This attribute is not synced by default.
+
 You should set these options in the "[LDAP_SYNC]" section of ccnet.conf.
 
 ### Don't Import New Users
