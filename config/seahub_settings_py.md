@@ -150,7 +150,6 @@ ENABLE_GLOBAL_ADDRESSBOOK = False
 
 ## Other options
 
-You may change seahub website's settings by adding variables in `seahub_settings.py`.
 
 ```python
 
@@ -175,9 +174,6 @@ SITE_TITLE = 'Seafile'
 # If you don't want to run seahub website on your site's root path, set this option to your preferred path.
 # e.g. setting it to '/seahub/' would run seahub on http://example.com/seahub/.
 SITE_ROOT = '/'
-
-# Whether a user can make group as public. Default is False. (Deprecated)
-ENABLE_MAKE_GROUP_PUBLIC = False
 ```
 
 ## Pro edition only options
