@@ -55,7 +55,16 @@ settings to solve it.
 windows_encoding = iso-8859-1
 </pre>
 
+## Changing MySQL Connection Pool Size
 
+When you configure seafile server to use MySQL, the default connection pool size is 100, which should be enough for most use cases. You can change this value by adding following options to seafile.conf:
+
+```
+[database]
+......
+# Use larger connection pool
+max_connections = 200
+```
 
 **Note**: You need to restart seafile and seahub so that your changes take effect.
 <pre>
