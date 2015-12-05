@@ -38,3 +38,14 @@ PORT=13419
 cd seafile-server
 ./seafile.sh restart
 </pre>
+
+## Changing MySQL Connection Pool Size
+
+When you configure ccnet to use MySQL, the default connection pool size is 100, which should be enough for most use cases. You can change this value by adding following options to ccnet.conf:
+
+```
+[Database]
+......
+# Use larger connection pool
+MAX_CONNECTIONS = 200
+```
