@@ -185,6 +185,10 @@ ENABLE_MAKE_GROUP_PUBLIC = False
 ```python
 # Whether to show the used traffic in user's profile popup dialog. Default is True
 SHOW_TRAFFIC = True
+
+# Allow administrator to view user's file in UNENCRYPTED libraries
+# through Libraries page in System Admin
+ENABLE_SYS_ADMIN_VIEW_REPO = True
 ```
 
 ## Note
