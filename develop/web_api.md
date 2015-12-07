@@ -1785,7 +1785,7 @@ check if a dir has a corresponding sub_repo, if it does not have, create one
 
 **Sample response**
 
-    "http://cloud.seafile.com:8082/upload-api/ef881b22"
+    "http://cloud.seafile.com:8082/upload-api/73c5d117-3bcf-48a0-aa2a-3f48d5274ae3"
 
 **Errors**
 
@@ -1795,18 +1795,17 @@ check if a dir has a corresponding sub_repo, if it does not have, create one
 
 After getting the upload link, POST to this link for uploading files.
 
-**POST** http://cloud.seafile.com:8082/upload-api/ef881b22
+**POST** http://cloud.seafile.com:8082/upload-api/73c5d117-3bcf-48a0-aa2a-3f48d5274ae3
 
 **Errors**
 
     400 Bad request
     440 Invalid filename
-    441 File already exists
     500 Internal server error
 
 **Sample request**
 
-    curl -H "Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd" -F file=@test.txt -F filename=test.txt -F parent_dir=/ http://cloud.seafile.com:8082/upload-api/ef881b22
+    curl -H "Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd" -F file=@test.txt -F filename=test.txt -F parent_dir=/ http://cloud.seafile.com:8082/upload-api/73c5d117-3bcf-48a0-aa2a-3f48d5274ae3
 
 **Sample response**
 
@@ -1814,7 +1813,9 @@ After getting the upload link, POST to this link for uploading files.
 
 **Note**
 
-For python client uploading, see <https://github.com/haiwen/webapi-examples/blob/master/python/upload-file.py>, or it can be done much more easily with elegant [python requests library](http://docs.python-requests.org/en/latest/), see <https://github.com/haiwen/webapi-examples/blob/master/python/upload-file2.py>
+- New uploaded file's name will be 'test(1).text' if a file with name 'test.txt' already exists in parent directory
+
+- For python client uploading, see <https://github.com/haiwen/webapi-examples/blob/master/python/upload-file.py>, or it can be done much more easily with elegant [python requests library](http://docs.python-requests.org/en/latest/), see <https://github.com/haiwen/webapi-examples/blob/master/python/upload-file2.py>
 
 #### <a id="update-file"></a>Update file ###
 
@@ -1832,7 +1833,7 @@ For python client uploading, see <https://github.com/haiwen/webapi-examples/blob
 
 **Sample response**
 
-    "http://cloud.seafile.com:8082/update-api/ef881b22"
+    "http://cloud.seafile.com:8082/update-api/e69e5ee7-9329-4f42-bf1b-12879bd72c28"
 
 **Errors**
 
@@ -1840,9 +1841,9 @@ For python client uploading, see <https://github.com/haiwen/webapi-examples/blob
 
 ##### <a id="update-file-1"></a>Update File
 
-After getting the upload link, POST to this link for uploading files.
+After getting the update link, POST to this link for updating files.
 
-**POST** http://cloud.seafile.com:8082/update-api/ef881b22
+**POST** http://cloud.seafile.com:8082/update-api/e69e5ee7-9329-4f42-bf1b-12879bd72c28
 
 **Request parameters**
 
@@ -1850,7 +1851,7 @@ After getting the upload link, POST to this link for uploading files.
 
 **Sample request**
 
-    curl -H "Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd" -F file=@test.txt -F filename=test.txt -F target_file=/test.txt http://cloud.seafile.com:8082/upload-api/ef881b22
+    curl -H "Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd" -F file=@test.txt -F filename=test.txt -F target_file=/test.txt http://cloud.seafile.com:8082/update-api/e69e5ee7-9329-4f42-bf1b-12879bd72c28
 
 **Returns**
 
@@ -1880,7 +1881,7 @@ The id of the updated file
 
 **Sample response**
 
-    "https://cloud.seafile.com/seafhttp/upload-blks-api/c1e6823d"
+    "https://cloud.seafile.com/seafhttp/upload-blks-api/569213db-7297-457a-907d-e2259a277c05"
 
 **Errors**
 
@@ -1901,7 +1902,7 @@ The id of the updated file
 
 **Sample response**
 
-    "https://cloud.seafile.com/seafhttp/update-blks-api/c1e6823d"
+    "https://cloud.seafile.com/seafhttp/update-blks-api/402c6d48-fe52-4592-97dd-85f462f03d66"
 
 **Errors**
 
