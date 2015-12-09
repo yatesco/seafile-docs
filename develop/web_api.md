@@ -131,7 +131,6 @@
 <li><a href="#get-thumbnail-image">Get Thumbnail Image</a></li>
 </ul>
 </li>
-<li><a href="#list-group-and-contacts">List Group And Contacts</a></li>
 <li><a href="#get-file-events">Get File Activities</a></li>
 <li><a href="#add-organization">Add Organization</a></li>
 </ul>
@@ -2225,42 +2224,6 @@ The id of the updated file
 
     curl -H 'Authorization: Token 40f9a510a0629430865dc199a3880898ad2e48fc' https://cloud.seafile.com/api2/repos/fbead5d0-4817-4446-92f3-7ac8e6a8e5f5/thumbnail/?p=/5.jpg\&size=123 > thumbnail.png
 
-## <a id="list-group-and-contacts"></a>List Group And Contacts ##
-
-**GET** https://cloud.seafile.com/api2/groupandcontacts/
-
-**Sample request**
-
-    curl -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' "https://cloud.seafile.com/api2/groupandcontacts/"
-
-**Sample response**
-
-    {
-        "contacts": [
-            {
-                "msgnum": 0,
-                "mtime": 0,
-                "lastmsg": null,
-                "email": "user@example.com",
-                "name": "123"
-            }
-        ],
-        "umsgnum": 0,
-        "replynum": 0,
-        "groups": [
-            {
-                "ctime": 1398134171327948,
-                "creator": "user@example.com",
-                "msgnum": 0,
-                "mtime": 0,
-                "lastmsg": null,
-                "id": 1,
-                "name": "lian"
-            }
-        ],
-        "gmsgnum": 0,
-        "newreplies": []
-    }
 
 ## <a id="get-file-events"></a>Get File Activities ##
 
