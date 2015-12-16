@@ -32,5 +32,24 @@ For maximum security, the plain-text password won't be saved on the client side 
 
 ## Why fileserver delivers every content to everybody knowing the content URL of an unshared private file?
 
-When a file download link is clicked, a random URL is generated for user to access the file from fileserver. This url can only be access for once. After that, all access will be denied to the url.
+When a file download link is clicked, a random URL is generated for user to access the file from fileserver. This url can only be access for once. After that, all access will be denied to the url. So even someone else happens to know about the url, he/she can't access it any more.
 
+## How does Seafile store user login password?
+
+User login passwords are stored in hash form only. Note that user login password is different from the passwords used in encrypted libraries. In the database, it's format is
+
+```
+PBKDF2SHA256$iterations$salt$hash
+```
+
+The record is divided into 4 parts by the $ sign.
+
+- The first part is the hash algorithm used. Currently we use PBKDF2 with SHA256. It can be changed to even stronger algorithm if needed.
+- The second part is the number of iterations of the hash algorithm
+- The third part is the random salt used for generating the hash
+- The fourth part is the final hash generated from the password
+
+The calculate the hash,
+
+- First, generate a 32-byte long cryptographically strong random number, use it as the salt.
+- Calculate the hash with `PBKDF2(password, salt, iterations)`. The number of iterations is currently 10000.
