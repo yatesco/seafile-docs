@@ -43,7 +43,7 @@ If the operation is successful, the tray icon would show a bubble saying __Succe
 After initialization, there are some options need to be configured:
 
 - Right click the tray icon, choose __Open seafile-server folder__. Your seafile-server data folder would be opened.
-- Edit the file ``ccnet/ccnet.conf``. Modify the following line of `ccnet.conf`:
+- Edit the file `conf/ccnet.conf`. Modify the following line of `ccnet.conf`:
 ```
 SERVICE_URL = XXX
 ```
