@@ -1,16 +1,13 @@
 # Configure Seafile to use LDAP
-The current code of seahub assumes that user name to be email address, so it's not possible to log in with UNIX user names or Windows Domain user names now. The support may be added later.
-
-Seafile will find a user both from database and LDAP. LDAP will be tried first. Note that the Seafile admin  accounts are always stored in sqlite/mysql database.
 
 ## LDAP User Management
 
-Before 4.2 version, there are some limitation on admin operations to LDAP users. The system admin cannot deactivate a LDAP user, and cannot set a LDAP user as system admin.
-After 4.2 version, we introduce a more flexible design for LDAP user management. In this design,
+Seafile LDAP/AD intergration works as following (without LDAP user sync):
 
 * When a LDAP user logs in, it will be automatically imported from LDAP server into the database (table `LDAPUser` in the ccnet database).
 * Now the admin can change various properties about this user in the database, such as deactivating, setting as system admin.
-* The admin can manage imported LDAP users in the sysmtem admin page.
+* The admin can manage imported LDAP users in the system admin page.
+* Seafile will find an user both from database and LDAP. LDAP will be tried first. Note that the Seafile admin accounts are always stored in sqlite/mysql database.
 * For Pro Edition, system user count only includes imported LDAP users. So customers can buy less licenses than all the users they have in LDAP server.
 
 In 4.2 Pro Edition, we introduced LDAP user sync feature, which brings even more management capabilities on LDAP users:
@@ -34,10 +31,10 @@ To use LDAP to authenticate user, please add the following lines to ccnet.conf. 
 Meaning of each config options:
 
 * HOST: LDAP URL for the host. ldap://, ldaps:// and ldapi:// are supported. You can also include port number in the URL, like ldap://ldap.example.com:389. To use TLS, you should configure the LDAP server to listen on LDAPS port and specify ldaps:// here. More details about TLS will be covered below.
-* BASE: The root distinguished name (DN) to use when running queries against the directory server.
+* BASE: The root distinguished name (DN) to use when running queries against the directory server. Note, you need to have `OU` or `CN` in the BASE, i.e., `BASE = cn=users,dc=example,dc=com` or  `BASE = ou=users,dc=example,dc=com` can work, but `BASE = dc=example,dc=com` cannot work.
 * USER_DN: The distinguished name of the user that Seafile will use when connecting to the directory server. This user should have sufficient privilege to access all the nodes under BASE. It's recommended to use a user in the administrator group.
 * PASSWORD: Password of the above user.
-* LOGIN_ATTR: The attribute to be used as user login id. By default it's the 'mail' attribute.
+* LOGIN_ATTR: The attribute to be used as user id. Use `email` or `userPrincipalName`.
 
 Tips for connecting to Active Directory:
 
@@ -75,6 +72,15 @@ If you're using Active Directory but don't have email address for the users, you
 
 The `userPrincipalName` is an user attribute provided by AD. It's usually of the form `username@domain-name`, where `username` is Windows user login name. The the user can log in to seahub with `username@domain-name`, such as `poweruser@example.com`. Note that such login name is not actually an email address. So sending emails from seahub won't work with this setting.
 
+#### Recommendation
+
+The LOGIN_ATTR will be used as unique identifier for an user in Seafile. We recommend use `userPrincipalName` as LOGIN_ATTR and use LDAP/AD syncing feature to sync users' name, email and username into Seafile. The benefits include:
+
+* User can login via username
+* User's email can be changed
+* User can search other users via name
+
+
 ## Connect to LDAP/AD from Windows server
 
 The config syntax on Windows is slightly different from Linux. 
@@ -99,41 +105,6 @@ Meaning of each config options:
 * PASSWORD: Password of the above user.
 * LOGIN_ATTR: The attribute to be used as user login id. By default it's the 'mail' attribute.
 
-Tips for connecting to Active Directory:
-
-* To determine the BASE, you first have to navigate your organization hierachy on the domain controller GUI.
-    * If you want to allow all users to use Seafile, you can use 'cn=users,dc=yourdomain,dc=com' as BASE (with proper adjustment for your own needs).
-    * If you want to limit users to a certain OU (Organization Unit), you run `dsquery` command on the domain controller to find out the DN for this OU. For example, if the OU is 'staffs', you can run 'dsquery ou -name staff'. More information can be found [here](https://technet.microsoft.com/en-us/library/cc770509.aspx).
-* AD supports 'user@domain.name' format for the USER_DN option. For example you can use administrator@example.com for USER_DN. Sometime the domain controller doesn't recognize this format. You can still use `dsquery` command to find out user's DN. For example, if the user name is 'seafileuser', run `dsquery user -name seafileuser`. More information [here](https://technet.microsoft.com/en-us/library/cc725702.aspx).
-
-Example config for Active Directory:
-
-    [LDAP]
-    HOST = 192.168.1.123
-    BASE = cn=users,dc=example,dc=com
-    USER_DN = administrator@example.local
-    PASSWORD = secret
-    LOGIN_ATTR = mail
-
-Example config for OpenLDAP or other LDAP servers:
-
-    [LDAP]
-    HOST = 192.168.1.123
-    BASE = ou=users,dc=example,dc=com
-    USER_DN = cn=admin,dc=example,dc=com
-    PASSWORD = secret
-    LOGIN_ATTR = mail
-
-If you're using Active Directory but don't have email address for the users, you can use the following config:
-
-    [LDAP]
-    HOST = 192.168.1.123
-    BASE = cn=users,dc=example,dc=com
-    USER_DN = administrator@example.local
-    PASSWORD = secret
-    LOGIN_ATTR = userPrincipalName
-
-The `userPrincipalName` is an user attribute provided by AD. It's usually of the form `username@domain-name`, where `username` is Windows user login name. The the user can log in to seahub with `username@domain-name`, such as `poweruser@example.com`. Note that such login name is not actually an email address. So sending emails notifications from Seahub won't work with this setting.
 
 ## Testing Your LDAP Configuration
 
