@@ -86,7 +86,7 @@
        * [Linux](build_seafile/linux.md)
        * [FreeBSD](build_seafile/freebsd.md)
        * [Windows](build_seafile/windows.md)
-       * [Max OS X](build_seafile/osx.md)
+       * [Mac OS X](build_seafile/osx.md)
        * [Server](build_seafile/server.md)
        * [Raspberry Pi](build_seafile/rpi.md)
    * [Develop env](develop/env.md)
