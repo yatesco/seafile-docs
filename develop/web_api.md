@@ -70,6 +70,7 @@
 <li><a href="#create-library">Create Library</a></li>
 <li><a href="#check/create-sub-library">Check/Create Sub Library</a></li>
 <li><a href="#delete-library">Delete Library</a></li>
+<li><a href="#rename-library">Rename Library</a></li>
 <li><a href="#decrypt-library">Decrypt Library</a></li>
 <li><a href="#create-public-lib">Create Public Library</a></li>
 <li><a href="#remove-public-lib">Remove Public Library</a></li>
@@ -1205,6 +1206,26 @@ check if a dir has a corresponding sub_repo, if it does not have, create one
 * 400 Library does not exist.
 
 * 403 Only library owner can perform this operation.
+
+#### <a id="rename-library"></a>Rename Library ###
+
+**POST** https://cloud.seafile.com/api2/repos/{repo-id}/?op=rename
+
+**Sample request**
+
+    curl -d "repo_name=new-repo-name"  -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' -H 'Accept: application/json; indent=4' https://cloud.seafile.com/api2/repos/8f5f2222-72a8-454f-ac40-8397c5a556a8/op=rename
+
+**Sample response**
+
+"success"
+
+**Errors**
+
+* 404 Library not found.
+
+* 403 You do not have permission to rename this library.
+
+* 500 Unable to rename library
 
 #### <a id="decrypt-library"></a>Decrypt Library ###
 
