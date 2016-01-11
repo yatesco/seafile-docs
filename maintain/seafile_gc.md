@@ -95,7 +95,7 @@ To run GC program
 
 If you want to do sanity check before actually removing any data, you can use the --dry-run option
 
-    ./seaf-gc.sh --dry-run
+    ./seaf-gc.sh dry-run
 
 It will show you the total block number vs. the number of blocks to be removed.
 
