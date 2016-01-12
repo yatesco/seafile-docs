@@ -4,12 +4,12 @@
 
 ## <a id="search-opt"></a>Search Options
 
-Following options should be set in file **seafevents.conf**, and need to restart seafile and seahub to take affect.
+Following options should be set in file **seafevents.conf**, and need to restart seafile and seahub to take effect.
 
 ```
 [INDEX FILES]
 ...
-# Seafile does not support search contents of PDF/DOC on Windows system 
+# Enable full-text search for PDF/Word/PPT
 index_office_pdf = false
 
 ```
