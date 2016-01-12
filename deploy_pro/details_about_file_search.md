@@ -69,11 +69,6 @@ If this not work, you can try the following steps:
 3. Restart Seafile
 4. Wait one minute then run `./pro/pro.py search --update`
 
-### <a id="wiki-search-office-pdf"></a>I can't search Office/PDF files
-
-
-Seafile does not support search contents of PDF/DOC on Windows system 
-
 
 ### <a id="wiki-search-no-result"></a>I get no result when I search a keyword
 
