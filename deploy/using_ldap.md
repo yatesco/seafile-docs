@@ -164,14 +164,21 @@ The current version of Seafile Linux server package is compiled on CentOS. We in
 
 The ldap library (libldap) bundled in the Seafile package is of version 2.4. If your Linux distribution is new enough (like CentOS 6, Debian 7 or Ubuntu 12.04 or above), you can use system's libldap instead.
 
-To do this, just run the following command
+On Ubuntu 14.04, moving the bundled ldap related libraries out of the library path should make TLS connection works.
 
 ```
 cd ${SEAFILE_INSTALLATION_DIR}/seafile-server-latest/seafile/lib
 mv liblber-2.4.so.2 libldap-2.4.so.2 libsasl2.so.2 ..
 ```
 
-This effectively remove the bundled ldap library from the library path. When the server runs, it'll look for ldap library from the system paths.
+On CentOS 6, you have to move the libnssutil library:
+
+```
+cd ${SEAFILE_INSTALLATION_DIR}/seafile-server-latest/seafile/lib
+mv libnssutil3.so ..
+```
+
+This effectively remove the bundled libraries out of the library path. When the server runs, it'll look for corresponding libraries from the system paths.
 
 ## Password reset page redirection
 
