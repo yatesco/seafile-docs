@@ -156,35 +156,6 @@ In a cluster environment, you may want to use a memcached cluster. In the above 
 memcached_options = --SERVER=192.168.1.134 --SERVER=192.168.1.135 --SERVER=192.168.1.136 --POOL-MIN=10 --POOL-MAX=100
 ```
 
-### Use HTTPS connections to Swift
-
-Since Pro 5.0.4, you can use HTTPS connections to Swift. Add the following options to seafile.conf:
-
-```
-[commit_object_backend]
-name = s3
-......
-use_https = true
-
-[fs_object_backend]
-name = s3
-......
-use_https = true
-
-[block_backend]
-name = s3
-......
-use_https = true
-```
-
-Because the server package is built on CentOS 6, if you're using Debian/Ubuntu, you have to copy the system CA bundle to CentOS's CA bundle path. Otherwise Seafile can't find the CA bundle so that the SSL connection will fail.
-
-```
-sudo mkdir -p /etc/pki/tls/certs
-sudo cp /etc/ssl/certs/ca-certificates.crt /etc/pki/tls/certs/ca-bundle.crt
-sudo ln -s /etc/pki/tls/certs/ca-bundle.crt /etc/pki/tls/cert.pem
-```
-
 ## Run and Test ##
 
 Now you can start Seafile by `./seafile.sh start` and `./seahub.sh start` and visit the website.
