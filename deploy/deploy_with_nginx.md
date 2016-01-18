@@ -42,6 +42,7 @@ server {
 
         access_log      /var/log/nginx/seahub.access.log;
     	error_log       /var/log/nginx/seahub.error.log;
+    	fastcgi_read_timeout 36000;
     }
 
     location /seafhttp {
@@ -51,6 +52,7 @@ server {
         proxy_connect_timeout  36000s;
         proxy_read_timeout  36000s;
         proxy_send_timeout  36000s;
+        send_timeout  36000s;
     }
 
     location /media {
