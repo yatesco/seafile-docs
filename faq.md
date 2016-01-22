@@ -54,3 +54,16 @@ There are some common mistakes:
 ### How to migrate libraries and groups from one account to another ?
 
 Since version 4.4.2, system admin can migrate libraries and groups from one account to another exsiting account using [RESTful web api](https://github.com/haiwen/seafile-docs/blob/master/develop/web_api.md#migrate-account).
+
+
+## Questions about Clustering
+
+### Page layout broken because seahub/media/CACHE is created only on first node
+
+Please add 
+
+    COMPRESS_CACHE_BACKEND = 'locmem://'
+
+to seahub_settings.py as documented http://manual.seafile.com/deploy_pro/deploy_in_a_cluster.html
+
+This will tell every node to generate the CSS CACHE in its local folder.
