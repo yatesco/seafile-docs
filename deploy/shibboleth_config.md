@@ -108,12 +108,18 @@ EXTRA_MIDDLEWARE_CLASSES = (
 )
 SHIBBOLETH_ATTRIBUTE_MAP = {
     "eppn": (True, "username"),
+    "givenname": (False, "givenname"),
+    "surname": (False, "surname"),
+    "emailaddress": (False, "contact_email"),
+    "organization": (False, "institution"),    
 }
 
 ENABLE_SHIB_LOGIN = True
 ```
 
 In the above configuration, the Shibboleth attribute `eppn` (short for Edu Person Principal Name) is mapped into Seahub's username. You can use other reasonable Shibboleth attribute returned by your IdP for username. The username should have format similar to an email address.
+
+Since version 5.0.5, we can process more attributes(givenname, surname, emailaddress, organization), these are not mandatory. Foe example, givenname and surname will be concatenated as nickname, emailaddress will be recorded as contact email which is used to recieve notification emails and organization will be recorded as institution, all these attributes can be found at user settings page. 
 
 ## Verify
 
