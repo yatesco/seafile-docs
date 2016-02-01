@@ -2,7 +2,9 @@
 
 Log files of seafile server:
 
-* Seafile server： logs/seafile.log
-* Controller: logs/controller.log
-* Seahub：logs/seahub_django_request.log, logs/seahub.log (for logs from Django framework and Emails)
+* seafile.log: logs of Seafile server
+* controller.log: logs of Controller
+* seahub_django_request.log: logs of Seahub
+* seahub.log: logs from Django framework and emails sending
+* seafevents.log: logs for background tasks and office file convertion
 * Ccnet Log: logs/ccnet.log  (logs for internal RPC, not useful)
