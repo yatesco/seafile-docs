@@ -41,6 +41,10 @@ SERVER_EMAIL = EMAIL_HOST_USER
 
 **Note2**: If you want to use the Email service without authentication leaf <code>EMAIL_HOST_USER</code> and <code>EMAIL_HOST_PASSWORD</code> **blank** (<code>''</code>). (But notice that the emails then will be sent without a <code>From:</code> address.)
 
+## About using SSL connection (using port 465)
+
+Port 587 is for using TLS connection to the Email server. Port 465 is for using SSL connection.  Starting from Django 1.8, it support both. But we are still using Django 1.5 in version 5.0, which only support  TLS connection. If your email server only support SSL connection, you can find a work around here: https://github.com/bancek/django-smtp-ssl.
+
 ## Change the `sender` and `reply to` of email
 
 You can change the sender and reply to field of email by add the following settings to seahub_settings.py. This only affects email sending for file/folder share link.
