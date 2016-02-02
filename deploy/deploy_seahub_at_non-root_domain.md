@@ -13,7 +13,7 @@ MEDIA_URL = '/seafmedia/'
 COMPRESS_URL = MEDIA_URL
 STATIC_URL = MEDIA_URL + 'assets/'
 SITE_ROOT = '/seafile/'
-LOGIN_URL = '/seafile/accounts/login/'    # NOTE: this config is added since 5.0.4
+LOGIN_URL = '/seafile/accounts/login/'    # NOTE: since version 5.0.4
 </pre>
 
 We will use Nginx to serve static files(js, css, etc), so we just disable <code>SERVE_STATIC</code>.
