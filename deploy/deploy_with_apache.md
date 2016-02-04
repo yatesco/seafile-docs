@@ -6,6 +6,8 @@ According to the [security advisory](https://www.djangoproject.com/weblog/2013/a
 
 ## Prepare
 
+`Notice`: Seahub has an issue working with Apache 2.4 using the mod_fastcgi https://github.com/haiwen/seafile/issues/1258.
+
 1. Install and enable mod_fastcgi and also enable mod_rewrite. On Ubuntu:
 
     ```bash
