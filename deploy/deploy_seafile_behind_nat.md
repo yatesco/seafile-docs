@@ -10,10 +10,10 @@ To achieve this, you need:
 
 ### Table of Contents
 
-- [Setup the server](deploy_Seafile_behind_NAT.md#setup-the-server)
-- [Setup port forwarding in your router](deploy_Seafile_behind_NAT.md#setup-port-forwarding-in-your-router)
-- [Use a dynamic dns serivce](deploy_Seafile_behind_NAT.md#use-a-dynamic-dns-serivce)
-- [Modify your seafile configuration](deploy_Seafile_behind_NAT.md#modify-your-seafile-configuration)
+- [Setup the server](#setup-the-server)
+- [Setup port forwarding in your router](#setup-port-forwarding-in-your-router)
+- [Use a dynamic dns serivce](#use-a-dynamic-dns-serivce)
+- [Modify your seafile configuration](#modify-your-seafile-configuration)
 
 
 ## Setup the server
