@@ -1,6 +1,6 @@
 # Configure Seafile to use LDAP
 
-Note: This documentation is for the Community Edition. If you're using Pro Edition, please refer to [the Seafile Pro documentation](../deploy_pro/using_ldap_pro.md).
+Note: This documentation is for the Community Edition. If you're using Pro Edition, please refer to [the Seafile Pro documentation|../deploy_pro/using_ldap_pro.md].
 
 ## How does LDAP User Management Works in Seafile
 
@@ -29,7 +29,8 @@ To use AD to authenticate user, please add the following lines to ccnet.conf.
 If you choose email address as unique identifier:
 
     [LDAP]
-    HOST = ldap://192.168.1.123/
+    HOST = 192.168.1.123
+    USE_SSL = false
     BASE = cn=users,dc=example,dc=com
     USER_DN = administrator@example.local
     PASSWORD = secret
@@ -38,7 +39,8 @@ If you choose email address as unique identifier:
 If you choose UserPrincipalName as unique identifier:
 
     [LDAP]
-    HOST = ldap://192.168.1.123/
+    HOST = 192.168.1.123
+    USE_SSL = false
     BASE = cn=users,dc=example,dc=com
     USER_DN = administrator@example.local
     PASSWORD = secret
@@ -64,7 +66,8 @@ Tips for choosing BASE and USER_DN:
 Please add the following options to ccnet.conf:
 
     [LDAP]
-    HOST = ldap://192.168.1.123/
+    HOST = 192.168.1.123
+    USE_SSL = false
     BASE = ou=users,dc=example,dc=com
     USER_DN = cn=admin,dc=example,dc=com
     PASSWORD = secret
@@ -105,26 +108,3 @@ You can use the FILTER option to limit user scope to a certain AD group.
 FILTER = memberOf={output of dsquery command}
 ```
 
-### Using TLS connection to LDAP/AD server
-
-To use TLS connection to the directory server, you should install a valid SSL certificate on the directory server.
-
-The current version of Seafile Linux server package is compiled on CentOS. We include the ldap client library in the package to maintain compatibility with older Linux distributions. But since different Linux distributions have different path or configuration for OpenSSL library, sometimes Seafile is unable to connect to the directory server with TLS.
-
-The ldap library (libldap) bundled in the Seafile package is of version 2.4. If your Linux distribution is new enough (like CentOS 6, Debian 7 or Ubuntu 12.04 or above), you can use system's libldap instead.
-
-On Ubuntu 14.04, moving the bundled ldap related libraries out of the library path should make TLS connection works.
-
-```
-cd ${SEAFILE_INSTALLATION_DIR}/seafile-server-latest/seafile/lib
-mv liblber-2.4.so.2 libldap-2.4.so.2 libsasl2.so.2 ..
-```
-
-On CentOS 6, you have to move the libnssutil library:
-
-```
-cd ${SEAFILE_INSTALLATION_DIR}/seafile-server-latest/seafile/lib
-mv libnssutil3.so ..
-```
-
-This effectively remove the bundled libraries out of the library path. When the server runs, it'll look for corresponding libraries from the system paths.

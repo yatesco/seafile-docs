@@ -1,6 +1,4 @@
-# Configure Seafile to use LDAP
-
-Note: This documentation is for the Community Edition. If you're using Pro Edition, please refer to [the Seafile Pro documentation](../deploy_pro/using_ldap_pro.md).
+# Configure Seafile Pro Edition to use LDAP
 
 ## How does LDAP User Management Works in Seafile
 
@@ -13,7 +11,7 @@ When Seafile is integrated with LDAP/AD, users in the system can be divided into
 
 When Seafile counts the user number in the system, it only counts the **activated** users in its internal database.
 
-When Seafile is integrated with LDAP/AD, it'll look up users from both the internal database and LDAP server. As long as the user exists in one of these two sources, it can log into the system.
+When Seafile is integrated with LDAP/AD, it'll look up users from both the internal database and LDAP server. As long as the user exists in one of these two sources, he/she can log into the system.
 
 ## Basic LDAP/AD Integration
 
@@ -72,6 +70,122 @@ Please add the following options to ccnet.conf:
 
 The meaning of the options are the same as described in the previous section. With other LDAP servers, you can only use `mail` attribute as user's unique identifier.
 
+### Testing Your LDAP Configuration
+
+Since 5.0.0 Pro Edition, we provide a command line tool for checking your LDAP configuration.
+
+To use this tool, make sure you have `python-ldap` package installed on your system.
+
+```
+sudo apt-get install python-ldap
+```
+
+Then you can run the test:
+
+```
+cd seafile-server-latest
+./pro/pro.py ldapsync --test
+```
+
+The test script will test your LDAP settings under the `[LDAP]` section of ccnet.conf. If everything works, it'll print the first ten users in the search results. Otherwise, it'll print out possible errors in your config.
+
+## Setting Up LADP/AD User Sync (Optional)
+
+In Seafile Pro, except for importing users into internal database when they log in, you can also configure Seafile to periodically sync user information from LDAP/AD server into the internal database.
+
+- User's full name, department, contact email address can be synced to internal database. Users can use this information to more easily search for specific user.
+- User's Windows or Unix login id can be synced the internal database. This allows the user to log in with his/her familiar login id.
+- When a user is removed from LDAP/AD, the corresponding user in Seafile will be deactivated. Otherwise, he/she can still sync files with Seafile client or access the web interface.
+
+After syncing is complete, you can see the user's full name, department and contact email on the user's profile page.
+
+### Active Directory
+
+If you're using Active Directory, add the following options to ccnet.conf:
+
+```
+[LDAP]
+......
+
+[LDAP_SYNC]
+ENABLE_USER_SYNC = true
+SYNC_INTERVAL = 60
+USER_OBJECT_CLASS = person
+ENABLE_EXTRA_USER_INFO_SYNC = true
+FIRST_NAME_ATTR = givenName
+LAST_NAME_ATTR = sn
+DEPT_ATTR = department
+UID_ATTR = sAMAccountName
+```
+
+Meaning of each options:
+
+- **ENABLE_USER_SYNC**: set to "true" if you want to enable ldap user syncing
+- **SYNC_INTERVAL**: The interval to sync. Unit is minutes. Default to 60 minutes.
+- **USER_OBJECT_CLASS**: This is the name of the class used to search for user objects. In Active Directory, it's usually "person". The default value is "person".
+- **ENABLE_EXTRA_USER_INFO_SYNC**: Enable syncing additional user information, including user full name, department, and Windows login name, etc.
+- **FIRST_NAME_ATTR**: Attribute for user's first name. It's "givenName" by default.
+- **LAST_NAME_ATTR**: Attribute for user's last name. It's "sn" by default.
+- **USER_NAME_REVERSE**: In some laguages, such as Chinese, the display order of first name and last name is reversed. Set this option if you need it.
+- **DEPT_ATTR**: Attribute for user's department. It's "department" by default.
+- **UID_ATTR**: Attribute for Windows login name. If this is synced, users can also log in with their Windows login name. In AD, the attribute `sAMAccountName` can be used as `UID_ATTR`.
+
+If you choose `userPrincipalName` as the unique identifier for user, Seafile cannot use that as real email address to send notification emails to user. If the users in AD also have email address attributes, you can sync these email addresses into Seafile's internal database. Seafile can then use them to send emails. The configuration option is:
+- **CONTACT_EMAIL_ATTR**: usually you can set it to the `mail` attribute.
+
+### Other LDAP servers
+
+Add the following options to ccnet.conf:
+
+```
+[LDAP]
+......
+
+[LDAP_SYNC]
+ENABLE_USER_SYNC = true
+SYNC_INTERVAL = 60
+USER_OBJECT_CLASS = userOfNames
+ENABLE_EXTRA_USER_INFO_SYNC = true
+FIRST_NAME_ATTR = givenName
+LAST_NAME_ATTR = sn
+DEPT_ATTR = department
+UID_ATTR = uid
+```
+
+Meaning of each options:
+
+- **ENABLE_USER_SYNC**: set to "true" if you want to enable ldap user syncing
+- **SYNC_INTERVAL**: The interval to sync. Unit is minutes. Default to 60 minutes.
+- **USER_OBJECT_CLASS**: This is the name of the class used to search for user objects. In OpenLDAP, you can use "userOfNames". The default value is "person".
+- **ENABLE_EXTRA_USER_INFO_SYNC**: Enable syncing additional user information, including user full name, department, and Windows/Unix login name, etc.
+- **FIRST_NAME_ATTR**: Attribute for user's first name. It's "givenName" by default.
+- **LAST_NAME_ATTR**: Attribute for user's last name. It's "sn" by default.
+- **USER_NAME_REVERSE**: In some laguages, such as Chinese, the display order of first name and last name is reversed. Set this option if you need it.
+- **DEPT_ATTR**: Attribute for user's department. It's "department" by default.
+- **UID_ATTR**: Attribute for Windows/Unix login name. If this is synced, users can also log in with their Windows/Unix login name. In OpenLDAP, the attribute `uid` or something similar can be used.
+
+### Manually Trigger Syncing
+
+To test your LDAP sync configuration, you can run the sync command manually.
+
+To trigger LDAP sync manually,
+
+```
+cd seafile-server-lastest
+./pro/pro.py ldapsync
+```
+
+### Don't Import New Users in LDAP Sync
+
+By default, when LDAP sync process detects that a new user is added in the LDAP server, it'll automatically sync that user into internal database. And the new users will be activated by default. This will consume one more user license. 
+
+Let's consider the following situation: you have a lot of users in the LDAP server, but you don't buy enough licenses to add all these users into Seafile. Enabling LDAP sync will consume all the licenses you buy and make your Seafile installation unusable. The ideal solution would be: new users are only added to Seafile when they log in for the first time. And LDAP sync only sync information from LDAP server for existing users. The following option is for this exact purpose:
+
+```
+[LDAP_SYNC]
+IMPORT_NEW_USER = false
+```
+
 ## Advanced LDAP/AD Integration Options
 
 ### Multiple BASE
@@ -128,3 +242,23 @@ mv libnssutil3.so ..
 ```
 
 This effectively remove the bundled libraries out of the library path. When the server runs, it'll look for corresponding libraries from the system paths.
+
+### Use paged results extension
+
+LDAP protocol version 3 supports "paged results" (PR) extension. When you have large number of users, this option can greatly improve the performance of listing users. Most directory server nowadays support this extension.
+
+In Seafile Pro Edition, add this option to LDAP section of ccnet.conf to enable PR:
+
+```
+USE_PAGED_RESULT = true
+```
+
+### Follow referrals
+
+Starting from Pro Edition 4.0.4, Seafile supports auto following referrals in LDAP search. This is useful for partitioned LDAP or AD servers, where users may be spreaded on multiple directory servers. For more information about referrals, you can refer to [this article](https://technet.microsoft.com/en-us/library/cc978014.aspx).
+
+To configure, add following option to ccnet.conf in the [LDAP] section:
+
+```
+FOLLOW_REFERRALS = true
+```
