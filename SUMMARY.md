@@ -40,7 +40,7 @@
    * [Garbage Collecting Unused Blocks on Seafile Server](deploy_windows/windows_gc.md)
 * [Deploy Seafile Pro Edition](deploy_pro/README.md)
    * [Download and Setup Seafile Professional Server](deploy_pro/download_and_setup_seafile_professional_server.md)
-   * [Configure Seafile Pro to use LDAP](deploy_pro/using_ldap.md)
+   * [Configure Seafile Pro to use LDAP](deploy_pro/using_ldap_pro.md)
    * [Importing Groups from LDAP](deploy_pro/ldap_group_sync.md)
    * [Enable Office/PDF Documents Online Preview](deploy_pro/office_documents_preview.md)
    * [Integrating with Office Web App](deploy_pro/office_web_app.md)
