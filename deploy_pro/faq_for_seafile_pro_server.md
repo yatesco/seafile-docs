@@ -52,3 +52,7 @@
   Now try re-opening the preview page in the brower again.
 
   Also if you are deploying seafile in cluster mode, make sure memcached is working on each server.
+
+- Q: The above solution does not solve my problem.
+
+  A: Please check whether the user you run Seafile can correctly start the libreoffice process. There may be permission problems.
