@@ -13,7 +13,7 @@ Possible reasons:
 
 #### How to add more verbose log information at the client
 
-Set environment variable `SEAFILE_DEBUG = all` before running Seafile desktip client.
+Set environment variable `SEAFILE_DEBUG = all` before running Seafile desktop client.
 
 
 ## Questions about server setup
@@ -81,3 +81,17 @@ Since version 4.4.2, system admin can migrate libraries and groups from one acco
 ### Seafile GC shows errors, FSCK can’t fix them
 
 GC scans the history. But FSCK only scan the currently version. You can ignore the error. It is a minor issue.
+
+## Questions about LDAP and User management
+
+### How to restrict Seafile access to a certain accounts in AD
+
+You can use FILTER field in LDAP configuration in `ccnet.conf`. For example, the following filter restricts the access to Seafile to members of a group.
+
+    FILTER = (memberOf=cn=group,cn=users,DC=x)
+
+AD also supports groups within group. The following filter restricts the access to Seafile to members/groups of a group.
+
+    FILTER = (memberOf:1.2.840.113556.1.4.1941:=cn=group,cn=users,DC=x)
+
+For more information on the Filter syntax, see http://msdn.microsoft.com/en-us/library/aa746475%28VS.85%29.aspx
