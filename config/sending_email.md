@@ -59,7 +59,7 @@ REPLACE_FROM_EMAIL = True
 ADD_REPLY_TO_HEADER = True
 </pre>
 
-## Config background email sending task
+## Config background email sending task (Pro Edition Only)
 
 The background task will run periodically to check whether an user have new unread notifications. If there are any, it will send a reminder email to that user. The background email sending task is controlled by `seafevents.conf`.
 
