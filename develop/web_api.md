@@ -1573,7 +1573,7 @@ check if a dir has a corresponding sub_repo, if it does not have, create one
 
 * repo-id
 * p
-* operation
+* operation=rename
 * newname
 
 **Sample request**
@@ -2005,13 +2005,14 @@ The id of the updated file
 
 #### <a id="rename-directory"></a>Rename Directory ###
 
-**POST** https://cloud.seafile.com/api2/repos/{repo-id}/dir/
+**POST** https://cloud.seafile.com/api2/repos/{repo-id}/dir/?p=/foo
 
 **Parameters**
 
+* repo-id
 * p (path)
-* operation=rename (post)
-* newname (the new name for directory)
+* operation=rename
+* newname (the new name of the directory)
 
 **Sample request**
 
