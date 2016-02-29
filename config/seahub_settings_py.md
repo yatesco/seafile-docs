@@ -113,6 +113,7 @@ DISABLE_SYNC_WITH_ANY_FOLDER = True
 ENABLE_REPO_HISTORY_SETTING = True
 
 # Enable or disable normal user to create organization libraries
+# Since version 5.0.5
 ENABLE_USER_CREATE_ORG_REPO = True
 ```
 
