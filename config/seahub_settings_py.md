@@ -111,6 +111,9 @@ DISABLE_SYNC_WITH_ANY_FOLDER = True
 
 # Enable or disable library history setting
 ENABLE_REPO_HISTORY_SETTING = True
+
+# Enable or disable normal user to create organization libraries
+ENABLE_USER_CREATE_ORG_REPO = True
 ```
 
 Options for online file preview:
