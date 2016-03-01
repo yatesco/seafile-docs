@@ -129,4 +129,7 @@ mkdir disabled_libs_use_local_ones_instead
 mv libnssutil3.so disabled_libs_use_local_ones_instead/
 ```
 
-This effectively removes the bundled libraries from the library search path. When the server starts, it'll instead find the system libraries (if they are installed).
+This effectively removes the bundled libraries from the library search path. 
+When the server starts, it'll instead find and use the system libraries (if they are installed). 
+This change has to be repeated after each update of the Seafile installation.
+
