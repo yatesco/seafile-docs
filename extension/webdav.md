@@ -121,49 +121,49 @@ By default Nginx will buffer large request body in temp file. After the body is 
 
 #### Apache
 
-First edit <code>apache2.conf</code> file, add this line to the end of the file (or add it to <code>httpd.conf</code> depending on your Linux distro):
+The following configuratioin assumes you use Apache 2.4 or later.
 
-<pre>
-FastCGIExternalServer /var/www/seafdav.fcgi -host 127.0.0.1:8080
-</pre>
-
-Note, <code>/var/www/seafdav.fcgi</code> is just a placeholder, you don't need to actually have this file in your system.
-
-Second, modify Apache config file (site-enabled/000-default):
+Modify Apache config file (site-enabled/000-default):
 
 #### Apache without HTTPS
 
-Based on your apache configuration when you [[Deploy Seafile with apache|deployed seafile with Apache]], add seafdav related config:
+Based on your apache configuration when you [deploy Seafile with Apache](,,/deploy/deploy_with_apache.md), add seafdav related config:
 
 <pre>
 <VirtualHost *:80>
 
-ServerName www.myseafile.com
-  DocumentRoot /var/www
-  Alias /media  /home/user/haiwen/seafile-server/seahub/media
+    ServerName www.myseafile.com
+    # Use "DocumentRoot /var/www/html" for Centos/Fedora
+    # Use "DocumentRoot /var/www" for Ubuntu/Debian
+    DocumentRoot /var/www
+    Alias /media  /home/user/haiwen/seafile-server-latest/seahub/media
 
-  RewriteEngine On
+    RewriteEngine On
 
-  #
-  # seafile fileserver
-  #
-  ProxyPass /seafhttp http://127.0.0.1:8082
-  ProxyPassReverse /seafhttp http://127.0.0.1:8082
-  RewriteRule ^/seafhttp - [QSA,L]
+    <Location /media>
+        Require all granted
+    </Location>
 
-  #
-  # seafile webdav
-  #
-  RewriteCond %{HTTP:Authorization} (.+)
-  RewriteRule ^(/seafdav.*)$ /seafdav.fcgi$1 [QSA,L,e=HTTP_AUTHORIZATION:%1]
-  RewriteRule ^(/seafdav.*)$ /seafdav.fcgi$1 [QSA,L]
+    #
+    # seafile fileserver
+    #
+    ProxyPass /seafhttp http://127.0.0.1:8082
+    ProxyPassReverse /seafhttp http://127.0.0.1:8082
+    RewriteRule ^/seafhttp - [QSA,L]
 
-  #
-  # seahub
-  #
-  RewriteRule ^/(media.*)$ /$1 [QSA,L,PT]
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteRule ^(.*)$ /seahub.fcgi$1 [QSA,L,E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+    #
+    # WebDAV
+    # We use http proxy, since SeafDAV is incompatible with FCGI proxy in Apache 2.4.
+    #
+    ProxyPass /seafdav http://127.0.0.1:8080/seafdav
+    ProxyPassReverse /seafdav http://127.0.0.1:8080/seafdav
+
+    #
+    # seahub
+    #
+    SetEnvIf Request_URI . proxy-fcgi-pathinfo=unescape
+    SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
+    ProxyPass / fcgi://127.0.0.1:8000/
 
 </virtualhost>
 </pre>
@@ -175,13 +175,19 @@ Based on your apache configuration when you [Enable Https on Seafile web with Ap
 <pre>
 <VirtualHost *:443>
 
-ServerName www.myseafile.com
+  ServerName www.myseafile.com
   DocumentRoot /var/www
-  Alias /media  /home/user/haiwen/seafile-server/seahub/media
 
   SSLEngine On
-  SSLCertificateFile /etc/ssl/cacert.pem
-  SSLCertificateKeyFile /etc/ssl/privkey.pem
+  SSLCertificateFile /path/to/cacert.pem
+  SSLCertificateKeyFile /path/to/privkey.pem
+
+  Alias /media  /home/user/haiwen/seafile-server-latest/seahub/media
+
+  <Location /media>
+    ProxyPass !
+    Require all granted
+  </Location>
 
   RewriteEngine On
 
@@ -191,20 +197,20 @@ ServerName www.myseafile.com
   ProxyPass /seafhttp http://127.0.0.1:8082
   ProxyPassReverse /seafhttp http://127.0.0.1:8082
   RewriteRule ^/seafhttp - [QSA,L]
-
+  
   #
-  # seafile webdav
+  # WebDAV
+  # We use http proxy, since SeafDAV is incompatible with FCGI proxy in Apache 2.4.
   #
-  RewriteCond %{HTTP:Authorization} (.+)
-  RewriteRule ^(/seafdav.*)$ /seafdav.fcgi$1 [QSA,L,e=HTTP_AUTHORIZATION:%1]
-  RewriteRule ^(/seafdav.*)$ /seafdav.fcgi$1 [QSA,L]
-
+  ProxyPass /seafdav http://127.0.0.1:8080/seafdav
+  ProxyPassReverse /seafdav http://127.0.0.1:8080/seafdav
+  
   #
   # seahub
   #
-  RewriteRule ^/(media.*)$ /$1 [QSA,L,PT]
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteRule ^(.*)$ /seahub.fcgi$1 [QSA,L,E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+  SetEnvIf Request_URI . proxy-fcgi-pathinfo=unescape
+  SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
+  ProxyPass / fcgi://127.0.0.1:8000/
 
 </virtualhost>
 </pre>
