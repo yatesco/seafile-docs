@@ -42,7 +42,7 @@ fastcgi = false
 share_name = /
 </pre>
 
-### Sample Configuration 2: With Nginx/Apache
+### Sample Configuration 2: With Nginx
 
 Your WebDAV client would visit the Seafile WebDAV server at <code>http://example.com/seafdav</code>
 
@@ -55,7 +55,6 @@ share_name = /seafdav
 </pre>
 
 In the above config, the value of '''share_name''' is changed to '''/seafdav''', which is the address suffix you assign to seafdav server.
-
 
 #### Nginx without HTTPS
 
@@ -119,9 +118,21 @@ Nginx conf with https:
 
 By default Nginx will buffer large request body in temp file. After the body is completely received, Nginx will send the body to the upstream server (seafdav in our case). But it seems when file size is very large, the buffering mechanism dosen't work well. It may stop proxying the body in the middle. So if you want to support file upload larger for 4GB, we suggest you install Nginx version >= 1.8.0 and add `proxy_request_buffering off` to Nginx configuration.
 
-#### Apache
+### Sample Configuration 3: With Apache
 
 The following configuratioin assumes you use Apache 2.4 or later.
+
+Your WebDAV client would visit the Seafile WebDAV server at <code>http://example.com/seafdav</code>
+
+<pre>
+[WEBDAV]
+enabled = true
+port = 8080
+fastcgi = false
+share_name = /seafdav
+</pre>
+
+In the above config, the value of '''share_name''' is changed to '''/seafdav''', which is the address suffix you assign to seafdav server. **Note that we do not use fastcgi for Apache.**
 
 Modify Apache config file (site-enabled/000-default):
 
