@@ -68,6 +68,7 @@
    * [seafile.conf](config/seafile-conf.md)
    * [seahub_settings.py](config/seahub_settings_py.md)
    * [Seahub customization](config/seahub_customization.md)
+   * [Desktop client customization](config/desktop_customization.md)
    * [Email Sending](config/sending_email.md)
    * [User management options](config/user_options.md)
    * [Storage Quota and File size limits](config/quota_and_size_options.md)
