@@ -1834,11 +1834,12 @@ For more info, you can see [this official docs](http://wopi.readthedocs.org/en/l
 
 ##### <a id="get-upload-link"></a>Get Upload Link
 
-**GET** https://cloud.seafile.com/api2/repos/{repo-id}/upload-link/
+**GET** https://cloud.seafile.com/api2/repos/{repo-id}/upload-link/?p=/upload-dir
 
 **Request parameters**
 
 * repo-id
+* p (use '/' as default)
 
 **Sample request**
 
@@ -1850,6 +1851,7 @@ For more info, you can see [this official docs](http://wopi.readthedocs.org/en/l
 
 **Errors**
 
+    403 Permission denied.
     500 Run out of quota
 
 ##### <a id="upload-file-1"></a>Upload File
@@ -1882,11 +1884,12 @@ After getting the upload link, POST to this link for uploading files.
 
 ##### <a id="get-update-link"></a>Get Update Link
 
-**GET** https://cloud.seafile.com/api2/repos/{repo-id}/update-link/
+**GET** https://cloud.seafile.com/api2/repos/{repo-id}/update-link/?p=/update-dir
 
 **Request parameters**
 
 * repo-id
+* p (use '/' as default)
 
 **Sample request**
 
@@ -1898,6 +1901,7 @@ After getting the upload link, POST to this link for uploading files.
 
 **Errors**
 
+    403 Permission denied.
     500 Run out of quota
 
 ##### <a id="update-file-1"></a>Update File
