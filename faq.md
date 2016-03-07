@@ -13,8 +13,12 @@ Possible reasons:
 
 #### How to add more verbose log information at the client
 
-Set environment variable `SEAFILE_DEBUG = all` before running Seafile desktop client.
+Set environment variable `SEAFILE_DEBUG = all` before running Seafile desktop client. On Linux, you can open a terminal and type: 
 
+```
+export SEAFILE_DEBUG=all
+./seafile-applet
+```
 
 ## Questions about server setup
 
