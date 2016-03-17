@@ -47,6 +47,7 @@
 <li><a href="#list-file-share-links">List File Share Links</a></li>
 <li><a href="#create-file-share-link">Create File Share Link</a></li>
 <li><a href="#delete-file-share-link">Delete File Share Link</a></li>
+<li><a href="#send-file-share-link-email">Send File Share Link Email</a></li>
 <li><a href="#list-direntry-in-dir-download-link">List Direntry in Dir Download Link</a></li>
 </ul>
 </li>
@@ -124,16 +125,13 @@
 </li>
 </ul>
 </li>
-<li><a href="#get-avatar">Get Avatar</a><ul>
+<li><a href="#avatar">Avatar</a><ul>
 <li><a href="#get-user-avatar">Get User Avatar</a></li>
 <li><a href="#get-group-avatar">Get Group Avatar</a></li>
 </ul>
 </li>
-<li><a href="#get-thumbnail">Get Thumbnail</a><ul>
+<li><a href="#get-file-activities">Get File Activities</a></li>
 <li><a href="#get-thumbnail-image">Get Thumbnail Image</a></li>
-</ul>
-</li>
-<li><a href="#get-file-events">Get File Activities</a></li>
 <li><a href="#add-organization">Add Organization</a></li>
 </ul>
 </li>
@@ -897,6 +895,43 @@ Create upload link for directory
     ...
     < HTTP/1.0 200 OK
     ...
+
+#### <a id="send-file-share-link-email"></a>Send File Share Link Email ####
+
+**POST** https://cloud.seafile.com/api2/send-share-link/
+
+**Request parameters**
+
+* token
+* email
+* extra_msg (not necessary)
+
+**Sample request**
+
+    curl -d "email=sample@eamil.com,invalid-email&token=4cbd625c5e" -H 'Authorization: Token ef12bf1e66a1aa797a1d6556fdc9ae84f1e9249f' -H 'Accept: application/json; indent=4' https://cloud.seafile.com/api2/send-share-link/
+
+**Sample response**
+
+```
+{
+    "failed": [
+        {
+            "email": "invalid-email",
+            "error_msg": "email invalid."
+        }
+    ],
+    "success": [
+        "sample@eamil.com"
+    ]
+}
+```
+
+**Errors**
+
+* 400 token/repo_id invalid
+* 403 Permission denied.
+* 403 Sending shared link failed. Email service is not properly configured, please contact administrator.
+* 404 token/library not found
 
 #### <a id="list-direntry-in-dir-download-link"></a>List Direntry in Dir Download Link ####
 
@@ -2231,7 +2266,7 @@ The id of the updated file
 * 404 repo not found
 * 502 failed to delete file
 
-## <a id="get-avatar"></a>Get Avatar ##
+## <a id="avatar"></a>Avatar ##
 
 ### <a id="get-user-avatar"></a>Get User Avatar ##
 
@@ -2275,7 +2310,32 @@ The id of the updated file
         "mtime": 0
     }
 
-## <a id="get-thumbnail"></a>Get Thumbnail##
+### <a id="get-file-activities"></a>Get File Activities ###
+
+**GET** https://cloud.seafile.com/api2/events/
+
+**Request parameters**
+
+this api will only return first 15 records of activities. if want get more, pass `start` parameter
+
+* start (default 0)
+
+**Sample request**
+
+    curl -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' "https://cloud.seafile.com/api2/events/"
+
+**Sample response**
+
+
+     {"more_offset": 15, "events":[{"repo_id": "6f3d28a4-73ae-4d01-a727-26774379dcb9", "author": "mysnowls@163.com", "nick": "lins05", "time": 1398078909, "etype": "repo-update", "repo_name": "Downloads", "desc": "Added \"seafile-cli_3.0.2_i386.tar.gz\"."},{"repo_id": "6f3d28a4-73ae-4d01-a727-26774379dcb9", "author": "mysnowls@163.com", "nick": "lins05", "time": 1398075540, "etype": "repo-update", "repo_name": "Downloads", "desc": "Added \"seafile-server_3.0.0_x86-64.tar.gz\"."}], "more": false}
+
+**Sample request for more activities**
+
+    curl -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' "https://cloud.seafile.com/api2/events/?start=15"
+
+**Sample response for more activities**
+
+     {"more_offset": 30, "events":[{"repo_id": "6f3d28a4-73ae-4d01-a727-26774379dcb9", "author": "mysnowls@163.com", "nick": "lins05", "time": 1398078909, "etype": "repo-update", "repo_name": "Downloads", "desc": "Added \"seafile-cli_3.0.2_i386.tar.gz\"."},{"repo_id": "6f3d28a4-73ae-4d01-a727-26774379dcb9", "author": "mysnowls@163.com", "nick": "lins05", "time": 1398075540, "etype": "repo-update", "repo_name": "Downloads", "desc": "Added \"seafile-server_3.0.0_x86-64.tar.gz\"."}], "more": false}
 
 ### <a id="get-thumbnail-image"></a>Get Thumbnail Image ##
 
@@ -2290,19 +2350,6 @@ The id of the updated file
 **Sample request**
 
     curl -H 'Authorization: Token 40f9a510a0629430865dc199a3880898ad2e48fc' https://cloud.seafile.com/api2/repos/fbead5d0-4817-4446-92f3-7ac8e6a8e5f5/thumbnail/?p=/5.jpg\&size=123 > thumbnail.png
-
-
-## <a id="get-file-events"></a>Get File Activities ##
-
-**GET** https://cloud.seafile.com/api2/events/
-
-**Sample request**
-
-    curl -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' "https://cloud.seafile.com/api2/events/"
-
-**Sample response**
-
-     {"more_offset": 16, "events":[{"repo_id": "6f3d28a4-73ae-4d01-a727-26774379dcb9", "author": "mysnowls@163.com", "nick": "lins05", "time": 1398078909, "etype": "repo-update", "repo_name": "Downloads", "desc": "Added \"seafile-cli_3.0.2_i386.tar.gz\"."},{"repo_id": "6f3d28a4-73ae-4d01-a727-26774379dcb9", "author": "mysnowls@163.com", "nick": "lins05", "time": 1398075540, "etype": "repo-update", "repo_name": "Downloads", "desc": "Added \"seafile-server_3.0.0_x86-64.tar.gz\"."}], "more": false}
 
 ## <a id="add-organization"></a>Add Organization ##
 
