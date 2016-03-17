@@ -47,7 +47,8 @@
 <li><a href="#list-file-share-links">List File Share Links</a></li>
 <li><a href="#create-file-share-link">Create File Share Link</a></li>
 <li><a href="#delete-file-share-link">Delete File Share Link</a></li>
-<li><a href="#send-file-share-link-email">Send File Share Link Email</a></li>
+<li><a href="#send-share-link-email">Send Share Link Email</a></li>
+<li><a href="#send-upload-link-email">Send Upload Link Email</a></li>
 <li><a href="#list-direntry-in-dir-download-link">List Direntry in Dir Download Link</a></li>
 </ul>
 </li>
@@ -896,7 +897,7 @@ Create upload link for directory
     < HTTP/1.0 200 OK
     ...
 
-#### <a id="send-file-share-link-email"></a>Send File Share Link Email ####
+#### <a id="send-share-link-email"></a>Send Share Link Email ####
 
 **POST** https://cloud.seafile.com/api2/send-share-link/
 
@@ -928,6 +929,40 @@ Create upload link for directory
 
 **Errors**
 
+* 400 token/repo_id invalid
+* 403 Permission denied.
+* 403 Sending shared link failed. Email service is not properly configured, please contact administrator.
+* 404 token/library not found
+
+#### <a id="send-upload-link-email"></a>Send Upload Link Email ####
+
+**POST** https://cloud.seafile.com/api2/send-upload-link/
+
+**Request parameters**
+
+* token
+* email
+* extra_msg (not necessary)
+
+**Sample request**
+
+    curl -d "email=sample@eamil.com,invalid-email&token=4cbd625c5e" -H 'Authorization: Token ef12bf1e66a1aa797a1d6556fdc9ae84f1e9249f' -H 'Accept: application/json; indent=4' https://cloud.seafile.com/api2/send-upload-link/
+
+**Sample response**
+
+```
+{
+    "failed": [
+        {
+            "email": "invalid-email",
+            "error_msg": "email invalid."
+        }
+    ],
+    "success": [
+        "sample@eamil.com"
+    ]
+}
+```
 * 400 token/repo_id invalid
 * 403 Permission denied.
 * 403 Sending shared link failed. Email service is not properly configured, please contact administrator.
