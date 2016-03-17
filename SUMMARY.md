@@ -96,6 +96,7 @@
    * [Develop env](develop/env.md)
    * [Code Standard](develop/code_standard.md)
    * [Web API](develop/web_api.md)
+   * [Web API V2.1](develop/web_api_v2.1.md)
    * [Python API](develop/python_api.md)
    * [PHP API](https://github.com/rene-s/Seafile-PHP-SDK)
    * [Data Model](develop/data_model.md)
