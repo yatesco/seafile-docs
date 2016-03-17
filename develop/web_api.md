@@ -125,16 +125,13 @@
 </li>
 </ul>
 </li>
-<li><a href="#get-avatar">Get Avatar</a><ul>
+<li><a href="#avatar">Avatar</a><ul>
 <li><a href="#get-user-avatar">Get User Avatar</a></li>
 <li><a href="#get-group-avatar">Get Group Avatar</a></li>
 </ul>
 </li>
-<li><a href="#get-thumbnail">Get Thumbnail</a><ul>
+<li><a href="#get-file-activities">Get File Activities</a></li>
 <li><a href="#get-thumbnail-image">Get Thumbnail Image</a></li>
-</ul>
-</li>
-<li><a href="#get-file-events">Get File Activities</a></li>
 <li><a href="#add-organization">Add Organization</a></li>
 </ul>
 </li>
@@ -2269,7 +2266,7 @@ The id of the updated file
 * 404 repo not found
 * 502 failed to delete file
 
-## <a id="get-avatar"></a>Get Avatar ##
+## <a id="avatar"></a>Avatar ##
 
 ### <a id="get-user-avatar"></a>Get User Avatar ##
 
@@ -2313,7 +2310,32 @@ The id of the updated file
         "mtime": 0
     }
 
-## <a id="get-thumbnail"></a>Get Thumbnail##
+### <a id="get-file-activities"></a>Get File Activities ###
+
+**GET** https://cloud.seafile.com/api2/events/
+
+**Request parameters**
+
+this api will only return first 15 records of activities. if want get more, pass `start` parameter
+
+* start (default 0)
+
+**Sample request**
+
+    curl -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' "https://cloud.seafile.com/api2/events/"
+
+**Sample response**
+
+
+     {"more_offset": 15, "events":[{"repo_id": "6f3d28a4-73ae-4d01-a727-26774379dcb9", "author": "mysnowls@163.com", "nick": "lins05", "time": 1398078909, "etype": "repo-update", "repo_name": "Downloads", "desc": "Added \"seafile-cli_3.0.2_i386.tar.gz\"."},{"repo_id": "6f3d28a4-73ae-4d01-a727-26774379dcb9", "author": "mysnowls@163.com", "nick": "lins05", "time": 1398075540, "etype": "repo-update", "repo_name": "Downloads", "desc": "Added \"seafile-server_3.0.0_x86-64.tar.gz\"."}], "more": false}
+
+**Sample request for more activities**
+
+    curl -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' "https://cloud.seafile.com/api2/events/?start=15"
+
+**Sample response for more activities**
+
+     {"more_offset": 30, "events":[{"repo_id": "6f3d28a4-73ae-4d01-a727-26774379dcb9", "author": "mysnowls@163.com", "nick": "lins05", "time": 1398078909, "etype": "repo-update", "repo_name": "Downloads", "desc": "Added \"seafile-cli_3.0.2_i386.tar.gz\"."},{"repo_id": "6f3d28a4-73ae-4d01-a727-26774379dcb9", "author": "mysnowls@163.com", "nick": "lins05", "time": 1398075540, "etype": "repo-update", "repo_name": "Downloads", "desc": "Added \"seafile-server_3.0.0_x86-64.tar.gz\"."}], "more": false}
 
 ### <a id="get-thumbnail-image"></a>Get Thumbnail Image ##
 
@@ -2328,19 +2350,6 @@ The id of the updated file
 **Sample request**
 
     curl -H 'Authorization: Token 40f9a510a0629430865dc199a3880898ad2e48fc' https://cloud.seafile.com/api2/repos/fbead5d0-4817-4446-92f3-7ac8e6a8e5f5/thumbnail/?p=/5.jpg\&size=123 > thumbnail.png
-
-
-## <a id="get-file-events"></a>Get File Activities ##
-
-**GET** https://cloud.seafile.com/api2/events/
-
-**Sample request**
-
-    curl -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' "https://cloud.seafile.com/api2/events/"
-
-**Sample response**
-
-     {"more_offset": 16, "events":[{"repo_id": "6f3d28a4-73ae-4d01-a727-26774379dcb9", "author": "mysnowls@163.com", "nick": "lins05", "time": 1398078909, "etype": "repo-update", "repo_name": "Downloads", "desc": "Added \"seafile-cli_3.0.2_i386.tar.gz\"."},{"repo_id": "6f3d28a4-73ae-4d01-a727-26774379dcb9", "author": "mysnowls@163.com", "nick": "lins05", "time": 1398075540, "etype": "repo-update", "repo_name": "Downloads", "desc": "Added \"seafile-server_3.0.0_x86-64.tar.gz\"."}], "more": false}
 
 ## <a id="add-organization"></a>Add Organization ##
 
