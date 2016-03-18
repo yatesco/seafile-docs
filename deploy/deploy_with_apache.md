@@ -89,6 +89,17 @@ sudo service apache2 restart
 ./seahub.sh start-fastcgi
 ```
 
+## Troubleshooting
+
+### Problems with paths and files containing spaces
+
+If there are problems with paths or files containing spaces, make sure to have at least Apache 2.4.10.
+
+References
+ * https://github.com/haiwen/seafile/issues/1258#issuecomment-188866740
+ * https://bugs.launchpad.net/ubuntu/+source/apache2/+bug/1284641
+ * https://bugs.launchpad.net/ubuntu/+source/apache2/+bug/1284641/comments/5
+
 ## Notes when Upgrading Seafile Server
 
 When [upgrading seafile server](upgrade.md), besides the normal steps you should take, there is one extra step to do: '''Update the path of the static files in your Nginx/Apache configuration'''. For example, assume your are upgrading seafile server 1.3.0 to 1.4.0, then:
