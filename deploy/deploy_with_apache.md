@@ -93,12 +93,13 @@ sudo service apache2 restart
 
 ### Problems with paths and files containing spaces
 
-If there are problems with paths or files containing spaces, make sure to have at least Apache 2.4.10.
+If there are problems with paths or files containing spaces, make sure to have at least Apache 2.4.12.
 
 References
  * https://github.com/haiwen/seafile/issues/1258#issuecomment-188866740
  * https://bugs.launchpad.net/ubuntu/+source/apache2/+bug/1284641
  * https://bugs.launchpad.net/ubuntu/+source/apache2/+bug/1284641/comments/5
+ * https://svn.apache.org/viewvc/httpd/httpd/tags/2.4.12/CHANGES?view=markup#l45
 
 ## Notes when Upgrading Seafile Server
 
