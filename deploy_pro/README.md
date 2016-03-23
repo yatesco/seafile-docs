@@ -43,6 +43,10 @@ Config Options
 - [Deploy seafile servers in a cluster](deploy_in_a_cluster.md)
 - [Enable search and background tasks in a cluster](enable_search_and_background_tasks_in_a_cluster.md)
 
+## Backup
+
+- [Real-time Backup Server](real_time_backup.md)
+
 ## FAQ
 
 - [FAQ For Seafile Professional Server](FAQ_for_seafile_pro_server.md)
