@@ -3,7 +3,7 @@
 
 Install Seafile Pro Edition
 
-- Method 1: [Deploy Seafile with an installation script](https://forum.seafile-server.org/t/seafile-server-installer-for-production-ready-seafile-ce-and-pro-installations/1464). The installer offer a quick and easy way to set up a production ready Seafile Server using MariaDB, Memcached and NGINX as a reverse proxy in under 5 minutes.
+- Method 1 (For Debian only): [Deploy Seafile with an installation script](https://forum.seafile-server.org/t/seafile-server-installer-for-production-ready-seafile-ce-and-pro-installations/1464). The installer offer a quick and easy way to set up a production ready Seafile Server using MariaDB, Memcached and NGINX as a reverse proxy in under 5 minutes.
 - Method 2:  [Download and Setup Seafile Professional Server Step by Step](download_and_setup_seafile_professional_server.md)
 
 LDAP/AD Integration for Pro:
