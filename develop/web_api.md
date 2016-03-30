@@ -2201,27 +2201,37 @@ The id of the updated file
 
 #### <a id="share-directory"></a>Share Directory ###
 
-**POST** https://cloud.seafile.com/api2/repos/{repo-id}/dir/share/
+**PUT** https://cloud.seafile.com/api2/repos/{repo-id}/dir/shared_items/?p={path}
 
 * repo-id
-* emails
-* s_type
 * path
-* perm
+* permission, `r` or `rw`
+* share_type, `user` or `group`
+* username, necessary if share_type is user
+* group_id, necessary if share_type is group
 
-**Sample request**
+**Sample request for share folder to user**
 
-    curl -v -X POST -d "emails=user@example.com&s_type=d&path=/dir&perm=r" -H 'Authorization: Token f2210dacd3606d94ff8e61d99b477fd' -H 'Accept: application/json; charset=utf-8; indent=4' https://cloud.seafile.com/api2/repos/dae8cecc-2359-4d33-aa42-01b7846c4b32/dir/share/
+    curl -X PUT -d "username=2@1.com&share_type=user&&perm=r" -H 'Authorization: Token ef12bf1e66a1aa797a1d6556fdc9ae84f1e9249f' -H 'Accept: application/json; charset=utf-8; indent=4' https://cloud.seafile.com/api2/repos/78c620ee-2989-4427-8eff-7748f4fbebc0/dir/shared_items/?p=/q
 
-**Sample response**
+**Sample response for share folder to user**
 
-    ...
-    < HTTP/1.0 200 OK
-    ...
+    {"failed": [], "success": [{"user_info": {"nickname": "2", "name": "2@1.com"}, "share_type": "user", "permission": "r"}]}
 
-**Success**
+**Sample request for share folder to group**
 
-   Response code is 200(OK).
+    curl -X PUT -d "group_id=772&share_type=group&&perm=rw" -H 'Authorization: Token ef12bf1e66a1aa797a1d6556fdc9ae84f1e9249f' -H 'Accept: application/json; charset=utf-8; indent=4' https://cloud.seafile.com/api2/repos/78c620ee-2989-4427-8eff-7748f4fbebc0/dir/shared_items/?p=/q
+
+**Sample response for share folder to group**
+
+    {"failed": [], "success": [{"group_info": {"id": 772, "name": "group-2"}, "share_type": "group", "permission": "r"}]}
+
+**Errors**
+
+* 400 share_type/permission/group_id invalid.
+* 403 Permission denied.
+* 404 Library/Folder/Group not found.
+* 500 Failed to get sub repo.
 
 ### <a id="multiple-files-directories">Multiple Files / Directories ##
 
