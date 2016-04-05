@@ -62,6 +62,11 @@ There are some common mistakes:
 1. Check whether there are some typos in the config, e.g., forget single quote, `EMAIL_HOST_USER = XXX`, which should be `EMAIL_HOST_USER = 'XXX'`
 1. Your mail server is not available.
 
+#### After upgrade Web UI is broken because CSS files can't be loaded
+
+Please remove the cache and try again, `rm -rf /tmp/seahub_cache/*`. If you configured memecached, restart memcached, then restart Seahub.
+
+If the problem is not fixed, check whether seafile-server-latest point to the right folder. Then check whether `seafile-server-latest/seahub/media/CACHE` is correctly generated (it should contain the auto-generated CSS file). 
 
 ## Questions about Clustering
 
