@@ -114,6 +114,43 @@ sudo ln -s /etc/pki/tls/certs/ca-bundle.crt /etc/pki/tls/cert.pem
 
 Another important note is that you **must not use '.' in your bucket names**. Otherwise the wildcard certificate for AWS S3 cannot be resolved. This is a limitation on AWS.
 
+## Use S3-compatible Object Storage
+
+Many object storage systems are now compatible with the S3 API, such as OpenStack Swift and Ceph's RADOS Gateway. You can use these S3-compatible storage systems as backend for Seafile. Here is an example config:
+
+```
+[commit_object_backend]
+name = s3
+bucket = my-commit-objects
+key_id = your-key-id
+key = your-secret-key
+host = 192.168.1.123:8080
+path_style_request = true
+memcached_options = --SERVER=localhost --POOL-MIN=10 --POOL-MAX=100
+
+[fs_object_backend]
+name = s3
+bucket = my-fs-objects
+key_id = your-key-id
+key = your-secret-key
+host = 192.168.1.123:8080
+path_style_request = true
+memcached_options = --SERVER=localhost --POOL-MIN=10 --POOL-MAX=100
+
+[block_backend]
+name = s3
+bucket = my-block-objects
+key_id = your-key-id
+key = your-secret-key
+host = 192.168.1.123:8080
+path_style_request = true
+memcached_options = --SERVER=localhost --POOL-MIN=10 --POOL-MAX=100
+```
+
+`host` is the address and port of the S3-compatible service. You cannot prepend "http" or "https" to the `host` option. By default it'll use http connections. If you want to use https connection, please set `https = true` option.
+
+`path_style_request` asks Seafile to use URLs like `https://192.168.1.123:8080/bucketname/object` to access objects. In Amazon S3, the default URL format is in virtual host style, such as `https://bucketname.s3.amazonaws.com/object`. But this style relies on advanced DNS server setup. So most S3-compatible storage systems only implement the path style format.
+
 ## Run and Test ##
 
 Now you can start Seafile by `./seafile.sh start` and `./seahub.sh start` and visit the website.

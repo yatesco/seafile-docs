@@ -19,7 +19,7 @@ Migration and Upgrading
 S3/OpenSwift/Ceph
 
 - [Setup Seafile Professional Server With Amazon S3](setup_with_mazon_S3.md)
-- [Setup Seafile Professional Server With OpenStackSwift](setup_with_OpenStackSwift.md)
+- [Setup Seafile Professional Server With OpenStack Swift](setup_with_swift.md)
 - [Setup Seafile Professional Server With Ceph](setup_with_Ceph.md)
 
 Config Options

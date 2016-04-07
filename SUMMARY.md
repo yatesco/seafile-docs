@@ -54,7 +54,7 @@
    * Storage Backends
        * [Amazon S3 Backend](deploy_pro/setup_with_amazon_s3.md)
        * [Ceph Backend](deploy_pro/setup_with_ceph.md)
-       * [OpenStack Swift Backend](deploy_pro/setup_with_openstackswift.md)
+       * [OpenStack Swift Backend](deploy_pro/setup_with_swift.md)
    * Cluster Deployment
        * [Deploy in a cluster](deploy_pro/deploy_in_a_cluster.md)
        * [Setup with MariaDB and Ceph](deploy_pro/clustering_with_mariadb_ceph.md)
