@@ -82,6 +82,10 @@ USER_PASSWORD_STRENGTH_LEVEL = 3
 # when True, check password strength level, STRONG(or above) is allowed
 USER_STRONG_PASSWORD_REQUIRED = False
 
+# Force user to change password when admin add/reset a user.
+# Added in 5.1.1, deafults to True.
+FORCE_PASSWORD_CHANGE = True
+
 # Age of cookie, in seconds (default: 2 weeks).
 SESSION_COOKIE_AGE = 60 * 60 * 24 * 7 * 2
 
