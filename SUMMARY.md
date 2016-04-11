@@ -45,7 +45,7 @@
    * [Upgrading Seafile Professional Server](deploy_pro/upgrading_seafile_professional_server.md)
    * [LDAP Configuration for Seafile Pro](deploy_pro/using_ldap_pro.md)
    * [Importing Groups from LDAP](deploy_pro/ldap_group_sync.md)
-   * [Manage users into Multi-Institutions](deploy_pro/multi-institutions.md)
+   * [Manage users into Multi-Institutions](deploy_pro/multi_institutions.md)
    * [Enable Office/PDF Documents Online Preview](deploy_pro/office_documents_preview.md)
    * [Integrating with Office Web App](deploy_pro/office_web_app.md)
    * [Details about File Search](deploy_pro/details_about_file_search.md)
