@@ -227,7 +227,11 @@ Once set up, the backup server is a fully working Seafile instance. The admin ca
 1. Access the server via Seahub web interface, just like a normal Seafile instance.
 2. Use the `seaf-backup-cmd.sh` script in the server package to manage the backup function.
 
-Currently, `seaf-backup-cmd.sh` only provides one command -- `status` to view the backup status. The output is like:
+The `seaf-backup-cmd.sh` script provides the following commands:
+
+### Checking Backup Status
+
+`seaf-backup-cmd.sh` provides `status` command to view the backup status. The output is like:
 
 ```
 # ./seaf-backup-cmd.sh status
@@ -251,7 +255,24 @@ There are a few reasons that may fail the backup of a library:
 - Some data in the primary server is corrupted. The data may be in the latest state or in history. Since the backup procedure syncs the full history, corruption in history will fail the backup.
 - The primary server has run seaf-fsck, which may restore a library back to an older state.
 
-In future versions, new command will be added to handle backup failures.
+### Manually Trigger Syncing a Library
+
+You can use the `sync` command to manually schedule backup of a library:
+
+```
+# ./seaf-backup-cmd.sh sync <library id>
+```
+
+The command will block until the backup is finished.
+
+### Handling Bacup Errors
+
+The `--force` option of `sync` command can be used to force failing backup to complete. Permanent backup failures are usually caused by data corruption of a library in the primary server. The `--force` option asks the backup to skip corrupted objects and finish the backup.
+
+When you find a backup error, follow two steps:
+
+1. Run seaf-fsck on the primary server, for the failing libraries. Fsck fixes any corruption for the latest state of the libraries.
+2. Run `seaf-backup-cmd.sh sync --force <library id>` on the backup server.
 
 ## Restore from the Backup Server
 
