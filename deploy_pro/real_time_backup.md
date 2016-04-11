@@ -265,7 +265,7 @@ You can use the `sync` command to manually schedule backup of a library:
 
 The command will block until the backup is finished.
 
-### Handling Bacup Errors
+### Handling Backup Errors
 
 The `--force` option of `sync` command can be used to force failing backup to complete. Permanent backup failures are usually caused by data corruption of a library in the primary server. The `--force` option asks the backup to skip corrupted objects and finish the backup.
 
