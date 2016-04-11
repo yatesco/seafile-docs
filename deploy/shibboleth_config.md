@@ -117,6 +117,11 @@ EXTRA_MIDDLEWARE_CLASSES = (
 )
 
 ENABLE_SHIB_LOGIN = True
+
+SHIBBOLETH_ATTRIBUTE_MAP = {
+    # Change eppn to mail if you use mail attribute for REMOTE_USER
+    "eppn": (False, "username"),
+}
 ```
 
 Since version 5.0, Seahub can process additional user attributes from Shibboleth. These attributes are saved into Seahub's database, as user's properties. They're all not mandatory. The internal user properties Seahub now supports are:
@@ -130,6 +135,7 @@ You can specify the mapping between Shibboleth attributes and Seahub's user prop
 
 ```
 SHIBBOLETH_ATTRIBUTE_MAP = {
+    "eppn": (False, "username"),
     "givenname": (False, "givenname"),
     "sn": (False, "surname"),
     "mail": (False, "contact_email"),
