@@ -1,10 +1,10 @@
 # Multiple Organization/Institution User Management
 
-Start from version 5.1, you can add institutions into Seafile and assign users into institutions. Each institution can have one or more administrators. This feature is to ease user administration when multiple organizations (universities) share a single Seafile instance. Unlike multi-tenancy, the users are not-isolated, so that an user from one institution can share files with another institution.
+Start from version 5.1, you can add institutions into Seafile and assign users into institutions. Each institution can have one or more administrators. This feature is to ease user administration when multiple organizations (universities) share a single Seafile instance. Unlike multi-tenancy, the users are not-isolated. An user from one institution can share files with another institution.
 
 ## Turn on the feature
 
-In `seahub_settings.py`, add `MULTI_INSTITUTION = True` to enable multi-instituion feature. And add
+In `seahub_settings.py`, add `MULTI_INSTITUTION = True` to enable multi-institution feature. And add
 
 ```
 EXTRA_MIDDLEWARE_CLASSES += (
