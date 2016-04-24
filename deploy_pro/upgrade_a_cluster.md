@@ -22,6 +22,15 @@ Doing maintanence upgrading is simple, you only need to run the script `./upgrad
 
 ## Specific instructions for each version
 
+### From v5.0 to v5.1
+
+Because Django is upgraded to 1.8, the COMPRESS_CACHE_BACKEND should be changed
+
+```
+   -    COMPRESS_CACHE_BACKEND = 'locmem://'
+   +    COMPRESS_CACHE_BACKEND = 'django.core.cache.backends.locmem.LocMemCache'
+```
+
 ### From v4.4 to v5.0
 
 v5.0 introduces some database schema change, and all configuration files (ccnet.conf, seafile.conf, seafevents.conf, seahub_settings.py) are moved to a central config directory.
