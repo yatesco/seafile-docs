@@ -72,6 +72,10 @@ LOGIN_REMEMBER_DAYS = 7
 # Attempt limit before showing a captcha when login.
 LOGIN_ATTEMPT_LIMIT = 3
 
+# deactivate user account when login attempts exceed limit
+# Since version 5.1.2 or pro 5.1.3
+FREEZE_USER_ON_LOGIN_FAILED = False
+
 # mininum length for user's password
 USER_PASSWORD_MIN_LENGTH = 6
 
