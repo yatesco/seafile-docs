@@ -83,7 +83,7 @@ GRANT ALL PRIVILEGES ON `seahub-db`.* to `seafile`@localhost;
 
 The Seafile server package requires the following packages have been installed in your system
 
-* python 2.7 or 2.6.5+
+* python 2.7
 * python-setuptools
 * python-imaging
 * python-ldap
@@ -181,14 +181,16 @@ Now you should have the following directory layout :
 #tree haiwen -L 2
 haiwen
 ├── ccnet               # configuration files
-│   ├── ccnet.conf
 │   ├── mykey.peer
 │   ├── PeerMgr
 │   └── seafile.ini
+├── conf
+│   └── ccnet.conf
+│   └── seafile.conf
+│   └── seahub_settings.py
 ├── installed
 │   └── seafile-server_1.8.2_x86-64.tar.gz
 ├── seafile-data
-│   └── seafile.conf
 ├── seafile-server-1.8.2  # active version
 │   ├── reset-admin.sh
 │   ├── runtime
@@ -201,8 +203,6 @@ haiwen
 ├── seafile-server-latest  # symbolic link to seafile-server-1.8.2
 ├── seahub-data
 │   └── avatars
-├── seahub_settings.py   # optional config file
-└── seahub_settings.pyc
 ```
 
 The folder <code>seafile-server-latest</code> is a symbolic link to the current seafile server folder. When later you upgrade to a new version, the upgrade scripts would update this link to keep it always point to the latest seafile server folder.
