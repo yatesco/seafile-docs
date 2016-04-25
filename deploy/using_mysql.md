@@ -91,10 +91,15 @@ The Seafile server package requires the following packages have been installed i
 * python-memcache (or python-memcached)
 
 <pre>
-#on Debian/Ubuntu
+# on Debian/Ubuntu
 apt-get update
 apt-get install python2.7 libpython2.7 python-setuptools python-imaging \
   python-ldap python-mysqldb python-memcache
+</pre>
+
+<pre>
+# on CentOS 7
+sudo yum install python-imaging MySQL-python python-memcached python-ldap
 </pre>
 
 ### Setup
