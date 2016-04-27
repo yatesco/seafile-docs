@@ -64,6 +64,8 @@
        * [Enable search and background tasks in a cluster](deploy_pro/enable_search_and_background_tasks_in_a_cluster.md)
        * [Upgrade a cluster](deploy_pro/upgrade_a_cluster.md)
    * [Real-time Backup Server](deploy_pro/real_time_backup.md)
+   * [Import Directory To Seafile](deploy_pro/seaf_import.md)
+   * [Seafile Store Backend Encryption](deploy_pro/seaf_encrypt.md)
    * [Configurable Options](deploy_pro/configurable_options.md)
    * [FAQ](deploy_pro/faq_for_seafile_pro_server.md)
    * [License](deploy_pro/seafile_professional_sdition_software_license_agreement.md)
