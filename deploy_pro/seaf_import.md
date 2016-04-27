@@ -15,12 +15,7 @@ seaf-import.sh
  -u <repo owner, must set>
 ```
 
-2. Before execute seaf-import.sh, you must ensure seafile server is stopped, or the follow warning information will output:
-```
-seafile server is still running, stop it by "seafile.sh stop"
-```
-
-3. Execute `./seaf-import.sh -p <dir you want to import> -n <repo name> -u <repo owner>`, follow similar information will output:
+2. Execute `./seaf-import.sh -p <dir you want to import> -n <repo name> -u <repo owner>`, follow similar information will output:
 ```
 Starting seaf-import, please wait ...
 [04/26/16 03:36:23] seaf-import.c(79): Import file ./runtime/seahub.pid successfully.
@@ -32,4 +27,4 @@ Starting seaf-import, please wait ...
 Done.
 ```
 
-4. Login in seafile server with <above repo owner>, you will find a new repositroy named <above repo name> created.
+3. Login in seafile server with <above repo owner>, you will find a new repositroy named <above repo name> created.

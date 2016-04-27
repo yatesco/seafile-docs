@@ -35,10 +35,12 @@ In order to work with previous data, we must encrypt previous data.
 2. Go to <INSTALL_PATH>, execute follow command:
 ```
 cp -r conf conf-enc
-cp -r seafile-data seafile-data-enc
+mkdir seafile-data-enc
+
+if you are using sqlite db, execute cp seafile-data/seafile.db seafile-data-enc/
 ```
 
-3. If you config s3/swift/ceph backend, edit <INSTALL_PATH>/conf-enc/seafile.conf, set new bucket/container/pool in block_backend, commit_object_backend, fs_object_backend three sections to store encryted data; If you config local file system backend, execute `rm -rf <INSTALL_PATH>/seafile-data-enc/storage`.
+3. If you config s3/swift/ceph backend, edit <INSTALL_PATH>/conf-enc/seafile.conf, set new bucket/container/pool in block_backend, commit_object_backend, fs_object_backend three sections to store encryted data.
 
 4. Add follow configuration to <INSTALL_PATH>/conf-enc/seafile.conf
 ```
