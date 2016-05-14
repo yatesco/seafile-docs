@@ -17,6 +17,7 @@
    * [Enabling Https with Apache](deploy/https_with_apache.md)
    * [Configure Seafile to use LDAP](deploy/using_ldap.md)
    * [Configure Seafile to use Shibboleth Authentication](deploy/shibboleth_config.md)
+   * [Configure Seafile to use Syslog](deploy/using_syslog.md)
    * [Upgrade Seafile server](deploy/upgrade.md)
    * Other Deployment Notes
        * [Start Seafile at System Bootup](deploy/start_seafile_at_system_bootup.md)

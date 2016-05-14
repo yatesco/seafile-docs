@@ -267,3 +267,27 @@ To configure, add following option to ccnet.conf in the [LDAP] section:
 ```
 FOLLOW_REFERRALS = true
 ```
+
+### Configure Multi-ldap Servers
+
+Since seafile 5.1.4 pro edition, we support multi-ldap servers, that is besides base ldap server info in [LDAP] section, you can set other ldap servers info in [LDAP_MULTI_1], [LDAP_MULTI_2] ... [LDAP_MULTI_9] sections, so you can configure ten ldap servers to work with seafile. Multi-ldap servers mean when get or search ldap user, it will iterate all configured ldap servers until find pointed one; When get all ldap users, it will iterate all ldap servers to get all users; For Ldap sync it will sync all user/group info in all configured ldap servers to seafile.
+
+For example I have configured base ldap server in `ccnet.conf` as follow:
+```
+[LDAP]
+HOST = ldap://192.168.1.123/
+BASE = ou=users,dc=example,dc=com
+USER_DN = cn=admin,dc=example,dc=com
+PASSWORD = secret
+LOGIN_ATTR = mail
+```
+Then I can configure another ldap server in `ccnet.conf` as follow:
+```
+[LDAP_MULTI_1]
+HOST = ldap://192.168.1.124/
+BASE = ou=users,dc=example,dc=com
+USER_DN = cn=admin,dc=example,dc=com
+PASSWORD = secret
+```
+
+Note: All ldap servers share LOGIN_ATTR, USE_PAGED_RESULT, FOLLOW_REFERRALS attributes in [LDAP] section; For ldap user/group sync, all ldap servers share all ldap sync related attributes in [LDAP_SYNC] section.
