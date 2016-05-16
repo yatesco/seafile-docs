@@ -188,6 +188,7 @@ SITE_TITLE = 'Seafile'
 # If you don't want to run seahub website on your site's root path, set this option to your preferred path.
 # e.g. setting it to '/seahub/' would run seahub on http://example.com/seahub/.
 SITE_ROOT = '/'
+
 ```
 
 ## Pro edition only options
@@ -199,6 +200,10 @@ SHOW_TRAFFIC = True
 # Allow administrator to view user's file in UNENCRYPTED libraries
 # through Libraries page in System Admin. Default is False.
 ENABLE_SYS_ADMIN_VIEW_REPO = True
+
+# For un-login users, providing an email before downloading or uploading on shared link page.
+# Since version 5.1.4
+ENABLE_SHARE_LINK_AUDIT = True
 ```
 
 ## Note
