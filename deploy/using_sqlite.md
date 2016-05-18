@@ -210,9 +210,9 @@ pkill -f seafile-controller
 pkill -f "manage.py run_gunicorn"
 ```
 
-## Setup In Auto Mode
+## Setup in non-interactive way
 
-Since seafile 5.1.4 edition, `setup-seafile.sh` supports auto mode, so that you do not need to answer prompted questions if you assign related script parameters or environment variables.
+Since Seafile version 5.1.4, `setup-seafile.sh` supports auto mode. You can run the setup script in non-interactive by supply the needed parameters via script parameters or environment variables.
 
 ```sh
 cd seafile-server-*
@@ -228,7 +228,7 @@ server ip or domain | -i |SERVER_IP | hostname -i(address for the host name)
 fileserver port | -p | FILESERVER_PORT | 8082
 seafile data dir | -d | SEAFILE_DIR | current directory
 
-**Note: If both script parameter and environment variable assigned, script parameter have higher priority; If neither script parameter nor environment variable assigned, default value will be used.**
+**Note: If both script parameter and environment variable assigned, script parameter has higher priority. If neither script parameter nor environment variable assigned, default value will be used.**
 
 ## That's it!
 For a production server we highly recommend to setup with Nginx/Apache and enable SSL/TLS.

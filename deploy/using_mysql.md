@@ -293,9 +293,9 @@ pkill -f "manage.py run_gunicorn"
 
 If you have more than 50 users in your Seafile system, we highly recommand you to [add memcached](../deploy/add_memcached.md). This will make the web 10x faster.  
 
-## Setup In Auto Mode
+## Setup in non-interactive way
 
-Since seafile 5.1.4 edition, `setup-seafile-mysql.sh` supports auto mode, so that you do not need to answer prompted questions if you assign related script parameters or environment variables.
+Since seafile 5.1.4 edition, `setup-seafile-mysql.sh` supports auto mode. You can run the setup script in non-interactive by supply the needed parameters via script parameters or environment variables.
 
 ```sh
 cd seafile-server-*
@@ -321,7 +321,7 @@ ccnet dabase name | -c | CCNET_DB | ccnet-db
 seafile dabase name | -s | SEAFILE_DB | seafile-db
 seahub dabase name | -b | SEAHUB_DB | seahub-db
 
-**Note: If both script parameter and environment variable assigned, script parameter have higher priority; If neither script parameter nor environment variable assigned, default value will be used.**
+**Note: If both script parameter and environment variable assigned, script parameter has higher priority. If neither script parameter nor environment variable assigned, default value will be used.**
 
 ## That's it!
 
