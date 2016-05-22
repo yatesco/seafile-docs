@@ -7,7 +7,7 @@ separately. A library can be encrypted with a user chosen password. This
 password is not stored on the server, so even the server admin cannot view a
 file's contents.
 
-Seafile allows users to create groups with file syncing, wiki, and discussion to
+Seafile allows users to create groups with file syncing, a wiki and discussions to
 enable easy collaboration around documents within a team.
 
 ## LICENSE
