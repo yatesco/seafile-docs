@@ -31,13 +31,13 @@ Then modify your Apache configuration file. Here is a sample:
 <VirtualHost *:443>
   ServerName www.myseafile.com
   DocumentRoot /var/www
-  
+
   SSLEngine On
   SSLCertificateFile /path/to/cacert.pem
   SSLCertificateKeyFile /path/to/privkey.pem
 
   Alias /media  /home/user/haiwen/seafile-server-latest/seahub/media
-  
+
   <Location /media>
     ProxyPass !
     Require all granted
@@ -65,14 +65,15 @@ Then modify your Apache configuration file. Here is a sample:
 
 ### ccnet conf
 
-Since you change from http to https, you need to modify the value of "SERVICE_URL" in [ccnet.conf](../config/ccnet-conf.md):
+Since you change from http to https, you need to modify the value of "SERVICE_URL" in [ccnet.conf](../config/ccnet-conf.md). You can also modify SERVICE_URL via web UI in "System Admin->Settings". (**Warning**: if you set the value both via Web UI and ccnet.conf, the setting via Web UI will take precedence.)
+
 ```python
 SERVICE_URL = https://www.myseafile.com
 ```
 
 ### seahub_settings.py
 
-You need to add a line in seahub_settings.py to set the value of `FILE_SERVER_ROOT` (Or `HTTP_SERVER_ROOT` before version 3.1.0)
+You need to add a line in seahub_settings.py to set the value of `FILE_SERVER_ROOT`. You can also modify `FILE_SERVER_ROOT` via web UI in "System Admin->Settings". (**Warning**: if you set the value both via Web UI and seahub_settings.py, the setting via Web UI will take precedence.)
 
 ```python
 FILE_SERVER_ROOT = 'https://www.myseafile.com/seafhttp'
@@ -83,36 +84,4 @@ FILE_SERVER_ROOT = 'https://www.myseafile.com/seafhttp'
 ```bash
 ./seafile.sh start
 ./seahub.sh start-fastcgi
-```
-
-## Detailed explanation
-
-The picture at the end of [this document](components.md) may help you understand seafile server better
-
-There are two components in Seafile server, Seahub and FileServer. FileServer only servers for raw file uploading/downloading, it listens on 8082. Seahub, that serving all the other pages, is still listen on 8000. But under https, Seahub should listen as in fastcgi mode on 8000 (run as ./seahub.sh start-fastcgi). And as in fastcgi mode, when you visit  http://domain:8000 directly, it should return an error page.
-
-When a user visit https://example.com/home/my/, Apache receives this request and sends it to Seahub via fastcgi. This is controlled by the following config items:
-```apache
-    #
-    # seahub
-    #
-    SetEnvIf Request_URI . proxy-fcgi-pathinfo=unescape
-    SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
-    ProxyPass / fcgi://127.0.0.1:8000/
-```
-and
-```apache
-    FastCGIExternalServer /var/www/seahub.fcgi -host 127.0.0.1:8000
-```
-
-When a user click a file download link in Seahub, Seahub reads the value of `FILE_SERVER_ROOT` and redirects the user to address `https://example.com/seafhttp/xxxxx/`. `https://example.com/seafhttp` is the value of FILE_SERVER_ROOT. Here, the `FILE_SERVER` means the FileServer component of Seafile, which only serves for raw file downloading/uploading.
-
-When Apache receives the request at 'https://example.com/seafhttp/xxxxx/', it proxies the request to FileServer, which is listening at 127.0.0.1:8082. This is controlled by the following config items:
-```apache
-    #
-    # seafile fileserver
-    #
-    ProxyPass /seafhttp http://127.0.0.1:8082
-    ProxyPassReverse /seafhttp http://127.0.0.1:8082
-    RewriteRule ^/seafhttp - [QSA,L]
 ```

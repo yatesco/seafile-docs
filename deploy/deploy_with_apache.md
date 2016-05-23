@@ -17,7 +17,7 @@ sudo a2enmod rewrite
 sudo a2enmod proxy_fcgi
 sudo a2enmod proxy_http
 ```
-  
+
 
 On raspbian install fcgi like [this](http://raspberryserver.blogspot.co.at/2013/02/installing-lamp-with-fastcgi-php-fpm.html)
 
@@ -65,7 +65,7 @@ Modify Apache config file:
 ### Modify ccnet.conf
 
 You need to modify the value of <code>SERVICE_URL</code> in [ccnet.conf](../config/ccnet-conf.md)
-to let Seafile know the domain you choose.
+to let Seafile know the domain you choose. You can also modify SERVICE_URL via web UI in "System Admin->Settings". (**Warning**: if you set the value both via Web UI and ccnet.conf, the setting via Web UI will take precedence.)
 
 ```python
 SERVICE_URL = http://www.myseafile.com
@@ -75,7 +75,7 @@ Note: If you later change the domain assigned to seahub, you also need to change
 
 ### Modify seahub_settings.py
 
-You need to add a line in <code>seahub_settings.py</code> to set the value of `FILE_SERVER_ROOT` (or `HTTP_SERVER_ROOT` before version 3.1)
+You need to add a line in <code>seahub_settings.py</code> to set the value of `FILE_SERVER_ROOT`. You can also modify `FILE_SERVER_ROOT` via web UI in "System Admin->Settings". (**Warning**: if you set the value both via Web UI and seahub_settings.py, the setting via Web UI will take precedence.)
 
 ```python
 FILE_SERVER_ROOT = 'http://www.myseafile.com/seafhttp'
@@ -100,52 +100,3 @@ References
  * https://bugs.launchpad.net/ubuntu/+source/apache2/+bug/1284641
  * https://bugs.launchpad.net/ubuntu/+source/apache2/+bug/1284641/comments/5
  * https://svn.apache.org/viewvc/httpd/httpd/tags/2.4.12/CHANGES?view=markup#l45
-
-## Notes when Upgrading Seafile Server
-
-When [upgrading seafile server](upgrade.md), besides the normal steps you should take, there is one extra step to do: '''Update the path of the static files in your Nginx/Apache configuration'''. For example, assume your are upgrading seafile server 1.3.0 to 1.4.0, then:
-
-```apache
-  Alias /media  /home/user/haiwen/seafile-server-1.4.0/seahub/media
-```
-
-**Tip:**
-You can create a symbolic link <code>seafile-server-latest</code>, and make it point to your current seafile server folder (Since seafile server 2.1.0, the <code>setup-seafile.sh</code> script will do this for you). Then, each time you run a upgrade script, it would update the <code>seafile-server-latest</code> symbolic link to keep it always point to the latest version seafile server folder.
-
-In this case, you can write:
-
-```apache
-  Alias /media  /home/user/haiwen/seafile-server-latest/seahub;
-```
-This way, you no longer need to update the apache config file each time you upgrade your seafile server.
-
-
-## Detailed explanation
-
-This may help you understand seafile server better: [Seafile Components](../overview/components.md)
-
-There are two components in Seafile server, Seahub and FileServer. FileServer only servers for raw file uploading/downloading, it listens on 8082. Seahub that serving all the other pages, is still listen on 8000. But under https, Seahub should listen as in fastcgi mode on 8000 (run as ./seahub.sh start-fastcgi). And as in fastcgi mode, when you visit  http://domain:8000 directly, it should return an error page.
-
-When a user visit https://example.com/home/my/, Apache receives this request and sends it to Seahub via fastcgi. This is controlled by the following config items:
-
-```apache
-    #
-    # seahub
-    #
-    SetEnvIf Request_URI . proxy-fcgi-pathinfo=unescape
-    SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
-    ProxyPass / fcgi://127.0.0.1:8000/
-```
-
-When a user click a file download link in Seahub, Seahub reads the value of `FILE_SERVER_ROOT` and redirects the user to address `https://example.com/seafhttp/xxxxx/`. `https://example.com/seafhttp` is the value of `FILE_SERVER_ROOT`. Here, the `FILE_SERVER` means the FileServer component of Seafile, which only serves for raw file downloading/uploading.
-
-When Apache receives the request at 'https://example.com/seafhttp/xxxxx/', it proxies the request to FileServer, which is listening at 127.0.0.1:8082. This is controlled by the following config items:
-
-```apache
-    #
-    # seafile fileserver
-    #
-    ProxyPass /seafhttp http://127.0.0.1:8082
-    ProxyPassReverse /seafhttp http://127.0.0.1:8082
-    RewriteRule ^/seafhttp - [QSA,L]
-```

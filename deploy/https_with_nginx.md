@@ -58,7 +58,7 @@ Here is the sample configuration file:
         ssl_certificate_key /etc/ssl/privkey.pem;	# path to your privkey.pem
         server_name www.yourdoamin.com;
         proxy_set_header X-Forwarded-For $remote_addr;
-        
+
         add_header Strict-Transport-Security "max-age=31536000; includeSubdomains";
         server_tokens off;
 
@@ -98,6 +98,7 @@ Here is the sample configuration file:
 ```
 
 ### Large file uploads
+
 Tip for uploading very large files (> 4GB): By default Nginx will buffer large request body in temp file. After the body is completely received, Nginx will send the body to the upstream server (seaf-server in our case). But it seems when file size is very large, the buffering mechanism dosen't work well. It may stop proxying the body in the middle. So if you want to support file upload larger for 4GB, we suggest you install Nginx version >= 1.8.0 and add the following options to Nginx config file:
 
 ```
@@ -105,7 +106,7 @@ Tip for uploading very large files (> 4GB): By default Nginx will buffer large r
         ... ...
         proxy_request_buffering off;
     }
-    
+
 ```
 
 If you have WebDAV enabled it is recommended to add the same:
@@ -126,14 +127,15 @@ If you have WebDAV enabled it is recommended to add the same:
 
 ### ccnet conf
 
-Since you change from http to https, you need to modify the value of "SERVICE_URL" in [ccnet.conf](../config/ccnet-conf.md):
+Since you change from http to https, you need to modify the value of "SERVICE_URL" in [ccnet.conf](../config/ccnet-conf.md). You can also modify SERVICE_URL via web UI in "System Admin->Settings". (**Warning**: if you set the value both via Web UI and ccnet.conf, the setting via Web UI will take precedence.)
+
 ```bash
 SERVICE_URL = https://www.example.com
 ```
 
 ### seahub_settings.py
 
-You need to add a line in seahub_settings.py to set the value of `FILE_SERVER_ROOT` (Or `HTTP_SERVER_ROOT` before version 3.1.0)
+You need to add a line in seahub_settings.py to set the value of `FILE_SERVER_ROOT`. You can also modify `FILE_SERVER_ROOT` via web UI in "System Admin->Settings". (**Warning**: if you set the value both via Web UI and seahub_settings.py, the setting via Web UI will take precedence.)
 
 ```python
 FILE_SERVER_ROOT = 'https://www.example.com/seafhttp'
