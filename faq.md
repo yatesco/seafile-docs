@@ -43,6 +43,10 @@ There was an unconfirmed solution on the internet, which later has vanished.
 
 * You can also turn on debug mode by adding <code>DEBUG = True</code> to `seahub_settings.py` and restarting Seahub with <code>./seahub.sh restart</code>, then refresh the page, all the debug infomations will be displayed. Make sure ./seahub.sh was started as: ./seahub.sh start-fastcgi in case you're using Nginx/Apache.
 
+#### Files with a space in their name do not work using Apache
+
+* See http://manual.seafile.com/deploy/deploy_with_apache.html#problems-with-paths-and-files-containing-spaces
+
 #### Avatar pictures vanished after upgrading the server, what can I do?
 
 * You need to check whether the "avatars" symbolic link under seahub/media/ is linking to ../../../seahub-data/avatars. If not, you need to correct the link according to the "minor upgrade" section in [Upgrading-Seafile-Server](deploy/upgrade.md).
