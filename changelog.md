@@ -1,11 +1,5 @@
 # Changelog
 
-### Changelog for this manual
-
-* 2015.11.20: Update document for file copy and add document for multiple file/folder delete/copy/move
-* 2015.11.18: Add document for [cleaning database](maintain/clean_database.md).
-
-
 ### Changelogs
 
 - [Seafile Community Edition](https://seacloud.cc/group/3/wiki/server-changelog/)
