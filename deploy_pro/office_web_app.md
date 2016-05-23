@@ -30,7 +30,7 @@ OFFICE_WEB_APP_FILE_EXTENSION = ('ods', 'xls', 'xlsb', 'xlsm', 'xlsx','ppsx', 'p
 ENABLE_OFFICE_WEB_APP_EDIT = True
 
 # types of files editing through Office Web App
-# Note, Office Web App 2016 is needed to editing docx
+# Note, Office Web App 2016 is needed for editing docx
 OFFICE_WEB_APP_EDIT_FILE_EXTENSION = ('xlsx', 'pptx', 'docx')
 
 ```
