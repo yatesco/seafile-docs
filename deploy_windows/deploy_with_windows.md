@@ -34,14 +34,12 @@ This file is created during Seafile initialization. Please:
 ### Failed to create seahub.db
 
 Use python version 2.7.4 32bit, do not use python 3+.
+
 ### Can not upload/download files in the Web interface
 
-Make sure you have modified ``SERVICE_URL`` in ccnet.conf.
+Make sure you have modified ``SERVICE_URL`` in ccnet.conf. You can also modify SERVICE_URL via web UI in "System Admin->Settings". (**Warning**: if you set the value both via Web UI and ccnet.conf, the setting via Web UI will take precedence.)
 
 ### The browser can't get the css and javascript files
 
 - Use python 2.7.4 32bit. If you have installed other python version, uninstall it and install python 2.7.4. Restart seafile server to see whether the problem has gone.
 - Delete non-ASCII keys from the registry path ``HKEY_CLASSES_ROOT\MIME\Database\Content`` Type, and try again.
-
-
-

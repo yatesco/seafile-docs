@@ -75,6 +75,7 @@ Assume you have uncompresssed seafile server into `C:/SeafileProgram/seafile-pro
 
 ### Modify ccnet.conf
 
+You can also modify SERVICE_URL via web UI in "System Admin->Settings". (**Warning**: if you set the value both via Web UI and ccnet.conf, the setting via Web UI will take precedence.)
 
 ```
 SERVICE_URL = http://www.myseafile.com
@@ -94,7 +95,7 @@ fastcgi=true
 
 ### Modify seahub_settings.py
 
-You need to add a line in <code>seahub_settings.py</code> to set the value of `FILE_SERVER_ROOT`
+You need to add a line in <code>seahub_settings.py</code> to set the value of `FILE_SERVER_ROOT`. You can also modify `FILE_SERVER_ROOT` via web UI in "System Admin->Settings". (**Warning**: if you set the value both via Web UI and seahub_settings.py, the setting via Web UI will take precedence.)
 
 ```
 FILE_SERVER_ROOT = 'http://www.myseafile.com/seafhttp'
