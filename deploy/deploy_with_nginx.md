@@ -6,9 +6,9 @@ According to the [security advisory](https://www.djangoproject.com/weblog/2013/a
 
 ## Deploy Seahub/FileServer with Nginx
 
-Seahub is the web interface of Seafile server. FileServer is used to handle raw file uploading/downloading through browsers. By default, it listens on port 8082 for HTTP request.
+Seahub is the web interface of Seafile server. FileServer is used to handle raw file uploading/downloading through browsers. By default, it listens on port 8082 for HTTP requests.
 
-Here we deploy Seahub using [FastCGI](http://en.wikipedia.org/wiki/FastCGI), and deploy FileServer with reverse proxy. We assume you are running Seahub using domain '''www.myseafile.com'''.
+Here we deploy Seahub using [FastCGI](http://en.wikipedia.org/wiki/FastCGI), and deploy FileServer with a reverse proxy. We assume you are running Seahub using domain `seafile.example.com`.
 
 This is a sample Nginx config file.
 
@@ -21,7 +21,7 @@ In Ubuntu 14.04, you can add the config file as follows:
 ```nginx
 server {
     listen 80;
-    server_name www.myseafile.com;
+    server_name seafile.example.com;
 
     proxy_set_header X-Forwarded-For $remote_addr;
 
@@ -61,11 +61,11 @@ server {
 }
 ```
 
-Nginx settings "client_max_body_size" is by default 1M. Uploading a file bigger than this limit will give you an error message HTTP error code 413 ("Request Entity Too Large").
+Nginx settings `client_max_body_size` is by default 1M. Uploading a file bigger than this limit will give you an error message HTTP error code 413 ("Request Entity Too Large").
 
-You should use 0 to disable this feature or write the same value than for the parameter `max_upload_size` in section `[fileserver]` of [seafile.conf](../config/seafile-conf.md).
+You should use 0 to disable this feature or write the same value than for the parameter `max_upload_size` in section `[fileserver]` of [seafile.conf](../config/seafile-conf.md). Client uploads are only partly effected by this limit. With a limit of 100 MiB they can safely upload files of any size.
 
-Tip for uploading very large files (> 4GB): By default Nginx will buffer large request body in temp file. After the body is completely received, Nginx will send the body to the upstream server (seaf-server in our case). But it seems when file size is very large, the buffering mechanism dosen't work well. It may stop proxying the body in the middle. So if you want to support file upload larger for 4GB, we suggest you install Nginx version >= 1.8.0 and add the following options to Nginx config file:
+Tip for uploading very large files (> 4GB): By default Nginx will buffer large request bodies in temp files. After the body is completely received, Nginx will send the body to the upstream server (seaf-server in our case). But it seems when the file size is very large, the buffering mechanism dosen't work well. It may stop proxying the body in the middle. So if you want to support file uploads larger than 4GB, we suggest to install Nginx version >= 1.8.0 and add the following options to Nginx config file:
 
 ```nginx
     location /seafhttp {
@@ -78,22 +78,21 @@ Tip for uploading very large files (> 4GB): By default Nginx will buffer large r
 
 ### Modify ccnet.conf
 
-You need to modify the value of <code>SERVICE_URL</code> in [ccnet.conf](../config/ccnet-conf.md)
-to let Seafile know the domain you choose. You can also modify SERVICE_URL via web UI in "System Admin->Settings". (**Warning**: if you set the value both via Web UI and ccnet.conf, the setting via Web UI will take precedence.)
+You need to modify the value of `SERVICE_URL` in [ccnet.conf](../config/ccnet-conf.md) to let Seafile know the domain, protocol and port you choose. You can also modify `SERVICE_URL` via web UI in "System Admin->Settings". (**Warning**: If you set the value both via Web UI and ccnet.conf, the setting via Web UI will take precedence.)
 
 ```python
-SERVICE_URL = http://www.myseafile.com
+SERVICE_URL = http://seafile.example.com
 ```
 
-Note: If you later change the domain assigned to seahub, you also need to change the value of  <code>SERVICE_URL</code>.
+Note: If you later change the domain assigned to Seahub, you also need to change the value of  `SERVICE_URL`.
 
 ### Modify seahub_settings.py
 
-You need to add a line in <code>seahub_settings.py</code> to set the value of `FILE_SERVER_ROOT`. You can also modify `FILE_SERVER_ROOT` via web UI in "System Admin->Settings". (**Warning**: if you set the value both via Web UI and seahub_settings.py, the setting via Web UI will take precedence.)
+You need to add a line in `seahub_settings.py` to set the value of `FILE_SERVER_ROOT`. You can also modify `FILE_SERVER_ROOT` via web UI in "System Admin->Settings". (**Warning**: if you set the value both via Web UI and seahub_settings.py, the setting via Web UI will take precedence.)
 
 
 ```python
-FILE_SERVER_ROOT = 'http://www.myseafile.com/seafhttp'
+FILE_SERVER_ROOT = 'http://seafile.example.com/seafhttp'
 ```
 
 ## Start Seafile and Seahub
