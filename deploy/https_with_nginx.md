@@ -1,14 +1,14 @@
 # Enabling Https with Nginx
 
-Here we use self-signed SSL digital certificate for free. If you use a paid ssl certificate from some authority, just skip the first step.
+Here we use self-signed SSL certificate. If you use a paid ssl certificate from some authority, just skip the first step.
 
-### Generate SSL digital certificate with OpenSSL
+### Generate SSL certificate with OpenSSL
 ```bash
     openssl genrsa -out privkey.pem 2048
     openssl req -new -x509 -key privkey.pem -out cacert.pem -days 1095
 ```
 
-If you're using a custom CA to sign your SSL certificate, you have to enable certificate revocation list (CRL) in your certificate. Otherwise http syncing on Windows client may not work. See [this thread](https://forum.seafile-server.org/t/https-syncing-on-windows-machine-using-custom-ca/898) for more information.
+If you're using a custom CA to sign your SSL certificate, you have to enable certificate revocation list (CRL) in your certificate. Otherwise http syncing on Windows client may not work. See [this thread](https://forum.seafile.de/t/https-syncing-on-windows-machine-using-custom-ca/898) for more information.
 
 ### Enable SSL module of Nginx (optional)
 If your Nginx does not support SSL, you need to recompile it, the commands are as follows:
@@ -24,7 +24,7 @@ Assume you have configured nginx as
 ```nginx
     server {
         listen       80;
-        server_name  www.yourdomain.com;
+        server_name  seafile.example.com;
         rewrite ^ https://$http_host$request_uri? permanent;	# force redirect http to https
     }
 
@@ -33,7 +33,7 @@ Assume you have configured nginx as
         ssl on;
         ssl_certificate /etc/ssl/cacert.pem;    	# path to your cacert.pem
         ssl_certificate_key /etc/ssl/privkey.pem;	# path to your privkey.pem
-        server_name www.yourdomain.com;
+        server_name seafile.example.com;
         # ......
         fastcgi_param   HTTPS               on;
         fastcgi_param   HTTP_SCHEME         https;
@@ -48,7 +48,7 @@ Here is the sample configuration file:
 ```nginx
     server {
         listen       80;
-        server_name  www.yourdomain.com;
+        server_name  seafile.example.com;
         rewrite ^ https://$http_host$request_uri? permanent;	# force redirect http to https
     }
     server {
@@ -56,7 +56,7 @@ Here is the sample configuration file:
         ssl on;
         ssl_certificate /etc/ssl/cacert.pem;        # path to your cacert.pem
         ssl_certificate_key /etc/ssl/privkey.pem;	# path to your privkey.pem
-        server_name www.yourdoamin.com;
+        server_name seafile.example.com;
         proxy_set_header X-Forwarded-For $remote_addr;
 
         add_header Strict-Transport-Security "max-age=31536000; includeSubdomains";
@@ -127,18 +127,18 @@ If you have WebDAV enabled it is recommended to add the same:
 
 ### ccnet conf
 
-Since you change from http to https, you need to modify the value of "SERVICE_URL" in [ccnet.conf](../config/ccnet-conf.md). You can also modify SERVICE_URL via web UI in "System Admin->Settings". (**Warning**: if you set the value both via Web UI and ccnet.conf, the setting via Web UI will take precedence.)
+Since you changed from http to https, you need to modify the value of `SERVICE_URL` in [ccnet.conf](../config/ccnet-conf.md). You can also modify `SERVICE_URL` via web UI in "System Admin->Settings". (**Warning**: If you set the value both via Web UI and ccnet.conf, the setting via Web UI will take precedence.)
 
 ```bash
-SERVICE_URL = https://www.example.com
+SERVICE_URL = https://seafile.example.com
 ```
 
 ### seahub_settings.py
 
-You need to add a line in seahub_settings.py to set the value of `FILE_SERVER_ROOT`. You can also modify `FILE_SERVER_ROOT` via web UI in "System Admin->Settings". (**Warning**: if you set the value both via Web UI and seahub_settings.py, the setting via Web UI will take precedence.)
+You need to add a line in seahub_settings.py to set the value of `FILE_SERVER_ROOT`. You can also modify `FILE_SERVER_ROOT` via web UI in "System Admin->Settings". (**Warning**: If you set the value both via Web UI and seahub_settings.py, the setting via Web UI will take precedence.)
 
 ```python
-FILE_SERVER_ROOT = 'https://www.example.com/seafhttp'
+FILE_SERVER_ROOT = 'https://seafile.example.com/seafhttp'
 ```
 
 ## Start Seafile and Seahub
@@ -150,7 +150,7 @@ FILE_SERVER_ROOT = 'https://www.example.com/seafhttp'
 
 ## Additional security settings for nginx (optional)
 
-Add the HSTS header. If you already visited the https version the next time your browser will visit directly the https site and not the http. Prevent man-in-the-middle-attacks.
+Add the HSTS header. If you already visited the https version the next time your browser will directly visit the https site and not the http one. Prevent man-in-the-middle-attacks:
 ```nginx
 add_header Strict-Transport-Security "max-age=31536000; includeSubdomains";
 ```
