@@ -1,9 +1,5 @@
 # Config Seahub with Nginx
 
-## Important
-
-According to the [security advisory](https://www.djangoproject.com/weblog/2013/aug/06/breach-and-django/) published by Django team, we recommend disable [GZip compression](http://wiki.nginx.org/HttpGzipModule) to mitigate [BREACH attack](http://breachattack.com/).
-
 ## Deploy Seahub/FileServer with Nginx
 
 Seahub is the web interface of Seafile server. FileServer is used to handle raw file uploading/downloading through browsers. By default, it listens on port 8082 for HTTP requests.
