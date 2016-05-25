@@ -69,19 +69,19 @@ In the following sections, you'll be guided to build and setup the seafile serve
 
 First create the top level directory. In the following sections, we'll use "/data/haiwen" as the top level directory.
 
-<pre>
+```
 mkdir /data/haiwen/
 cd /data/haiwen/
 mkdir seafile-server
 cd seafile-server
-</pre>
+```
 
 The currently layout is:
 
-<pre>
+```
 haiwen/
 └── seafile-server
-</pre>
+```
 
 ### Get the source
 
@@ -101,28 +101,28 @@ For example, if the latest released seafile server is 4.4.7, then just use the *
 * seafile-4.4.7-server.tar.gz
 * seahub-4.4.7-server.tar.gz
 
-Create a folder <code>haiwen/src</code>, and uncompress libsearpc/ccnet/seafile source to it.
+Create a folder `haiwen/src`, and uncompress libsearpc/ccnet/seafile source to it.
 
-<pre>
+```
 cd haiwen/seafile-server
 mkdir src
 cd src
 tar xf /path/to/libsearpc-3.0-latest.tar.gz
 tar xf /path/to/ccnet-4.4.7-server.tar.gz
 tar xf /path/to/seafile-4.4.7-server.tar.gz
-</pre>
+```
 
-And uncompress seahub tarball to <code>haiwen/seafile-server</code>:
+And uncompress seahub tarball to `haiwen/seafile-server`:
 
-<pre>
+```
 cd haiwen/seafile-server
 tar xf /path/to/seahub-4.4.7-server.tar.gz
 mv seahub-4.4.7-server seahub
-</pre>
+```
 
 So far, The current directory layout is:
 
-<pre>
+```
 haiwen/
 └── seafile-server
     └── seahub
@@ -131,7 +131,7 @@ haiwen/
         ├── ccnet-4.4.7-server
         ├── seafile-4.4.7-server
         ├── ... (other files)
-</pre>
+```
 
 ### Building
 
@@ -139,33 +139,33 @@ To build seafile server, you need first build **libsearpc** and **ccnet**.
 
 ##### libsearpc
 
-<pre>
+```
 cd libsearpc-${version}
 ./autogen.sh
 ./configure
 make
 make install
-</pre>
+```
 
 ##### ccnet
 
-<pre>
+```
 cd ccnet-${version}
 ./autogen.sh
 ./configure --disable-client --enable-server   # `export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig` if libsearpc is not found
 make
 make install
-</pre>
+```
 
 ##### seafile
 
-<pre>
+```
 cd seafile-${version}
 ./autogen.sh
 ./configure --disable-client --enable-server
 make
 make install
-</pre>
+```
 
 
 *Note*: You need to run `sudo ldconfig` to refresh the system libraries cache after you compiles all the components.
@@ -196,9 +196,9 @@ The seafile server consists of the following components:
 
 ![server architecture](../images/server-arch.png "server architecture")
 
-* **ccnet** stores its configuration and metadata is a directory named <code>ccnet</code>.
-* **seaf-server** store its configuration and data in a directory, normally named <code>seafile-data</code>.
-* **seahub** is written in Django. If you have any experience with Django, you should know the <code>syncdb</code> command must be run to create all the database tables.
+* **ccnet** stores its configuration and metadata is a directory named `ccnet`.
+* **seaf-server** store its configuration and data in a directory, normally named `seafile-data`.
+* **seahub** is written in Django. If you have any experience with Django, you should know the `syncdb` command must be run to create all the database tables.
 * An **admin account** has to be created, so that you, the admin, can login with this account to manage the server.
 
 These are the essential steps to create the configuration:
@@ -217,8 +217,8 @@ To create the configurations, you can either:
 
 ### Create Configurations with the seafile-admin script
 
-<code>seafile-admin</code> should have been installed to system path after you have built and installed Seafile from source.
-<pre>
+`seafile-admin` should have been installed to system path after you have built and installed Seafile from source.
+```
 usage: seafile-admin [-h] {setup,start,stop,reset-admin} ...
 
 optional arguments:
@@ -231,14 +231,14 @@ subcommands:
     start               start the seafile server
     stop                stop the seafile server
     reset-admin         reset seafile admin account
-</pre>
+```
 
 Go to the top level directory(in this guide it's **/data/haiwen/**), and run **seafile-admin setup** to create all the configuration:
-<pre>
+```
 cd /data/haiwen
 export PYTHONPATH=/data/haiwen/seafile-server/seahub/thirdpart
 seafile-admin setup
-</pre>
+```
 
 The script would ask you a series of questions, and create all the configuration for you.
 
@@ -297,7 +297,7 @@ And a screenshot after setup is finished successfully:
 ![admin setup finished](images/seafile-admin-2.png)
 
 At this time, the directory layout would be like this:
-<pre>
+```
 haiwen/
 └── ccnet # ccnet config directory
     └── ccnet.conf # ccnet config file
@@ -309,16 +309,16 @@ haiwen/
 └── seafile-server
     └── seahub/
     └── seafile-{VERSION} # seafile source code
-</pre>
+```
 
 ### Start the Seafile Server
 
 After configuration successfully created, run **seafile-admin start** in the top directory to start the all components of Seafile. ( **You should always run the seafile-admin script in the top directory** ).
 
-<pre>
+```
 cd /data/haiwen # go to the top level directory
 seafile-admin start
-</pre>
+```
 
 At this moment, all the components should be running and seahub can be visited at **http://yourserver-ip-or-domain:8000**
 
@@ -328,10 +328,10 @@ At this moment, all the components should be running and seahub can be visited a
 
 To stop seafile server, run **seafile-admin stop**.
 
-<pre>
+```
 cd /data/haiwen # go to the top level directory
 seafile-admin stop
-</pre>
+```
 
 ## Upgrade the Seafile Server
 
@@ -339,10 +339,10 @@ When you want to upgrade to a new vesrion of seafile server, you need to:
 
 * Stop the seafile server if it's running
 
-<pre>
+```
 cd /data/haiwen
 seafile-admin stop
-</pre>
+```
 
 * Get and latest source code and build libsearpc/ccnet/seafile, just as what you do in a fresh setup.
 * Run the upgrade script. The upgrade script mainly updates database used by seafile for you. For example, create a new database table that is used in the latest seafile server but not in the previous version.
@@ -353,24 +353,24 @@ See the **Building** section above.
 
 ### Get the new seahub tarball and uncompress it
 
-<pre>
+```
 cd haiwen/seafile-server
 mv seahub/ seahub-old # move away the old seahub folder
 tar xf /path/to/new/seahub-x.x.x-server.tar.gz
 mv seahub-x.x.x-server seahub
-</pre>
+```
 
 
 ### Do the upgrade
 
 * copy the scripts/upgrade/ subdir outside
 
-The upgrade scripts is distributed in the <code>scripts/upgrade</code> subdir of seafile source code, we need to copy it to **seafile-server** directory before run the scripts.
+The upgrade scripts is distributed in the `scripts/upgrade` subdir of seafile source code, we need to copy it to **seafile-server** directory before run the scripts.
 
-<pre>
+```
 cd /data/haiwen/seafile-server
 cp -rf seafile-{version}/scripts/upgrade .
-</pre>
+```
 
 #### Continuous Upgrade (like from 1.1 to 1.2)
 
@@ -378,12 +378,12 @@ Continuous upgrade means to upgrade from one version of seafile server to the ne
 
 **Note:** Minor upgrade, like upgrade from 1.3.0 to 1.3.1, is documented in a separate section below.
 
-Say you are upgrading from 1.1.0 to 1.2.0, you should run the script **upgrade_1.1_1.2.sh** in <code>seafile-server</code> directory.
+Say you are upgrading from 1.1.0 to 1.2.0, you should run the script **upgrade_1.1_1.2.sh** in `seafile-server` directory.
 
-<pre>
+```
 cd /data/haiwen/seafile-server
 ./upgrade/upgrade_1.1_1.2.sh
-</pre>
+```
 
 #### Non-continous version upgrade(like from 1.1 to 1.3)
 
@@ -398,12 +398,12 @@ Just run the upgrade scripts in sequence.
 
 Minor upgrade Minor upgrade is like an upgrade from 1.3.0 to 1.3.1. For this type of upgrade, you only need to update the avatar link:
 
-<pre>
+```
 cd /data/haiwen/seafile-server/seahub/media
 cp -rf avatars/* ../../../seahub-data/avatars/
 rm -rf avatars
 ln -s ../../../seahub-data/avatars
-</pre>
+```
 
 ## Problems Report
 

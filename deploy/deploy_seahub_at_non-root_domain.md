@@ -7,37 +7,37 @@ This documentation will talk about how to deploy Seafile Web using Apache/Nginx 
 
 First, we need to overwrite some variables in seahub_settings.py:
 
-<pre>
+```
 SERVE_STATIC = False
 MEDIA_URL = '/seafmedia/'
 COMPRESS_URL = MEDIA_URL
 STATIC_URL = MEDIA_URL + 'assets/'
 SITE_ROOT = '/seafile/'
 LOGIN_URL = '/seafile/accounts/login/'    # NOTE: since version 5.0.4
-</pre>
+```
 
-The webserver will serve static files (js, css, etc), so we just disable <code>SERVE_STATIC</code>.
+The webserver will serve static files (js, css, etc), so we just disable `SERVE_STATIC`.
 
-<code>MEDIA_URL</code> can be anything you like, just make sure a trailing slash is appended at the end.
+`MEDIA_URL` can be anything you like, just make sure a trailing slash is appended at the end.
 
-We deploy Seafile at <code>/seafile/</code> directory instead of root directory, so we set <code>SITE_ROOT</code> to <code>/seafile/</code>.
+We deploy Seafile at `/seafile/` directory instead of root directory, so we set `SITE_ROOT` to `/seafile/`.
 
 ## Modify ccnet.conf and seahub_setting.py
 
 ### Modify ccnet.conf
 
-You need to modify the value of <code>SERVICE_URL</code> in [ccnet.conf](../config/ccnet-conf.md)
+You need to modify the value of `SERVICE_URL` in [ccnet.conf](../config/ccnet-conf.md)
 to let Seafile know the domain you choose.
 
-<pre>
+```
 SERVICE_URL = http://www.myseafile.com/seafile
-</pre>
+```
 
-Note: If you later change the domain assigned to seahub, you also need to change the value of  <code>SERVICE_URL</code>.
+Note: If you later change the domain assigned to seahub, you also need to change the value of  `SERVICE_URL`.
 
 ### Modify seahub_settings.py
 
-You need to add a line in <code>seahub_settings.py</code> to set the value of `FILE_SERVER_ROOT`
+You need to add a line in `seahub_settings.py` to set the value of `FILE_SERVER_ROOT`
 
 ```python
 FILE_SERVER_ROOT = 'http://www.myseafile.com/seafhttp'
@@ -51,7 +51,7 @@ FILE_SERVER_ROOT = 'http://www.myseafile.com/seafhttp'
 
 Then, we need to configure the Nginx:
 
-<pre>
+```
 server {
     listen 80;
     server_name www.example.com;
@@ -87,14 +87,14 @@ server {
         root /home/user/haiwen/seafile-server-latest/seahub;
     }
 }
-</pre>
+```
 
 
 ## Deploy with Apache
 
 Here is the sample configuration:
 
-<pre>
+```
 <VirtualHost *:80>
   ServerName www.example.com
   DocumentRoot /var/www
@@ -121,7 +121,7 @@ Here is the sample configuration:
   SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
   ProxyPass /seafile fcgi://127.0.0.1:8000/seafile
 </VirtualHost>
-</pre>
+```
 
 We use Alias to let Apache serve static files, please change the second argument to your path.
 
@@ -129,15 +129,15 @@ We use Alias to let Apache serve static files, please change the second argument
 
 By default, Seahub caches some data like the link to the avatar icon in `/tmp/seahub_cache/` (unless memcache is used). We suggest to clear the cache after seafile has been stopped:
 
-<pre>
+```
 rm -rf /tmp/seahub_cache/
-</pre>
+```
 
 For memcache users, please purge the cache there instead by restarting your memcached server.
 
 ## Start Seafile and Seahub
 
-<pre>
+```
 ./seafile.sh start
 ./seahub.sh start-fastcgi
-</pre>
+```

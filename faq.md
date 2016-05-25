@@ -41,7 +41,7 @@ There was an unconfirmed solution on the internet, which later has vanished.
 
 * You can check the back trace in Seahub log files (`installation folder/logs/seahub_django_request.log`)
 
-* You can also turn on debug mode by adding <code>DEBUG = True</code> to `seahub_settings.py` and restarting Seahub with <code>./seahub.sh restart</code>, then refresh the page, all the debug infomations will be displayed. Make sure ./seahub.sh was started as: ./seahub.sh start-fastcgi in case you're using Nginx/Apache.
+* You can also turn on debug mode by adding `DEBUG = True` to `seahub_settings.py` and restarting Seahub with `./seahub.sh restart`, then refresh the page, all the debug infomations will be displayed. Make sure ./seahub.sh was started as: ./seahub.sh start-fastcgi in case you're using Nginx/Apache.
 
 #### Avatar pictures vanished after upgrading the server, what can I do?
 

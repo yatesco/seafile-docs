@@ -15,13 +15,13 @@ If you are running a **cluster**, please read [upgrade a Seafile cluster](../dep
 Suppose you are using version 2.1.0 and like to upgrade to version 3.1.0. First download and extract the new version. You should have a directory layout similar to this:
 
 
-<pre>
+```
 haiwen
    -- seafile-server-2.1.0
    -- seafile-server-3.1.0
    -- ccnet
    -- seafile-data
-</pre>
+```
 
 
 Now upgrade to version 3.1.0.
@@ -71,13 +71,13 @@ Now upgrade to version 3.1.0.
 Suppose you are using version 3.0.0 and like to upgrade to version 3.2.2. First download and extract the new version. You should have a directory layout similar to this:
 
 
-<pre>
+```
 haiwen
    -- seafile-server-3.0.0
    -- seafile-server-3.2.2
    -- ccnet
    -- seafile-data
-</pre>
+```
 
 
 Now upgrade to version 3.2.2.

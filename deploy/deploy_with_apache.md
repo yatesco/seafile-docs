@@ -64,18 +64,18 @@ Modify Apache config file:
 
 ### Modify ccnet.conf
 
-You need to modify the value of <code>SERVICE_URL</code> in [ccnet.conf](../config/ccnet-conf.md)
+You need to modify the value of `SERVICE_URL` in [ccnet.conf](../config/ccnet-conf.md)
 to let Seafile know the domain you choose. You can also modify SERVICE_URL via web UI in "System Admin->Settings". (**Warning**: if you set the value both via Web UI and ccnet.conf, the setting via Web UI will take precedence.)
 
 ```python
 SERVICE_URL = http://www.myseafile.com
 ```
 
-Note: If you later change the domain assigned to seahub, you also need to change the value of  <code>SERVICE_URL</code>.
+Note: If you later change the domain assigned to seahub, you also need to change the value of  `SERVICE_URL`.
 
 ### Modify seahub_settings.py
 
-You need to add a line in <code>seahub_settings.py</code> to set the value of `FILE_SERVER_ROOT`. You can also modify `FILE_SERVER_ROOT` via web UI in "System Admin->Settings". (**Warning**: if you set the value both via Web UI and seahub_settings.py, the setting via Web UI will take precedence.)
+You need to add a line in `seahub_settings.py` to set the value of `FILE_SERVER_ROOT`. You can also modify `FILE_SERVER_ROOT` via web UI in "System Admin->Settings". (**Warning**: if you set the value both via Web UI and seahub_settings.py, the setting via Web UI will take precedence.)
 
 ```python
 FILE_SERVER_ROOT = 'http://www.myseafile.com/seafhttp'

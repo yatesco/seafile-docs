@@ -4,7 +4,7 @@
 
 You may change Seafile's network options by modifying `ccnet.conf` file. Let's walk through the options by an example.
 
-<pre>
+```
 [General]
 
 # Used internally. Don't delete.
@@ -27,14 +27,14 @@ PORT=10001
 # Not used anymore
 PORT=13419
 
-</pre>
+```
 
 **Note**: You should restart seafile so that your changes take effect.
 
-<pre>
+```
 cd seafile-server
 ./seafile.sh restart
-</pre>
+```
 
 ## Changing MySQL Connection Pool Size
 
