@@ -33,6 +33,21 @@ ENABLE_OFFICE_WEB_APP_EDIT = True
 # Note, Office Web App 2016 is needed for editing docx
 OFFICE_WEB_APP_EDIT_FILE_EXTENSION = ('xlsx', 'pptx', 'docx')
 
+# HTTPS authentication related
+
+# Server certificates
+# Path to a CA_BUNDLE file or directory with certificates of trusted CAs
+# NOTE: If set this setting to a directory, the directory must have been processed using the c_rehash utility supplied with OpenSSL.
+OFFICE_WEB_APP_SERVER_CA = '/path/to/certfile'
+
+
+# Client certificates
+# You can specify a single file (containing the private key and the certificate) to use as client side certificate
+OFFICE_WEB_APP_CLIENT_PEM = 'path/to/client.pem'
+
+# or you can specify these two file path to use as client side certificate
+OFFICE_WEB_APP_CLIENT_CERT = 'path/to/client.cert'
+OFFICE_WEB_APP_CLIENT_KEY = 'path/to/client.key'
 ```
 
 Then restart
