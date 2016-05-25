@@ -26,7 +26,7 @@ and **seafile\_dir** accordingly)
     seafile_init_log=${seafile_dir}/logs/seafile.init.log
     seahub_init_log=${seafile_dir}/logs/seahub.init.log
 
-    # Change the value of fastcgi to falst if fastcgi is not used
+    # Change the value of fastcgi to false if fastcgi is not used
     fastcgi=true
     # Set the port of fastcgi, default is 8000. Change it if you need different.
     fastcgi_port=8000
