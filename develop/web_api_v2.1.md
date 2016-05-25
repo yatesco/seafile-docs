@@ -181,6 +181,7 @@
             <li><a href="#multiple-files-directories-copy">Copy</a></li>
             <li><a href="#multiple-files-directories-move">Move</a></li>
             <li><a href="#multiple-files-directories-delete">Delete</a></li>
+            <li><a href="#multiple-files-directories-download">Download</a></li>
         </ul>
     </li>
 
@@ -2750,6 +2751,31 @@ The id of the updated file
 * 403 You do not have permission to delete file
 * 404 repo not found
 * 502 failed to delete file
+
+### <a id="multiple-files-directories-download"></a>Download ###
+
+**GET** https://cloud.seafile.com/api/v2.1/repos/{repo-id}/dirents/download-link/?parent_dir={parent_dir}&dirents={dirents}
+
+**Request parameters**
+
+* repo_id
+* parent_dir
+* dirents, string of all file/folder name
+
+**Sample request**
+
+    curl -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' https://cloud.seafile.com/api/v2.1/repos/47945b31-dedb-4b92-a048-32bf825595ce/dirents/download-link/?parent_dir=/&dirents=file_name_1,file_name_2,folder_name
+
+**Sample response**
+
+    {'url': https://cloud.seafile.com/seafhttp/files/916dac2d-0480-4aad-8b29-fe0240923738}
+
+**Errors**
+
+* 400 parent_dir invalid.
+* 400 dirents invalid.
+* 404 Library not found.
+* 500 Internal Server Error
 
 ## <a id="avatar"></a>Avatar ##
 
