@@ -65,6 +65,8 @@ Steps to migrate Seafile from SQLite to MySQL:
                 'PASSWORD' : 'root',
                 'NAME' : 'seahub-db',
                 'HOST' : '127.0.0.1',
+                # This is only needed for MySQL older than 5.5.5.
+                # For MySQL newer than 5.5.5 INNODB is the default already.
                 'OPTIONS': {
                     "init_command": "SET storage_engine=INNODB",
                 }
