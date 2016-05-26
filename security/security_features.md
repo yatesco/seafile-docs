@@ -2,11 +2,7 @@
 
 ## How is the connection between client and server encrypted?
 
-Before version 4.0, Seafile only supports synchronization using a self-designed protocol. Every Seafile desktop client has a unique private key. When a client connects to a server, they will exchange public keys and negotiate a session key. The session key is derived from a cryptographically secure random number with PDKDF2 algorithm. And it's exchanged between the client and the server with RSA encryption. This session key will be used to encrypt the data transfer with AES-256/CBC algorithm. 
-
-From version 4.0, Seafile supports synchronization via HTTP(S) protocol, which is a more standard approach.
-
-From version 4.1, Seafile uses HTTP(S) syncing protocol by default.
+Seafile uses HTTP(S) to syncing files between client and server (Since version 4.1.0).
 
 ## Encrypted Library
 
@@ -14,7 +10,7 @@ Seafile provides a feature called encrypted library to protect your privacy. The
 
 CAUTION: The client side encryption does currently NOT work while using the web browser and the cloud file explorer of the desktop client. When you are browsing encrypted libraries via the web browser or the cloud file explorer, you need to input the password and the server is going to use the password to decrypt the "file key" for the library (see description below) and cache the password in memory for one hour. The plain text password is never stored or cached on the server.
 
-Update: The client side encryption works on iOS client since version 2.1.6. The Android client doesn't support client side encryption, yet. 
+The client side encryption works on iOS client since version 2.1.6. The Android client support client side encryption since version 2.1.0.
 
 
 ## How does an encrypted library work?
