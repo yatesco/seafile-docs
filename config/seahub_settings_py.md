@@ -29,9 +29,9 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 SERVER_EMAIL = EMAIL_HOST_USER
 ```
 
-**Note**: If your Email service still can not work, you may checkout the log file <code>logs/seahub.log</code> to see what may cause the problem. For complete email notification list, please refer to [Email notification list](customize_email_notifications.md).
+**Note**: If your Email service still can not work, you may checkout the log file `logs/seahub.log` to see what may cause the problem. For complete email notification list, please refer to [Email notification list](customize_email_notifications.md).
 
-**Note2**: If you want to use the Email service without authentication leaf <code>EMAIL_HOST_PASSWORD</code> **blank** (<code>''</code>).
+**Note2**: If you want to use the Email service without authentication leaf `EMAIL_HOST_PASSWORD` **blank** (`''`).
 
 
 ## Memcached
