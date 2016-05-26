@@ -21,9 +21,14 @@ Assuming your ccnet-server's logfile is `/home/haiwen/logs/ccnet.log`, and your
 ccnet-server's pidfile for ccnet-server is ``/home/haiwen/pids/ccnet.pid``.
 
 Assuming your seaf-server's logfile is setup to ``/home/haiwen/logs/seaf-server.log``, and your
-seaf-server's pidfile for seaf-server is setup to ``/home/haiwen/pids/seaf-server.pid``:
+seaf-server's pidfile for seaf-server is setup to ``/home/haiwen/pids/seaf-server.pid``.
 
-The configuration for logroate could be like this:
+
+Assuming your seafile-init logfile is setup to ``/home/haiwen/logs/seafile.init.log``.
+
+Assuming your seahub-init logfile is setup to ``/home/haiwen/logs/seahub.init.log``:
+
+The configuration for logrotate could be like this:
 ```
 /home/haiwen/logs/seaf-server.log
 {
@@ -51,6 +56,28 @@ The configuration for logroate could be like this:
         postrotate
                 [ ! -f /home/haiwen/pids/ccnet.pid ] || kill -USR1 `cat /home/haiwen/pids/ccnet.pid`
         endscript
+}
+
+/home/haiwen/logs/seafile.init.log
+{
+	monthly
+	missingok
+	rotate 24
+	compress
+	delaycompress
+	notifempty
+	sharedscripts
+}
+
+/home/haiwen/logs/seahub.init.log
+{
+	monthly
+	missingok
+	rotate 24
+	compress
+	delaycompress
+	notifempty
+	sharedscripts
 }
 ```
 
