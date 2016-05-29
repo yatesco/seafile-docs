@@ -1,8 +1,8 @@
 # Office Web app
 
-In pro version 4.4.0(or above), you can use Microsoft Office Web App to preview document online. Office Web App provides the best preview for all Office format files. For organizations with Microsoft Office Volume License, it's free to use Office Web App. For more information about Office Web App and how to deploy it, please refer to https://technet.microsoft.com/en-us/library/jj219456.aspx .
+In Seafile Professional Server Version 4.4.0 (or above), you can use Microsoft Office Web App to preview documents online. Office Web App provides the best preview for all Office format files. For organizations with Microsoft Office Volume License, it's free to use Office Web App. For more information about Office Web App and how to deploy it, please refer to https://technet.microsoft.com/en-us/library/jj219456.aspx .
 
-Seafile's own Office file preview is still the default. To use Office Web App for preview, please add following config to seahub_settings.py.
+Seafile's own Office file preview is still the default. To use Office Web App for preview, please add following config option to seahub_settings.py.
 
 ``` python
 # Enable Office Web App
@@ -19,17 +19,17 @@ OFFICE_WEB_APP_BASE_URL = 'http://example.office-web-app.com/hosting/discovery'
 # And for security reason, this token should expire after a set time period
 WOPI_ACCESS_TOKEN_EXPIRATION = 30 * 60 # seconds
 
-# Tuple of file format that you want to view through Office Web App
+# List of file formats that you want to view through Office Web App
 # You can change this value according to your preferences
-# And of course you should make sure your Office Web App support to preview
-# the specified extension file you add below
+# And of course you should make sure your Office Web App supports to preview
+# the files with the specified extensions
 OFFICE_WEB_APP_FILE_EXTENSION = ('ods', 'xls', 'xlsb', 'xlsm', 'xlsx','ppsx', 'ppt',
     'pptm', 'pptx', 'doc', 'docm', 'docx')
 
-# Enable edit file through Office Web App
+# Enable edit files through Office Web App
 ENABLE_OFFICE_WEB_APP_EDIT = True
 
-# types of files editing through Office Web App
+# types of files should be editable through Office Web App
 # Note, Office Web App 2016 is needed for editing docx
 OFFICE_WEB_APP_EDIT_FILE_EXTENSION = ('xlsx', 'pptx', 'docx')
 
@@ -48,11 +48,11 @@ After you click the document you specified in seahub_settings.py, you will see t
 
 ## Trouble shooting
 
-Understanding how the web app integration work will help you debug the problem. When a user visit a file page:
+Understanding how the web app integration works is going to help you debugging the problem. When a user visits a file page:
 
-1. (seahub->browser) Seahub will generate a page containing an iframe and send to the browser
-2. (broswer->office web app) With the iframe, the browser will try to load the file preview page from the office web app
-3. (office web app->seahub) Office web app receives the request and send a request to Seahub to get the file content
-4. (office web app->browser) Office web app send the file preview page to the browser.
+1. (seahub->browser) Seahub will generate a page containing an iframe and send it to the browser
+2. (browser->office web app) With the iframe, the browser will try to load the file preview page from the office web app
+3. (office web app->seahub) Office web app receives the request and sends a request to Seahub to get the file content
+4. (office web app->browser) Office web app sends the file preview page to the browser.
 
 Please check the Nginx log for Seahub (for step 3) and Office Web App to see which step is wrong.

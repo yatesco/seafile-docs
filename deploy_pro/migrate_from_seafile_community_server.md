@@ -2,11 +2,11 @@
 
 ## <a id="wiki-restriction"></a>Restriction ##
 
-It's quite likely you have deployed the Seafile Community Server and want to switch to the [Professional Server](http://seafile.com/en/product/private_server/), or vice versa. But there is some restriction:
+It's quite likely you have deployed the Seafile Community Server and want to switch to the [Professional Server](http://seafile.com/en/product/private_server/), or vice versa. But there are some restrictions:
 
 - You can only switch between Community Server and Professional Server of the same minor version.
 
-That is, if you are using Community Server 1.6, and want to switch to the Professional Server 1.7, you must first upgrade to Community Server 1.7, and then follow the guides below to switch to the Professional Server 1.7. (The last tiny version number in 1.7.x is not important.)
+That means, if you are using Community Server version 1.6, and want to switch to the Professional Server 1.7, you must first upgrade to Community Server version 1.7, and then follow the guides below to switch to the Professional Server 1.7. (The last tiny version number in 1.7.x is not important.)
 
 ## <a id="wiki-preparation"></a>Preparation ##
 
@@ -28,7 +28,7 @@ sudo yum install java-1.7.0-openjdk
 
 ### Install poppler-utils ###
 
-We need poppler-utils for full text search of pdf files.
+The package poppler-utils is required for full text search of pdf files.
 
 On Ubuntu/Debian:
 ```
@@ -42,19 +42,19 @@ sudo yum install poppler-utils
 
 ## <a id="wiki-do-migration"></a>Do the migration ##
 
-We assume you have already deployed Seafile Community Server 1.8.0 under `/data/haiwen/seafile-server-1.8.0`. 
+We assume you already have deployed Seafile Community Server 1.8.0 under `/data/haiwen/seafile-server-1.8.0`. 
 
 
 ### Get the license ###
 
 
-Put the license you get under the top level directory of your Seafile installation. In our example, it is `/data/haiwen/`.
+Put the license file you get under the top level directory of your Seafile installation. In our example, it is `/data/haiwen/`.
 
 
-### <a id="wiki-download-and-uncompress"></a>Download/Uncompress Seafile Professional Server ###
+### <a id="wiki-download-and-uncompress"></a>Download & uncompress Seafile Professional Server ###
 
 
-You should uncompress the tarball to the top level directory of your installation, in our example, `/data/haiwen`.
+You should uncompress the tarball to the top level directory of your installation, in our example it is `/data/haiwen`.
 
 ```
 tar xf seafile-pro-server_1.8.0_x86-64.tar.gz
@@ -100,28 +100,28 @@ cd haiwen/seafile-pro-server-1.8.0/
 ./pro/pro.py setup --migrate
 ```
 
-The migration script would do the following for you:
+The migration script is going to do the following for you:
 
 - ensure your have all the prerequisites met
 - create necessary extra configurations
 - update the avatar directory
-- create extra database tables  
+- create extra database tables
 
 
 Now you have:
 
-<blockquote>
-haiwen<br/>
-├── seafile-license.txt<br/>
-├── seafile-pro-server-1.8.0/<br/>
-├── seafile-server-1.8.0/<br/>
-├── ccnet/<br/>
-├── seafile-data/<br/>
-├── seahub-data/<br/>
-├── seahub.db<br/>
-├── seahub_settings.py<br/>
-└── <span style="color:green;font-weight:bold;">pro-data/</span><br/>
-</blockquote>
+```
+haiwen
+├── seafile-license.txt
+├── seafile-pro-server-1.8.0/
+├── seafile-server-1.8.0/
+├── ccnet/
+├── seafile-data/
+├── seahub-data/
+├── seahub.db
+├── seahub_settings.py
+└── pro-data/
+```
 
 ### Start Seafile Professional Server ###
 
