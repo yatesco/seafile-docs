@@ -2,9 +2,9 @@
 
 ## Prerequisite
 
-Assume you have installed Kaspersky Anti-Virus for Linux File Server in Seafile server machine.
+Assume you have installed Kaspersky Anti-Virus for Linux File Server on the Seafile Server machine.
 
-If the user that runs Seafile server is not root, it should have sudoers privilege to avoid writing password when running kav4fs-control. Add following content to /etc/sudoers:
+If the user that runs Seafile Server is not root, it should have sudoers privilege to avoid writing password when running kav4fs-control. Add following content to /etc/sudoers:
 
 ```
 <user of running seafile server>	ALL=(ALL:ALL) ALL
@@ -13,8 +13,7 @@ If the user that runs Seafile server is not root, it should have sudoers privile
 
 ## Script
 
-As the return code of kav4fs can not reflect the file scan result, we use a shell script to parse
-the scan output and based on the parse result to return different return code to reflect the scan result.
+As the return code of kav4fs cannot reflect the file scan result, we use a shell wrapper script to parse the scan output and based on the parse result to return different return codes to reflect the scan result.
 
 Save following contents to a file such as `kav4fs_scan.sh`:
 
@@ -59,13 +58,13 @@ else
 fi
 ```
 
-Grant executable privilege to the script:
+Grant execute permissions for the script (make sure it is owned by the user Seafile is running as):
 
 ```
 chmod u+x kav4fs_scan.sh
 ```
 
-The meaing of the script return code:
+The meaning of the script return code:
 
 ```
 1: found virus
@@ -73,7 +72,7 @@ The meaing of the script return code:
 other: scan failed
 ```
 
-## configuration
+## Configuration
 
 Add following content to `seafile.conf`:
 

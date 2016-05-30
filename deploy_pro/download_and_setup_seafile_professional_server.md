@@ -1,11 +1,11 @@
 # Download and Setup Seafile Professional Server
 ## <a id="wiki-preparation"></a>Preparation ##
 
-The following document is tested in Ubuntu 14.04 and CentOS 7. We recommend that you use Ubuntu 14.04 or CentOS 7 as your server.
+The following document is tested with Ubuntu 14.04 and CentOS 7. We recommend to you use Ubuntu 14.04 or CentOS 7 for your server.
 
 > NOTE:
 >
-> If you are using Ubuntu 14.04, you can use the following command to install all the dependency that Seafile requires at one time.
+> If you are using Ubuntu 14.04, you can use the following command to install all dependencies Seafile requires at one time.
 >
 > ```
 > sudo apt-get install openjdk-7-jre poppler-utils libpython2.7 python-pip \
@@ -28,7 +28,7 @@ The following document is tested in Ubuntu 14.04 and CentOS 7. We recommend that
 >
 > For more information please see bellow.
 
-### Minimum System Requirement ###
+### Minimum System Requirements ###
 
 - A Linux server with 2GB RAM
 
@@ -46,7 +46,7 @@ sudo yum install java-1.7.0-openjdk
 
 ### Install poppler-utils ###
 
-We need poppler-utils for full text search of pdf files.
+The package poppler-utils is required for full text search of pdf files.
 
 On Ubuntu/Debian:
 ```
@@ -61,7 +61,7 @@ sudo yum install poppler-utils
 
 ### Install Python libraries ###
 
-First make sure your have installed python 2.7
+First make sure your have installed Python 2.7
 ```
 sudo easy_install pip
 sudo pip install boto
@@ -78,7 +78,7 @@ sudo pip install setuptools --no-use-wheel --upgrade
 sudo apt-get install libpython2.7
 ```
 
-### Install other libraries as required in the community edition
+### Install all libraries required by the Community Edition
 
 See [Download and Setup Seafile Server With MySQL](../deploy/using_mysql.md).
 
@@ -86,10 +86,10 @@ See [Download and Setup Seafile Server With MySQL](../deploy/using_mysql.md).
 
 ### Get the license ###
 
-Put the license you get under the top level diretory. In our wiki, we use the diretory `/data/haiwen/` as the top level directory.
+Put the license you got under the top level diretory. In our wiki, we use the diretory `/data/haiwen/` as the top level directory. If you're using the free Pro Edition with three users you don't need a license file.
 
 
-### <a id="wiki-download-and-uncompress"></a>Download/Uncompress Seafile Professional Server ###
+### <a id="wiki-download-and-uncompress"></a>Download & uncompress Seafile Professional Server ###
 
 
 ```
@@ -119,9 +119,9 @@ You should notice the difference between the names of the Community Server and P
 
 The setup process of Seafile Professional Server is the same as the Seafile Community Server. See [Download and Setup Seafile Server With MySQL](../deploy/using_mysql.md).
 
-If you have any problem in setting up the service, please check [Common problems in setting up Seafile server](../deploy/common_problems_for_setting_up_server.md).
+If you have any problem with setting up the service, please check [Common problems in setting up Seafile server](../deploy/common_problems_for_setting_up_server.md).
 
-After you have succesfully setup Seafile Professional Server, you would have a directory layout like this:
+After you have succesfully setup Seafile Professional Server, you have a directory layout like this:
 
 ```
 #tree haiwen -L 2
@@ -157,7 +157,7 @@ haiwen
 
 ## Performance turning
 
-If you have more than 50 users in your Seafile system, we highly recommand you to [add memcached](../deploy/add_memcached.md). This will make the web 10x faster.  
+If you have more than 50 Seafile users, we highly recommend to [add memcached](../deploy/add_memcached.md). This is going to speedup Seahub (the web front end) significantly.
 
 ## <a id="wiki-done"></a>Done
 
