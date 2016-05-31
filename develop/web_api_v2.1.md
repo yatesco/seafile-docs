@@ -92,6 +92,7 @@
                 <ul>
                     <li><a href="#list-shared-libraries">List Shared Libraries</a></li>
                     <li><a href="#list-be-shared-libraries">List Be Shared Libraries</a></li>
+                    <li><a href="#delete-be-shared-library">Delete Be Shared Library</a></li>
                     <li><a href="#share-a-library">Share A Library</a></li>
                     <li><a href="#unshare-a-library">Unshare A Library</a></li>
                 </ul>
@@ -117,6 +118,7 @@
             <li><a href="#transfer-library">Transfer Library</a></li>
             <li><a href="#decrypt-library">Decrypt Library</a></li>
             <li><a href="#create-public-lib">Create Public Library</a></li>
+            <li><a href="#set-exist-lib-as-public-lib">Set Exist Lib as Public Library</a></li>
             <li><a href="#remove-public-lib">Remove Public Library</a></li>
             <li><a href="#fetch-library-download-info">Fetch library download info</a></li>
             <li><a href="#list-virtual-libraries">List Virtual Libraries</a></li>
@@ -1245,7 +1247,6 @@ Create upload link for directory with password
 
 **GET** https://cloud.seafile.com/api2/beshared-repos/
 
-
 **Sample request**
 
     curl -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' "https://cloud.seafile.com/api2/beshared-repos/"
@@ -1253,6 +1254,23 @@ Create upload link for directory with password
 **Sample response**
 
     "[{"user": "user@example.com", "repo_id": "989e3952-9d6f-4427-ab16-4bf9b53212eb", "share_type": "personal", "permission": "rw", "encrypted": false, "repo_desc": "lib shared to imwhatiam", "enc_version": false, "last_modified": 1398218747, "is_virtual": false, "group_id": 0, "repo_name": "lib shared to imwhatiam"}]"
+
+#### <a id="delete-be-shared-library"></a>Delete Be Shared Library ####
+
+**DELETE** https://cloud.seafile.com/api2/beshared-repos/{repo_id}/?share_type=personal&from=from_user@name.com
+
+**Sample request**
+
+    curl -X DELETE -H "Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd" -H 'Accept: application/json; indent=4' https://cloud.seafile.com/api2/beshared-repos/{repo_id}/?share_type=personal&from=from_user@name.com
+
+**Sample response**
+
+    {"success": true}
+
+**Errors**
+
+* 400 Invalid argument
+* 400 Library does not exist
 
 #### <a id="share-a-library"></a>Share A Library ####
 
@@ -1635,59 +1653,91 @@ check if a dir has a corresponding sub_repo, if it does not have, create one
 
 ### <a id="create-public-lib"></a>Create Public Library ###
 
-**POST** https://cloud.seafile.com/api2/repos/{repo-id}/public/
+**POST** https://cloud.seafile.com/api2/repos/public/
 
 **Request parameters**
 
-* repo-id
+* name
+* permission, `r` or `rw`, default `r`.
+* passwd (optional).
 
-**Sample request**
+**Sample request**, create an encrypted public repo with `rw` permission
 
-    curl -X POST -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d9b477fd' -H 'Accept: application/json; indent=4' https://cloud.seafile.com/api2/repos/dae8cecc-2359-4d33-aa42-01b7846c4b32/public/
+    curl -X POST -d "name=test-public-repo&permission=rw&passwd=password" -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d9b477fd' -H 'Accept: application/json; indent=4' https://cloud.seafile.com/api2/repos/public/
 
 **Sample response**
 
-    ...
-    < HTTP/1.0 200 OK
-    ...
-
-**Success**
-
-    Response code is 200(OK), and a string "success" is returned.
+```
+{
+    "owner_nickname": "lian",
+    "permission": "rw",
+    "encrypted": true,
+    "mtime_relative": "<time datetime=\"2016-05-31T12:01:49\" is=\"relative-time\" title=\"Tue, 31 May 2016 12:01:49 +0800\" >1 second ago</time>",
+    "mtime": 1464667309,
+    "owner": "lian@lian.com",
+    "id": "6553fd8b-bf3e-41ad-a481-90c8523d3b4a",
+    "size": 0,
+    "name": "test-public-repo",
+    "desc": "",
+    "size_formatted": "0 bytes"
+}
+```
 
 **Errors**
 
-* 404 Repo not found
-* 403 Forbid to access this repo
-* 500 INTERNAL SERVER ERROR, Unable to make repo public
+* 400 Library name is required.
+* 400 Invalid permission
+* 403 You do not have permission to create library.
+* 403 NOT allow to create encrypted library.
+
+### <a id="set-exist-lib-as-public-lib"></a>Set Exist Lib as Public Library ###
+
+**PUT** https://cloud.seafile.com/api2/shared-repos/{repo-id}/?share_type=public
+
+**Request parameters**
+
+* repo_id
+* share_type, must be `public`
+* permission, `r` or `rw`.
+
+**Sample request**, create an encrypted public repo with `rw` permission
+
+    curl -X PUT -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d9b477fd' -H 'Accept: application/json; indent=4' 'https://cloud.seafile.com/api2/shared-repos/2deffbac-d7be-4ace-b406-efb799083ee9/?share_type=public&permission=rw'
+
+**Sample response**
+
+```
+success
+```
+
+**Errors**
+
+* 400 Permission need to be rw or r.
+* 403 You do not have permission to share library.
+* 500 Failed to share library to public.
 
 ### <a id="remove-public-lib"></a>Remove Public Library ###
 
-**DELETE** https://cloud.seafile.com/api2/repos/{repo-id}/public/
+**DELETE** https://cloud.seafile.com/api2/shared-repos/{repo-id}/?share_type=public
 
 **Request parameters**
 
 * repo-id
+* share_type
 
 **Sample request**
 
-    curl -X DELETE -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d9b477fd' -H 'Accept: application/json; indent=4' https://cloud.seafile.com/api2/repos/dae8cecc-2359-4d33-aa42-01b7846c4b32/public/
-
-**Sample response**
-
-    ...
-    < HTTP/1.0 200 OK
-    ...
+    curl -X DELETE -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d9b477fd' -H 'Accept: application/json; indent=4' https://cloud.seafile.com/api2/shared-repos/dae8cecc-2359-4d33-aa42-01b7846c4b32/?share_type=public
 
 **Success**
 
-    Response code is 200(OK), and a string "success" is returned.
+    "success"
 
 **Errors**
 
-* 404 Repo not found
-* 403 Forbid to access this repo
-* 500 INTERNAL SERVER ERROR, Unable to remove public repo
+* 400 Share type is required.
+* 400 Share type can only be personal or group or public.
+* 403 You do not have permission to unshare library.
 
 ### <a id="fetch-library-download-info"></a>Fetch library download info ###
 
