@@ -92,6 +92,7 @@
                 <ul>
                     <li><a href="#list-shared-libraries">List Shared Libraries</a></li>
                     <li><a href="#list-be-shared-libraries">List Be Shared Libraries</a></li>
+                    <li><a href="#delete-be-shared-library">Delete Be Shared Library</a></li>
                     <li><a href="#share-a-library">Share A Library</a></li>
                     <li><a href="#unshare-a-library">Unshare A Library</a></li>
                 </ul>
@@ -1246,7 +1247,6 @@ Create upload link for directory with password
 
 **GET** https://cloud.seafile.com/api2/beshared-repos/
 
-
 **Sample request**
 
     curl -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' "https://cloud.seafile.com/api2/beshared-repos/"
@@ -1254,6 +1254,23 @@ Create upload link for directory with password
 **Sample response**
 
     "[{"user": "user@example.com", "repo_id": "989e3952-9d6f-4427-ab16-4bf9b53212eb", "share_type": "personal", "permission": "rw", "encrypted": false, "repo_desc": "lib shared to imwhatiam", "enc_version": false, "last_modified": 1398218747, "is_virtual": false, "group_id": 0, "repo_name": "lib shared to imwhatiam"}]"
+
+#### <a id="delete-be-shared-library"></a>Delete Be Shared Library ####
+
+**DELETE** https://cloud.seafile.com/api2/beshared-repos/{repo_id}/?share_type=personal&from=from_user@name.com
+
+**Sample request**
+
+    curl -X DELETE -H "Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd" -H 'Accept: application/json; indent=4' https://cloud.seafile.com/api2/beshared-repos/{repo_id}/?share_type=personal&from=from_user@name.com
+
+**Sample response**
+
+    {"success": true}
+
+**Errors**
+
+* 400 Invalid argument
+* 400 Library does not exist
 
 #### <a id="share-a-library"></a>Share A Library ####
 
