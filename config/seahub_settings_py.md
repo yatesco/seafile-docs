@@ -1,6 +1,6 @@
 # Seahub Settings
 
-Note: You can also modify most of the config items via web interface.The config items are saved in database table (seahub-db/constance_config). They have a higher priority over the items in config files.
+Note: You can also modify most of the config items via web interface. The config items are saved in database table (seahub-db/constance_config). They have a higher priority over the items in config files. If you want to disable settings via web interface, you can add `ENABLE_SETTINGS_VIA_WEB = False` to `seahub_settings.py`.
 
 ##  Sending Email Notifications on Seahub
 
@@ -166,6 +166,10 @@ ENABLE_GLOBAL_ADDRESSBOOK = False
 
 
 ```python
+# Disable settings via Web interface in system admin->settings
+# Default is True
+# Since 5.1.3
+ENABLE_SETTINGS_VIA_WEB = False
 
 # Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
