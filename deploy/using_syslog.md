@@ -1,21 +1,16 @@
-## Configure Seafile To Use Syslog
+## Configure Seafile to Use Syslog
 
-Since seafile 5.1.2 community edition and seafile 5.1.4 pro edition, we support syslog functionality.
+Since community edition 5.1.2 and professional edition 5.1.4, Seafile support using Syslog.
 
-### Configure Syslog For Seafile Controller and Server
+### Configure Syslog for Seafile Controller and Server
 
-Add follow configuration to `general` section in `seafile.conf`:
-```
-enable_syslog = true
-```
-
-If there is not `general` section in `seafile.conf`, append follow option to `seafile.conf`:
+Add following configuration to `general` section in `seafile.conf`:
 ```
 [general]
 enable_syslog = true
 ```
 
-Restart seafile server, you will find follow log info in `/var/log/syslog`:
+Restart seafile server, you will find follow logs in `/var/log/syslog`:
 ```
 May 10 23:45:19 ubuntu seafile-controller[16385]: seafile-controller.c(154): starting ccnet-server ...
 May 10 23:45:19 ubuntu seafile-controller[16385]: seafile-controller.c(73): spawn_process: ccnet-server -F /home/plt/haiwen/conf -c /home/plt/haiwen/ccnet -f /home/plt/haiwen/logs/ccnet.log -d -P /home/plt/haiwen/pids/ccnet.pid
@@ -25,15 +20,15 @@ May 12 01:00:51 ubuntu seaf-server[21552]: ../common/mq-mgr.c(60): [mq client] m
 May 12 01:00:51 ubuntu seaf-server[21552]: ../common/mq-mgr.c(106): [mq mgr] publish to hearbeat mq: seaf_server.heartbeat
 ```
 
-### Pro Edition Configure Syslog For Seafevents
+### Configure Syslog For Seafevents (Professional Edition only)
 
-Add follow configuration to `seafevents.conf`:
+Add following configuration to `seafevents.conf`:
 ```
 [Syslog]
 enabled = true
 ```
 
-Restart seafile server, you will find follow log info in `/var/log/syslog`
+Restart seafile server, you will find follow logs in `/var/log/syslog`
 ```
 May 12 01:00:52 ubuntu seafevents[21542]: [seafevents] database: mysql, name: seahub-pro
 May 12 01:00:52 ubuntu seafevents[21542]: seafes enabled: True
@@ -41,3 +36,59 @@ May 12 01:00:52 ubuntu seafevents[21542]: seafes dir: /home/plt/pro-haiwen/seafi
 ```
 
 ### Configure Syslog For Seahub
+
+Add following configurations to `seahub_settings.py`:
+
+```
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'formatters': {
+        'verbose': {
+            'format': '%(process)-5d %(thread)d %(name)-50s %(levelname)-8s %(message)s'
+        },
+        'standard': {
+            'format': '%(asctime)s [%(levelname)s] %(name)s:%(lineno)s %(funcName)s %(message)s'
+        },
+        'simple': {
+            'format': '[%(asctime)s] %(name)s %(levelname)s %(message)s',
+            'datefmt': '%d/%b/%Y %H:%M:%S'
+        },
+    },
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse',
+        },
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple'
+        },
+        'syslog': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.SysLogHandler',
+            'address': '/dev/log',
+            'formatter': 'standard'
+        },
+    },
+    'loggers': {
+        # root logger
+        '': {
+            'handlers': ['console', 'syslog'],
+            'level': 'INFO',
+            'disabled': False
+        },
+        'django.request': {
+            'handlers': ['console', 'syslog'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+    },
+}
+```
