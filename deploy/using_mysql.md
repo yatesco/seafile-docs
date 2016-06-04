@@ -279,14 +279,14 @@ Most of the time, seafile.sh and seahub.sh work fine. But if they fail, you may
 
 ```
 pgrep -f seafile-controller # check seafile processes
-pgrep -f "manage.py run_gunicorn" # check seahub process
+pgrep -f "seahub" # check seahub process
 ```
 
 * Use `pkill` to kill the processes
 
 ```
 pkill -f seafile-controller
-pkill -f "manage.py run_gunicorn"
+pkill -f "seahub"
 ```
 
 ## Performance turning
