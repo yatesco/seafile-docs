@@ -63,17 +63,18 @@ The Seafile server package requires the following packages have been installed i
 - python-setuptools
 - python-imaging
 - python-ldap
+- python-urllib3
 - sqlite3
 
 ```
 #on Debian
 apt-get update
-apt-get install python2.7 libpython2.7 python-setuptools python-imaging python-ldap sqlite3
+apt-get install python2.7 libpython2.7 python-setuptools python-imaging python-ldap python-urllib3 sqlite3
 ```
 
 ```
 # on CentOS 7
-sudo yum install python-imaging MySQL-python python-memcached python-ldap
+sudo yum install python-imaging MySQL-python python-memcached python-ldap python-urllib3
 ```
 
 #### Setup
