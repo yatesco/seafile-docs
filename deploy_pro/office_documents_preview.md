@@ -67,6 +67,9 @@ max-size = 2
 
     You can check the log at logs/seafevents.log
 
+- My server is CentOS, and I see errors like "/usr/lib64/libreoffice/program/soffice.bin X11 error: Can't open display", how could I fix it?
+
+  This error indicates you have not installed the `libreoffice-headless` package. Install it by `"sudo yum install libreoffice-headless"`.
 
 - How can I change max size and max pages of documents that can be previewed online ?
 
