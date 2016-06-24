@@ -9,7 +9,7 @@ If you want to setup email notifications, please add the following lines to `sea
 
 ```python
 EMAIL_USE_TLS = False
-EMAIL_HOST = 'smtp.example.com'        # smpt server
+EMAIL_HOST = 'smtp.example.com'        # smtp server
 EMAIL_HOST_USER = 'username@example.com'    # username and domain
 EMAIL_HOST_PASSWORD = 'password'    # password
 EMAIL_PORT = 25
