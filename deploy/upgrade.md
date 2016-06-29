@@ -9,6 +9,14 @@ This page is for users who use the pre-compiled seafile server package.
 
 If you are running a **cluster**, please read [upgrade a Seafile cluster](../deploy_pro/upgrade_a_cluster.md).
 
+__Notice: If you upgrade from a version prior to 5.1.8 you need to install python-urllib3__
+```
+# for Ubuntu / Debian
+sudo apt-get install python-urllib3
+# for CentOS
+sudo yum install python-urllib3
+```
+
 ## Major version upgrade (like from 2.x to 3.y)
 
 
