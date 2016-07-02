@@ -76,6 +76,11 @@ The corresponding Nginx configuration is (without https):
         fastcgi_param   SERVER_NAME         $server_name;
         
         client_max_body_size 0;
+        proxy_connect_timeout  36000s;
+        proxy_read_timeout  36000s;
+        proxy_send_timeout  36000s;
+        send_timeout  36000s;
+        proxy_request_buffering off;
         
         # This option is only available for Nginx >= 1.8.0. See more details below.
         proxy_request_buffering off;
@@ -103,10 +108,17 @@ Nginx conf with https:
         fastcgi_param   SERVER_ADDR         $server_addr;
         fastcgi_param   SERVER_PORT         $server_port;
         fastcgi_param   SERVER_NAME         $server_name;
+        fastcgi_param   HTTPS               on;
+        fastcgi_param   HTTP_SCHEME         https;
 
         fastcgi_param   HTTPS               on;
         
         client_max_body_size 0;
+        proxy_connect_timeout  36000s;
+        proxy_read_timeout  36000s;
+        proxy_send_timeout  36000s;
+        send_timeout  36000s;
+        proxy_request_buffering off;
         
         # This option is only available for Nginx >= 1.8.0. See more details below.
         proxy_request_buffering off;
@@ -265,7 +277,7 @@ Finder's support for WebDAV is also not very stable and slow. So it is recommend
 
 ## Frequently Asked Questions
 
-### Clients can't connect to seafdav sersver
+### Clients can't connect to seafdav server
 
 By default, seafdav is disabled. Check whether you have `enabled = true` in `seafdav.conf`.
 If not, modify it and restart seafile server.
