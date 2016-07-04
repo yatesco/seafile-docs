@@ -10,7 +10,12 @@ The GC program cleans up two types of unused blocks:
 1. Blocks that no library references to, that is, the blocks belong to deleted libraries;
 2. If you set history length limit on some libraries, the out-dated blocks in those libraries will also be removed.
 
-**Before running GC, you must shutdown the Seafile program on your server if you use the community edition. For professional edition, from version 3.1.11, online GC operation is supported. If you use Professional edition, you don't need to shutdown the Seafile program if you are using MySQL or PostgreSQL as database.**  This is because new blocks written into Seafile while GC is running may be mistakenly deleted by the GC program. 
+**Before running GC, you must shutdown the Seafile program on your server if you use the community edition. For professional edition, from version 3.1.11, online GC operation is supported. If you use Professional edition, you don't need to shutdown the Seafile program if you are using MySQL or PostgreSQL as database.**  
+This is because new blocks written into Seafile while GC is running may be mistakenly deleted by the GC program.
+
+***Community version - GC cleanup Script***
+
+At the bottom of the page there is a script that you can use to run the cleanup manually or e.g. once a week with as cronjob.
 
 ## Run GC in version 4.1.1 and later
 
@@ -116,3 +121,62 @@ It will show you the total block number vs. the number of blocks to be removed.
 
 To check data integrity after running GC, you can use [seaf-fsck](seafile_fsck.md)
 
+## GC cleanup script for Community Version
+
+To use this script you need:
+
+- Setup the seafile-service file at '/etc/init.d/seafile-server'
+- Files of seafile setup need to be owner by 'seafile:nogroup' or 'seafile:seafile'
+- Run the script with sudo or as root
+- Put the script into crontab of a root user
+
+Create the script file (change the location to your liking):
+
+    touch /opt/haiwen/seafile/cleanupScript.sh
+    
+Use your favorite text editor and paste the following code:
+
+```
+#!/bin/bash
+
+# display usage if the script is not run as root user
+#        if [[ $USER != "root" ]]; then
+#                echo "This script must be run as root user!"
+#                exit 1
+#        fi
+#
+#echo "Super User detected!!"
+
+#uncomment the following line if you rather want to run the script manually.
+#read -p "Press [ENTER] to start the procedure, this will stop the seafile server!!"
+
+# stop the server
+echo Stopping the Seafile-Server...
+/etc/init.d/seafile-server stop
+
+echo Giving the server some time to shut down properly....
+sleep 10
+
+# run the cleanup
+echo Seafile cleanup started...
+sudo -u seafile $pathtoseafile/seafile-server-latest/seaf-gc.sh -r
+
+echo Giving the server some time....
+sleep 3
+
+# start the server again
+echo Starting the Seafile-Server...
+/etc/init.d/seafile-server start
+
+echo Seafile cleanup done!
+```
+
+Then open crontab with the root user
+
+    crontab -e
+    
+Add the following line (change the location of your script accordingly!)
+
+    0 2 * * Sun /opt/haiwen/seafile/cleanupScript.sh
+    
+The script wil then run every Sunday at 2:00 AM.
