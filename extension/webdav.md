@@ -80,7 +80,6 @@ The corresponding Nginx configuration is (without https):
         proxy_read_timeout  36000s;
         proxy_send_timeout  36000s;
         send_timeout  36000s;
-        proxy_request_buffering off;
         
         # This option is only available for Nginx >= 1.8.0. See more details below.
         proxy_request_buffering off;
@@ -110,15 +109,12 @@ Nginx conf with https:
         fastcgi_param   SERVER_NAME         $server_name;
         fastcgi_param   HTTPS               on;
         fastcgi_param   HTTP_SCHEME         https;
-
-        fastcgi_param   HTTPS               on;
         
         client_max_body_size 0;
         proxy_connect_timeout  36000s;
         proxy_read_timeout  36000s;
         proxy_send_timeout  36000s;
         send_timeout  36000s;
-        proxy_request_buffering off;
         
         # This option is only available for Nginx >= 1.8.0. See more details below.
         proxy_request_buffering off;
