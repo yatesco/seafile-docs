@@ -52,7 +52,7 @@ On the primary server, add following options to my.cnf:
 
 ```
 [mysqld]
-log-bin=mysql-bin
+log_bin=mysql-bin
 server-id=1
 ```
 
