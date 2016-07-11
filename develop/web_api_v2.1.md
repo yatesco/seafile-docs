@@ -56,10 +56,8 @@
                 <a href="#group-message">Group Message</a>
                 <ul>
                     <li><a href="#get-group-messages">Get Group Messages</a></li>
-                    <li><a href="#get-group-message-detail">Get Group Message Detail</a></li>
                     <li><a href="#send-a-group-message">Send A Group Message</a></li>
-                    <li><a href="#reply-a-group-message">Reply A Group Message</a></li>
-                    <li><a href="#get-group-message-replies">Get Group Message Replies</a></li>
+                    <li><a href="#delete-a-group-message">Delete A Group Message</a></li>
                 </ul>
             </li>
         </ul>
@@ -841,158 +839,86 @@ curl -X DELETE -H 'Authorization: Token 444d2bbf1fc78ffbeedc4704c9f41e32d926ac94
 
 #### <a id="get-group-messages"></a>Get Group Messages ####
 
-**GET** https://cloud.seafile.com/api2/group/msgs/{group_id}/
+**GET** https://cloud.seafile.com/api2/groups/{group_id}/discussions/
 
 **Request parameters**
 
 * group_id
+* page (default 1)
+* per_page (default 20)
+* avatar_size (default 80)
 
 **Sample request**
 
-    curl -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' "https://cloud.seafile.com/api2/group/msgs/1/"
+    curl -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' "https://cloud.seafile.com/api2/groups/772/discussions/"
 
 **Sample response**
 
-    {
-        "next_page": -1,
-        "msgs": [
-            {
-                "reply_cnt": 0,
-                "timestamp": 1398230602,
-                "replies": [],
-                "from_email": "user@example.com",
-                "msgid": 1,
-                "msg": "test discuss",
-                "nickname": "user"
-            }
-        ]
-    }
-
-#### <a id="get-group-message-detail"></a>Get Group Message Detail ####
-
-**GET** https://cloud.seafile.com/api2/group/{group_id}/msg/{msg_id}/
-
-**Request parameters**
-
-* group_id
-* msg_id
-
-**Sample request**
-
-    curl -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' "https://cloud.seafile.com/api2/group/1/msg/1/"
-
-**Sample response**
-
-    {
-        "reply_cnt": 2,
-        "timestamp": 1398230602,
-        "replies": [
-            {
-                "msg": "this is another test",
-                "timestamp": 1398232319,
-                "nickname": "user",
-                "msgid": 1,
-                "from_email": "user@example.com"
-            },
-            {
-                "msg": "this is another test",
-                "timestamp": 1398232508,
-                "nickname": "user",
-                "msgid": 3,
-                "from_email": "user@example.com"
-            }
-        ],
-        "from_email": "user@example.com",
-        "msgid": 1,
-        "msg": "test discuss",
-        "nickname": "user"
-    }
-
-**Errors**
-
-* 404 message not found
+```
+{'current_page': 1,
+ 'msgs': [{'avatar_url': 'https://cloud.seafile.com/media/avatars/default.png',
+           'content': u'test',
+           'created_at': '2016-07-11T09:18:20+08:00',
+           'group_id': 772,
+           'id': 1,
+           'user_email': u'lian@lian.com',
+           'user_login_id': '',
+           'user_name': u'name-of-lian'}],
+ 'page_num': 1}
+```
 
 #### <a id="send-a-group-message"></a>Send A Group Message ####
 
-**POST** https://cloud.seafile.com/api2/group/msgs/{group_id}/
-
-**Request parameters**
-
-* message
-* group_id
-* repo_id(optional)
-* path(optional)
-
-**Sample request**
-
-    curl -d "message=this is another test&repo_id=c7436518-5f46-4296-97db-2fcba4c8c8db&path=/123.md" -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' "https://cloud.seafile.com/api2/group/msgs/1/"
-
-**Sample response**
-
-    {
-        "msgid": 3
-    }
-
-#### <a id="reply-a-group-message"></a>Reply A Group Message ####
-
-**POST** https://cloud.seafile.com/api2/group/{group_id}/msg/{msg_id}
+**POST** https://cloud.seafile.com/api2/groups/{group_id}/discussions/
 
 **Request parameters**
 
 * group_id
-* msg_id
-* message
+* content
+* avatar_size (default 80)
 
 **Sample request**
 
-    curl -d "message=this is a reply" -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' "https://cloud.seafile.com/api2/group/1/msg/1/"
+    curl -d "content=this is another test" -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' "https://cloud.seafile.com/api2/groups/772/discussions/"
 
 **Sample response**
 
-    {
-        "msgid": 3
-    }
+```
+{'avatar_url': 'http://192.168.1.124:8000/media/avatars/default.png',
+ 'content': u'this is another test',
+ 'created_at': '2016-07-11T09:27:49+08:00',
+ 'group_id': 772,
+ 'id': 3,
+ 'user_email': u'lian@lian.com',
+ 'user_login_id': '',
+ 'user_name': u'name-of-lian'}
+```
+
+#### <a id="delete-a-group-message"></a>Delete A Group Message ####
+
+**DELETE** https://cloud.seafile.com/api2/groups/772/discussions/3/
+
+**Request parameters**
+
+* group_id
+* discuss_id
+
+**Sample request**
+
+    curl -v -X DELETE -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' "https://cloud.seafile.com/api2/groups/772/discussions/3/"
+
+**sample response**
+
+```
+...
+< http/1.0 204 no content
+...
+```
 
 **Errors**
 
-* 404 message not found
-
-#### <a id="get-group-message-replies"></a>Get Group Message Replies ####
-
-**GET** https://cloud.seafile.com/api2/new_replies/
-
-
-**Sample request**
-
-    curl -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' "https://cloud.seafile.com/api2/new_replies/"
-
-**Sample response**
-
-    [
-        {
-            "reply_cnt": 1,
-            "timestamp": 1398231100,
-            "replies": [
-                {
-                    "msg": "@user test reply",
-                    "timestamp": 1398234493,
-                    "nickname": "123",
-                    "msgid": 5,
-                    "from_email": "user@example.com"
-                }
-            ],
-            "from_email": "user@example.com",
-            "att": {
-                "repo": "c7436518-5f46-4296-97db-2fcba4c8c8db",
-                "path": "/123.md",
-                "type": "file",
-                "src": "recommend"
-            },
-            "msgid": 3,
-            "msg": "this is another test",
-            "nickname": "user"
-        }
-    ]
+* 400 Discussion id not found.
+* 403 Permission denied.
 
 ## <a id="share"></a>Share
 
