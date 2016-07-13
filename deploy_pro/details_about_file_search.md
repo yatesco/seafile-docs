@@ -39,10 +39,12 @@ Restart your ES server after this.
 ```
 [INDEX FILES]
 ...
+external_es_server = true
 es_host = 192.168.1.101
 es_port = 9500
 ```
 
+- `external_es_server`: set to `true` so seafile would not start its own elasticsearch server
 - `es_host`: The ip address of your ES server
 - `es_port`: The listening port of the Thrift transport module. By default it should be `9500`
 
