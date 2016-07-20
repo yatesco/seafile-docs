@@ -59,7 +59,7 @@ Here is the sample configuration file:
         server_name seafile.example.com;
         proxy_set_header X-Forwarded-For $remote_addr;
 
-        add_header Strict-Transport-Security "max-age=31536000; includeSubdomains";
+        add_header Strict-Transport-Security "max-age=31536000; includeSubDomains";
         server_tokens off;
 
         location / {
@@ -101,7 +101,7 @@ Here is the sample configuration file:
 
 Tip for uploading very large files (> 4GB): By default Nginx will buffer large request body in temp file. After the body is completely received, Nginx will send the body to the upstream server (seaf-server in our case). But it seems when file size is very large, the buffering mechanism dosen't work well. It may stop proxying the body in the middle. So if you want to support file upload larger for 4GB, we suggest you install Nginx version >= 1.8.0 and add the following options to Nginx config file:
 
-```
+```nginx
     location /seafhttp {
         ... ...
         proxy_request_buffering off;
@@ -111,7 +111,7 @@ Tip for uploading very large files (> 4GB): By default Nginx will buffer large r
 
 If you have WebDAV enabled it is recommended to add the same:
 
-```
+```nginx
     location /seafdav {
         ... ...
         proxy_request_buffering off;
@@ -148,11 +148,30 @@ FILE_SERVER_ROOT = 'https://seafile.example.com/seafhttp'
 ./seahub.sh start-fastcgi
 ```
 
+## Additional modern settings for nginx (optional)
+
+### Activate IPv6
+
+Require IPv6 on server otherwise the server will not start! Also the AAAA dns record is required for IPv6 usage.
+
+```nginx
+listen 443;
+listen [::]:443;
+```
+
+### Activate HTTP2
+
+Activate HTTP2 for more performance. Only available for SSL and nginx version>=1.9.5. Simply add `http2`.
+```nginx
+listen 443 http2;
+listen [::]:443 http2;
+```
+
 ## Additional security settings for nginx (optional)
 
 Add the HSTS header. If you already visited the https version the next time your browser will directly visit the https site and not the http one. Prevent man-in-the-middle-attacks:
 ```nginx
-add_header Strict-Transport-Security "max-age=31536000; includeSubdomains";
+add_header Strict-Transport-Security "max-age=31536000; includeSubDomains";
 ```
 
 Disable exact server version in header. Prevent scans for vulnerable server.
