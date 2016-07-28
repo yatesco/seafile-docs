@@ -1,5 +1,7 @@
 # Deploy with Windows
 
+Note: Seafile Windows server is not suitable to be used in an environment with more than 25 users. In the latter case, please use Seafile Linux server.
+
 ## Setup and Upgrade
 
 Seafile Windows Community Edition supports SQLite/MySQL database.
@@ -43,3 +45,7 @@ Make sure you have modified ``SERVICE_URL`` in ccnet.conf. You can also modify S
 
 - Use python 2.7.11 32bit. If you have installed other python version, uninstall it and install python 2.7.11. Restart seafile server to see whether the problem has gone.
 - Delete non-ASCII keys from the registry path ``HKEY_CLASSES_ROOT\MIME\Database\Content`` Type, and try again.
+
+### "Page unavailable" when visit http://127.0.0.1:8000
+
+Please check the log file `seahub_django_request.log` under the folder `seafile-server/logs`.
