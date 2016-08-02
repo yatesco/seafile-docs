@@ -9,8 +9,6 @@ This page is for users who use the pre-compiled seafile server package.
 
 If you are running a **cluster**, please read [upgrade a Seafile cluster](../deploy_pro/upgrade_a_cluster.md).
 
-### IMPORTANT
-Always make a backup of your current databases in case something goes wrong. If you have the option to make snapshots on your virtual server you can save yourself a lot of trouble and time!
 
 __Notice: If you upgrade from a version prior to 5.1.8 you need to install python-urllib3__
 ```
