@@ -1,101 +1,159 @@
-# Setup Develop Environment
+# Setup Seafile Develop Environment
 
-## Preparation ##
+The following operation have all been tested on ubuntu-16.04.1-desktop-amd64 system.
 
-Package names are according to Ubuntu 12.04. For other Linux distros, please find their corresponding names yourself.
+## Install Necessary Packages
 
-* libevent-dev  (2.0 or later )
-* libcurl4-openssl-dev  (1.0.0 or later)
-* libglib2.0-dev (2.28 or later)
-* uuid-dev
-* intltool (0.40 or later)
-* libsqlite3-dev (3.7 or later)
-* libmysqlclient-dev (5.5 or later)
-* libarchive-dev
-* libtool
-* libjansson-dev
-* valac
-* libfuse-dev
+- install necessary packages by `apt`
 
+```
+sudo apt install ssh libevent-dev libcurl4-openssl-dev libglib2.0-dev uuid-dev intltool libsqlite3-dev libmysqlclient-dev libarchive-dev libtool libjansson-dev valac libfuse-dev python-dateutil cmake re2c flex sqlite3 python-pip python-simplejson git libssl-dev libldap2-dev
+```
 
-The following libraries need to be compiled from source.
+- install `libevhtp` from source
 
-* [libzdb](http://www.tildeslash.com/libzdb/dist/libzdb-2.12.tar.gz)
-* [libevhtp](https://github.com/ellzey/libevhtp/archive/1.1.6.zip)
+```
+cd ~/Downloads/
+wget https://github.com/ellzey/libevhtp/archive/1.1.6.tar.gz
+tar xf 1.1.6.tar.gz
+cd libevhtp-1.1.6/
+cmake -DEVHTP_DISABLE_SSL=OFF -DEVHTP_BUILD_SHARED=ON .
+make
+sudo make install
+sudo ldconfig
+```
 
-libzdb relies on two packages: `re2c` and `flex`.
-libevhtp can be build by `cmake .; make; sudo make install`.  libevhtp's version should be 1.1.6 or 1.1.7.
+- install `libzdb` from source
 
-'''Seahub''' is the web front end of Seafile. It's written in the Django framework. Seahub requires Python 2.6(2.7) installed on your server, and it needs the following python libraries:
+```
+cd ~/Downloads/
+wget http://tildeslash.com/libzdb/dist/libzdb-3.1.tar.gz
+tar xf libzdb-3.1.tar.gz
+cd libzdb-3.1/
+./configure
+make
+sudo make install
+sudo ldconfig
+```
 
-* [Django1.5](https://www.djangoproject.com/download/1.5.2/tarball/)
-* [Djblets](https://github.com/djblets/djblets/tarball/release-0.6.14)
-* sqlite3
-* simplejson (python-simplejson)
-* PIL (aka. python imaging library, python-image) or Pillow
-* chardet
-* python-dateutil
+## Download and Build Seafile
 
-## Download & Compile
+- create project root directory *dev*
 
-Clone [libsearpc](https://github.com/haiwen/libsearpc/), [ccnet](https://github.com/haiwen/ccnet/), [seafile](https://github.com/haiwen/seafile/), [seahub](https://github.com/haiwen/seahub/) to ~/dev (or wherever you want).
+```
+cd
+mkdir dev
+```
 
-Complie libsearpc with
+- download and install `libsearpc`
 
-    cd ~/dev/libsearpc
-    ./autogen.sh
-    ./configure
-    make
-    make install
+```
+cd ~/dev/
+git clone https://github.com/haiwen/libsearpc.git
+cd libsearpc/
+./autogen.sh
+./configure
+make
+sudo make install
+sudo ldconfig
+```
 
-Compile ccnet with
+- download and install `ccnet`
 
-    cd ~/dev/ccnet
-    ./autogen.sh
-    ./configure --disable-client --enable-server   # `export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig` if libsearpc is not found
-    make
-    make install
+```
+cd ~/dev/
+git clone https://github.com/haiwen/ccnet.git
+cd ccnet/
+git checkout -b v6.0.0-server v6.0.0-server
+./autogen.sh
+./configure --disable-client --enable-server --enable-ldap
+make
+sudo make install
+sudo ldconfig
+```
 
-Compile seafile with
+- download and install `seafile`
 
-    cd ~/dev/seafile
-    ./autogen.sh
-    ./configure --disable-client --enable-server
-    make     # in Mac, use `make LDFLAGS=-liconv`
-    make install
-    
+```
+cd ~/dev/
+git clone https://github.com/haiwen/seafile.git
+cd seafile/
+git checkout -b v6.0.0-server v6.0.0-server
+./autogen.sh
+./configure --disable-client --enable-server
+make
+sudo make install
+```
 
-## Run seafile
+- download `seahub`
 
-Run seafile with
+```
+cd ~/dev/
+git clone https://github.com/haiwen/seahub.git
+cd seahub/
+git checkout -b v6.0.0-server v6.0.0-server
+```
 
-    cd ~/dev/seafile/tests/basic
-    ./seafile.sh 2
+## Start `ccnet-server` and `seaf-server`
 
-Or you can start ccnet, seafile and fileserver manually by:
+```
+cd ~/dev/seafile/tests/basic
+./seafile.sh 2
+```
 
-    ccnet-server -c ~/dev/seafile/tests/basic/conf2/ -D all -f -
-    seaf-server -c ~/dev/seafile/tests/basic/conf2/ -d ~/dev/seafile/tests/basic/conf2/seafile-data/ -f -l -
+or you can start manually by:
 
-## Prepare seahub
+```
+ccnet-server -c ~/dev/seafile/tests/basic/conf2/ -D all -f -
+seaf-server -c ~/dev/seafile/tests/basic/conf2/ -d ~/dev/seafile/tests/basic/conf2/seafile-data/ -f -l -
+```
 
-Go to seahub
+**NOTE**: if *error while loading shared libraries: libzdb.so.11: cannot open shared object file: No such file or directory*, you should `sudo ldconfig`
 
-    cd ~/dev/seahub
+## Start `seahub`
 
-Download django-1.5 to thirdpart. And create and modify setenv.sh from templates
+`Seahub` is the web front end of Seafile. It is written in the Django framework, requires Python 2.7 installed on your server.
 
-    cp setenv.sh.template setenv.sh
+- set environment
 
-Create database
+```
+cd ~/dev/seahub/
 
-    . setenv.sh
-    python manage.py syncdb
+cat > setenv.sh << EOF
+export CCNET_CONF_DIR=/home/plt/dev/seafile/tests/basic/conf2
+export SEAFILE_CONF_DIR=/home/plt/dev/seafile/tests/basic/conf2/seafile-data
+export PYTHONPATH=/usr/local/lib/python2.7/dist-packages:thirdpart:\$PYTHONPATH
+EOF
 
-Create admin account (assume seafile is under ~/dev/seafile)
+sudo chmod u+x setenv.sh
+```
 
-    python tools/seahub-admin.py ~/dev/seafile/tests/basic/conf2
+**NOTE**: change **plt** to your linux user name
 
-Start seahub
+- install requirements
 
-    ./run-seahub.sh.template
+```
+. setenv.sh
+cd ~/dev/seahub/
+sudo pip install -r requirements.txt
+```
+
+**NOTE**: if *locale.Error: unsupported locale setting*, you should `export LC_ALL=en_US.UTF-8`
+
+- create database and admin account
+
+```
+. setenv.sh
+python manage.py migrate
+python tools/seahub-admin.py # create admin account
+```
+
+**NOTE**: currently, your *ccnet directory* is `/home/plt/dev/seafile/tests/basic/conf2`
+
+- run `seahub`
+
+```
+python manage.py runserver 0.0.0.0:8000
+```
+
+then open browser and navigate to http://127.0.0.1:8000
