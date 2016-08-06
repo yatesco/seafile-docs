@@ -1,29 +1,28 @@
 # Setup Seafile Develop Environment
 
-The following operation have all been tested on ubuntu-16.04.1-desktop-amd64 system.
+The following operations have been tested on ubuntu-16.04.1-desktop-amd64 system.
 
 ## Install Necessary Packages
 
-- install necessary packages by `apt`
+#### install necessary packages by `apt`
 
 ```
 sudo apt install ssh libevent-dev libcurl4-openssl-dev libglib2.0-dev uuid-dev intltool libsqlite3-dev libmysqlclient-dev libarchive-dev libtool libjansson-dev valac libfuse-dev python-dateutil cmake re2c flex sqlite3 python-pip python-simplejson git libssl-dev libldap2-dev
 ```
 
-- install `libevhtp` from source
+#### install `libevhtp` from source
 
 ```
 cd ~/Downloads/
-wget https://github.com/ellzey/libevhtp/archive/1.1.6.tar.gz
-tar xf 1.1.6.tar.gz
-cd libevhtp-1.1.6/
+wget https://github.com/haiwen/libevhtp.git
+cd libevhtp/
 cmake -DEVHTP_DISABLE_SSL=OFF -DEVHTP_BUILD_SHARED=ON .
 make
 sudo make install
 sudo ldconfig
 ```
 
-- install `libzdb` from source
+#### install `libzdb` from source
 
 ```
 cd ~/Downloads/
@@ -38,14 +37,14 @@ sudo ldconfig
 
 ## Download and Build Seafile
 
-- create project root directory *dev*
+#### create project root directory *dev*
 
 ```
 cd
 mkdir dev
 ```
 
-- download and install `libsearpc`
+#### download and install `libsearpc`
 
 ```
 cd ~/dev/
@@ -58,7 +57,7 @@ sudo make install
 sudo ldconfig
 ```
 
-- download and install `ccnet`
+#### download and install `ccnet`
 
 ```
 cd ~/dev/
@@ -72,7 +71,7 @@ sudo make install
 sudo ldconfig
 ```
 
-- download and install `seafile`
+#### download and install `seafile`
 
 ```
 cd ~/dev/
@@ -85,7 +84,7 @@ make
 sudo make install
 ```
 
-- download `seahub`
+#### download `seahub`
 
 ```
 cd ~/dev/
@@ -114,7 +113,7 @@ seaf-server -c ~/dev/seafile/tests/basic/conf2/ -d ~/dev/seafile/tests/basic/con
 
 `Seahub` is the web front end of Seafile. It is written in the Django framework, requires Python 2.7 installed on your server.
 
-- set environment
+#### set environment
 
 ```
 cd ~/dev/seahub/
@@ -130,7 +129,7 @@ sudo chmod u+x setenv.sh
 
 **NOTE**: change **plt** to your linux user name
 
-- install requirements
+#### install requirements
 
 ```
 . setenv.sh
@@ -140,7 +139,7 @@ sudo pip install -r requirements.txt
 
 **NOTE**: if *locale.Error: unsupported locale setting*, you should `export LC_ALL=en_US.UTF-8`
 
-- create database and admin account
+#### create database and admin account
 
 ```
 . setenv.sh
@@ -150,7 +149,7 @@ python tools/seahub-admin.py # create admin account
 
 **NOTE**: currently, your *ccnet directory* is `/home/plt/dev/seafile/tests/basic/conf2`
 
-- run `seahub`
+#### run `seahub`
 
 ```
 python manage.py runserver 0.0.0.0:8000
