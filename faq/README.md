@@ -7,6 +7,7 @@
 * [LDAP](ldap.md)
 * [GC and fsck](gc-fsck.md)
 * [Common problems after upgrade](upgrade.md)
+* [Cluster](cluster.md)
 
 ## Client
 
