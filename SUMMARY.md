@@ -93,6 +93,8 @@
    * [Security features](security/security_features.md)
    * [Access logs and auditing](security/auditing.md)
    * [Config fail2ban](security/fail2ban.md)
+* [FAQ](faq/README.md)
+   * [LDAP](faq/ldap.md)
 * [Developing](develop/README.md)
    * [How to Build Seafile](build_seafile/README.md)
        * [Linux](build_seafile/linux.md)
