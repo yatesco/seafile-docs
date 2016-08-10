@@ -96,5 +96,3 @@ Since version 4.4.2, system admins can migrate libraries and groups from one acc
 ### Seafile GC shows errors, FSCK can’t fix them
 
 GC scans the history. But FSCK only scans the current version. You can ignore the error. It is a minor issue.
-
-## Questions about LDAP and User management
