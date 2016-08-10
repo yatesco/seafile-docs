@@ -8,4 +8,6 @@
 * [GC and fsck](gc-fsck.md)
 * [Common problems after upgrade](upgrade.md)
 
-## Desktop Syncing Client
+## Client
+
+* [Common problems about desktop syncing client](faq/client.md)

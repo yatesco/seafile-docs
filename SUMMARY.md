@@ -99,6 +99,7 @@
    * [Upgrade](faq/upgrade.md)
    * [GC and fsck](faq/gc-fsck.md)
    * [data management](faq/library-mgr.md)
+   * [Desktop syncing client](faq/client.md)
 * [Developing](develop/README.md)
    * [How to Build Seafile](build_seafile/README.md)
        * [Linux](build_seafile/linux.md)
