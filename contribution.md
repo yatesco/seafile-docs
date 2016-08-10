@@ -2,9 +2,14 @@
 
 ## Licensing
 
-Seafile and its desktop and mobile clients are published under the GPLv2.
+The different components of Seafile project are released under different licenses:
 
-The Seafile server's web front end Seahub, is published under the Apache License.
+* [Seafile iOS client](https://github.com/haiwen/seafile-iOS): Apache License v2
+* [Seafile Android client](https://github.com/haiwen/seadroid): GPLv3
+* Desktop syncing client: GPLv2
+* Seafile Server core: GPLv2
+* Seahub (Seafile server Web UI): Apache License v2
+
 
 ## Discussion
 
