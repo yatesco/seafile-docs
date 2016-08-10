@@ -11,7 +11,7 @@ If you are running a **cluster**, please read [upgrade a Seafile cluster](../dep
 
 
 __Notice: If you upgrade from a version prior to 5.1.8 you need to install python-urllib3__
-```
+```sh
 # for Ubuntu / Debian
 sudo apt-get install python-urllib3
 # for CentOS
@@ -62,7 +62,7 @@ Now upgrade to version 5.0.0.
    upgrade/upgrade_4.4_5.0.sh
    ```
 
-3. Start from you current version, run the script(s one by one)
+3. Start from your current version, run the script(s one by one)
 
    ```
    upgrade/upgrade_4.3_4.4.sh
@@ -133,7 +133,7 @@ Now upgrade to version 5.1.0.
    upgrade/upgrade_5.0_5.1.sh
    ```
 
-3. Start from you current version, run the script(s one by one)
+3. Start from your current version, run the script(s one by one)
 
    ```
    upgrade/upgrade_5.0_5.1.sh
