@@ -82,6 +82,15 @@ In a cluster environment, you may want to use a memcached cluster. In the above 
 memcached_options = --SERVER=192.168.1.134 --SERVER=192.168.1.135 --SERVER=192.168.1.136 --POOL-MIN=10 --POOL-MAX=100
 ```
 
+## Notes for Ubuntu 16.04
+
+Since version 5.1.0 version, we upgraded the bundled Ceph rados library to 0.94.6. On Ubuntu 16.04, this causes some incompatibility. To work around this issue, you have to install librados 0.94.6 in the Ubuntu system (from Ceph's official repositories) and let Seafile use the library from system. To do this, you have to remove a few bundled libraries:
+
+```
+cd seafile-server-latest/seafile/lib
+rm librados.so.2 libstdc++.so.6 libnspr4.so
+```
+
 ## Use arbitary Ceph user
 
 The above configuration will use the default (client.admin) user to connect to Ceph.
