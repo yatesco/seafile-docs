@@ -12,4 +12,4 @@
 
 ## Client
 
-* [Common problems about desktop syncing client](faq/client.md)
+* [Common problems about desktop syncing client](client.md)
