@@ -7,7 +7,7 @@ The different components of Seafile project are released under different license
 * [Seafile iOS client](https://github.com/haiwen/seafile-iOS): Apache License v2
 * [Seafile Android client](https://github.com/haiwen/seadroid): GPLv3
 * Desktop syncing client: GPLv2
-* Seafile Server core: GPLv2
+* [Seafile Server core](https://github.com/haiwen/seafile-server): AGPLv3
 * Seahub (Seafile server Web UI): Apache License v2
 
 
