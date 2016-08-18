@@ -2604,6 +2604,8 @@ The id of the updated file
 
 **Sample request**
 
+request file/dir list of a folder.
+
     curl -H "Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d9b477fd" -H 'Accept: application/json; indent=4' https://cloud.seafile.com/api2/repos/99b758e6-91ab-4265-b705-925367374cf0/dir/?p=/foo
 
 **Sample response**
@@ -2623,6 +2625,48 @@ The id of the updated file
         "name": "test_dir"
     }
     ]
+
+**Sample request**
+
+request recursive dir list of a folder.
+
+    curl -H "Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d9b477fd" -H 'Accept: application/json; indent=4' 'https://cloud.seafile.com/api2/repos/99b758e6-91ab-4265-b705-925367374cf0/dir/?t=d&recursive=1'
+
+**Sample response**
+
+```
+[{'id': u'5e307101cad46398fb5fe52d9177836f73c4bae8',
+  'mtime': 1471490386,
+  'name': u'123',
+  'parent_dir': u'/video',
+  'permission': u'rw',
+  'type': 'dir'},
+ {'id': u'0000000000000000000000000000000000000000',
+  'mtime': 1471490391,
+  'name': u'123-2',
+  'parent_dir': u'/video',
+  'permission': u'rw',
+  'type': 'dir'},
+ {'id': u'0000000000000000000000000000000000000000',
+  'mtime': 1471490379,
+  'name': u'456',
+  'parent_dir': u'/video/123',
+  'permission': u'rw',
+  'type': 'dir'},
+ {'id': u'0000000000000000000000000000000000000000',
+  'mtime': 1471490386,
+  'name': u'456-2',
+  'parent_dir': u'/video/123',
+  'permission': u'rw',
+  'type': 'dir'},
+ {'id': u'd8f5f80fbd89bf5634dcf9e21b569c487541d34e',
+  'mtime': 1471490391,
+  'name': u'video',
+  'parent_dir': '/',
+  'permission': u'rw',
+  'type': 'dir'}
+]
+```
 
 **Errors**
 
