@@ -11,7 +11,7 @@ Package names are according to Ubuntu 12.04. For other Linux distros, please fin
 * libglib2.0-dev (2.28 or later)
 * uuid-dev
 * intltool (0.40 or later)
-* libsqlite3-dev (3.7 or later)
+* libsqlite3-dev (3.8 or later)
 * libmysqlclient-dev (5.5 or later)
 * libarchive-dev
 * libtool
@@ -23,12 +23,23 @@ Also, python 2.7 is required since seafile server 5.1.0.
 
 The following libraries need to be compiled from source.
 
-### libzdb
+### Notes about MySQL client library
 
-* Install `re2c` and `flex`
-* Download [libzdb](http://www.tildeslash.com/libzdb/dist/libzdb-2.12.tar.gz)
+You can also use MariaDB's LGPL Connector/C library. Download the latest stable version of the library on https://downloads.mariadb.org/connector-c/ then compile and install the library.
 
-#### libevhtp
+```
+cmake .
+make
+sudo make install
+```
+
+By default the library will be installed under `/usr/local/lib/mariadb`. Add this path to your `LD_LIBRARY_PATH` environment variable so the loader can find this library.
+
+```
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/mariadb
+```
+
+### libevhtp
 
 * Download [libevhtp](https://github.com/ellzey/libevhtp/archive/1.1.6.tar.gz).
 * Build libevhtp by:
@@ -85,21 +96,21 @@ haiwen/
 
 ### Get the source
 
-First you should get the latest source of libsearpc/ccnet/seafile/seahub
+First you should get the latest source of libsearpc/ccnet-server/seafile-server/seahub
 
 Download the source tarball of the latest tag from
 
 * https://github.com/haiwen/libsearpc/tags
-* https://github.com/haiwen/ccnet/tags
-* https://github.com/haiwen/seafile/tags
+* https://github.com/haiwen/ccnet-server/tags
+* https://github.com/haiwen/seafile-server/tags
 * https://github.com/haiwen/seahub/tags
 
-For example, if the latest released seafile server is 4.4.7, then just use the **v4.4.7-server** tags of the projects (except for libsearpc, which uses the **v3.0-latest** tag). You should get four tarballs:
+For example, if the latest released seafile server is 6.0.1, then just use the **v6.0.1-server** tags of the projects (except for libsearpc, which uses the **v3.0-latest** tag). You should get four tarballs:
 
 * libsearpc-3.0-latest.tar.gz
-* ccnet-4.4.7-server.tar.gz
-* seafile-4.4.7-server.tar.gz
-* seahub-4.4.7-server.tar.gz
+* ccnet-server-6.0.1-server.tar.gz
+* seafile-server-6.0.1-server.tar.gz
+* seahub-6.0.1-server.tar.gz
 
 Create a folder `haiwen/src`, and uncompress libsearpc/ccnet/seafile source to it.
 
@@ -108,16 +119,16 @@ cd haiwen/seafile-server
 mkdir src
 cd src
 tar xf /path/to/libsearpc-3.0-latest.tar.gz
-tar xf /path/to/ccnet-4.4.7-server.tar.gz
-tar xf /path/to/seafile-4.4.7-server.tar.gz
+tar xf /path/to/ccnet-server-6.0.1-server.tar.gz
+tar xf /path/to/seafile-server-6.0.1-server.tar.gz
 ```
 
 And uncompress seahub tarball to `haiwen/seafile-server`:
 
 ```
 cd haiwen/seafile-server
-tar xf /path/to/seahub-4.4.7-server.tar.gz
-mv seahub-4.4.7-server seahub
+tar xf /path/to/seahub-6.0.1-server.tar.gz
+mv seahub-6.0.1-server seahub
 ```
 
 So far, The current directory layout is:
@@ -127,15 +138,15 @@ haiwen/
 └── seafile-server
     └── seahub
     └── src
-        ├── libsearpc-4.4.7-server
-        ├── ccnet-4.4.7-server
-        ├── seafile-4.4.7-server
+        ├── libsearpc-6.0.1-server
+        ├── ccnet-server-6.0.1-server
+        ├── seafile-server-6.0.1-server
         ├── ... (other files)
 ```
 
 ### Building
 
-To build seafile server, you need first build **libsearpc** and **ccnet**.
+To build seafile server, you need first build **libsearpc** and **ccnet-server**.
 
 ##### libsearpc
 
@@ -147,26 +158,39 @@ make
 make install
 ```
 
-##### ccnet
+##### ccnet-server
 
 ```
-cd ccnet-${version}
+cd ccnet-server-${version}
 ./autogen.sh
-./configure --disable-client --enable-server   # `export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig` if libsearpc is not found
+./configure # `export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig` if libsearpc is not found
 make
 make install
 ```
 
-##### seafile
+By default, `configure` tries to find MySQL and Postgresql client libraries in the system. If you do not want to support MySQL or Postgresql, use the following configure options:
+
+```
+./configure --without-mysql --without-postgresql
+```
+
+If you want to use MariaDB Connector/C library, use the following configure option:
+
+```
+./configure --with-mysql=/usr/local/bin/mariadb_config
+```
+
+##### seafile-server
 
 ```
 cd seafile-${version}
 ./autogen.sh
-./configure --disable-client --enable-server
+./configure
 make
 make install
 ```
 
+You can use the same options as ccnet-server to configure MySQL and Postgresql client libraries.
 
 *Note*: You need to run `sudo ldconfig` to refresh the system libraries cache after you compiles all the components.
 
