@@ -183,11 +183,11 @@ TIME_ZONE = 'UTC'
 # Default language for sending emails.
 LANGUAGE_CODE = 'en'
 
-# Set this to your website's name. This is contained in email notifications.
-SITE_NAME = 'example.com'
+# Set this to your website/company's name. This is contained in email notifications and welcome message when user login for the first time.
+SITE_NAME = 'Seafile'
 
-# Set seahub website's title
-SITE_TITLE = 'Seafile'
+# Browser tab's title
+SITE_TITLE = 'Private Seafile'
 
 # If you don't want to run seahub website on your site's root path, set this option to your preferred path.
 # e.g. setting it to '/seahub/' would run seahub on http://example.com/seahub/.
