@@ -67,8 +67,16 @@ The Seafile server package requires the following packages have been installed i
 - sqlite3
 
 ```
-#on Debian
+#on Debian/Ubuntu 14.04 server
 apt-get update
+apt-get install python2.7 libpython2.7 python-setuptools python-imaging python-ldap python-urllib3 sqlite3
+```
+
+```
+# on Ubuntu 16.04 server
+# As the default python binary on Ubuntu 16.04 server is python 3, we need to install python (python 2) first.
+apt-get update
+apt-get install python
 apt-get install python2.7 libpython2.7 python-setuptools python-imaging python-ldap python-urllib3 sqlite3
 ```
 
