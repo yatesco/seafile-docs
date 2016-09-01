@@ -78,3 +78,14 @@ max_connections = 200
 ./seahub.sh restart
 ./seafile.sh restart
 ```
+
+## Change File Lock Auto Expire time (Pro edition only)
+
+The Seafile Pro server auto expires file locks after some time, to prevent a locked file being locked for too long. The expire time can be tune in seafile.conf file.
+
+```
+[file_lock]
+default_expire_hours = 6
+```
+
+The default is 12 hours.
