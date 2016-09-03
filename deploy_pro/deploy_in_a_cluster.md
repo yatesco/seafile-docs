@@ -223,6 +223,8 @@ cd /data/haiwen/
 ln -s /nfs-share/seafile-httptemp seafile-data/httptemp
 ```
 
+The httptemp folder only contains temp files for downloading/uploading file on web UI. So there is no reliability requirement for the NFS share. You can export it from any node in the cluster.
+
 ### Backend Storage Settings
 
 You also need to add the settings for backend cloud storage systems to the config files.
