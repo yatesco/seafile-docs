@@ -2,6 +2,8 @@
 
 **Note**: Since Seafile Server 5.0.0, all config files are moved to the central **conf** folder. [Read More](../deploy/new_directory_layout_5_0_0.md).
 
+**Update**: Since Seafile Pro server 6.0.0, cluster deployment requires that `seafile-data/httptemp` folder be placed inside an NFS share. Otherwise sometimes folder download on the web UI can't work properly. Read the "Link `seafile-data/httptemp` to an NFS Share" section below for details.
+
 ## <a id="wiki-arch"></a> Architecture
 
 The Seafile cluster solution employs a 3-tier architecture:
@@ -212,6 +214,15 @@ In cluster environment, we have to store avatars in the database instead of in a
 CREATE TABLE `avatar_uploaded` (`filename` TEXT NOT NULL, `filename_md5` CHAR(32) NOT NULL PRIMARY KEY, `data` MEDIUMTEXT NOT NULL, `size` INTEGER NOT NULL, `mtime` datetime NOT NULL);
 ```
 
+### Link `seafile-data/httptemp` to an NFS Share
+
+In version 6.0.0, the folder download mechanism has been updated. This requires that, in a cluster deployment, `seafile-data/httptemp` folder must be in an NFS share. You can make this folder a symlink to the NFS share.
+
+```
+cd /data/haiwen/
+ln -s /nfs-share/seafile-httptemp seafile-data/httptemp
+```
+
 ### Backend Storage Settings
 
 You also need to add the settings for backend cloud storage systems to the config files.
@@ -244,6 +255,8 @@ Now you have one node working fine, let's continue to configure more nodes.
 ### Copy the config to all Seafile servers
 
 Supposed your Seafile installation directory is `/data/haiwen`, compress this whole directory into a tarball and copy the tarball to all other Seafile server machines. You can simply uncompress the tarball and use it.
+
+You have to make sure, on each node, `seafile-data/httptemp` should point to the same NFS share folder.
 
 On each node, run `./seafile.sh` and `./seahub.sh` to start Seafile server.
 
