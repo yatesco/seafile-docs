@@ -12,10 +12,13 @@ enable easy collaboration around documents within a team.
 
 ## LICENSE
 
-Seafile server is public under GPLv2.
+The different components of Seafile project are released under different licenses:
 
-The Seafile server's web end, i.e. Seahub, is published under the Apache
-License.
+- Seafile iOS client: Apache License v2
+- Seafile Android client: GPLv3
+- Desktop syncing client: GPLv2
+- Seafile Server core: AGPLv3
+- Seahub (Seafile server Web UI): Apache License v2
 
 ## About this manual
 
