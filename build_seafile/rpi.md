@@ -39,19 +39,6 @@ make
 sudo make install
 ```
 
-#### libzdb
-
-`libzdb` provides a consistent API to various database backends, including sqlite/mysql/pg/oracle. It's used by ccnet-server and seafile-server.
-
-```
-git clone https://www.github.com/haiwen/libzdb.git
-cd libzdb
-./autogen.sh
-./configure
-make
-sudo make install
-```
-
 After compiling all the libraries, run `ldconfig` to update the system libraries cache:
 
 ```
@@ -117,8 +104,8 @@ easy_install -d . /tmp/openpyxl-2.3.0.tar.gz
 To build seafile server, there are four sub projects involved:
 
 - [libsearpc](https://github.com/haiwen/libsearpc)
-- [ccnet](https://github.com/haiwen/ccnet)
-- [seafile](https://github.com/haiwen/seafile)
+- [ccnet-server](https://github.com/haiwen/ccnet-server)
+- [seafile-server](https://github.com/haiwen/seafile-server)
 - [seahub](https://github.com/haiwen/seahub)
 
 The build process has two steps:
@@ -130,9 +117,9 @@ The build process has two steps:
 
 Seafile manages the releases in tags on github.
 
-Assume we are packaging for seafile server 4.1.1, then the tags are:
+Assume we are packaging for seafile server 6.0.1, then the tags are:
 
-- ccnet, seafile, and seahub would all have a `v4.1.1-sever` tag.
+- ccnet-server, seafile-server, and seahub would all have a `v6.0.1-sever` tag.
 - libsearpc would have the `v3.0-latest` tag (libsearpc has been quite stable and basically has no further development, so the tag is always `v3.0-latest`)
 
 First setup the `PKG_CONFIG_PATH` enviroment variable (So we don't need to make and make install libsearpc/ccnet/seafile into the system):
@@ -160,9 +147,9 @@ make dist
 
 ```
 cd ~/dev
-git clone https://github.com/haiwen/ccnet.git
+git clone https://github.com/haiwen/ccnet-server.git
 cd ccnet
-git reset --hard v4.1.1-server
+git reset --hard v6.0.1-server
 ./autogen.sh
 ./configure
 make dist
@@ -172,9 +159,9 @@ make dist
 
 ```
 cd ~/dev
-git clone https://github.com/haiwen/seafile.git
+git clone https://github.com/haiwen/seafile-server.git
 cd seafile
-git reset --hard v4.1.1-server
+git reset --hard v6.0.1-server
 ./autogen.sh
 ./configure
 make dist
@@ -186,8 +173,8 @@ make dist
 cd ~/dev
 git clone https://github.com/haiwen/seahub.git
 cd seahub
-git reset --hard v4.1.1-server
-./tools/gen-tarball.py --version=4.1.1 --branch=HEAD
+git reset --hard v6.0.1-server
+./tools/gen-tarball.py --version=6.0.1 --branch=HEAD
 ```
 
 ### seafobj
@@ -196,7 +183,7 @@ git reset --hard v4.1.1-server
 cd ~/dev
 git clone https://github.com/haiwen/seafobj.git
 cd seafobj
-git reset --hard v4.1.1-server
+git reset --hard v6.0.1-server
 make dist
 ```
 
@@ -206,7 +193,7 @@ make dist
 cd ~/dev
 git clone https://github.com/haiwen/seafdav.git
 cd seafdav
-git reset --hard v4.1.1-server
+git reset --hard v6.0.1-server
 make
 ```
 
@@ -232,7 +219,7 @@ mkdir ~/seafile-server-pkgs
 ~/dev/seafile/scripts/build-server.py --libsearpc_version=<libsearpc_version> --ccnet_version=<ccnet_version> --seafile_version=<seafile_version> --seahub_version=<seahub_version> --srcdir=  --thidrpartdir=/home/pi/dev/seahub_thirdpart --srcdir=/home/pi/seafile-sources --outputdir=/home/pi/seafile-server-pkgs
 ```
 
-After the script finisheds, we would get a `seafile-server_4.1.1_pi.tar.gz` in `~/seafile-server-pkgs` folder.
+After the script finisheds, we would get a `seafile-server_6.0.1_pi.tar.gz` in `~/seafile-server-pkgs` folder.
 
 ## <a id="wiki-test-built-pkg"></a> Test the built package
 
