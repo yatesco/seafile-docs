@@ -101,6 +101,7 @@
    * [Data management](faq/library-mgr.md)
    * [Data lost after power failure](faq/data-lost.md)
    * [Cluster](faq/cluster.md)
+   * [Ceph](faq/ceph.md)
    * [Desktop syncing client](faq/client.md)
 * [Developing](develop/README.md)
    * [How to Build Seafile](build_seafile/README.md)

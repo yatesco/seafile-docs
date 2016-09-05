@@ -7,8 +7,9 @@
 * [LDAP](ldap.md)
 * [GC and fsck](gc-fsck.md)
 * [Common problems after upgrade](upgrade.md)
-* [Data lost or can't start server after power failure](data-lost.md)
+* [Can't start server](data-lost.md)
 * [Cluster](cluster.md)
+* [Ceph](ceph.md)
 
 ## Client
 
