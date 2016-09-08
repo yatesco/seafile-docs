@@ -21,6 +21,7 @@ S3/OpenSwift/Ceph
 - [Setup Seafile Professional Server With Amazon S3](setup_with_mazon_S3.md)
 - [Setup Seafile Professional Server With OpenStack Swift](setup_with_swift.md)
 - [Setup Seafile Professional Server With Ceph](setup_with_Ceph.md)
+- [Migrate from File System to Ceph](migrate_to_ceph.md)
 - [Storage Backend Encryption](seaf_encrypt.md)
 
 Config Options
