@@ -208,6 +208,14 @@ ENABLE_SYS_ADMIN_VIEW_REPO = True
 # For un-login users, providing an email before downloading or uploading on shared link page.
 # Since version 5.1.4
 ENABLE_SHARE_LINK_AUDIT = True
+
+# Check virus after upload files to shared upload links. Defaults to `False`.
+# Since version 6.0
+ENABLE_UPLOAD_LINK_VIRUS_CHECK = True
+
+# Enable system admin add T&C, all users need to accept terms before using. Defaults to `False`.
+# Since version 6.0
+ENABLE_TERMS_AND_CONDITIONS = True
 ```
 
 ## Note
