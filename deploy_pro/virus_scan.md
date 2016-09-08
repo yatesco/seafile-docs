@@ -36,3 +36,20 @@ cd seafile-server-latest
 
 If a virus was detected, you can see scan records and delete infected files on the Virus Scan page in the admin area.
 ![virus-scan](../images/virus-scan.png)
+
+Since Pro edition 6.0.0, a few more options are added to provide finer grained control for virus scan.
+
+```
+[virus_scan]
+......
+scan_size_limit = (size limit for files to be scanned)
+scan_skip_ext = (a comma (',') separated list of file extensions to be ignored)
+```
+
+The file extensions should start with '.'. The extensions are case insensitive. By default, files with following extensions will be ignored:
+
+```
+.bmp, .gif, .ico, .png, .jpg, .mp3, .mp4, .wav, .avi, .rmvb, .mkv
+```
+
+The list you provide will override default list.
