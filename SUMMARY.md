@@ -50,6 +50,7 @@
    * [Multi-Institutions Support](deploy_pro/multi_institutions.md)
    * [Enable Office/PDF Documents Online Preview](deploy_pro/office_documents_preview.md)
    * [Integrating with Office Web App](deploy_pro/office_web_app.md)
+   * [Integrating with LibreOffice Online](deploy_pro/libreoffice_online.md)
    * [Details about File Search](deploy_pro/details_about_file_search.md)
    * [Virus Scan](deploy_pro/virus_scan.md)
        * [Virus Scan With Kav4fs](deploy_pro/virus_scan_with_kav4fs.md)
