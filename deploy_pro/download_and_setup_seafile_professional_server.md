@@ -15,6 +15,17 @@ The following document is tested with Ubuntu 14.04 and CentOS 7. We recommend to
 > sudo pip install boto
 > ```
 >
+> Ubuntu 16.04:
+>
+> ```
+> sudo apt-get install openjdk-8-jre poppler-utils libpython2.7 python-pip \
+> mysql-server python-setuptools python-imaging python-mysqldb python-memcache python-ldap \
+> python-urllib3
+>
+> sudo pip install boto
+> sudo ln -sf /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java /usr/bin/
+> ```
+>
 > CentOS 7:
 >
 > ```
