@@ -115,7 +115,7 @@ cd ..
 
 ```bash
 cd seafile-client-${version}
-cmake -DUSE_QT5=ON -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PREFIX .
+cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PREFIX .
 make
 sudo make install
 cd ..
