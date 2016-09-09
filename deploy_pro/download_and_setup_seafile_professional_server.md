@@ -41,6 +41,12 @@ On Ubuntu/Debian:
 sudo apt-get install openjdk-7-jre
 ```
 
+On Ubuntu 16.04:
+```
+sudo apt-get install openjdk-8-jre
+sudo ln -sf /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java /usr/bin/
+```
+
 On CentOS/Red Hat:
 ```
 sudo yum install java-1.7.0-openjdk
