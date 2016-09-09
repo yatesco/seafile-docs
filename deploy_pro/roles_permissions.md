@@ -2,7 +2,7 @@
 
 Starting from version 6.0, you can add/edit roles and permission for users. A role is just a group of users with some pre-defined permissions, you can toggle user roles in user list page at admin panel.
 
-In version 6.0, we support 11 permissions, more permissions will be added later.
+In version 6.0, we support 10 permissions, more permissions will be added later.
 
 Seafile comes with two build-in roles `default` and `guest`, a default user is a normal user with permissions as followings:
 ```
@@ -14,7 +14,6 @@ Seafile comes with two build-in roles `default` and `guest`, a default user is a
         'can_generate_share_link': True,
         'can_generate_upload_link': True,
         'can_invite_guest': False,
-        'can_drag_drop_folder_to_sync': True,
         'can_connect_with_android_clients': True,
         'can_connect_with_ios_clients': True,
         'can_connect_with_desktop_clients': True,
@@ -31,7 +30,6 @@ While a guest user can only read files/folders in the system, here are the permi
         'can_generate_share_link': False,
         'can_generate_upload_link': False,
         'can_invite_guest': False,
-        'can_drag_drop_folder_to_sync': False,
         'can_connect_with_android_clients': False,
         'can_connect_with_ios_clients': False,
         'can_connect_with_desktop_clients': False,
@@ -52,7 +50,6 @@ ENABLED_ROLE_PERMISSIONS = {
         'can_generate_share_link': True,
         'can_generate_upload_link': True,
         'can_invite_guest': True,
-        'can_drag_drop_folder_to_sync': True,
         'can_connect_with_android_clients': True,
         'can_connect_with_ios_clients': True,
         'can_connect_with_desktop_clients': True,
@@ -65,7 +62,6 @@ ENABLED_ROLE_PERMISSIONS = {
         'can_generate_share_link': False,
         'can_generate_upload_link': False,
         'can_invite_guest': False,
-        'can_drag_drop_folder_to_sync': False,
         'can_connect_with_android_clients': False,
         'can_connect_with_ios_clients': False,
         'can_connect_with_desktop_clients': False,
@@ -101,7 +97,6 @@ ENABLED_ROLE_PERMISSIONS = {
         'can_generate_share_link': True,
         'can_generate_upload_link': True,
         'can_invite_guest': False,
-        'can_drag_drop_folder_to_sync': True,
         'can_connect_with_android_clients': True,
         'can_connect_with_ios_clients': True,
         'can_connect_with_desktop_clients': True,
@@ -114,7 +109,6 @@ ENABLED_ROLE_PERMISSIONS = {
         'can_generate_share_link': False,
         'can_generate_upload_link': False,
         'can_invite_guest': False,
-        'can_drag_drop_folder_to_sync': False,
         'can_connect_with_android_clients': False,
         'can_connect_with_ios_clients': False,
         'can_connect_with_desktop_clients': False,
@@ -127,7 +121,6 @@ ENABLED_ROLE_PERMISSIONS = {
         'can_generate_share_link': True,
         'can_generate_upload_link': True,
         'can_invite_guest': True,
-        'can_drag_drop_folder_to_sync': True,
         'can_connect_with_android_clients': True,
         'can_connect_with_ios_clients': True,
         'can_connect_with_desktop_clients': True,
