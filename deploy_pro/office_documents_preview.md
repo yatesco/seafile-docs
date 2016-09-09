@@ -1,4 +1,5 @@
-Seafile Professional server supports previewing office/pdf documents online, to use it you need to follow the steps described on this page.
+Seafile Professional server supports previewing office/pdf documents online by converting them to HTML pages. You can follow the steps described on this page to use this feature. If you'd like to edit office files online, you can integrate Seafile with Microsoft Office Online server or LibreOffice online.
+
 
 ### Install Libreoffice/UNO ###
 
