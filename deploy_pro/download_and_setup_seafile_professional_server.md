@@ -1,7 +1,7 @@
 # Download and Setup Seafile Professional Server
 ## <a id="wiki-preparation"></a>Preparation ##
 
-The following document is tested with Ubuntu 14.04 and CentOS 7. We recommend to you use Ubuntu 14.04 or CentOS 7 for your server.
+The following document is tested with Ubuntu 14.04/16.04 and CentOS 7. We recommend to you use Ubuntu 16.04 or CentOS 7 for your server.
 
 > NOTE:
 >
@@ -47,7 +47,7 @@ The following document is tested with Ubuntu 14.04 and CentOS 7. We recommend to
 
 ### Install Java Runtime Environment (JRE) ###
 
-On Ubuntu/Debian:
+On Ubuntu 14.04/Debian:
 ```
 sudo apt-get install openjdk-7-jre
 ```
