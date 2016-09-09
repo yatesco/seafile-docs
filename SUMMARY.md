@@ -70,6 +70,8 @@
    * Advanced User Management
        * [Multi-Institutions Support](deploy_pro/multi_institutions.md)
        * [Roles and Permissions](deploy_pro/roles_permissions.md)
+   * Advanced Authentication
+       * [Two-factor Authenticatioin](deploy_pro/two_factor_authentication.md)
    * Advanced Maintenance Tools
        * [Real-time Backup Server](deploy_pro/real_time_backup.md)
        * [Import Directory To Seafile](deploy_pro/seaf_import.md)

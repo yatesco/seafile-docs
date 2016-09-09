@@ -56,6 +56,10 @@ Install Seafile Pro Edition
 - [Multi-Institutions Support](multi_institutions.md)
 - [Roles and Permissions](roles_permissions.md)
 
+## Advanced Authentication
+
+- [Two-factor Authentication](two_factor_authentication.md)
+
 ## Backup
 
 - [Real-time Backup Server](real_time_backup.md)

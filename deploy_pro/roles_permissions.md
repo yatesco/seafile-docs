@@ -73,6 +73,20 @@ ENABLED_ROLE_PERMISSIONS = {
 }
 ```
 
+### More about guest invitation feature
+
+An user who has `can_invite_guest` permission can invite people outside of the organization as guest.
+
+In order to use this feature, in addition to granting `can_invite_guest` permission to the user, add the  following line to `seahub_settings.py`,
+
+```
+ENABLE_GUEST_INVITATION = True
+```
+
+After restarting, users who have `can_invite_guest` permission will see "Invite People" section at sidebar of home page.
+
+Users can invite a guest user by providing his/her email address, system will email the invite link to the user.
+
 ## Add custom roles
 
 If you want to add a new role and assign some users with this role, e.g. new role `employee` can invite guest and have all other permissions a default user has, you can add following lines to `seahub_settings.py`
