@@ -1,21 +1,21 @@
-# Integrate Seafile with LibreOffice Online
+# Integrate Seafile with Collabora Online (LibreOffice Online)
 
-Since Seafile Professional edition 6.0.0, you can integrate Seafile with LibreOffice Online to preview office files.
+Since Seafile Professional edition 6.0.0, you can integrate Seafile with Collabora Online to preview office files.
 
 ## Setup LibreOffice Online
 
-Prepare a Ubuntu 16.04 64bit server with [docker](http://www.docker.com/) installed, the use the following command to setup LibreOffice Online:
+Prepare a Ubuntu 16.04 64bit server with [docker](http://www.docker.com/) installed, the use the following command to setup Collabora Online:
 
 ```
 docker pull collabora/code
 docker run -t -p 9980:9980 -e "domain=<your-dot-escaped-domain>" --cap-add MKNOD collabora/code
 ```
 
-For more information about LibreOffice Online and how to deploy it, please refer to https://www.collaboraoffice.com/code/
+For more information about Collabora Online and how to deploy it, please refer to https://www.collaboraoffice.com/code/
 
 ## Config Seafile
 
-NOTE: You must [enable https](../deploy/https_with_nginx.md) with Seafile to use LibreOffice Online.
+NOTE: You must [enable https](../deploy/https_with_nginx.md) with Seafile to use Collabora Online.
 
 Add following config option to seahub_settings.py:
 
@@ -65,4 +65,4 @@ Understanding how theintegration work will help you debug the problem. When a us
 3. (LibreOffice Online->seahub) LibreOffice Online receives the request and sends a request to Seahub to get the file content
 4. (LibreOffice Online->browser) LibreOffice Online sends the file preview page to the browser.
 
-If you have a problem, please check the Nginx log for Seahub (for step 3) and LibreOffice Online to see which step is wrong.
+If you have a problem, please check the Nginx log for Seahub (for step 3) and Collabora Online to see which step is wrong.
