@@ -2,11 +2,16 @@
 
 Starting from version 6.0, we added Two-Factor Authentication to enhance account security.
 
-System admin can enable this feature by ticking the check-box at "Password" section of system settings page.
+There are two ways to enable this feature:
+
+System admin can ticking the check-box at "Password" section of system settings page, or
+
+just add `ENABLE_TWO_FACTOR_AUTH = True` to `seahub_settings.py` and restart service.
 
 After that, there will be a "Two-Factor Authentication" section in user profile page.
 
 Users can use Google Authenticator app on their smart-phone to scan the QR code.
+
 
 ## Twilio intergration
 
