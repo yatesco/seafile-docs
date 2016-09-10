@@ -216,6 +216,10 @@ ENABLE_UPLOAD_LINK_VIRUS_CHECK = True
 # Enable system admin add T&C, all users need to accept terms before using. Defaults to `False`.
 # Since version 6.0
 ENABLE_TERMS_AND_CONDITIONS = True
+
+# Enable two factor authentication for accounts. Defaults to `False`.
+# Since version 6.0
+ENABLE_TWO_FACTOR_AUTH = True
 ```
 
 ## Note
