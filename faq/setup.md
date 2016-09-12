@@ -10,6 +10,12 @@
 
 No, You must have Python 2.7 installed on your server.
 
+## Seahub/Seafile started correctly, but when visiting the web interface, it shows "Internal Server Error"
+
+It is mostly likely some required Python packages of Seahub is not installed correctly.
+
+You can check the detailed error messages in `/var/log/nginx/seahub.error.log` if you use Nginx.
+
 
 ## Website displays "Page unavailable", what can I do?
 
