@@ -22,6 +22,18 @@ Doing maintanence upgrading is simple, you only need to run the script `./upgrad
 
 ## Specific instructions for each version
 
+### From 5.1 to 6.0
+
+In version 6.0, the folder download mechanism has been updated. This requires that, in a cluster deployment, seafile-data/httptemp folder must be in an NFS share. You can make this folder a symlink to the NFS share.
+
+```
+cd /data/haiwen/
+ln -s /nfs-share/seafile-httptemp seafile-data/httptemp
+```
+
+The httptemp folder only contains temp files for downloading/uploading file on web UI. So there is no reliability requirement for the NFS share. You can export it from any node in the cluster.
+
+
 ### From v5.0 to v5.1
 
 Because Django is upgraded to 1.8, the COMPRESS_CACHE_BACKEND should be changed
