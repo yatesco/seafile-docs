@@ -193,6 +193,9 @@ SITE_TITLE = 'Private Seafile'
 # e.g. setting it to '/seahub/' would run seahub on http://example.com/seahub/.
 SITE_ROOT = '/'
 
+# Max number of files when user upload file/folder.
+# Since version 6.0.4
+MAX_NUMBER_OF_FILES_FOR_FILEUPLOAD = 500
 ```
 
 ## Pro edition only options
@@ -223,7 +226,7 @@ ENABLE_TWO_FACTOR_AUTH = True
 
 # Enable user select a template when he/she creates library.
 # When user select a template, Seafile will create folders releated to the pattern automaticly.
-# Since Pro version 6.0
+# Since version 6.0
 LIBRARY_TEMPLATES = {
     'Technology': ['/Develop/Python', '/Test'],
     'Finance': ['/Current assets', '/Fixed assets/Computer']
