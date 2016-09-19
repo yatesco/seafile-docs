@@ -1,4 +1,4 @@
-# Setup Seafile Develop Environment
+# Setup Seafile Server Development Environment
 
 The following operations have been tested on ubuntu-16.04.1-desktop-amd64 system.
 
@@ -17,19 +17,6 @@ cd ~/Downloads/
 wget https://github.com/haiwen/libevhtp.git
 cd libevhtp/
 cmake -DEVHTP_DISABLE_SSL=OFF -DEVHTP_BUILD_SHARED=ON .
-make
-sudo make install
-sudo ldconfig
-```
-
-#### install `libzdb` from source
-
-```
-cd ~/Downloads/
-wget http://tildeslash.com/libzdb/dist/libzdb-3.1.tar.gz
-tar xf libzdb-3.1.tar.gz
-cd libzdb-3.1/
-./configure
 make
 sudo make install
 sudo ldconfig
@@ -57,29 +44,29 @@ sudo make install
 sudo ldconfig
 ```
 
-#### download and install `ccnet`
+#### download and install `ccnet-server`
 
 ```
 cd ~/dev/
-git clone https://github.com/haiwen/ccnet.git
-cd ccnet/
-git checkout -b v6.0.0-server v6.0.0-server
+git clone https://github.com/haiwen/ccnet-server.git
+cd ccnet-server/
+git checkout -b v6.0.3-server v6.0.3-server
 ./autogen.sh
-./configure --disable-client --enable-server --enable-ldap
+./configure --enable-ldap
 make
 sudo make install
 sudo ldconfig
 ```
 
-#### download and install `seafile`
+#### download and install `seafile-server`
 
 ```
 cd ~/dev/
-git clone https://github.com/haiwen/seafile.git
-cd seafile/
-git checkout -b v6.0.0-server v6.0.0-server
+git clone https://github.com/haiwen/seafile-server.git
+cd seafile-server/
+git checkout -b v6.0.3-server v6.0.3-server
 ./autogen.sh
-./configure --disable-client --enable-server
+./configure
 make
 sudo make install
 ```
@@ -90,24 +77,24 @@ sudo make install
 cd ~/dev/
 git clone https://github.com/haiwen/seahub.git
 cd seahub/
-git checkout -b v6.0.0-server v6.0.0-server
+git checkout -b v6.0.3-server v6.0.3-server
 ```
 
 ## Start `ccnet-server` and `seaf-server`
 
-```
-cd ~/dev/seafile/tests/basic
-./seafile.sh 2
-```
-
-or you can start manually by:
+Start `ccnet-server` and `seaf-server` in two separate terminals.
 
 ```
-ccnet-server -c ~/dev/seafile/tests/basic/conf2/ -D all -f -
-seaf-server -c ~/dev/seafile/tests/basic/conf2/ -d ~/dev/seafile/tests/basic/conf2/seafile-data/ -f -l -
+cd ~/dev/seafile-server/tests
+ccnet-server -c conf -f -
 ```
 
-**NOTE**: if *error while loading shared libraries: libzdb.so.11: cannot open shared object file: No such file or directory*, you should `sudo ldconfig`
+```
+cd ~/dev/seafile-server/tests
+seaf-server -c conf -d conf/seafile-data -f -l -
+```
+
+The config files and databases (if you use sqlite, which is by default) of `ccnet-server` are located in `~/dev/seafile-server/tests/conf`. This directory is called "ccnet conf directory". The config files, databases and data of `seaf-server` are located in `~/dev/seafile-server/tests/conf/seafile-data`. This directory is called "seafile conf directory". 
 
 ## Start `seahub`
 
@@ -119,19 +106,18 @@ seaf-server -c ~/dev/seafile/tests/basic/conf2/ -d ~/dev/seafile/tests/basic/con
 cd ~/dev/seahub/
 
 cat > setenv.sh << EOF
-export CCNET_CONF_DIR=/home/plt/dev/seafile/tests/basic/conf2
-export SEAFILE_CONF_DIR=/home/plt/dev/seafile/tests/basic/conf2/seafile-data
+export CCNET_CONF_DIR=~/dev/seafile-server/tests/conf
+export SEAFILE_CONF_DIR=~/dev/seafile-server/tests/conf/seafile-data
 export PYTHONPATH=/usr/local/lib/python2.7/dist-packages:thirdpart:\$PYTHONPATH
 EOF
 
 sudo chmod u+x setenv.sh
 ```
 
-**NOTE**: change **plt** to your linux user name
-
 #### install requirements
 
 ```
+# Expand setenv.sh in the current shell
 . setenv.sh
 cd ~/dev/seahub/
 sudo pip install -r requirements.txt
@@ -147,7 +133,7 @@ python manage.py migrate
 python tools/seahub-admin.py # create admin account
 ```
 
-**NOTE**: currently, your *ccnet directory* is `/home/plt/dev/seafile/tests/basic/conf2`
+**NOTE**: currently, your *ccnet directory* is `~/dev/seafile-server/tests/conf`
 
 #### run `seahub`
 
@@ -156,3 +142,9 @@ python manage.py runserver 0.0.0.0:8000
 ```
 
 then open browser and navigate to http://127.0.0.1:8000
+
+If you have set up Nginx/Apache to run Seafile, you should run seahub in fastcgi mode.
+
+```
+python manage.py runfcgi host=127.0.0.1 port=8000
+```
