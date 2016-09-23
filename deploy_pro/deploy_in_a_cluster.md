@@ -206,6 +206,21 @@ Add following to `seafevents.conf` to disable file indexing service on the local
 external_es_server = true
 ```
 
+Here is an example `[INDEX FILES]` section:
+
+```
+[INDEX FILES]
+enabled = true
+interval = 10m
+index_office_pdf = true
+external_es_server = true
+es_host = background.seafile.com
+es_port = 9500
+```
+
+Note: `enable = true` should be left unchanged.
+
+
 ### Update Seahub Database
 
 In cluster environment, we have to store avatars in the database instead of in a local disk.
