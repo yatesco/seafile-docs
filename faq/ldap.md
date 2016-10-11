@@ -25,10 +25,10 @@ If the script can correctly talk to ldap server, it is most likely caused by inc
 
 You can use FILTER field in LDAP configuration in `ccnet.conf`. For example, the following filter restricts the access to Seafile to members of a group.
 
-    FILTER = (memberOf=cn=group,cn=users,DC=x)
+    FILTER = memberOf=cn=group,cn=users,DC=x
 
 AD also supports subgroups. The following filter restricts the access to Seafile to membersand subgroups of a group.
 
-    FILTER = (memberOf:1.2.840.113556.1.4.1941:=cn=group,cn=users,DC=x)
+    FILTER = memberOf:1.2.840.113556.1.4.1941:=cn=group,cn=users,DC=x
 
 For more information on the Filter syntax, see http://msdn.microsoft.com/en-us/library/aa746475%28VS.85%29.aspx
