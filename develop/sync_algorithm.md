@@ -22,7 +22,7 @@ A typical synchronization work flow consists of the following steps:
 Since the above work flow may be interrupted at any point by shutting down the
 program or computer, after reboot we lose all notifications from the OS.
 We need a reliable and efficient way to determine which
-files in the worktree has been changed (even after reboots).
+files in the worktree have been changed (even after reboots).
 
 We use Git's index file to do this. It caches the timestamps of every
 file in the worktree when the last commit is generated. So we can easily and
