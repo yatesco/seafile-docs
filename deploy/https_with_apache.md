@@ -39,7 +39,6 @@ Then modify your Apache configuration file. Here is a sample:
   Alias /media  /home/user/haiwen/seafile-server-latest/seahub/media
 
   <Location /media>
-    ProxyPass !
     Require all granted
   </Location>
 
