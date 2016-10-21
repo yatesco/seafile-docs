@@ -322,7 +322,7 @@ seafile data dir | -d | SEAFILE_DIR | current directory
 use existing db | -e | USE_EXISTING_DB | 0(create new db)
 mysql server host | -o | MYSQL_HOST | 127.0.0.1
 mysql server port | -t | MYSQL_PORT | 3306
-mysql root password | -t | MYSQL_ROOT_PASSWD | no default value(must be set when create new db)
+mysql root password | -r | MYSQL_ROOT_PASSWD | no default value(must be set when create new db)
 mysql user for seafile | -u | MYSQL_USER | no default value(must be set)
 password for seafile mysql user | -w | MYSQL_USER_PASSWD | no default value(must be set)
 mysql user host | -q | MYSQL_USER_HOST | no default value(must be set when create new db and using non local mysql server)
