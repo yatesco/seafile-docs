@@ -67,6 +67,7 @@
 4. Start seahub as follows (assume current path is `/data/haiwen/seafile-server-1.7.0`:
 
         export CCNET_CONF_DIR=/data/haiwen/ccnet
+        export SEAFILE_CENTRAL_CONF_DIR=/data/haiwen/conf
         export SEAFILE_CONF_DIR=/data/haiwen/seafile-data
         INSTALLPATH=/data/haiwen/seafile-server-1.7.0
         export PYTHONPATH=${INSTALLPATH}/seafile/lib/python2.6/site-packages:${INSTALLPATH}/seafile/lib64/python2.6/site-packages:${INSTALLPATH}/seahub/thirdpart:$PYTHONPATH
