@@ -4,18 +4,63 @@ Since Seafile Professional edition 6.0.0, you can integrate Seafile with Collabo
 
 ## Setup LibreOffice Online
 
-Prepare a Ubuntu 16.04 64bit server with [docker](http://www.docker.com/) installed, the use the following command to setup Collabora Online:
+1. Prepare an Ubuntu 16.04 64bit server with [docker](http://www.docker.com/) installed;
 
+1. Assign a domain name to this server, we use *collabora-online.seafile.com* here.
+
+1. Obtain and install valid TLS/SSL certificates for this server, we use [Let’s Encrypt](https://letsencrypt.org/).
+
+1. Use Nginx to serve collabora online, config file example:
+
+ ```
+server {
+    listen       443 ssl;
+    server_name  collabora-online.seafile.com;
+
+    ssl_certificate /etc/letsencrypt/live/collabora-online.seafile.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/collabora-online.seafile.com/privkey.pem;
+
+    # static files
+    location ^~ /loleaflet {
+        proxy_pass https://localhost:9980;
+        proxy_set_header Host $http_host;
+    }
+
+    # WOPI discovery URL
+    location ^~ /hosting/discovery {
+        proxy_pass https://localhost:9980;
+        proxy_set_header Host $http_host;
+    }
+
+    # websockets, download, presentation and image upload
+    location ^~ /lool {
+        proxy_pass https://localhost:9980;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_set_header Host $http_host;
+    }
+}
 ```
+
+1. then use the following command to setup/start Collabora Online:
+
+ ```
 docker pull collabora/code
-docker run -t -p 9980:9980 -e "domain=<your-dot-escaped-domain>" --cap-add MKNOD collabora/code
+docker run -t -p 9980:9980 -e "domain=<your-dot-escaped-domain>" --restart always --cap-add MKNOD collabora/code
 ```
 
-For more information about Collabora Online and how to deploy it, please refer to https://www.collaboraoffice.com/code/
+ **NOTE:** the `domain` args is the domain name of your Seafile server, if your
+Seafile server's domain name is *demo.seafile.com*, the command should be:
+
+ ```
+docker run -t -p 9980:9980 -e "domain=demo\.seafile\.com" --restart always --cap-add MKNOD collabora/code
+```
+
+For more information about Collabora Online and how to deploy it, please refer to https://www.collaboraoffice.com
 
 ## Config Seafile
 
-NOTE: You must [enable https](../deploy/https_with_nginx.md) with Seafile to use Collabora Online.
+**NOTE:** You must [enable https](../deploy/https_with_nginx.md) with valid TLS/SSL certificates (we use [Let’s Encrypt](https://letsencrypt.org/)) to Seafile to use Collabora Online.
 
 Add following config option to seahub_settings.py:
 
@@ -25,8 +70,8 @@ ENABLE_OFFICE_WEB_APP = True
 
 # Url of LibreOffice Online's discovery page
 # The discovery page tells Seafile how to interact with LibreOffice Online when view file online
-# You should change `https://example.LibreOffice-online:9980/hosting/discovery` to your actual LibreOffice Online server address
-OFFICE_WEB_APP_BASE_URL = 'https://example.LibreOffice-online:9980/hosting/discovery'
+# You should change `https://collabora-online.seafile.com/hosting/discovery` to your actual LibreOffice Online server address
+OFFICE_WEB_APP_BASE_URL = 'https://collabora-online.seafile.com/hosting/discovery'
 
 # Expiration of WOPI access token
 # WOPI access token is a string used by Seafile to determine the file's
