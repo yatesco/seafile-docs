@@ -12,7 +12,7 @@ The following document is tested with Ubuntu 14.04/16.04 and CentOS 7. We recomm
 > mysql-server python-setuptools python-imaging python-mysqldb python-memcache python-ldap \
 > python-urllib3
 >
-> sudo pip install boto
+> sudo pip install boto requests
 > ```
 >
 > Ubuntu 16.04:
@@ -22,7 +22,7 @@ The following document is tested with Ubuntu 14.04/16.04 and CentOS 7. We recomm
 > mysql-server python-setuptools python-imaging python-mysqldb python-memcache python-ldap \
 > python-urllib3
 >
-> sudo pip install boto
+> sudo pip install boto requests
 > sudo ln -sf /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java /usr/bin/
 > ```
 >
@@ -35,7 +35,7 @@ The following document is tested with Ubuntu 14.04/16.04 and CentOS 7. We recomm
 > python-imaging MySQL-python mysql-server.x86_64 python-memcached python-ldap \
 > python-urllib3
 >
-> sudo pip install boto
+> sudo pip install boto requests
 > sudo /etc/init.d/mysqld start
 > ```
 >
