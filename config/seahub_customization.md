@@ -37,7 +37,9 @@ During upgrading, Seafile upgrade script will create symbolic link automatically
 
 Create a folder ``templates`` under ``<seafile-install-path>/seahub-data/custom``
 
-### Customize footer
+### Customize footer (not used since 6.0.0)
+
+**Note:** Since version 6.0, Seafile uses a full screen adaptive design, footer is removed.
 
 1. Copy ``seahub/seahub/templates/footer.html`` to ``seahub-data/custom/templates``.
 2. Modify `footer.html`.
