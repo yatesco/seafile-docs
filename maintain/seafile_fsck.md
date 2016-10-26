@@ -12,7 +12,7 @@ Starting from version 4.1, we provide a seaf-fsck.sh script. The seaf-fsck tool 
 
 ```
 cd seafile-server-latest
-./seaf-fsck.sh [--repair|-r] [--enable-sync|-e] [--export|-E export_path] [repo_id_1 [repo_id_2 ...]]
+./seaf-fsck.sh [--repair|-r] [--export|-E export_path] [repo_id_1 [repo_id_2 ...]]
 ```
 
 There are three modes of operation for seaf-fsck:
@@ -87,19 +87,8 @@ cd seafile-server-latest
 ./seaf-fsck.sh --repair [library-id1] [library-id2] ...
 ```
 
-Because corrupted files and directories are emptied after repair, syncing the library after repair may result in data lost in the clients. The good copies on the clients may be replaced by the empty copies. To prevent this from happening, the system prevents a "repaired" library from syncing to clients. The system admin should inform the users to recover the corrupted files and folders. And then run the following command to enable syncing for the library again:
+After repairing, in the library history, seaf-fsck includes the list of files and folders that are corrupted. So it's much easier to located corrupted paths.
 
-```
-cd seafile-server-latest
-./seaf-fsck.sh --enable-sync [library-id1] [library-id2] ...
-```
-
-### Change after CE 5.0.3 and Pro 5.0.2
-
-Since community eidition 5.0.3 and Pro edition 5.0.2, we improved seaf-fsck repair operation. Two improvements are added:
-
-- After running "--repair" operation, the system admin doesn't need to run "--enable-sync" command any more. Instead, seaf-fsck automatically disconnects all syncing clients to the library. So the users are forced to re-sync the library.
-- In the library history, seaf-fsck includes the list of files and folders that are corrupted. So it's much easier to located corrupted paths.
 
 ### Best Practice for Repairing a Library
 
