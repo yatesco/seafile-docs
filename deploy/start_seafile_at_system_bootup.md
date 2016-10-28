@@ -99,6 +99,10 @@ and **seafile\_dir** accordingly)
 
     sudo chmod +x /etc/init.d/seafile-server
 
+### Add seafile-server to rc.d
+
+    sudo update-rc.d seafile-server defaults
+    
 ### Done
 
 Don't forget to update the value of **script\_path** later if you update
