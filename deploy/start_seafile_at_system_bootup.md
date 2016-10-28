@@ -15,7 +15,16 @@ The content of this script is: (You need to modify the value of **user**
 and **seafile\_dir** accordingly)
 
     #!/bin/bash
-
+    ### BEGIN INIT INFO
+    # Provides:          seafile-server
+    # Required-Start:    $remote_fs $syslog
+    # Required-Stop:     $remote_fs $syslog
+    # Default-Start:     2 3 4 5
+    # Default-Stop:      0 1 6
+    # Short-Description: Seafile server
+    # Description:       Start Seafile server
+    ### END INIT INFO
+    
     # Change the value of "user" to your linux user name
     user=haiwen
 
@@ -64,36 +73,7 @@ and **seafile\_dir** accordingly)
             ;;
     esac
 
-
-
-### Create a file **/etc/init/seafile-server.conf**
-
-#### If you're not using MySQL or an external MySQL server
-
-    start on (runlevel [2345])
-    stop on (runlevel [016])
-
-    pre-start script
-    /etc/init.d/seafile-server start
-    end script
-
-    post-stop script
-    /etc/init.d/seafile-server stop
-    end script
-
-#### If you're using MySQL
-
-    start on (started mysql
-    and runlevel [2345])
-    stop on (runlevel [016])
-
-    pre-start script
-    /etc/init.d/seafile-server start
-    end script
-
-    post-stop script
-    /etc/init.d/seafile-server stop
-    end script
+**Note:** If you are using local mysql server with Seafile, please relace `# Required-Start:    $remote_fs $syslog` with `# Required-Start:    $remote_fs $syslog mysql`.
 
 ### Make the seafile-sever script executable
 
