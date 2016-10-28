@@ -73,7 +73,7 @@ and **seafile\_dir** accordingly)
             ;;
     esac
 
-**Note:** If you are using local mysql server with Seafile, please relace `# Required-Start:    $remote_fs $syslog` with `# Required-Start:    $remote_fs $syslog mysql`.
+**Note:** If you are using local mysql server, please replace `# Required-Start:    $remote_fs $syslog` with `# Required-Start:    $remote_fs $syslog mysql`.
 
 ### Make the seafile-sever script executable
 
