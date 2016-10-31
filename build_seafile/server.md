@@ -45,7 +45,7 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/mariadb
 * Build libevhtp by:
 
 ```
-cmake -DEVHTP_DISABLE_SSL=ON -DEVHTP_BUILD_SHARED=ON .
+cmake -DEVHTP_DISABLE_SSL=ON -DEVHTP_BUILD_SHARED=OFF .
 make
 sudo make install
 
