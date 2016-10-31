@@ -34,7 +34,7 @@ libevhtp is a http server libary on top of libevent. It's used in seafile file s
 ```
 git clone https://www.github.com/haiwen/libevhtp.git
 cd libevhtp
-cmake -DEVHTP_DISABLE_SSL=OFF -DEVHTP_BUILD_SHARED=ON .
+cmake -DEVHTP_DISABLE_SSL=ON -DEVHTP_BUILD_SHARED=OFF .
 make
 sudo make install
 ```
