@@ -16,7 +16,7 @@ sudo apt install ssh libevent-dev libcurl4-openssl-dev libglib2.0-dev uuid-dev i
 cd ~/Downloads/
 wget https://github.com/haiwen/libevhtp.git
 cd libevhtp/
-cmake -DEVHTP_DISABLE_SSL=OFF -DEVHTP_BUILD_SHARED=ON .
+cmake -DEVHTP_DISABLE_SSL=ON -DEVHTP_BUILD_SHARED=OFF .
 make
 sudo make install
 sudo ldconfig
