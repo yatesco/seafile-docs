@@ -1,7 +1,5 @@
 # Seafile Real-Time Backup Server
 
-NOTE: The real-time backup feature is currently in beta state. It may have minor issues on the backup server side. But this feature will not affect the functionality or data integrity of the primary server.
-
 Backup is the procedure that copies data from a primary server (which is running production service) to a backup server.
 
 Backup is an important procedure to keep data safe. The basic backup procedure described in [this documentation](../maintain/backup_recovery.md) has a few drawbacks:
