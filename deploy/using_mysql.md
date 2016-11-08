@@ -51,7 +51,7 @@ Three components of Seafile Server need their own databases:
 * seafile server
 * seahub
 
-See [Seafile Server Components Overview](components.md) if you want to know more about the Seafile server components.
+See [Seafile Server Components Overview](../overview/components.md) if you want to know more about the Seafile server components.
 
 There are two ways to intialize the databases:
 
