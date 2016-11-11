@@ -27,6 +27,20 @@ For example, Chinese users may wish to install the WenQuanYi series of truetype 
 sudo apt-get install ttf-wqy-microhei ttf-wqy-zenhei xfonts-wqy
 ```
 
+### Install poppler-utils ###
+
+The package poppler-utils is also required.
+
+On Ubuntu/Debian:
+```
+sudo apt-get install poppler-utils
+```
+
+On CentOS/Red Hat:
+```
+sudo yum install poppler-utils
+```
+
 ### Enable Office Preview
 
 1. Open file `seafevents.conf`, in the `OFFICE CONVERTER` section:
