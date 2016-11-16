@@ -52,6 +52,18 @@ After a file is uploaded via the web interface, or the cloud file browser in the
 [fileserver]
 max_indexing_threads = 10
 ```
+Change the block size.
+```
+[fileserver]
+#Set block size to 2MB
+fixed_block_size=2
+```
+You can limit the time for uploading files.
+```
+[fileserver]
+#Set uploading time limit to 3600s 
+web_token_expire_time=3600
+```
 
 You can download a folder as a zip archive from seahub, but some zip software
 on windows doesn't support UTF-8, in which case you can use the "windows_encoding"
