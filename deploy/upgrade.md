@@ -78,7 +78,7 @@ Now upgrade to version 5.0.0.
    # or via service
    /etc/init.d/seafile-server start
    ```
-5. If the new version works file, the old version can be removed
+5. If the new version works fine, the old version can be removed
 
    ```sh
    rm -rf seafile-server-4.3.0/
