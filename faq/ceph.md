@@ -1,6 +1,33 @@
 # Ceph
 
 
+## Seafile server can't started when using Ceph
+
+#### Description
+
+Seafile server can't started when using Ceph as storage backend. seafile.log is empty. controller.log shows:
+
+```
+[10/20/16 12:39:29] seafile-controller.c(568): pid file /opt/seafile/pids/seaf-server.pid does not exist
+[10/20/16 12:39:29] seafile-controller.c(588): seaf-server need restart...
+[10/20/16 12:39:29] seafile-controller.c(198): starting seaf-server ...
+```
+
+#### Answer
+
+This is most likely caused by Ceph library incompatible.
+
+You can install `librados` provided by the Linux distribution, then remove bundled libraries:
+
+```
+cd seafile-server-latest/seafile/lib
+rm librados.so.2 libstdc++.so.6 libnspr4.so
+```
+
+You can also run `seaf-fsck.sh`. It will print detailed message if Ceph library incompatible.
+
+
+
 ## GC error when removing blocks in Ceph
 
 #### Description
