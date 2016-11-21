@@ -9,6 +9,15 @@ In the Pro Edition, Seafile offers four audit logs in system admin panel:
 
 ![Seafile Auditing Log](../images/admin-audit-log.png)
 
-The logging feature is turned off by default. See [config options for pro edition](../deploy_pro/configurable_options.md) for how to turn it on.
+The logging feature is turned off by default. Add the following option to `seafevent.conf` to turn it on:
 
-The audit log data is being saved in seahub-db.
+```
+[Audit]
+## Audit log is disabled default.
+## Leads to additional SQL tables being filled up, make sure your SQL server is able to handle it.
+enabled = true
+```
+
+See [config options for pro edition](../deploy_pro/configurable_options.md) for more information.
+
+The audit log data is being saved in `seahub-db`.
