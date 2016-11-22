@@ -479,4 +479,10 @@ console client and you want to run it on system boot.
     [Install]
     WantedBy=multi-user.target
 
+### Enable service start on system boot
+
+    sudo systemctl enable seafile.service
+    sudo systemctl enable seahub.service
+    sudo systemctl enable seafile-client.service   # optional
+
 ### Done
