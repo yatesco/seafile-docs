@@ -1,38 +1,78 @@
 # Migrate From SQLite to MySQL
 
-First make sure the python module for MySQL is installed. On Ubuntu, use `apt-get install python-mysqldb` to install it.
+**NOTE**: The tutorial is only available for Seafile CE version.
+
+First make sure the python module for MySQL is installed. On Ubuntu, use `sudo apt-get install python-mysqldb` to install it.
 
 Steps to migrate Seafile from SQLite to MySQL:
 
-0. Stop seafile and seahub
+1. Stop Seafile and Seahub.
 
-1. Download [sqlite2mysql.sh](https://raw.github.com/haiwen/seafile/master/scripts/sqlite2mysql.sh) and [sqlite2mysql.py](https://raw.github.com/haiwen/seafile/master/scripts/sqlite2mysql.py) to the top directory of your Seafile installation path. For example, /data/haiwen.
+1. Download [sqlite_to_mysql.sh](./sqlite_to_mysql.sh)  to the top directory of your Seafile installation path. For example, `/data/haiwen`.
 
-2. Run sqlite2mysql.sh
-```
-  chmod +x sqlite2mysql.sh
-  ./sqlite2mysql.sh
-```
-  This script will produce three files(ccnet-db.sql, seafile-db.sql, seahub-db.sql).
+1. Run `sqlite_to_mysql.sh`, this script will produce three files (ccnet_db_data.sql, seafile_db_data.sql, seahub_db_data.sql).
 
-3. Create 3 databases named `ccnet-db`, `seafile-db`, `seahub-db`.
-```
-  create database `ccnet-db` character set = 'utf8';
-  create database `seafile-db` character set = 'utf8';
-  create database `seahub-db` character set = 'utf8';
+ ```
+chmod +x sqlite_to_mysql.sh
+./sqlite_to_mysql.sh
 ```
 
-4. Loads the sql files to your MySQL databases. For example:
-```
-  mysql> use `ccnet-db`
-  mysql> source ccnet-db.sql
-  mysql> use `seafile-db`
-  mysql> source seafile-db.sql
-  mysql> use `seahub-db`
-  mysql> source seahub-db.sql
+1. Download these three files to `/data/haiwen`, [ce_ccnet_db.sql](./ce_ccnet_db.sql), [ce_seafile_db.sql](./ce_seafile_db.sql), [mysql.sql](https://raw.githubusercontent.com/haiwen/seahub/master/sql/mysql.sql)(used for create tables in `seahub_db`).
+
+1. Rename `mysql.sql` to `ce_seahub_db.sql`: `mv mysql.sql ce_seahub_db.sql`. Now you should have the following directory layout.
+
+ ```sh
+.
+└── haiwen
+|    ...
+|    ...
+|    ├── ce_ccnet_db.sql
+|    ├── ce_seafile_db.sql
+|    ├── ce_seahub_db.sql
+|    ├── ccnet_db_data.sql
+|    ├── seafile_db_data.sql
+|    ├── seahub_db_data.sql
+|    ...
+|    ├── seafile-data
+|    ├── seahub-data
+|    ├── seahub.db
+|    ...
+|    ...
 ```
 
-5. Modify configure files
+1. Create 3 databases ccnet_db, seafile_db, seahub_db and seafile user.
+
+ ```
+mysql> create database ccnet_db character set = 'utf8';
+mysql> create database seafile_db character set = 'utf8';
+mysql> create database seahub_db character set = 'utf8';
+```
+
+1. Import ccnet data to MySql.
+
+ ```
+mysql> use ccnet_db;
+mysql> source ce_ccnet_db.sql;
+mysql> source ccnet_db_data.sql;
+```
+
+1. Import seafile data to MySql.
+
+ ```
+mysql> use seafile_db;
+mysql> source ce_seafile_db.sql;
+mysql> source seafile_db_data.sql;
+```
+
+1. Import seahub data to MySql.
+
+ ```
+mysql> use seahub_db;
+mysql> source ce_seahub_db.sql;
+mysql> source seahub_db_data.sql;
+```
+
+1. Modify configure files.
 
   Append following lines to [ccnet.conf](../config/ccnet-conf.md):
 
@@ -41,7 +81,7 @@ Steps to migrate Seafile from SQLite to MySQL:
         HOST=127.0.0.1
         USER=root
         PASSWD=root
-        DB=ccnet-db
+        DB=ccnet_db
         CONNECTION_CHARSET=utf8
 
     Note: Use `127.0.0.1`, don't use `localhost`.
@@ -53,7 +93,7 @@ Steps to migrate Seafile from SQLite to MySQL:
         host=127.0.0.1
         user=root
         password=root
-        db_name=seafile-db
+        db_name=seafile_db
         CONNECTION_CHARSET=utf8
 
     Append following lines to `seahub_settings.py`:
@@ -63,7 +103,7 @@ Steps to migrate Seafile from SQLite to MySQL:
                 'ENGINE': 'django.db.backends.mysql',
                 'USER' : 'root',
                 'PASSWORD' : 'root',
-                'NAME' : 'seahub-db',
+                'NAME' : 'seahub_db',
                 'HOST' : '127.0.0.1',
                 # This is only needed for MySQL older than 5.5.5.
                 # For MySQL newer than 5.5.5 INNODB is the default already.
@@ -73,8 +113,7 @@ Steps to migrate Seafile from SQLite to MySQL:
             }
         }
 
-6. Restart seafile and seahub
-
+1. Restart seafile and seahub
 
 **NOTE**
 
