@@ -119,5 +119,5 @@ mysql> source seahub_db_data.sql;
 
 User notifications will be cleared during migration due to the slight difference between MySQL and SQLite, if you only see the busy icon when click the notitfications button beside your avatar, please remove `user_notitfications` table manually by:
 
-    use seahub-db
+    use seahub_db;
     delete from notifications_usernotification;
