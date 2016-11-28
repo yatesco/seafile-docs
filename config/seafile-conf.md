@@ -52,13 +52,17 @@ After a file is uploaded via the web interface, or the cloud file browser in the
 [fileserver]
 max_indexing_threads = 10
 ```
-Change the block size.
+
+When users upload files in the web interface (seahub), file server divides the file into fixed size blocks. Default blocks size for web uploaded files is 1MB. The block size can be set here.
+
 ```
 [fileserver]
 #Set block size to 2MB
 fixed_block_size=2
 ```
-You can limit the time for uploading files.
+
+When users upload files in the web interafece, file server assigns an token to authorize the upload operation. This token is valid for 1 hour by default. When uploading a large file via WAN, the upload time can be longer than 1 hour. You can change the token expire time to a larger value.
+
 ```
 [fileserver]
 #Set uploading time limit to 3600s 
