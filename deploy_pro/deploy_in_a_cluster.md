@@ -152,16 +152,9 @@ health_check_port = 12345
 
 Install Python memcache library.
 
-On Debian/Ubuntu:
-
 ```
-sudo apt-get install python-memcache
-```
-
-On CentOS/RedHat:
-
-```
-sudo yum install python-memcached
+sudo pip install pylibmc
+sudo pip install django-pylibmc
 ```
 
 Add the following configuration to `seahub_settings.py`. These settings tell Seahub to store avatar in database and cache avatar in memcached, and store css CACHE to local memory of every node.
@@ -169,7 +162,7 @@ Add the following configuration to `seahub_settings.py`. These settings tell Sea
 ```
 CACHES = {
     'default': {
-        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'BACKEND': 'django_pylibmc.memcached.PyLibMCCache',
         'LOCATION': '192.168.1.134:11211',
     }
 }
@@ -180,13 +173,19 @@ COMPRESS_CACHE_BACKEND = 'django.core.cache.backends.locmem.LocMemCache'
 
 ```
 
-If you use memcached cluster, please replace the `CACHES` variable with the following:
+If you use memcached cluster, please replace the `CACHES` variable with the following. This configuration uses consistent hashing to distribute the keys in memcached. More information can be found on [pylibmc documentation](http://sendapatch.se/projects/pylibmc/behaviors.html) and [django-pylibmc documentation](https://github.com/django-pylibmc/django-pylibmc).
 
 ```
 CACHES = {
     'default': {
-        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'BACKEND': 'django_pylibmc.memcached.PyLibMCCache',
         'LOCATION': ['192.168.1.134:11211', '192.168.1.135:11211', '192.168.1.136:11211',],
+        'OPTIONS': {
+            'ketama': True,
+            'remove_failed': 1,
+            'retry_timeout': 1,
+            'dead_timeout': 60
+        }
     }
 }
 ```
