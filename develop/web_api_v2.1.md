@@ -320,6 +320,13 @@ For each API, we provide `curl` examples to illustrate the usage. We also provid
 
     {"token": "24fd3c026886e3121b2ca630805ed425c272cb96"}
 
+
+you should use `--data-urlencode` if you want to process some special characters properly.
+
+    curl --data-urlencode username=user+name@example.com -d password=123456 https://cloud.seafile.com/api2/auth-token/
+
+    {"token":"265757b0a5aaf5d6b2e266d0c21791121ce6cdec"}
+
 **auth ping**
 
     curl -H 'Authorization: Token 24fd3c026886e3121b2ca630805ed425c272cb96' https://cloud.seafile.com/api2/auth/ping/
