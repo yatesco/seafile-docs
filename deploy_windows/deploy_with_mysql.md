@@ -10,7 +10,7 @@
 
 ### Install MySQL-python Library
 
-- download the windows installer from https://pypi.python.org/pypi/MySQL-python/1.2.4
+- download the windows installer from https://pypi.python.org/pypi/MySQL-python/1.2.5
 - install it by double clicking the downloaded exe file
 
 ## Create MySQL Databases

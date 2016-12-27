@@ -3,11 +3,11 @@
 ## Download/Uncompress
 ### Install Python 2.7.11 32bit
 
-- Download and install [python 2.7.11 32bit](https://www.python.org/ftp/python/2.7.11/python-2.7.11.msi)
+- Download and install [python 2.7.11 32bit](https://www.python.org/ftp/python/2.7.13/python-2.7.13.msi)
 - Add the installation path of python2.7 to the system PATH environment variable. If you installed python 2.7 to ``C:\Python27`` add ``C:\Python27`` to the PATH environment variable.
 
 
-**Warning**: Be sure to use Python 2.7.11 32bit. 64bit and other versions don't work.
+**Warning**: Be sure to use Python 2.7.13 32bit. 64bit and other versions don't work.
 
 ### Download/Uncompress Seafile Server
 
