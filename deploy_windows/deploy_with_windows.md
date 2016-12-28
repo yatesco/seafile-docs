@@ -10,7 +10,7 @@ Seafile Windows Community Edition supports SQLite/MySQL database.
 - [Deploy Seafile with MySQL](deploy_with_mysql.md)
 - [Deploy Seafile with Apache](deploy_with_apache.md)
 - [Deploy Seafile with Nginx](deploy_with_nginx.md)
-- [LDAP Integration](../deploy/using_ldap.md)
+- [LDAP Integration](using_ldap.md)
 - [Install Seafile Server as a Windows Service](install_seafile_server_as_a_windows_service.md)
 - [Ports used by Seafile Windows Server](ports_used_by_seafile_windows_server.md)
 - [Upgrading Seafile Windows Server](upgrading_seafile_windows_server.md)
