@@ -31,7 +31,7 @@ then
     exit $UNDEFINED
 fi
 
-sudo $KAV4FS --scan-file $1 > $TEMP_LOG_FILE
+sudo $KAV4FS --scan-file "$1" > $TEMP_LOG_FILE
 if [ "$?" -ne 0 ]
 then
     echo "Error due to check file '$1'"
