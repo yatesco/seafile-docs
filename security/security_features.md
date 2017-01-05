@@ -20,7 +20,7 @@ When you create an encrypted library, you'll need to provide a password for it. 
 The encryption procedure is:
 
 1. Generate a 32-byte long cryptographically strong random number. This will be used as the file encryption key ("file key").
-2. Encrypt the file key with the user provided password. We first use PBKDF2 algorithm (1000 iteratioins of SHA256) to derive a key/iv pair from the password, then use AES 256/CBC to encrypt the file key. The result is called the "encrypted file key". This encrypted file key will be sent to and stored on the server. When you need to access the data, you can decrypt the file key from the encrypted file key.
+2. Encrypt the file key with the user provided password. We first use PBKDF2 algorithm (1000 iterations of SHA256) to derive a key/iv pair from the password, then use AES 256/CBC to encrypt the file key. The result is called the "encrypted file key". This encrypted file key will be sent to and stored on the server. When you need to access the data, you can decrypt the file key from the encrypted file key.
 3. All file data is encrypted by the file key with AES 256/CBC. We use PBKDF2 algorithm (1000 iterations of SHA256) to derive key/iv pair from the file key. After encryption, the data is uploaded to the server.
 
 The above encryption procedure can be executed on the desktop and the mobile client. The Seahub browser client uses a different encryption procedure that happens at the server. Because of this your password will be transferred to the server.
