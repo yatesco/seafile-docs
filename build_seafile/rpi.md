@@ -216,7 +216,7 @@ Now we have all the tarballs prepared, we can run the `build-server.py` script t
 
 ```
 mkdir ~/seafile-server-pkgs
-~/dev/seafile/scripts/build-server.py --libsearpc_version=<libsearpc_version> --ccnet_version=<ccnet_version> --seafile_version=<seafile_version> --seahub_version=<seahub_version> --srcdir=  --thidrpartdir=/home/pi/dev/seahub_thirdpart --srcdir=/home/pi/seafile-sources --outputdir=/home/pi/seafile-server-pkgs
+~/dev/seafile/scripts/build-server.py --libsearpc_version=<libsearpc_version> --ccnet_version=<ccnet_version> --seafile_version=<seafile_version> --seahub_version=<seahub_version> --srcdir=  --thirdpartdir=/home/pi/dev/seahub_thirdpart --srcdir=/home/pi/seafile-sources --outputdir=/home/pi/seafile-server-pkgs
 ```
 
 After the script finisheds, we would get a `seafile-server_6.0.1_pi.tar.gz` in `~/seafile-server-pkgs` folder.
