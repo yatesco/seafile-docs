@@ -83,6 +83,15 @@ After restarting, users who have `can_invite_guest` permission will see "Invite 
 
 Users can invite a guest user by providing his/her email address, system will email the invite link to the user.
 
+If you want to block certain email addresses for the invitation, you can define a blacklist, e.g.
+
+```
+INVITATION_ACCEPTER_BLACKLIST = ["a@a.com", "*@a-a-a.com", r".*@(foo|bar).com", ]
+```
+
+After that, email address "a@a.com", any email address ends with "@a-a-a.com" and any email address ends with "@foo.com" or "@bar.com" will not be allowd.
+
+
 ## Add custom roles
 
 If you want to add a new role and assign some users with this role, e.g. new role `employee` can invite guest and have all other permissions a default user has, you can add following lines to `seahub_settings.py`
