@@ -89,7 +89,7 @@ If you want to block certain email addresses for the invitation, you can define 
 INVITATION_ACCEPTER_BLACKLIST = ["a@a.com", "*@a-a-a.com", r".*@(foo|bar).com", ]
 ```
 
-After that, email address "a@a.com", any email address ends with "@a-a-a.com" and any email address ends with "@foo.com" or "@bar.com" will not be allowd.
+After that, email address "a@a.com", any email address ends with "@a-a-a.com" and any email address ends with "@foo.com" or "@bar.com" will not be allowed.
 
 
 ## Add custom roles
