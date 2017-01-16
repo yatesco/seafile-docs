@@ -259,6 +259,10 @@
             <li><a href="#admin-only-get-all-groups">Get all Groups</a></li>
             <li><a href="#admin-only-delete-a-group">Delete a Group</a></li>
             <li><a href="#admin-only-transfer-a-group">Transfer a Group</a></li>
+            <li><a href="#admin-only-get-group-libraries">Get Group Libraries</a></li>
+            <li><a href="#admin-only-delete-group-library">Delete Group Library</a></li>
+            <li><a href="#admin-only-get-group-members">Get Group Members</a></li>
+            <li><a href="#admin-only-delete-group-member">Delete Group Member</a></li>
         </ul>
     </li>
 
@@ -3540,7 +3544,7 @@ Get first page (100 records per page) of libraries.
             "size": 0
         },
         {
-            "name": "<img onerror=alert(1) src=a>",
+            "name": "My Library",
             "encrypted": false,
             "file_count": 161,
             "owner": "lian@lian.com",
@@ -3695,7 +3699,6 @@ Available for Seafile v6.0.0+
 * 404 Library not found.
 * 500 Internal Server Error
 
-
 ## <a id="admin-only-groups"></a>Groups
 
 ### <a id="admin-only-get-all-groups"></a>Get all groups
@@ -3760,7 +3763,6 @@ Available for Seafile v6.0.0+
 
 * 403 Permission error, only administrator can perform this action
 
-
 ### <a id="admin-only-transfer-a-group"></a>Transfer a Group
 
 Available for Seafile v6.0.0+
@@ -3786,6 +3788,127 @@ Available for Seafile v6.0.0+
 
 * 403 Permission error, only administrator can perform this action
 * 404 User not found.
+* 500 Internal Server Error
+
+### <a id="admin-only-get-group-libraries"></a>Get Group Libraries
+
+Available for Seafile v6.0.0+
+
+**GET** https://cloud.seafile.com/api/v2.1/admin/groups/{group_id}/libraries/
+
+Get all libraries of a group.
+
+**Sample request**
+
+    curl -H "Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd" -H 'Accept: application/json; indent=4' https://cloud.seafile.com/api/v2.1/admin/groups/64/libraries/
+
+**Sample response**
+
+```
+[
+    {
+        "repo_id":"7460f7ac-a0ff-4585-8906-bb5a57d2e118",
+        "name":"My Library",
+        "permission":"rw",
+        "group_id":65,
+        "shared_by":"lian@lian.com",
+        "size":97662
+    }
+]
+```
+
+**Errors**
+
+* 403 Permission error, only administrator can perform this action
+* 404 Group not found.
+
+### <a id="admin-only-delete-group-library"></a>Delete Group Library
+
+Available for Seafile v6.0.0+
+
+**DELETE** https://cloud.seafile.com/api/v2.1/admin/groups/{group_id}/libraries/{repo_id}/
+
+**Sample request**
+
+    curl -X DELETE -H 'Authorization: Token 444d2bbf1fc78ffbeedc4704c9f41e32d926ac94' https://cloud.seafile.com/api/v2.1/admin/groups/64/libraries/7460f7ac-a0ff-4585-8906-bb5a57d2e118/
+
+**Sample response**
+
+```
+{"success":true}
+```
+
+**Errors**
+
+* 403 Permission error, only administrator can perform this action
+* 404 Library/Group not found.
+* 500 Internal Server Error
+
+### <a id="admin-only-get-group-members"></a>Get Group Members
+
+Available for Seafile v6.0.0+
+
+**GET** https://cloud.seafile.com/api/v2.1/admin/groups/{group_id}/members/
+
+Get all members of a group.
+
+**Sample request**
+
+    curl -H "Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd" -H 'Accept: application/json; indent=4' https://cloud.seafile.com/api/v2.1/admin/groups/64/members/
+
+**Sample response**
+
+```
+[
+    {
+        "login_id":"",
+        "avatar_url":"https://cloud.seafile.com/media/avatars/0/1/a72299021077701e7c522c46fdaa87/resized/80/6ad30837f69ea7ef234dc272fb15e9e9.png",
+        "contact_email":"lian@lian.com",
+        "name":"name of lian",
+        "is_admin":true,
+        "role":"Owner",
+        "group_id":65,
+        "email":"lian@lian.com"
+    },
+    {
+        "login_id":"",
+        "avatar_url":"https://cloud.seafile.com/media/avatars/default.png",
+        "contact_email":"1@1.com",
+        "name":"123",
+        "is_admin":false,
+        "role":"Member",
+        "group_id":65,
+        "email":"1@1.com"
+    }
+]
+```
+
+**Errors**
+
+* 403 Permission error, only administrator can perform this action
+* 404 Group not found.
+
+### <a id="admin-only-delete-group-member"></a>Delete Group Member
+
+Available for Seafile v6.0.0+
+
+**DELETE** https://cloud.seafile.com/api/v2.1/admin/groups/{group_id}/members/{email}/
+
+**Sample request**
+
+    curl -X DELETE -H 'Authorization: Token 444d2bbf1fc78ffbeedc4704c9f41e32d926ac94' https://cloud.seafile.com/api/v2.1/admin/groups/64/members/foo@foo.com/
+
+**Sample response**
+
+```
+{"success":true}
+```
+
+**Errors**
+
+* 403 Permission error, only administrator can perform this action
+* 403 foo@foo.com is group owner, can not be removed.
+* 404 Group not found.
 * 500 Internal Server Error
 
 ## <a id="admin-only-log"></a>Admin Log
@@ -3920,7 +4043,7 @@ Available for Seafile v6.0.0+
 [
     {
         'etype': u'add-repo-perm',
-        'file_path': u'/<img onerror=alert(1) src=a>_"_\u2126_%2F_W_#_12_\u8fd9',
+        'file_path': u'/folder',
         'from_email': u'org3@org3.com',
         'from_name': u'org3',
         'permission': u'rw',
@@ -3931,7 +4054,7 @@ Available for Seafile v6.0.0+
     },
     {
         'etype': u'add-repo-perm',
-        'file_path': u'/<img onerror=alert(1) src=a>_"_\u2126_%2F_W_#_12_\u8fd9',
+        'file_path': u'/folder',
         'from_email': u'org3@org3.com',
         'from_name': u'org3',
         'permission': u'rw',
