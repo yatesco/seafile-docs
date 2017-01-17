@@ -147,6 +147,37 @@ In the above config, the hash key is Shibboleth attribute name, the second eleme
 
 Since version 5.1.1, we added an option `SHIB_ACTIVATE_AFTER_CREATION` (defaults to `True`) which control the user status after shibboleth connection. If this option set to `False`, user will be inactive after connection, and system admins will be notified by email to activate that account.
 
+### Affiliation and user role
+
+Shibboleth has a field called affiliation. It is a list like: `employee@uni-mainz.de;member@uni-mainz.de;faculty@uni-mainz.de;staff@uni-mainz.de.`
+
+Since version 6.0.7 pro, we are able to set user role from Shibboleth. Details about user role, please refer to https://manual.seafile.com/deploy_pro/roles_permissions.html
+
+To enable this, modify `SHIBBOLETH_ATTRIBUTE_MAP` above and add `Shibboleth-affiliation` field, you may need to change `Shibboleth-affiliation` according to your Shibboleth SP attributes.
+```
+SHIBBOLETH_ATTRIBUTE_MAP = {
+    "eppn": (False, "username"),
+    "givenname": (False, "givenname"),
+    "sn": (False, "surname"),
+    "mail": (False, "contact_email"),
+    "organization": (False, "institution"),
+    "Shibboleth-affiliation": (False, "affiliation"),
+}
+```
+
+Then add new config to define affiliation role map, 
+
+```
+SHIBBOLETH_AFFILIATION_ROLE_MAP = {
+    'employee@uni-mainz.de': 'staff',
+    'member@uni-mainz.de': 'staff',
+    'student@uni-mainz.de': 'student',
+    'employee@hu-berlin.de': 'guest'
+}
+```
+
+After Shibboleth login, Seafile should calcualte user's role from affiliation and SHIBBOLETH_AFFILIATION_ROLE_MAP.
+
 ## Verify
 
 After restarting Apache and Seafile services, you can then test the shibboleth login workflow.
