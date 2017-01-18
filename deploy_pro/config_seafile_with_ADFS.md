@@ -75,7 +75,7 @@ SAML_ATTRIBUTE_MAPPING = {
     'Telephone': ('telephone', ),
 }
 
-# update the 'idp' section in SAMPL_CONFIG accoring to your situation, and leave others as default
+# update the 'idp' section in SAMPL_CONFIG according to your situation, and leave others as default
 ENABLE_ADFS_LOGIN = True
 EXTRA_AUTHENTICATION_BACKENDS = (
     'seahub_extra.adfs_auth.backends.Saml2Backend',
