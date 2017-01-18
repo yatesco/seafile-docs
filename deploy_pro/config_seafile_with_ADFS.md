@@ -50,7 +50,7 @@ openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout sp.key -out sp.crt
 
 - For Ubuntu 16.04
 ```
-sudo apt install libxmlsec1
+sudo apt install xmlsec1
 sudo pip install cryptography djangosaml2
 ```
 
@@ -153,12 +153,12 @@ SAML_CONFIG = {
 
     # Signing
     'key_file': '', 
-    'cert_file': path.join(CERTS_DIR, 'certs/idp.crt'),  # from IdP
+    'cert_file': path.join(CERTS_DIR, 'idp.crt'),  # from IdP
 
     # Encryption
     'encryption_keypairs': [{
-        'key_file': path.join(CERTS_DIR, 'certs/sp.key'),  # private part
-        'cert_file': path.join(CERTS_DIR, 'certs/sp.crt'),  # public part
+        'key_file': path.join(CERTS_DIR, 'sp.key'),  # private part
+        'cert_file': path.join(CERTS_DIR, 'sp.crt'),  # public part
     }],
 	
     'valid_for': 24,  # how long is our metadata valid
