@@ -9,7 +9,7 @@ In the Pro Edition, Seafile offers four audit logs in system admin panel:
 
 ![Seafile Auditing Log](../images/admin-audit-log.png)
 
-The logging feature is turned off by default. Add the following option to `seafevent.conf` to turn it on:
+The logging feature is turned off by default before version 6.0. Add the following option to `seafevents.conf` to turn it on:
 
 ```
 [Audit]
