@@ -101,7 +101,7 @@ From Pro edition 6.0.0 on, the migration scripts are included in the package. Fo
 - https://github.com/haiwen/seafile-server/blob/master/scripts/seafobj_migrate.py
 - https://github.com/haiwen/seafile-server/blob/master/scripts/migrate-to-ceph.sh
 
-You have to shutdown Seafile server before running the script.
+You can run the migration script when your Seafile server is still running.
 
 ```
 cd haiwen/seafile-server-latest
@@ -109,6 +109,8 @@ cd haiwen/seafile-server-latest
 ```
 
 If there is any error in the migration process, the script will stop. After you check and fix the errors, you can run the script again. The script is designed to be idempotent to multiple runs. It only copies non-existing objects to Ceph. The script won't delete any objects from the file system backend.
+
+***After the initial migration completes successfully, you need to shutdown the Seafile server and run the script again to migrate the data that's added when you run the initial migration.*** Since the script won't migrate objects that have been migrated, this phase should finish in a short time.
 
 ### Update seafile.conf
 
