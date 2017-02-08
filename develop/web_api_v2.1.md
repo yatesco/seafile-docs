@@ -210,7 +210,6 @@
 
     <li><a href="#get-file-activities">Get File Activities</a></li>
     <li><a href="#get-thumbnail-image">Get Thumbnail Image</a></li>
-    <li><a href="#add-organization">Add Organization</a></li>
     <li><a href="#search-user">Search User</a></li>
 
 </ul>
@@ -273,6 +272,13 @@
             <li><a href="#admin-only-get-file-audit-log">Get File Audit Log</a></li>
             <li><a href="#admin-only-get-file-update-log">Get File Update Log</a></li>
             <li><a href="#admin-only-get-perm-audit-log">Get Permission Audit Log</a></li>
+        </ul>
+    </li>
+
+    <li>
+        <a href="#admin-only-organization">Organization</a>
+        <ul>
+            <li><a href="#admin-only-add-organization">Add Organization</a></li>
         </ul>
     </li>
 </ul>
@@ -3130,29 +3136,6 @@ this api will only return first 15 records of activities. if want get more, pass
 
     curl -H 'Authorization: Token 40f9a510a0629430865dc199a3880898ad2e48fc' https://cloud.seafile.com/api2/repos/fbead5d0-4817-4446-92f3-7ac8e6a8e5f5/thumbnail/?p=/5.jpg\&size=123 > thumbnail.png
 
-## <a id="add-organization"></a>Add Organization
-
-This API is only used internally to create an organization account in seacloud.cc.
-
-**POST** https://cloud.seafile.com/api2/organization/
-
-**Request parameters**
-
-* username
-* password
-* org_name
-* prefix
-* quota
-* member_limit
-
-**Sample request**
-
-    curl -v -X POST -d "username=example@example.com&password=example&org_name=example&prefix=example&quota=100&member_limit=10" -H "Authorization: Token ccdff90e4d1efe76b2b3d91c06b027a5cff189d4" -H 'Accept: application/json; indent=4' https://cloud.seafile.com/api2/organization/
-
-**Sample response**
-
-    "success"
-
 ### <a id="search-user"></a>Search User
 
 **GET** https://cloud.seafile.com/api2/search-user/?q=foo
@@ -4070,5 +4053,30 @@ Available for Seafile v6.0.0+
 
 * 400 start or end date invalid.
 * 403 Feature disabled.
+
+**NOTE** This api only supported in pro edition.
+
+## <a id="admin-only-organization"></a>Organization
+
+### <a id="admin-only-add-organization"></a>Add Organization
+
+**POST** https://cloud.seafile.com/api2/organization/
+
+**Request parameters**
+
+* username
+* password
+* org_name
+* prefix
+* quota
+* member_limit
+
+**Sample request**
+
+    curl -v -X POST -d "username=example@example.com&password=example&org_name=example&prefix=example&quota=100&member_limit=10" -H "Authorization: Token ccdff90e4d1efe76b2b3d91c06b027a5cff189d4" -H 'Accept: application/json; indent=4' https://cloud.seafile.com/api2/organization/
+
+**Sample response**
+
+    "success"
 
 **NOTE** This api only supported in pro edition.
