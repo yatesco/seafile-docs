@@ -72,16 +72,17 @@ max_download_dir_size=200
 #### Sending Email Notifications on Seahub
 
 A few features work better if it can send email notifications, such as notifying users about new messages.
-If you want to setup email notifications, please add the following lines to seahub_settings.py (and set your email server).
+If you want to setup email notifications, please add the following lines to seahub_settings.py (and set your email server). 
+See [Django email documentation](https://docs.djangoproject.com/en/1.10/topics/email/) for the full description of these variables.
 
 ```
 EMAIL_USE_TLS = False
 EMAIL_HOST = 'smtp.example.com'        # smpt server
-EMAIL_HOST_USER = 'username@example.com'    # username and domain
-EMAIL_HOST_PASSWORD = 'password'    # password
+EMAIL_HOST_USER = 'username@example.com'    # smtp authentication username
+EMAIL_HOST_PASSWORD = 'password'    # smtp authentication password
 EMAIL_PORT = '25'
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
-SERVER_EMAIL = EMAIL_HOST_USER
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER # value of email's From: field
+SERVER_EMAIL = EMAIL_HOST_USER # error-reporting emails' From: field
 ```
 
 If you are using Gmail as email server, use following lines:
