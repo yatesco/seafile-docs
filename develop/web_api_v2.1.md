@@ -2785,26 +2785,67 @@ request recursive dir list of a folder.
 
    This can also be used to delete file.
 
-### <a id="Download-directory"></a>Download Directory
+### <a id="download-directory"></a>Download Directory
 
-**GET** https://cloud.seafile.com/api2/repos/{repo-id}/dir/download/?p=/foo
+Perform the following two steps to download directory
+
+##### <a id="download-directory-get-tast-toke"></a>Get Task Token
+
+**GET** https://cloud.seafile.com/api/v2.1/repos/{repo-id}/zip-task/?parent_dir={parent_dir}&dirents={dir}
 
 * repo-id
-* p
+* parent_dir
+* dirents
 
 **Sample request**
 
-    curl -H 'Authorization: Token f2210dacd3606d94ff8e61d99b477fd' -H 'Accept: application/json; charset=utf-8; indent=4' https://cloud.seafile.com/api2/repos/dae8cecc-2359-4d33-aa42-01b7846c4b32/dir/?p=/foo
+    curl -H 'Authorization: Token 0eb24ce5db35a31f70171eca2f760f03f59fa09a' -H 'Accept: application/json; charset=utf-8; indent=4' "https://cloud.seafile.com/api/v2.1/repos/7460f7ac-a0ff-4585-8906-bb5a57d2e118/zip-task/?parent_dir=/&dirents=my_dir_name"
 
 **Sample response**
 
-    "https://cloud.seafile.com:8082/files/adee6094/foo"
+    {
+        "zip_token": "b2272645-35ee-44ce-8f68-07c022107015"
+    }
 
 **Errors**
 
-* 400 Path is missing or invalid(e.g. p=/), or unable to download directory, size is too large
-* 404 Repo(path) not found(exist)
-* 520 Operation failed.
+* 400 parent_dir/dirents invalid.
+* 400 Unable to download directory: size is too large.
+* 404 Library/Folder not found.
+* 403 Permission denied.
+* 500 Internal Server Error
+
+##### <a id="download-directory-query-task-progress"></a>Query Task Progress
+
+Use the token returned from previous request to check if task progress finished.
+
+**GET** https://cloud.seafile.com/api/v2.1/query-zip-progress/?token={token}
+
+* token
+
+**Sample request**
+
+    curl -H 'Authorization: Token 0eb24ce5db35a31f70171eca2f760f03f59fa09a' -H 'Accept: application/json; charset=utf-8; indent=4' "https://cloud.seafile.com/api/v2.1/query-zip-progress/?token=b2272645-35ee-44ce-8f68-07c022107015"
+
+**Sample response**
+
+If `zipped` is equal to `total`, means task finished.
+
+    {
+        "zipped":2,
+        "total":2
+    }
+
+**Errors**
+
+* 400 token invalid.
+* 500 Internal Server Error
+
+After the task finished, you can manually generate directory download url with the `zip_token`:
+
+    FILE_SERVER_ROOT/zip/{zip_token}
+
+For example, `https://cloud.seafile.com/seafhttp/zip/b2272645-35ee-44ce-8f68-07c022107015` is the final url here.
 
 ## <a id="multiple-files-directories">Multiple Files / Directories
 
@@ -2886,28 +2927,65 @@ request recursive dir list of a folder.
 
 ### <a id="multiple-files-directories-download"></a>Download
 
-**GET** https://cloud.seafile.com/api/v2.1/repos/{repo-id}/dirents/download-link/?parent_dir={parent_dir}&dirents={dirents}
+Perform the following two steps to download multiple files and directories.
 
-**Request parameters**
+##### <a id="multiple-files-directories-get-tast-toke"></a>Get Task Token
 
-* repo_id
+**GET** https://cloud.seafile.com/api/v2.1/repos/{repo-id}/zip-task/?parent_dir={parent_dir}&dirents={dir,file}
+
+* repo-id
 * parent_dir
-* dirents, string of all file/folder name
+* dirents
 
 **Sample request**
 
-    curl -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' https://cloud.seafile.com/api/v2.1/repos/47945b31-dedb-4b92-a048-32bf825595ce/dirents/download-link/?parent_dir=/&dirents=file_name_1,file_name_2,folder_name
+    curl -H 'Authorization: Token 0eb24ce5db35a31f70171eca2f760f03f59fa09a' -H 'Accept: application/json; charset=utf-8; indent=4' "https://cloud.seafile.com/api/v2.1/repos/7460f7ac-a0ff-4585-8906-bb5a57d2e118/zip-task/?parent_dir=/&dirents=my_dir_name&dirents=my_file_name"
 
 **Sample response**
 
-    {'url': https://cloud.seafile.com/seafhttp/files/916dac2d-0480-4aad-8b29-fe0240923738}
+    {
+        "zip_token": "b2272645-35ee-44ce-8f68-07c022107015"
+    }
 
 **Errors**
 
-* 400 parent_dir invalid.
-* 400 dirents invalid.
-* 404 Library not found.
+* 400 parent_dir/dirents invalid.
+* 400 Unable to download directory: size is too large.
+* 404 Library/Folder not found.
+* 403 Permission denied.
 * 500 Internal Server Error
+
+##### <a id="multiple-files-directories-query-task-progress"></a>Query Task Progress
+
+Use the token returned from previous request to check if task progress finished.
+
+**GET** https://cloud.seafile.com/api/v2.1/query-zip-progress/?token={token}
+
+* token
+
+**Sample request**
+
+    curl -H 'Authorization: Token 0eb24ce5db35a31f70171eca2f760f03f59fa09a' -H 'Accept: application/json; charset=utf-8; indent=4' "https://cloud.seafile.com/api/v2.1/query-zip-progress/?token=b2272645-35ee-44ce-8f68-07c022107015"
+
+**Sample response**
+
+If `zipped` is equal to `total`, means task finished.
+
+    {
+        "zipped":2,
+        "total":2
+    }
+
+**Errors**
+
+* 400 token invalid.
+* 500 Internal Server Error
+
+After the task finished, you can manually generate directory download url with the `zip_token`:
+
+    FILE_SERVER_ROOT/zip/{zip_token}
+
+For example, `https://cloud.seafile.com/seafhttp/zip/b2272645-35ee-44ce-8f68-07c022107015` is the final url here.
 
 ## <a id="avatar"></a>Avatar
 
