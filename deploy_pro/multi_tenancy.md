@@ -1,5 +1,3 @@
-**NOTE**: Nginx] or Apache is needed to use Seafile multi-tenancy feature.
-
 Multi-tenancy feature is designed for hosting providers that what to host several customers in a single Seafile instance. You can create multi-organizations. Organizations is separated from each other. Users can't share libraries between organizations.
 
 ## Seafile Config ##
