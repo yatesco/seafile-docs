@@ -253,6 +253,20 @@
     </li>
 
     <li>
+        <a href="#admin-only-shares">Shares</a>
+        <ul>
+            <li><a href="#admin-only-get-repo-user-shares">Get Repo User Shares</a></li>
+            <li><a href="#admin-only-get-repo-group-shares">Get Repo Group Shares</a></li>
+            <li><a href="#admin-only-share-repo-to-user">Share Repo to User</a></li>
+            <li><a href="#admin-only-share-repo-to-group">Share Repo to Group</a></li>
+            <li><a href="#admin-only-modify-repo-user-share-permission">Modify Repo User Share Permission</a></li>
+            <li><a href="#admin-only-modify-repo-group-share-permission">Modify Repo Group Share Permission</a></li>
+            <li><a href="#admin-only-delete-repo-user-share">Delete Repo User Share</a></li>
+            <li><a href="#admin-only-delete-repo-group-share">Delete Repo Group Share</a></li>
+        </ul>
+    </li>
+
+    <li>
         <a href="#admin-only-groups">Groups</a>
         <ul>
             <li><a href="#admin-only-get-all-groups">Get all Groups</a></li>
@@ -928,7 +942,7 @@ curl -X DELETE -H 'Authorization: Token 444d2bbf1fc78ffbeedc4704c9f41e32d926ac94
 **Sample response**
 
 ```
-{'avatar_url': 'http://192.168.1.124:8000/media/avatars/default.png',
+{'avatar_url': 'https://cloud.seafile.com/media/avatars/default.png',
  'content': u'this is another test',
  'created_at': '2016-07-11T09:27:49+08:00',
  'group_id': 772,
@@ -3521,6 +3535,8 @@ Get first page (50 records per page) of mobile devices.
 
 ### <a id="admin-only-get-device-errors"></a>Get Device Errors
 
+This api only supported in pro edition.
+
 **GET** https://cloud.seafile.com/api/v2.1/admin/device-errors/
 
 **Sample request**
@@ -3549,9 +3565,9 @@ Get first page (50 records per page) of mobile devices.
 * 403 Feature disabled.
 * 500 Internal Server Error
 
-**NOTE** This api only supported in pro edition.
-
 ### <a id="admin-only-clean-device-errors"></a>Clean Device Errors
+
+This api only supported in pro edition.
 
 **DELETE** https://cloud.seafile.com/api/v2.1/admin/device-errors/
 
@@ -3569,8 +3585,6 @@ Get first page (50 records per page) of mobile devices.
 
 * 403 Feature disabled.
 * 500 Internal Server Error
-
-**NOTE** This api only supported in pro edition.
 
 ## <a id="admin-only-libraries"></a>Libraries
 
@@ -3758,6 +3772,328 @@ Available for Seafile v6.0.0+
 * 403 Permission error, only administrator can perform this action
 * 404 User not found.
 * 404 Library not found.
+* 500 Internal Server Error
+
+## <a id="admin-only-shares"></a>Shares
+
+### <a id="admin-only-get-repo-user-shares"></a>Get Repo User Shares
+
+Available for Seafile v6.0.1+
+
+**GET** https://cloud.seafile.com/api/v2.1/admin/shares/?repo_id={repo_id)&share_type={share_type}
+
+**Request parameters**
+
+* repo_id
+* share_type
+
+**Sample request**
+
+    curl -H "Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd" -H 'Accept: application/json; indent=4' 'https://cloud.seafile.com/api/v2.1/admin/shares/?repo_id=ddd42241-e003-425d-960e-0f9f7144866f&share_type=user'
+
+**Sample response**
+
+```
+[
+    {
+        "repo_id": "ddd42241-e003-425d-960e-0f9f7144866f",
+        "share_type": "user",
+        "permission": "r",
+        "path": "/",
+        "user_name": "name of user 2",
+        "user_email": "2@2.com"
+    }
+]
+```
+
+**Errors**
+
+* 400 repo_id invalid.
+* 400 share_type invalid.
+* 403 Permission denied.
+* 404 Library not found.
+* 404 Folder not found.
+* 500 Internal Server Error
+
+### <a id="admin-only-get-repo-group-shares"></a>Get Repo Group Shares
+
+Available for Seafile v6.0.1+
+
+**GET** https://cloud.seafile.com/api/v2.1/admin/shares/?repo_id={repo_id)&share_type={share_type}
+
+**Request parameters**
+
+* repo_id
+* share_type
+
+**Sample request**
+
+    curl -H "Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd" -H 'Accept: application/json; indent=4' 'https://cloud.seafile.com/api/v2.1/admin/shares/?repo_id=ddd42241-e003-425d-960e-0f9f7144866f&share_type=group'
+
+**Sample response**
+
+```
+[
+    {
+        "repo_id": "ddd42241-e003-425d-960e-0f9f7144866f",
+        "share_type": "group",
+        "permission": "rw",
+        "group_name": "group-of-lian-2",
+        "path": "/",
+        "group_id": 2
+    }
+]
+```
+
+**Errors**
+
+* 400 repo_id invalid.
+* 400 share_type invalid.
+* 403 Permission denied.
+* 404 Library not found.
+* 404 Folder not found.
+* 500 Internal Server Error
+
+### <a id="admin-only-share-repo-to-user"></a>Share Repo to User
+
+Available for Seafile v6.0.1+
+
+**POST** https://cloud.seafile.com/api/v2.1/admin/shares/
+
+**Request parameters**
+
+* repo_id
+* share_type
+* share_to (user email)
+* permission
+
+**Sample request**
+
+    curl -d "repo_id=ddd42241-e003-425d-960e-0f9f7144866f&share_type=user&permission=r&share_to=1@1.com&share_to=invalid@email.com" -H "Authorization: Token 9c845638b855e549c07ff81be2a0471aa52810d7" -H 'Accept: application/json; indent=4' 'https://cloud.seafile.com/api/v2.1/admin/shares/'
+
+**Sample response**
+
+```
+{
+    "failed": [
+        {
+            "error_msg": "User invalid@email.com not found.",
+            "user_email": "invalid@email.com"
+        }
+    ],
+    "success": [
+        {
+            "repo_id": "ddd42241-e003-425d-960e-0f9f7144866f",
+            "share_type": "user",
+            "permission": "r",
+            "path": "/",
+            "user_name": "name of user 1",
+            "user_email": "1@1.com"
+        }
+    ]
+}
+```
+
+**Errors**
+
+* 400 repo_id invalid.
+* 400 share_type invalid.
+* 403 Permission denied.
+* 404 Library not found.
+* 404 Folder not found.
+* 500 Internal Server Error
+
+### <a id="admin-only-share-repo-to-group"></a>Share Repo to Group
+
+Available for Seafile v6.0.1+
+
+**POST** https://cloud.seafile.com/api/v2.1/admin/shares/
+
+**Request parameters**
+
+* repo_id
+* share_type
+* share_to (group_id)
+* permission
+
+**Sample request**
+
+    curl -d "repo_id=ddd42241-e003-425d-960e-0f9f7144866f&share_type=group&permission=r&share_to=1&share_to=1232" -H "Authorization: Token 9c845638b855e549c07ff81be2a0471aa52810d7" -H 'Accept: application/json; indent=4' 'https://cloud.seafile.com/api/v2.1/admin/shares/'
+
+**Sample response**
+
+```
+{
+    "failed": [
+        {
+            "group_id": 1232,
+            "error_msg": "Group %s not found"
+        }
+    ],
+    "success": [
+        {
+            "repo_id": "ddd42241-e003-425d-960e-0f9f7144866f",
+            "share_type": "group",
+            "permission": "r",
+            "group_name": "group-of-lian",
+            "path": "/",
+            "group_id": 1
+        }
+    ]
+}
+```
+
+**Errors**
+
+* 400 repo_id invalid.
+* 400 share_type invalid.
+* 403 Permission denied.
+* 404 Library not found.
+* 404 Folder not found.
+* 500 Internal Server Error
+
+### <a id="admin-only-modify-repo-user-share-permission"></a>Modify Repo User Share Permission
+
+Available for Seafile v6.0.1+
+
+**PUT** https://cloud.seafile.com/api/v2.1/admin/shares/
+
+**Request parameters**
+
+* repo_id
+* share_type
+* share_to (user email)
+* permission
+
+**Sample request**
+
+    curl -X PUT -d "repo_id=ddd42241-e003-425d-960e-0f9f7144866f&share_type=user&permission=rw&share_to=1@1.com" -H "Authorization: Token 9c845638b855e549c07ff81be2a0471aa52810d7" -H 'Accept: application/json; indent=4' 'https://cloud.seafile.com/api/v2.1/admin/shares/'
+
+**Sample response**
+
+```
+{
+    "repo_id": "ddd42241-e003-425d-960e-0f9f7144866f",
+    "share_type": "user",
+    "permission": "rw",
+    "path": "/",
+    "user_name": "name of user 1",
+    "user_email": "1@1.com"
+}
+```
+
+**Errors**
+
+* 400 repo_id invalid.
+* 400 share_type invalid.
+* 403 Permission denied.
+* 404 Library not found.
+* 404 Folder not found.
+* 500 Internal Server Error
+
+### <a id="admin-only-modify-repo-group-share-permission"></a>Modify Repo Group Share Permission
+
+Available for Seafile v6.0.1+
+
+**PUT** https://cloud.seafile.com/api/v2.1/admin/shares/
+
+**Request parameters**
+
+* repo_id
+* share_type
+* share_to (group_id)
+* permission
+
+**Sample request**
+
+    curl -X PUT -d "repo_id=ddd42241-e003-425d-960e-0f9f7144866f&share_type=group&permission=rw&share_to=1" -H "Authorization: Token 9c845638b855e549c07ff81be2a0471aa52810d7" -H 'Accept: application/json; indent=4' 'https://cloud.seafile.com/api/v2.1/admin/shares/'
+
+**Sample response**
+
+```
+{
+    "repo_id": "ddd42241-e003-425d-960e-0f9f7144866f",
+    "share_type": "group",
+    "permission": "rw",
+    "group_name": "group-of-lian",
+    "path": "/",
+    "group_id": 1
+}
+```
+
+**Errors**
+
+* 400 repo_id invalid.
+* 400 share_type invalid.
+* 403 Permission denied.
+* 404 Library not found.
+* 404 Folder not found.
+* 500 Internal Server Error
+
+### <a id="admin-only-delete-repo-user-share"></a>Delete Repo User Share
+
+Available for Seafile v6.0.1+
+
+**DELETE** https://cloud.seafile.com/api/v2.1/admin/shares/
+
+**Request parameters**
+
+* repo_id
+* share_type
+* share_to (user email)
+
+**Sample request**
+
+    curl -X DELETE -d "repo_id=ddd42241-e003-425d-960e-0f9f7144866f&share_type=user&share_to=1@1.com" -H "Authorization: Token 9c845638b855e549c07ff81be2a0471aa52810d7" -H 'Accept: application/json; indent=4' 'https://cloud.seafile.com/api/v2.1/admin/shares/'
+
+**Sample response**
+
+```
+{
+    "success": true
+}
+```
+
+**Errors**
+
+* 400 repo_id invalid.
+* 400 share_type invalid.
+* 403 Permission denied.
+* 404 Library not found.
+* 404 Folder not found.
+* 500 Internal Server Error
+
+### <a id="admin-only-delete-repo-group-share"></a>Delete Repo Group Share
+
+Available for Seafile v6.0.1+
+
+**DELETE** https://cloud.seafile.com/api/v2.1/admin/shares/
+
+**Request parameters**
+
+* repo_id
+* share_type
+* share_to (group id)
+
+**Sample request**
+
+    curl -X DELETE -d "repo_id=ddd42241-e003-425d-960e-0f9f7144866f&share_type=group&share_to=1" -H "Authorization: Token 9c845638b855e549c07ff81be2a0471aa52810d7" -H 'Accept: application/json; indent=4' 'https://cloud.seafile.com/api/v2.1/admin/shares/'
+
+**Sample response**
+
+```
+{
+    "success": true
+}
+```
+
+**Errors**
+
+* 400 repo_id invalid.
+* 400 share_type invalid.
+* 403 Permission denied.
+* 404 Library not found.
+* 404 Folder not found.
 * 500 Internal Server Error
 
 ## <a id="admin-only-groups"></a>Groups
@@ -3976,6 +4312,8 @@ Available for Seafile v6.0.0+
 
 ### <a id="admin-only-get-login-log"></a>Get Login Log
 
+This api only supported in pro edition.
+
 **GET** https://cloud.seafile.com/api/v2.1/admin/logs/login/?start=2016-03-20&end=2016-03-31
 
 **Sample request**
@@ -4006,9 +4344,9 @@ Available for Seafile v6.0.0+
 * 400 start or end date invalid.
 * 403 Feature disabled.
 
-**NOTE** This api only supported in pro edition.
-
 ### <a id="admin-only-get-file-audit-log"></a>Get File Audit Log
+
+This api only supported in pro edition.
 
 **GET** https://cloud.seafile.com/api/v2.1/admin/logs/file-audit/?start=2016-03-20&end=2016-03-31
 
@@ -4048,9 +4386,9 @@ Available for Seafile v6.0.0+
 * 400 start or end date invalid.
 * 403 Feature disabled.
 
-**NOTE** This api only supported in pro edition.
-
 ### <a id="admin-only-get-file-update-log"></a>Get File Update Log
+
+This api only supported in pro edition.
 
 **GET** https://cloud.seafile.com/api/v2.1/admin/logs/file-update/?start=2016-03-20&end=2016-03-31
 
@@ -4088,9 +4426,9 @@ Available for Seafile v6.0.0+
 * 400 start or end date invalid.
 * 403 Feature disabled.
 
-**NOTE** This api only supported in pro edition.
-
 ### <a id="admin-only-get-perm-audit-log"></a>Get Permission Audit Log
+
+This api only supported in pro edition.
 
 **GET** https://cloud.seafile.com/api/v2.1/admin/logs/perm-audit/?start=2016-03-20&end=2016-03-31
 
@@ -4132,11 +4470,11 @@ Available for Seafile v6.0.0+
 * 400 start or end date invalid.
 * 403 Feature disabled.
 
-**NOTE** This api only supported in pro edition.
-
 ## <a id="admin-only-organization"></a>Organization
 
 ### <a id="admin-only-add-organization"></a>Add Organization
+
+This api only supported in pro edition.
 
 **POST** https://cloud.seafile.com/api2/organization/
 
@@ -4156,5 +4494,3 @@ Available for Seafile v6.0.0+
 **Sample response**
 
     "success"
-
-**NOTE** This api only supported in pro edition.
