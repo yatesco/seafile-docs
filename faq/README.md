@@ -4,6 +4,8 @@
 
 #### Seafile/Seahub can't start after upgrade or any other reasons
 
+Please check whether the old version of Seahub is still running.
+
 Please check whether you use the right user to run or upgrade Seafile. Pay special attention to the following files:
 
 * `seafile-directory/seafile-server-6.0.3/runtime/error.log`
