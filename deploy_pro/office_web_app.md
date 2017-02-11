@@ -33,7 +33,8 @@ ENABLE_OFFICE_WEB_APP_EDIT = True
 # Note, Office Web App 2016 is needed for editing docx
 OFFICE_WEB_APP_EDIT_FILE_EXTENSION = ('xlsx', 'pptx', 'docx')
 
-# HTTPS authentication related
+
+# HTTPS authentication related (optional)
 
 # Server certificates
 # Path to a CA_BUNDLE file or directory with certificates of trusted CAs
