@@ -3535,7 +3535,7 @@ Get first page (50 records per page) of mobile devices.
 
 ### <a id="admin-only-get-device-errors"></a>Get Device Errors
 
-This api only supported in pro edition.
+This api is only supported in pro edition.
 
 **GET** https://cloud.seafile.com/api/v2.1/admin/device-errors/
 
@@ -3567,7 +3567,7 @@ This api only supported in pro edition.
 
 ### <a id="admin-only-clean-device-errors"></a>Clean Device Errors
 
-This api only supported in pro edition.
+This api is only supported in pro edition.
 
 **DELETE** https://cloud.seafile.com/api/v2.1/admin/device-errors/
 
@@ -4312,7 +4312,7 @@ Available for Seafile v6.0.0+
 
 ### <a id="admin-only-get-login-log"></a>Get Login Log
 
-This api only supported in pro edition.
+This api is only supported in pro edition.
 
 **GET** https://cloud.seafile.com/api/v2.1/admin/logs/login/?start=2016-03-20&end=2016-03-31
 
@@ -4346,7 +4346,7 @@ This api only supported in pro edition.
 
 ### <a id="admin-only-get-file-audit-log"></a>Get File Audit Log
 
-This api only supported in pro edition.
+This api is only supported in pro edition.
 
 **GET** https://cloud.seafile.com/api/v2.1/admin/logs/file-audit/?start=2016-03-20&end=2016-03-31
 
@@ -4388,7 +4388,7 @@ This api only supported in pro edition.
 
 ### <a id="admin-only-get-file-update-log"></a>Get File Update Log
 
-This api only supported in pro edition.
+This api is only supported in pro edition.
 
 **GET** https://cloud.seafile.com/api/v2.1/admin/logs/file-update/?start=2016-03-20&end=2016-03-31
 
@@ -4428,7 +4428,7 @@ This api only supported in pro edition.
 
 ### <a id="admin-only-get-perm-audit-log"></a>Get Permission Audit Log
 
-This api only supported in pro edition.
+This api is only supported in pro edition.
 
 **GET** https://cloud.seafile.com/api/v2.1/admin/logs/perm-audit/?start=2016-03-20&end=2016-03-31
 
@@ -4474,7 +4474,7 @@ This api only supported in pro edition.
 
 ### <a id="admin-only-add-organization"></a>Add Organization
 
-This api only supported in pro edition.
+This api is only supported in pro edition.
 
 **POST** https://cloud.seafile.com/api2/organization/
 
