@@ -276,6 +276,8 @@
             <li><a href="#admin-only-delete-group-library">Delete Group Library</a></li>
             <li><a href="#admin-only-get-group-members">Get Group Members</a></li>
             <li><a href="#admin-only-delete-group-member">Delete Group Member</a></li>
+            <li><a href="#admin-only-add-group-member">Add Group Member</a></li>
+            <li><a href="#admin-only-update-group-member-role">Update Group Member Role</a></li>
         </ul>
     </li>
 
@@ -4306,6 +4308,109 @@ Available for Seafile v6.0.0+
 * 403 Permission error, only administrator can perform this action
 * 403 foo@foo.com is group owner, can not be removed.
 * 404 Group not found.
+* 500 Internal Server Error
+
+### <a id="admin-only-add-group-member"></a>Add Group Member
+
+Available for Seafile v6.0.8+
+
+**POST** https://cloud.seafile.com/api/v2.1/admin/groups/{group_id}/members/
+
+**Sample request**
+
+    curl -d "email=1@1.com&email=2@1.com" -H 'Authorization: Token 0eb24ce5db35a31f70171eca2f760f03f59fa09a' http://192.168.1.124:8000/api/v2.1/admin/groups/65/members/
+
+**Sample response**
+
+```
+{
+    "failed":[
+        {
+            "email":"2@1.com","error_msg":"User 2@1.com is already a group member."
+        }
+    ],
+    "success":[
+        {
+            "login_id":"",
+            "avatar_url":"http://192.168.1.124:8000/media/avatars/default.png",
+            "contact_email":"8@1.com",
+            "name":"name of 8",
+            "is_admin":0,
+            "role":"Member",
+            "group_id":65,
+            "email":"8@1.com"
+        }
+    ]
+}
+```
+
+**Errors**
+
+* 400 email invalid.
+* 404 Group not found.
+
+### <a id="admin-only-update-group-member-role"></a>Update Group Member Role
+
+Available for Seafile v6.0.8+
+
+##### Set a group member as admin
+
+**PUT** https://cloud.seafile.com/api/v2.1/admin/groups/{group_id}/members/{email}
+
+**Sample request**
+
+    curl -X PUT -d "is_admin=true" -H 'Authorization: Token 0eb24ce5db35a31f70171eca2f760f03f59fa09a' http://192.168.1.124:8000/api/v2.1/admin/groups/65/members/3@1.com/
+
+**Sample response**
+
+```
+{
+    "login_id":"",
+    "avatar_url":"http://192.168.1.124:8000/media/avatars/default.png",
+    "contact_email":"3@1.com",
+    "name":"update name of 3",
+    "is_admin":1,
+    "role":"Admin",
+    "group_id":65,
+    "email":"3@1.com"
+}
+```
+
+**Errors**
+
+* 400 email invalid.
+* 400 is_admin invalid.
+* 404 Group/User not found.
+* 500 Internal Server Error
+
+##### Unset a group member as admin
+
+**PUT** https://cloud.seafile.com/api/v2.1/admin/groups/{group_id}/members/{email}
+
+**Sample request**
+
+    curl -X PUT -d "is_admin=false" -H 'Authorization: Token 0eb24ce5db35a31f70171eca2f760f03f59fa09a' http://192.168.1.124:8000/api/v2.1/admin/groups/65/members/3@1.com/
+
+**Sample response**
+
+```
+{
+    "login_id":"",
+    "avatar_url":"http://192.168.1.124:8000/media/avatars/default.png",
+    "contact_email":"3@1.com",
+    "name":"update name of 3",
+    "is_admin":0,
+    "role":"Member",
+    "group_id":65,
+    "email":"3@1.com"
+}
+```
+
+**Errors**
+
+* 400 email invalid.
+* 400 is_admin invalid.
+* 404 Group/User not found.
 * 500 Internal Server Error
 
 ## <a id="admin-only-log"></a>Admin Log
