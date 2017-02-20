@@ -31,7 +31,7 @@ During upgrading, Seafile upgrade script will create symbolic link automatically
    BRANDING_CSS = 'custom/custom.css'
    ```
 
-You can find good example of customized css file here: https://github.com/focmb/seafile_custom_css_green
+You can find a good example of customized css file here: https://github.com/focmb/seafile_custom_css_green
 
 
 ## Customize footer and other Seahub Pages
