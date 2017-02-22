@@ -257,6 +257,7 @@
             <li><a href="#admin-only-search-library-by-owner">Search Library by Owner</a></li>
             <li><a href="#admin-only-delete-a-library">Delete a Library</a></li>
             <li><a href="#admin-only-transfer-a-library">Transfer a Library</a></li>
+            <li><a href="#admin-only-get-library-dirents">Get Library Dirents</a></li>
         </ul>
     </li>
 
@@ -3865,6 +3866,56 @@ Available for Seafile v6.0.0+
 * 403 Permission error, only administrator can perform this action
 * 404 User not found.
 * 404 Library not found.
+* 500 Internal Server Error
+
+### <a id="admin-only-get-library-dirents"></a>Get Library Dirents
+
+**GET** https://cloud.seafile.com/api/v2.1/admin/libraries/{repo_id}/dirents/?parent_dir={parent_dir}
+
+* repo-id
+* parent_dir
+
+**Sample request**
+
+    curl -H "Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd" -H 'Accept: application/json; indent=4' https://cloud.seafile.com/api/v2.1/admin/libraries/104f6537-b3a5-4d42-b8b5-8e47e494e4cf/dirents/?parent_dir=/asd
+
+**Sample response**
+
+```
+{
+    "repo_id": "c474a093-19dc-4ddf-b0b0-72b33214ba33",
+    "dirent_list": [
+        {
+            "file_size": "",
+            "last_update": "2016-12-19T03:35:14+00:00",
+            "is_file": false,
+            "obj_name": "book"
+        },
+        {
+            "file_size": "",
+            "last_update": "2016-10-12T07:43:32+00:00",
+            "is_file": false,
+            "obj_name": "image"
+        },
+        {
+            "file_size": "47.0 KB",
+            "last_update": "2017-02-13T02:41:05+00:00",
+            "is_file": true,
+            "obj_name": "123.md"
+        }
+    ],
+    "is_system_library": false,
+    "repo_name": "seacloud.cc.124"
+}
+```
+
+**Errors**
+
+* 400 parent_dir invalid.
+* 403 Feature disabled.
+* 403 Permission error, only administrator can perform this action
+* 404 Library not found.
+* 404 Folder not found.
 * 500 Internal Server Error
 
 ## <a id="admin-only-shares"></a>Shares
