@@ -2,7 +2,7 @@
 
 ## How it works
 
-seaf-server and ccnet-server now (since version 3.1) support reopenning
+seaf-server,ccnet-server(since version 3.1) and seafile-controller(since version 6.0.8) support reopenning
 logfile by receiving SIGUR1 signal.
 
 This feature is very useful when you need cut logfile while you don't want
@@ -20,9 +20,13 @@ For debian, the default directory for logrotate should be ``/etc/logrotate.d/``
 Assuming your ccnet-server's logfile is `/home/haiwen/logs/ccnet.log`, and your
 ccnet-server's pidfile for ccnet-server is ``/home/haiwen/pids/ccnet.pid``.
 
-Assuming your seaf-server's logfile is setup to ``/home/haiwen/logs/seaf-server.log``, and your
+Assuming your seaf-server's logfile is setup to ``/home/haiwen/logs/seafile.log``, and your
 seaf-server's pidfile for seaf-server is setup to ``/home/haiwen/pids/seaf-server.pid``.
 
+Assuming your seafile-controller's logfile is setup to ``/home/haiwen/logs/controller.log``, and your
+seafile-controller's pidfile for seafile-controller is setup to ``/home/haiwen/pids/controller.pid``.
+
+Assuming your seafevents logfile is setup to ``/home/haiwen/logs/seafevents.log``.
 
 Assuming your seafile-init logfile is setup to ``/home/haiwen/logs/seafile.init.log``.
 
@@ -30,7 +34,7 @@ Assuming your seahub-init logfile is setup to ``/home/haiwen/logs/seahub.init.lo
 
 The configuration for logrotate could be like this:
 ```
-/home/haiwen/logs/seaf-server.log
+/home/haiwen/logs/seafile.log
 {
         daily
         missingok
@@ -58,6 +62,31 @@ The configuration for logrotate could be like this:
         endscript
 }
 
+/home/haiwen/logs/controller.log
+{
+        daily
+        missingok
+        rotate 52
+        compress
+        delaycompress
+        notifempty
+        sharedscripts
+        postrotate
+                [ ! -f /home/haiwen/pids/controller.pid ] || kill -USR1 `cat /home/haiwen/pids/controller.pid`
+        endscript
+}
+
+/home/haiwen/logs/seafevents.log
+{
+	monthly
+	missingok
+	rotate 24
+	compress
+	delaycompress
+	notifempty
+	sharedscripts
+}
+
 /home/haiwen/logs/seafile.init.log
 {
 	monthly
@@ -80,8 +109,8 @@ The configuration for logrotate could be like this:
 	sharedscripts
 }
 ```
-
 You can save this file, for example in debian, to ``/etc/logrotate.d/seafile``
+Other logs can also be configured in the same way(without postrotate), like seahub.log,seahub_django_request.log,etc.
 
 ## That's it
 
