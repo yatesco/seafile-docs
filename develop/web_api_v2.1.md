@@ -1220,15 +1220,40 @@ Create upload link for directory with password
 
 #### <a id="list-shared-libraries"></a>List Shared Libraries
 
-**GET** https://cloud.seafile.com/api2/shared-repos/
+**GET** https://cloud.seafile.com/api/v2.1/shared-repos/
 
 **Sample request**
 
-    curl -v -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' -H 'Accept: application/json; indent=4' https://cloud.seafile.com/api2/shared-repos/
+    curl -v -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' -H 'Accept: application/json; indent=4' https://cloud.seafile.com/api/v2.1/shared-repos/
 
 **Sample response**
 
-    [{"repo_id": "7d42522b-1f6f-465d-b9c9-879f8eed7c6c", "share_type": "personal", "permission": "rw", "encrypted": false, "user": "user@example.com", "last_modified": 1361072500, "repo_desc": "ff", "group_id": 0, "repo_name": "\u6d4b\u8bd5\u4e2d\u6587pdf"}, {"repo_id": "79bb29cd-b683-4844-abaf-433952723ca5", "share_type": "group", "permission": "rw", "encrypted": false, "user": "user@example.com", "last_modified": 1359182468, "repo_desc": "test", "group_id": 1, "repo_name": "test_enc"}]
+```
+
+[
+    {
+        "share_permission": "rw",
+        "repo_id": "7460f7ac-a0ff-4585-8906-bb5a57d2e118",
+        "share_type": "personal",
+        "contact_email": "foo-contact@email.com",
+        "user_name": "foo",
+        "user_email": "foo@foo.com",
+        "repo_name": "repo"
+    },
+    {
+        "share_permission": "r",
+        "repo_id": "c474a093-19dc-4ddf-b0b0-72b33214ba33",
+        "share_type": "group",
+        "group_name": "group",
+        "group_id": 65,
+        "repo_name": "seacloud.cc.124"
+    }
+]
+```
+
+**Errors**
+
+* 500 Internal Server Error
 
 #### <a id="list-be-shared-libraries"></a>List Be Shared Libraries
 
@@ -1357,6 +1382,7 @@ If share_type is 'personal' then 'user' param is required, if share_type is 'gro
         "folder_name": "asd",
         "path": "/asd",
         "user_name": "1",
+        "contact_email": "contact@email.com",
         "user_email": "1@1.com"
     },
     {
