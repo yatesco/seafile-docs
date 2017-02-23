@@ -231,6 +231,11 @@ LIBRARY_TEMPLATES = {
     'Technology': ['/Develop/Python', '/Test'],
     'Finance': ['/Current assets', '/Fixed assets/Computer']
 }
+
+# Send email to these email addresses when a virus is detected.
+# This list can be any valid email address, not necessarily the emails of Seafile user.
+# Since version 6.0.8
+VIRUS_SCAN_NOTIFY_LIST = ['user_a@seafile.com', 'user_b@seafile.com']
 ```
 
 ## Note
