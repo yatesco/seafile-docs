@@ -32,6 +32,7 @@ password = secret
 container = seafile-blocks
 auth_host = 192.168.56.31:5000
 auth_ver = v2.0
+region = yourRegion
 memcached_options = --SERVER=192.168.1.134:11211 --POOL-MIN=10 --POOL-MAX=100
 
 [commit_object_backend]
@@ -42,6 +43,7 @@ password = secret
 container = seafile-commits
 auth_host = 192.168.56.31:5000
 auth_ver = v2.0
+region = yourRegion
 memcached_options = --SERVER=192.168.1.134:11211 --POOL-MIN=10 --POOL-MAX=100
 
 [fs_object_backend]
@@ -52,12 +54,13 @@ password = secret
 container = seafile-fs
 auth_host = 192.168.56.31:5000
 auth_ver = v2.0
+region = yourRegion
 memcached_options = --SERVER=192.168.1.134:11211 --POOL-MIN=10 --POOL-MAX=100
 ```
 
 The above config is just an example. You should replace the options according to your own environment.
 
-Seafile only supports Swift with Keystone as authentication mechanism. Currently only the v2.0 auth protocol is supported. The `auth_host` option is the address and port of Keystone service.
+Seafile only supports Swift with Keystone as authentication mechanism. Currently only the v2.0 auth protocol is supported. The `auth_host` option is the address and port of Keystone service.The `region` option is used to select publicURL,if you don't configure it, use the first publicURL in returning authenticated information.
 
 It's recommended to create separate containers for commit, fs, and block objects.
 
