@@ -2,13 +2,13 @@
 
 # Enable search and background tasks in a cluster
 
-**Note**: Since Seafile Server 5.0.0, all config files are moved to the central **conf** folder. [Read More](../deploy/new_directory_layout_5_0_0.md).
-
 In the seafile cluster, only one server should run the background tasks, including:
 
 - indexing files for search
 - email notification
 - office documents converts service
+- LDAP sync
+- virus scan
 
 Let's assume you have three nodes in your cluster: A, B, and C.
 
@@ -48,6 +48,9 @@ Edit **seahub_settings.py** and add a line:
 ```
 OFFICE_CONVERTOR_NODE = True
 ```
+
+Edit **seafile.conf** to enable virus scan according to [virus scan document](virus_scan.md)
+
 
 ### Edit the firewall rules
 
@@ -92,17 +95,20 @@ curl -v http://<IP of node A>/office-convert/internal/status/
 It should say "400 Bad Request" when you have nginx config updated.
 
 
-## Start the background tasks
+## Start the background node
 
-Before starting background tasks, you have to start seafile and seahub on the backend node, too.
+Type the following commands to start the background node (Note, one additional command `seafile-background-tasks.sh` is needed)
 
 ```
 ./seafile.sh start
 ./seahub.sh start-fastcgi
+./seafile-background-tasks.sh start
 ```
 
-On node A (the background tasks node), you can start/stop background tasks by:
+To stop the background node, type:
 
 ```
-./seafile-background-tasks.sh { start | stop | restart }
+./seafile-background-tasks.sh stop
+./seafile.sh stop
+./seahub.sh stop
 ```
