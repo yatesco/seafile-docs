@@ -116,6 +116,7 @@ FIRST_NAME_ATTR = givenName
 LAST_NAME_ATTR = sn
 DEPT_ATTR = department
 UID_ATTR = sAMAccountName
+ACTIVATE_USER_WHEN_IMPORT = true
 ```
 
 Meaning of each options:
@@ -132,6 +133,7 @@ Meaning of each options:
 
 If you choose `userPrincipalName` as the unique identifier for user, Seafile cannot use it as real email address to send notification emails to user. If the users in AD also have an email address attribute, you can sync these email addresses into Seafile's internal database. Seafile can then use them to send emails. The configuration option is:
 - **CONTACT_EMAIL_ATTR**: usually you can set it to the `mail` attribute.
+- **ACTIVATE_USER_WHEN_IMPORT**: Set to "false" if you don't want to activate the users when import.It's "true" by default.
 
 ### Other LDAP servers
 
