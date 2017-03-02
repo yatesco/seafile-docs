@@ -172,6 +172,15 @@ pool = seafile-fs
 memcached_options = --SERVER=localhost --POOL-MIN=10 --POOL-MAX=100
 ```
 
+You can create a ceph user for seafile on your ceph cluster like this:
+
+```
+ceph auth add client.seafile \
+  mds 'allow' \
+  mon 'allow r' \
+  osd 'allow rw pool=seafile-blocks pool=seafile-commits pool=seafile-fs'
+```
+
 You also have to add this user's keyring path to /etc/ceph/ceph.conf:
 
 ```
