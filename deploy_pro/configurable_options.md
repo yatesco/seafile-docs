@@ -5,7 +5,7 @@
 In the file `seafevents.conf`:
 
 ```
-[Audit]
+[AUDIT]
 ## Audit log is disabled default.
 ## Leads to additional SQL tables being filled up, make sure your SQL server is able to handle it.
 enabled = true
