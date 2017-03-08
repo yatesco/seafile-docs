@@ -129,7 +129,7 @@ You can create a ceph user for seafile on your ceph cluster like this:
 ceph auth add client.seafile \
   mds 'allow' \
   mon 'allow r' \
-  osd 'allow rw pool=seafile-blocks pool=seafile-commits pool=seafile-fs'
+  osd 'allow rwx pool=seafile-blocks, allow rwx pool=seafile-commits, allow rwx pool=seafile-fs'
 ```
 
 You also have to add this user's keyring path to /etc/ceph/ceph.conf:
