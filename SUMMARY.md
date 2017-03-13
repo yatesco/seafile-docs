@@ -55,6 +55,8 @@
    * [File Search](deploy_pro/details_about_file_search.md)
    * [Virus Scan](deploy_pro/virus_scan.md)
        * [Virus Scan With Kav4fs](deploy_pro/virus_scan_with_kav4fs.md)
+   * ADFS
+       * [ADFS Integration](deploy_pro/adfs.md)
    * Storage Backends
        * [Amazon S3 Backend](deploy_pro/setup_with_amazon_s3.md)
        * [Ceph Backend](deploy_pro/setup_with_ceph.md)
