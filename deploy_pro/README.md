@@ -43,6 +43,10 @@ Install Seafile Pro Edition
 - [Virus Scan](virus_scan.md)
 - [Virus Scan With Kav4fs](virus_scan_with_kav4fs.md)
 
+## ADFS Integration
+
+- [ADFS](adfs.md)
+
 ## Cluster
 
 - [Deploy seafile servers in a cluster](deploy_in_a_cluster.md)
