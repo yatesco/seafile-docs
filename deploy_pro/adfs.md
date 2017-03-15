@@ -209,6 +209,14 @@ SAML_CONFIG = {
  1. the Outgoing name ID format is **Email**.
  
  1. **Pass through all claim values** and click **Finish**. 
+ 
+ 
+ ### Test
+ 
+After re-starting the services, you may open a web browser and type in `https://demo.seafile.com`, there should be a `ADFS` button in login dialog, click that button will redirect you to the ADFS server (adfs-server.adfs.com), if username and password are correct, you will be redirect back to Seafile home page.
+
+For descktop client, simply click "Shibboleth Login" in "Add a new account" window, type in `https://demo.seafile.com`, click OK button will open a new window display ADFS server login page, if username and password are correct, the window will be closed and show Seafile libraries panel.
+
 
 ----
 
