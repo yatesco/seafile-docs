@@ -2544,15 +2544,25 @@ After getting the upload link, POST to this link for uploading files.
 
 **POST** http://cloud.seafile.com:8082/upload-api/73c5d117-3bcf-48a0-aa2a-3f48d5274ae3
 
-**Errors**
+**Request parameters**
 
-    400 Bad request
-    440 Invalid filename
-    500 Internal server error
+* file: local file path.
+* parent_dir : path in your Seafile repo that you want to upload local file to.
+* relative_path: sub path of "parent_dir", if this sub path does not exist, Seafile will create it recursively.
+
+> NOTE:
+> 1. `parent_dir` must endswith `/`
+> 1. `relative_path` must NOT startswith `/`
 
 **Sample request**
 
-    curl -H "Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd" -F file=@test.txt -F parent_dir=/ http://cloud.seafile.com:8082/upload-api/73c5d117-3bcf-48a0-aa2a-3f48d5274ae3
+upload file to `/path-in-seafile-repo/`:
+
+    curl -H "Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd" -F file=@local-folder/test.txt -F parent_dir=/path-in-seafile-repo/ http://cloud.seafile.com:8082/upload-api/73c5d117-3bcf-48a0-aa2a-3f48d5274ae3
+
+upload file to `/path-in-seafile-repo/sub_path_1/sub_path_2/`, Seafile will create `sub_path_1/sub_path_2/` recursively if it does not exist:
+
+    curl -H "Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd" -F file=@local-folder/test.txt -F parent_dir=/path-in-seafile-repo/ -F relative_path=sub_path_1/sub_path_2/ http://cloud.seafile.com:8082/upload-api/73c5d117-3bcf-48a0-aa2a-3f48d5274ae3
 
 **Sample response**
 
@@ -2563,6 +2573,12 @@ After getting the upload link, POST to this link for uploading files.
 - New uploaded file name will be 'test(1).text' if a file with name 'test.txt' already exists in parent directory
 
 - For python client uploading, see <https://github.com/haiwen/webapi-examples/blob/master/python/upload-file.py>, or it can be done much more easily with elegant [python requests library](http://docs.python-requests.org/en/latest/), see <https://github.com/haiwen/webapi-examples/blob/master/python/upload-file2.py>
+
+**Errors**
+
+    400 Bad request
+    440 Invalid filename
+    500 Internal server error
 
 ### <a id="update-file"></a>Update file
 
