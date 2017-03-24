@@ -39,6 +39,7 @@ server {
         access_log      /var/log/nginx/seahub.access.log;
     	error_log       /var/log/nginx/seahub.error.log;
     	fastcgi_read_timeout 36000;
+        client_max_body_size 0;
     }
 
     location /seafhttp {
