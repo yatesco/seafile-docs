@@ -2,7 +2,7 @@
 
 **Note**: Since Seafile Server 5.0.0, all config files are moved to the central **conf** folder. [Read More](../deploy/new_directory_layout_5_0_0.md).
 
-**Update**: Since Seafile Pro server 6.0.0, cluster deployment requires that `seafile-data/httptemp` folder be placed inside an NFS share. Otherwise sometimes folder download on the web UI can't work properly. Read the "Link `seafile-data/httptemp` to an NFS Share" section below for details.
+**Update**: Since Seafile Pro server 6.0.0, cluster deployment requires "sticky session" settings in the load balancer. Otherwise sometimes folder download on the web UI can't work properly. Read the "Load Balancer Setting" section below for details.
 
 ## <a id="wiki-arch"></a> Architecture
 
@@ -297,19 +297,19 @@ Beside [standard ports of a seafile server](../deploy/using_firewall.md), there 
 
 ## <a id="wiki-lb-settings"></a>Load Balancer Setting
 
-Now that your cluster is already running, fire up the load balancer and welcome your users.
+Now that your cluster is already running, fire up the load balancer and welcome your users. Since version 6.0.0, Seafile Pro requires "sticky session" settings in the load balancer. You should refer to the manual of your load balancer for how to set up sticky sessions.
 
 ### AWS Elastic Load Balancer (ELB)
 
 In the AWS ELB management console, after you've added the Seafile server instances to the instance list, you should do two more configurations.
 
-First you should setup TCP listeners
-
-![elb-listeners](../images/elb-listeners.png)
+First you should setup HTTP(S) listeners. Ports 443 and 80 of ELB should be forwarded to the ports 80 or 443 of the Seafile servers.
 
 Then you setup health check
 
 ![elb-health-check](../images/elb-health-check.png)
+
+Refer to [AWS documentation](http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-sticky-sessions.html) about how to setup sticky sessions.
 
 ### HAProxy
 
@@ -333,20 +333,14 @@ defaults
     timeout client 300000
     timeout server 300000
 
-listen seahub 0.0.0.0:80
+listen seafile 0.0.0.0:80
     mode http
     option httplog
     option dontlognull
     option forwardfor
-    server seahubserver01 192.168.1.165:80 check port 11001
-    server seahubserver02 192.168.1.200:80 check port 11001
-
-listen seahub-https 0.0.0.0:443
-    mode tcp
-    option tcplog
-    option dontlognull
-    server seahubserver01 192.168.1.165:443 check port 11001
-    server seahubserver02 192.168.1.200:443 check port 11001
+    cookie SERVERID insert indirect nocache
+    server seafileserver01 192.168.1.165:80 check port 11001 cookie seafileserver01
+    server seafileserver02 192.168.1.200:80 check port 11001 cookie seafileserver02
 ```
 
 ## See how it runs
