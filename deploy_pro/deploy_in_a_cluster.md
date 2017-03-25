@@ -80,6 +80,8 @@ Seafile servers share session information within memcached. If you set up a memc
 
 When setting up a memcached cluster, you can either run one memcached instance on each Seafile server node, or set up separate machines for the memcached cluster. It usually saves you some money if you run memcached on Seafile server nodes.
 
+
+
 ### (Optional) Setup MariaDB Cluster
 
 MariaDB cluster helps you to remove single point of failure from the cluster architecture. Every update in the database cluster is synchronously replicated to all instances.
@@ -138,8 +140,10 @@ If you have a memcached cluster, you need to specify all the memcached server ad
 ```
 [cluster]
 enabled = true
-memcached_options = --SERVER=192.168.1.134 --SERVER=192.168.1.135 --SERVER=192.168.1.136 --POOL-MIN=10 --POOL-MAX=100
+memcached_options = --SERVER=192.168.1.134 --SERVER=192.168.1.135 --SERVER=192.168.1.136 --POOL-MIN=10 --POOL-MAX=100 --RETRY-TIMEOUT=3600
 ```
+
+Notice that there is a `--RETRY-TIMEOUT=3600` option in the above config. This option is important for dealing with memcached server failures. After a memcached server in the cluster fails, Seafile server will stop trying to use it for "RETRY-TIMEOUT" (in seconds). You should set this timeout to relatively long time, to prevent Seafile from retrying the failed server frequently, which may lead to frequent request errors for the clients.
 
 (Optional) The Seafile server also opens a port for the load balancers to run health checks. Seafile by default uses port 11001. You can change this by adding the following config option to `seafile.conf`
 
@@ -149,6 +153,26 @@ health_check_port = 12345
 ```
 
 #### seahub_settings.py
+
+First, you should make sure `libmemcached` library and development headers are installed in your system. Version 1.0.18 of libmemcached or later should be used.
+
+On Ubuntu 16.04 or similar, the version in system repository is new enough. So you can install it directly.
+
+```
+sudo apt-get install libmemcached-dev
+```
+
+On other systems, such as CentOS 7 or Ubuntu 14.04, you should install the library from source code.
+
+```
+sudo apt-get install build-essential # or sudo yum install gcc gcc-c++ make openssl-devel
+wget https://launchpad.net/libmemcached/1.0/1.0.18/+download/libmemcached-1.0.18.tar.gz
+tar zxf libmemcached
+cd libmemcached-1.0.18
+./configure
+make
+sudo make install
+```
 
 Install Python memcache library.
 
@@ -183,8 +207,8 @@ CACHES = {
         'OPTIONS': {
             'ketama': True,
             'remove_failed': 1,
-            'retry_timeout': 1,
-            'dead_timeout': 60
+            'retry_timeout': 3600,
+            'dead_timeout': 3600
         }
     }
 }
@@ -227,17 +251,6 @@ In cluster environment, we have to store avatars in the database instead of in a
 ```
 CREATE TABLE `avatar_uploaded` (`filename` TEXT NOT NULL, `filename_md5` CHAR(32) NOT NULL PRIMARY KEY, `data` MEDIUMTEXT NOT NULL, `size` INTEGER NOT NULL, `mtime` datetime NOT NULL);
 ```
-
-### Link `seafile-data/httptemp` to an NFS Share
-
-In version 6.0.0, the folder download mechanism has been updated. This requires that, in a cluster deployment, `seafile-data/httptemp` folder must be in an NFS share. You can make this folder a symlink to the NFS share.
-
-```
-cd /data/haiwen/
-ln -s /nfs-share/seafile-httptemp seafile-data/httptemp
-```
-
-The httptemp folder only contains temp files for downloading/uploading file on web UI. So there is no reliability requirement for the NFS share. You can export it from any node in the cluster.
 
 ### Backend Storage Settings
 
