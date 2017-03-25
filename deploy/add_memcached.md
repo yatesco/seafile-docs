@@ -1,24 +1,63 @@
 # Add memcached
 
-Seahub caches items (avatars, profiles, etc) on the file system in /tmp/seahub_cache/ by default. You can replace it with Memcached. You need to install
+Seahub caches items (avatars, profiles, etc) on the file system in /tmp/seahub_cache/ by default. You can replace it with Memcached. 
 
-* memcached
-* python memcached modules: pylibmc and django-pylibmc
+First, you should make sure `libmemcached` library and development headers are installed in your system. Version 1.0.18 of libmemcached or later should be used.
 
-To install the python modules:
+On Ubuntu 16.04 or similar, the version in system repository is new enough. So you can install it directly.
+
+```
+sudo apt-get install libmemcached-dev
+```
+
+On other systems, such as CentOS 7 or Ubuntu 14.04, you should install the library from source code.
+
+```
+sudo apt-get install build-essential # or sudo yum install gcc gcc-c++ make openssl-devel
+wget https://launchpad.net/libmemcached/1.0/1.0.18/+download/libmemcached-1.0.18.tar.gz
+tar zxf libmemcached
+cd libmemcached-1.0.18
+./configure
+make
+sudo make install
+```
+
+Install Python memcache library.
 
 ```
 sudo pip install pylibmc
 sudo pip install django-pylibmc
 ```
 
-Then add the following lines to **seahub_settings.py**.
+Add the following configuration to `seahub_settings.py`. These settings tell Seahub to store avatar in database and cache avatar in memcached, and store css CACHE to local memory of every node.
 
 ```
 CACHES = {
     'default': {
         'BACKEND': 'django_pylibmc.memcached.PyLibMCCache',
-        'LOCATION': '127.0.0.1:11211',
+        'LOCATION': '192.168.1.134:11211',
+    }
+}
+
+AVATAR_FILE_STORAGE = 'seahub.base.database_storage.DatabaseStorage'
+
+COMPRESS_CACHE_BACKEND = 'django.core.cache.backends.locmem.LocMemCache'
+
+```
+
+If you use memcached cluster, please replace the `CACHES` variable with the following. This configuration uses consistent hashing to distribute the keys in memcached. More information can be found on [pylibmc documentation](http://sendapatch.se/projects/pylibmc/behaviors.html) and [django-pylibmc documentation](https://github.com/django-pylibmc/django-pylibmc).
+
+```
+CACHES = {
+    'default': {
+        'BACKEND': 'django_pylibmc.memcached.PyLibMCCache',
+        'LOCATION': ['192.168.1.134:11211', '192.168.1.135:11211', '192.168.1.136:11211',],
+        'OPTIONS': {
+            'ketama': True,
+            'remove_failed': 1,
+            'retry_timeout': 3600,
+            'dead_timeout': 3600
+        }
     }
 }
 ```
