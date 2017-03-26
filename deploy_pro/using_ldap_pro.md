@@ -109,6 +109,7 @@ If you're using Active Directory, add the following options to ccnet.conf:
 
 [LDAP_SYNC]
 ENABLE_USER_SYNC = true
+DEACTIVE_USER_IF_NOTFOUND = true
 SYNC_INTERVAL = 60
 USER_OBJECT_CLASS = person
 ENABLE_EXTRA_USER_INFO_SYNC = true
@@ -121,6 +122,7 @@ UID_ATTR = sAMAccountName
 Meaning of each options:
 
 - **ENABLE_USER_SYNC**: set to "true" if you want to enable ldap user synchronization
+- **DEACTIVE_USER_IF_NOTFOUND**: set to "true" if you want to deactivate a user when he/she was deleted in AD server.
 - **SYNC_INTERVAL**: The interval to sync. Unit is minutes. Defaults to 60 minutes.
 - **USER_OBJECT_CLASS**: This is the name of the class used to search for user objects. In Active Directory, it's usually "person". The default value is "person".
 - **ENABLE_EXTRA_USER_INFO_SYNC**: Enable synchronization of additional user information, including user's full name, department, and Windows login name, etc.
@@ -143,6 +145,7 @@ Add the following options to ccnet.conf:
 
 [LDAP_SYNC]
 ENABLE_USER_SYNC = true
+DEACTIVE_USER_IF_NOTFOUND = true
 SYNC_INTERVAL = 60
 USER_OBJECT_CLASS = userOfNames
 ENABLE_EXTRA_USER_INFO_SYNC = true
@@ -155,6 +158,7 @@ UID_ATTR = uid
 Meaning of each option:
 
 - **ENABLE_USER_SYNC**: set to "true" if you want to enable ldap user synchronization
+- **DEACTIVE_USER_IF_NOTFOUND**: set to "true" if you want to deactivate a user when he/she was deleted in LDAP server.
 - **SYNC_INTERVAL**: The synchronization interval. Unit is minutes. Defaults to 60 minutes.
 - **USER_OBJECT_CLASS**: This is the name of the class used to search for user objects. In OpenLDAP, you can use "userOfNames". The default value is "person".
 - **ENABLE_EXTRA_USER_INFO_SYNC**: Enable synchronization of additional user information, including user's full name, department, and Windows/Unix login name, etc.
