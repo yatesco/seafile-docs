@@ -262,7 +262,7 @@ SERVICE_URL = http://192.168.1.111:8001
 ./seahub.sh start 8001
 ```
 
-see [Seafile server configuration options](server_configuration.md) for more details about `ccnet.conf`.
+see [Seafile server configuration options](../config/ccnet-conf.md) for more details about `ccnet.conf`.
 
 ## Stopping and Restarting Seafile and Seahub
 

@@ -154,7 +154,15 @@ health_check_port = 12345
 
 #### seahub_settings.py
 
-Refer to ["add memcached"](../deploy/add_memcached.md) to use memcached in Seahub.
+You must setup and use memcached when deploying Seafile cluster. Refer to ["add memcached"](../deploy/add_memcached.md) to use memcached in Seahub.
+
+Also add following options to seahub_setting.py. These settings tell Seahub to store avatar in database and cache avatar in memcached, and store css CACHE to local memory.
+
+```
+AVATAR_FILE_STORAGE = 'seahub.base.database_storage.DatabaseStorage'
+
+COMPRESS_CACHE_BACKEND = 'django.core.cache.backends.locmem.LocMemCache'
+```
 
 If you enable the thumbnail feature, you'd better set thumbnail storage path to a **shared folder**, so that every node will create/get thumbnail through the same **shared folder**.
 
