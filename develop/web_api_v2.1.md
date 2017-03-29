@@ -88,11 +88,16 @@
             <li>
                 <a href="#shared-libraries">Shared Libraries</a>
                 <ul>
-                    <li><a href="#list-shared-libraries">List Shared Libraries</a></li>
+                    <li><a href="#list-user-shared-libraries">List User Shared Libraries</a></li>
+                    <li><a href="#list-group-shared-libraries">List Group Shared Libraries</a></li>
                     <li><a href="#list-be-shared-libraries">List Be Shared Libraries</a></li>
                     <li><a href="#delete-be-shared-library">Delete Be Shared Library</a></li>
-                    <li><a href="#share-a-library">Share A Library</a></li>
-                    <li><a href="#unshare-a-library">Unshare A Library</a></li>
+                    <li><a href="#share-a-library-to-user">Share a Library to User</a></li>
+                    <li><a href="#unshare-a-library-from-user">Unshare a Library from User</a></li>
+                    <li><a href="#update-permission-of-user-shared-library">Update Permission of User Shared Library</a></li>
+                    <li><a href="#share-a-library-to-group">Share a Library to Group</a></li>
+                    <li><a href="#unshare-a-library-from-group">Unshare a Library from Group</a></li>
+                    <li><a href="#update-permission-of-group-shared-library">Update Permission of Group Shared Library</a></li>
                 </ul>
             <li>
                 <a href="#shared-folders">Shared Folders</a>
@@ -1227,42 +1232,61 @@ Create upload link for directory with password
 
 ### <a id="shared-libraries"></a>Shared Libraries
 
-#### <a id="list-shared-libraries"></a>List Shared Libraries
+#### <a id="list-user-shared-libraries"></a>List User Shared Libraries
 
-**GET** https://cloud.seafile.com/api/v2.1/shared-repos/
+**GET** https://cloud.seafile.com/api2/repos/7460f7ac-a0ff-4585-8906-bb5a57d2e118/dir/shared_items/?p=/&share_type=user
+
+**Request parameters**
+
+* p, `/` means the **root** folder, which is equivalent to the library.
+* share_type, `user`
 
 **Sample request**
 
-    curl -v -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' -H 'Accept: application/json; indent=4' https://cloud.seafile.com/api/v2.1/shared-repos/
+    curl -v -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' -H 'Accept: application/json; indent=4' https://cloud.seafile.com/api2/repos/7460f7ac-a0ff-4585-8906-bb5a57d2e118/dir/shared_items/?p=/&share_type=user
 
 **Sample response**
 
 ```
-
 [
-    {
-        "share_permission": "rw",
-        "repo_id": "7460f7ac-a0ff-4585-8906-bb5a57d2e118",
-        "share_type": "personal",
-        "contact_email": "foo-contact@email.com",
-        "user_name": "foo",
-        "user_email": "foo@foo.com",
-        "repo_name": "repo"
-    },
-    {
-        "share_permission": "r",
-        "repo_id": "c474a093-19dc-4ddf-b0b0-72b33214ba33",
-        "share_type": "group",
-        "group_name": "group",
-        "group_id": 65,
-        "repo_name": "seacloud.cc.124"
-    }
+    {"user_info": {"nickname": "5", "name": "5@1.com"}, "share_type": "user", "permission": "r"},
+    {"user_info": {"nickname": "name of 4", "name": "4@1.com"}, "share_type": "user", "permission": "r"}
 ]
 ```
 
 **Errors**
 
-* 500 Internal Server Error
+* 400 share_type invalid.
+* 403 Permission denied.
+* 404 Library not found.
+
+#### <a id="list-group-shared-libraries"></a>List Group Shared Libraries
+
+**GET** https://cloud.seafile.com/api2/repos/7460f7ac-a0ff-4585-8906-bb5a57d2e118/dir/shared_items/?p=/&share_type=group
+
+**Request parameters**
+
+* p, `/` means the **root** folder, which is equivalent to the library.
+* share_type, `group`
+
+**Sample request**
+
+    curl -v -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' -H 'Accept: application/json; indent=4' https://cloud.seafile.com/api2/repos/7460f7ac-a0ff-4585-8906-bb5a57d2e118/dir/shared_items/?p=/&share_type=group
+
+**Sample response**
+
+```
+[
+    {"group_info": {"id": 65, "name": "group"}, "share_type": "group", "permission": "r"},
+    {"group_info": {"id": 395, "name": "lsd"}, "share_type": "group", "permission": "rw"}
+]
+```
+
+**Errors**
+
+* 400 share_type invalid.
+* 403 Permission denied.
+* 404 Library not found.
 
 #### <a id="list-be-shared-libraries"></a>List Be Shared Libraries
 
@@ -1293,48 +1317,187 @@ Create upload link for directory with password
 * 400 Invalid argument
 * 400 Library does not exist
 
-#### <a id="share-a-library"></a>Share A Library
+#### <a id="share-a-library-to-user"></a>Share a Library to User
 
-**PUT** https://cloud.seafile.com/api2/shared-repos/{repo-id}/
-
-**Request parameters**
-
-* share_type ('personal', 'group' or 'public')
-* user (or users)
-* group_id
-* permission
-
-If share_type is 'personal' then 'user' or 'users' param are required, if share_type is 'group' then 'group_id' parameter is required. If share_type is 'public' no other params is required.
-
-'user' or 'users' parameters can be a comma separated list of emails, in this case the share will be done for more users at the same time. If a problem is encountered during multiple users sharing then the sharing process is aborted.
-
-**Sample request**
-
-    curl -X PUT -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' "https://cloud.seafile.com/api2/shared-repos/7d42522b-1f6f-465d-b9c9-879f8eed7c6c/?share_type=group&user=user@example.com&group_id=1&permission=rw"
-
-**Sample response**
-
-    "success"
-
-#### <a id="unshare-a-library"></a>Unshare A Library
-
-**DELETE** https://cloud.seafile.com/api2/shared-repos/{repo-id}/
+**PUT** https://cloud.seafile.com/api2/repos/{repo_id}/dir/shared_items/?p=/
 
 **Request parameters**
 
-* share_type ('personal', 'group' or 'public')
-* user
-* group_id
-
-If share_type is 'personal' then 'user' param is required, if share_type is 'group' then 'group_id' parameter is required. If share_type is 'public' no other params is required.
+* p, `/` means the **root** folder, which is equivalent to the library.
+* share_type, `user`
+* username, a email string or a list contains multi emails
+* permission, default `r`
 
 **Sample request**
 
-    curl -X DELETE -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' "https://cloud.seafile.com/api2/shared-repos/7d42522b-1f6f-465d-b9c9-879f8eed7c6c/?share_type=personal&user=user@example.com&group_id=0"
+    curl -X PUT -d "share_type=user&username=4@1.com&username=5@1.com&username=invalid@email.com&permission=r" -H 'Authorization: Token 0eb24ce5db35a31f70171eca2f760f03f59fa09a' -H 'Accept: application/json; charset=utf-8; indent=4' https://cloud.seafile.com/api2/repos/7460f7ac-a0ff-4585-8906-bb5a57d2e118/dir/shared_items/?p=/
 
 **Sample response**
 
-    "success"
+```
+{
+    "failed": [
+        {"email": "invalid@email.com", "error_msg": "User invalid@email.com not found."}
+    ],
+    "success": [
+        {"user_info": {"nickname": "name of 4", "name": "4@1.com"}, "share_type": "user", "permission": "r"},
+        {"user_info": {"nickname": "5", "name": "5@1.com"}, "share_type": "user", "permission": "r"}
+    ]
+}
+```
+
+**Errors**
+
+* 400 permission invalid.
+* 400 share_type invalid.
+* 403 Permission denied.
+* 404 Library not found.
+
+#### <a id="unshare-a-library-from-user"></a>Unshare a Library from User
+
+**DELETE** https://cloud.seafile.com/api2/repos/{repo_id}/dir/shared_items/?p=/&share_type=user&username=5@1.com
+
+**Request parameters**
+
+* p, `/` means the **root** folder, which is equivalent to the library.
+* share_type, `user`
+* username, a email string
+
+**Sample request**
+
+    curl -X DELETE -H 'Authorization: Token 0eb24ce5db35a31f70171eca2f760f03f59fa09a' -H 'Accept: application/json; charset=utf-8; indent=4' "https://cloud.seafile.com/api2/repos/7460f7ac-a0ff-4585-8906-bb5a57d2e118/dir/shared_items/?p=/&share_type=user&username=5@1.com"
+
+**Sample response**
+
+```
+{"success": true}
+```
+
+**Errors**
+
+* 400 share_type invalid.
+* 400 email invalid.
+* 403 Permission denied.
+* 404 Library not found.
+
+#### <a id="update-permission-of-user-shared-library"></a>Update Permission of User Shared Library
+
+**POST** https://cloud.seafile.com/api2/repos/{repo_id}/dir/shared_items/?p=/&share_type=user&username=5@1.com
+
+**Request parameters**
+
+* p, `/` means the **root** folder, which is equivalent to the library.
+* share_type, `user`
+* username, a email string
+* permisson, `r` or `rw`
+
+**Sample request**
+
+    curl -d "permission=r" -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' -H 'Accept: application/json; indent=4' "https://cloud.seafile.com/api2/repos/2deffbac-d7be-4ace-b406-efb799083ee9/dir/shared_items/?p=/&share_type=user&username=5@1.com"
+
+**Sample response**
+
+```
+{"success": true}
+```
+
+**Errors**
+
+* 400 share_type invalid.
+* 403 permission invalid.
+* 403 Permission denied.
+* 404 Library not found.
+* 404 Folder not found.
+
+#### <a id="share-a-library-to-group"></a>Share a Library to Group
+
+**PUT** https://cloud.seafile.com/api2/repos/{repo_id}/dir/shared_items/?p=/
+
+**Request parameters**
+
+* p, `/` means the **root** folder, which is equivalent to the library.
+* share_type, `group`
+* group_id , an integer or a list contains multi integers
+* permission, default `r`
+
+**Sample request**
+
+    curl -X PUT -d "share_type=group&group_id=65&group_id=395&group_id=invalid_group_id&group_id=111&permission=rw" -H 'Authorization: Token 0eb24ce5db35a31f70171eca2f760f03f59fa09a' -H 'Accept: application/json; charset=utf-8; indent=4' https://cloud.seafile.com/api2/repos/7460f7ac-a0ff-4585-8906-bb5a57d2e118/dir/shared_items/?p=/
+
+**Sample response**
+
+```
+{
+    "failed": [],
+    "success": [
+        {"group_info": {"id": 65, "name": "group"}, "share_type": "group", "permission": "rw"},
+        {"group_info": {"id": 395, "name": "lsd"}, "share_type": "group", "permission": "rw"}
+    ]
+}
+```
+
+**Errors**
+
+* 400 permission invalid.
+* 400 group_id invalid.
+* 400 share_type invalid.
+* 403 Permission denied.
+* 404 Library not found.
+
+#### <a id="unshare-a-library-from-group"></a>Unshare a Library from Group
+
+**DELETE** https://cloud.seafile.com/api2/repos/{repo_id}/dir/shared_items/?p=/&share_type=group&group=65
+
+**Request parameters**
+
+* p, `/` means the **root** folder, which is equivalent to the library.
+* share_type, `group`
+* group_id , an integer
+
+**Sample request**
+
+    curl -X DELETE -H 'Authorization: Token 0eb24ce5db35a31f70171eca2f760f03f59fa09a' -H 'Accept: application/json; charset=utf-8; indent=4' "https://cloud.seafile.com/api2/repos/7460f7ac-a0ff-4585-8906-bb5a57d2e118/dir/shared_items/?p=/&share_type=group&group_id=65"
+
+**Sample response**
+
+```
+{"success": true}
+```
+
+**Errors**
+
+* 400 share_type invalid.
+* 400 group_id invalid.
+* 403 Permission denied.
+* 404 Library not found.
+
+#### <a id="update-permission-of-group-shared-library"></a>Update Permission of Group Shared Library
+
+**POST** https://cloud.seafile.com/api2/repos/{repo_id}/dir/shared_items/?p=/&share_type=group&group_id=65
+
+**Request parameters**
+
+* p, `/` means the **root** folder, which is equivalent to the library.
+* share_type, `group`
+* group_id , an integer
+* permisson, `r` or `rw`
+
+**Sample request**
+
+    curl -d "permission=r" -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' -H 'Accept: application/json; indent=4' "https://cloud.seafile.com/api2/repos/2deffbac-d7be-4ace-b406-efb799083ee9/dir/shared_items/?p=/&share_type=group&group_id=65"
+
+**Sample response**
+
+```
+{"success": true}
+```
+
+**Errors**
+
+* 400 share_type invalid.
+* 403 permission invalid.
+* 403 Permission denied.
+* 404 Library not found.
 
 ### <a id="shared-folders"></a>Shared Folders
 
