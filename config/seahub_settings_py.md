@@ -93,6 +93,9 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 # Whether to save the session data on every request. Default is `False`
 SESSION_SAVE_EVERY_REQUEST = False
 
+# Whether enable personal wiki and group wiki. Default is `True`
+ENABLE_WIKI = False
+
 ```
 
 

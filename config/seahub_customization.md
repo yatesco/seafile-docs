@@ -22,6 +22,16 @@ During upgrading, Seafile upgrade script will create symbolic link automatically
    LOGO_HEIGHT = 32
    ```
 
+### Customize Favicon
+
+1. Add your favicon file to `custom/`
+2. Overwrite `FAVICON_PATH` in `seahub_settings.py`
+
+
+   ```python
+   FAVICON_PATH = 'custom/favicon.png'
+   ```
+
 ### Customize Seahub CSS
 
 1. Add your css file to `custom/`, for example, `custom.css`
