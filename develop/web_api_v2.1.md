@@ -69,7 +69,9 @@
             <li>
                 <a href="#share-link">Share Link</a>
                 <ul>
-                    <li><a href="#list-share-links">List Share Links</a></li>
+                    <li><a href="#list-all-share-links">List all Share Links</a></li>
+                    <li><a href="#list-share-links-of-a-library">List Share Links of a Library</a></li>
+                    <li><a href="#list-share-link-of-a-folder-file">List Share Link of a Folder(File)</a></li>
                     <li><a href="#create-share-link">Create Share Link</a></li>
                     <li><a href="#delete-share-link">Delete Share Link</a></li>
                     <li><a href="#send-share-link-email">Send Share Link Email</a></li>
@@ -998,17 +1000,193 @@ curl -X DELETE -H 'Authorization: Token 444d2bbf1fc78ffbeedc4704c9f41e32d926ac94
 
 ### <a id="share-link"></a>File Share Link
 
-#### <a id="list-share-links"></a>List Share Links
+#### <a id="list-all-share-links"></a>List all Share Links
+
+This api will list all folder/file download share links in all libraries created by user.
 
 **GET** https://cloud.seafile.com/api/v2.1/share-links/
 
 **Sample request**
 
-    curl -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' "https://cloud.seafile.com/api/v2.1/share-links/"
+    curl -H 'Authorization: Token 0eb24ce5db35a31f70171eca2f760f03f59fa09a' -H 'Accept: application/json; charset=utf-8; indent=4' "https://cloud.seafile.com/api/v2.1/share-links/"
 
 **Sample response**
+```
+[
+    {
+        "username": "lian@lian.com",
+        "repo_id": "c474a093-19dc-4ddf-b0b0-72b33214ba33",
+        "ctime": "2017-04-01T02:35:57+00:00",
+        "expire_date": "",
+        "token": "6afa667ff2c248378b70",
+        "view_cnt": 0,
+        "link": "https://cloud.seafile.com/d/6afa667ff2c248378b70/",
+        "obj_name": "/",
+        "path": "/",
+        "is_dir": true,
+        "is_expired": false,
+        "repo_name": "seacloud.cc.124"
+    },
+    {
+        "username": "lian@lian.com",
+        "repo_id": "104f6537-b3a5-4d42-b8b5-8e47e494e4cf",
+        "ctime": "2017-04-01T02:35:29+00:00",
+        "expire_date": "",
+        "token": "0c4eb0cb104a43caaeef",
+        "view_cnt": 0,
+        "link": "https://cloud.seafile.com/d/0c4eb0cb104a43caaeef/",
+        "obj_name": "folder",
+        "path": "/folder/",
+        "is_dir": true,
+        "is_expired": false,
+        "repo_name": "for-test-web-api"
+    },
+    {
+        "username": "lian@lian.com",
+        "repo_id": "104f6537-b3a5-4d42-b8b5-8e47e494e4cf",
+        "ctime": "2017-04-01T02:35:35+00:00",
+        "expire_date": "",
+        "token": "8c05a00c44db4764b3a5",
+        "view_cnt": 0,
+        "link": "https://cloud.seafile.com/f/8c05a00c44db4764b3a5/",
+        "obj_name": "tmp.md",
+        "path": "/tmp.md",
+        "is_dir": false,
+        "is_expired": false,
+        "repo_name": "for-test-web-api"
+    }
+]
+```
 
-    [{"username":"lian@lian.com","view_cnt":0,"ctime":"2016-02-26T16:20:36.894","token":"4cbd625c5e","repo_id":"62ca6cf9-dab6-47e5-badc-bab13d9220ce","link":"https://cloud.seafile.com/f/4cbd625c5e/","expire_date":null,"path":"/file.md","is_expired":false},{"username":"lian@lian.com","view_cnt":0,"ctime":"2016-03-04T03:54:58.279","token":"8dc1e04ddd","repo_id":"62ca6cf9-dab6-47e5-badc-bab13d9220ce","link":"https://cloud.seafile.com/d/8dc1e04ddd/","expire_date":null,"path":"/","is_expired":false}]
+**Errors**
+
+* 403 Permission denied.
+* 500 Internal Server Error
+
+#### <a id="list-share-links-of-a-library"></a>List Share Links of a Library
+
+This api will list all folder/file download share links in a specific library.
+
+**GET** https://cloud.seafile.com/api/v2.1/share-links/?repo_id={rpeo_id}
+
+**Request parameters**
+
+* repo-id
+
+**Sample request**
+
+    curl -H 'Authorization: Token 0eb24ce5db35a31f70171eca2f760f03f59fa09a' -H 'Accept: application/json; charset=utf-8; indent=4' "https://cloud.seafile.com/api/v2.1/share-links/?repo_id=104f6537-b3a5-4d42-b8b5-8e47e494e4cf"
+
+**Sample response**
+```
+[
+    {
+        "username": "lian@lian.com",
+        "repo_id": "104f6537-b3a5-4d42-b8b5-8e47e494e4cf",
+        "ctime": "2017-04-01T02:35:29+00:00",
+        "expire_date": "",
+        "token": "0c4eb0cb104a43caaeef",
+        "view_cnt": 0,
+        "link": "https://cloud.seafile.com/d/0c4eb0cb104a43caaeef/",
+        "obj_name": "folder",
+        "path": "/folder/",
+        "is_dir": true,
+        "is_expired": false,
+        "repo_name": "for-test-web-api"
+    },
+    {
+        "username": "lian@lian.com",
+        "repo_id": "104f6537-b3a5-4d42-b8b5-8e47e494e4cf",
+        "ctime": "2017-04-01T02:35:35+00:00",
+        "expire_date": "",
+        "token": "8c05a00c44db4764b3a5",
+        "view_cnt": 0,
+        "link": "https://cloud.seafile.com/f/8c05a00c44db4764b3a5/",
+        "obj_name": "tmp.md",
+        "path": "/tmp.md",
+        "is_dir": false,
+        "is_expired": false,
+        "repo_name": "for-test-web-api"
+    }
+]
+```
+
+**Errors**
+
+* 403 Permission denied.
+* 404 library not found.
+* 500 Internal Server Error
+
+#### <a id="list-share-link-of-a-folder-file"></a>List Share Link of a Folder(File)
+
+This api will list download share link info of a specific folder/file.
+
+**GET** https://cloud.seafile.com/api/v2.1/share-links/?repo_id={rpeo_id}&path={path}
+
+**Request parameters**
+
+* repo-id
+* path, could be path of a foler or a file.
+
+**Sample request**
+
+Get folder download share link.
+
+    curl -H 'Authorization: Token 0eb24ce5db35a31f70171eca2f760f03f59fa09a' -H 'Accept: application/json; charset=utf-8; indent=4' "https://cloud.seafile.com/api/v2.1/share-links/?repo_id=104f6537-b3a5-4d42-b8b5-8e47e494e4cf&path=/folder/"
+
+**Sample response**
+```
+[
+    {
+        "username": "lian@lian.com",
+        "repo_id": "104f6537-b3a5-4d42-b8b5-8e47e494e4cf",
+        "ctime": "2017-04-01T02:35:29+00:00",
+        "expire_date": "",
+        "token": "0c4eb0cb104a43caaeef",
+        "view_cnt": 0,
+        "link": "https://cloud.seafile.com/d/0c4eb0cb104a43caaeef/",
+        "obj_name": "folder",
+        "path": "/folder/",
+        "is_dir": true,
+        "is_expired": false,
+        "repo_name": "for-test-web-api"
+    }
+]
+```
+
+or a empty list `[]` if this folder has no download share link.
+
+Get file download share link.
+
+    curl -H 'Authorization: Token 0eb24ce5db35a31f70171eca2f760f03f59fa09a' -H 'Accept: application/json; charset=utf-8; indent=4' "https://cloud.seafile.com/api/v2.1/share-links/?repo_id=104f6537-b3a5-4d42-b8b5-8e47e494e4cf&path=/tmp.md"
+
+**Sample response**
+```
+[
+    {
+        "username": "lian@lian.com",
+        "repo_id": "104f6537-b3a5-4d42-b8b5-8e47e494e4cf",
+        "ctime": "2017-04-01T02:35:35+00:00",
+        "expire_date": "",
+        "token": "8c05a00c44db4764b3a5",
+        "view_cnt": 0,
+        "link": "https://cloud.seafile.com/f/8c05a00c44db4764b3a5/",
+        "obj_name": "tmp.md",
+        "path": "/tmp.md",
+        "is_dir": false,
+        "is_expired": false,
+        "repo_name": "for-test-web-api"
+    }
+]
+```
+
+or a empty list `[]` if this file has no download share link.
+
+**Errors**
+
+* 403 Permission denied.
+* 404 folder/library not found.
+* 500 Internal Server Error
 
 #### <a id="create-share-link"></a>Create Share Link
 
@@ -4639,7 +4817,7 @@ Available for Seafile v6.0.8+
 
 **Sample request**
 
-    curl -d "email=1@1.com&email=2@1.com" -H 'Authorization: Token 0eb24ce5db35a31f70171eca2f760f03f59fa09a' http://192.168.1.124:8000/api/v2.1/admin/groups/65/members/
+    curl -d "email=1@1.com&email=2@1.com" -H 'Authorization: Token 0eb24ce5db35a31f70171eca2f760f03f59fa09a' https://cloud.seafile.com/api/v2.1/admin/groups/65/members/
 
 **Sample response**
 
@@ -4653,7 +4831,7 @@ Available for Seafile v6.0.8+
     "success":[
         {
             "login_id":"",
-            "avatar_url":"http://192.168.1.124:8000/media/avatars/default.png",
+            "avatar_url":"https://cloud.seafile.com/media/avatars/default.png",
             "contact_email":"8@1.com",
             "name":"name of 8",
             "is_admin":0,
@@ -4680,14 +4858,14 @@ Available for Seafile v6.0.8+
 
 **Sample request**
 
-    curl -X PUT -d "is_admin=true" -H 'Authorization: Token 0eb24ce5db35a31f70171eca2f760f03f59fa09a' http://192.168.1.124:8000/api/v2.1/admin/groups/65/members/3@1.com/
+    curl -X PUT -d "is_admin=true" -H 'Authorization: Token 0eb24ce5db35a31f70171eca2f760f03f59fa09a' https://cloud.seafile.com/api/v2.1/admin/groups/65/members/3@1.com/
 
 **Sample response**
 
 ```
 {
     "login_id":"",
-    "avatar_url":"http://192.168.1.124:8000/media/avatars/default.png",
+    "avatar_url":"https://cloud.seafile.com/media/avatars/default.png",
     "contact_email":"3@1.com",
     "name":"update name of 3",
     "is_admin":1,
@@ -4710,14 +4888,14 @@ Available for Seafile v6.0.8+
 
 **Sample request**
 
-    curl -X PUT -d "is_admin=false" -H 'Authorization: Token 0eb24ce5db35a31f70171eca2f760f03f59fa09a' http://192.168.1.124:8000/api/v2.1/admin/groups/65/members/3@1.com/
+    curl -X PUT -d "is_admin=false" -H 'Authorization: Token 0eb24ce5db35a31f70171eca2f760f03f59fa09a' https://cloud.seafile.com/api/v2.1/admin/groups/65/members/3@1.com/
 
 **Sample response**
 
 ```
 {
     "login_id":"",
-    "avatar_url":"http://192.168.1.124:8000/media/avatars/default.png",
+    "avatar_url":"https://cloud.seafile.com/media/avatars/default.png",
     "contact_email":"3@1.com",
     "name":"update name of 3",
     "is_admin":0,
