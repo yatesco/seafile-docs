@@ -135,7 +135,7 @@
             <li><a href="#set-exist-lib-as-public-lib">Set Exist Lib as Public Library</a></li>
             <li><a href="#remove-public-lib">Remove Public Library</a></li>
             <li><a href="#fetch-library-download-info">Fetch library download info</a></li>
-            <li><a href="#search-libraries">Search Libraries</a></li>
+            <li><a href="#search-files-in-libraries">Search Files in Libraries</a></li>
             <li><a href="#get-library-download-links">Get Library Download Links</a></li>
             <li><a href="#get-library-upload-links">Get Library Upload Links</a></li>
             <li><a href="#delete-library-download-link">Delete Library Download Link</a></li>
@@ -2246,51 +2246,55 @@ success
     "email": "user@example.com"
     }
 
-### <a id="search-libraries"></a>Search Libraries
+### <a id="search-files-in-libraries"></a>Search Files in Libraries
 
 **GET** https://cloud.seafile.com/api2/search/
 
 **Request parameters**
 
-* q
-* per_page (optional)
+* `q`, keyword for searching.
+
+* `per_page`, optional.
+
+* `search_repo`, `all` or a *repo_id*, (`all` for searching in all libraries), optional.
+
+* `search_ftypes`, `all` or `custom`, (`all` for searching all file types, `custom` for only searching the specific file types you defined in `ftype` and `input_fexts`).
+
+* `ftype`, must be in (`TEXT`, `IMAGE`, `DOCUMENT`, `SPREADSHEET`, `PDF`, `MARKDOWN`, `VIDEO`, `AUDIO`).
+
+* `input_fexts`, file extensions manually specific.
 
 **Sample request**
 
-    curl -G -H 'Authorization: Token 24fd3c026886e3121b2ca630805ed425c272cb96' -H 'Accept: application/json; indent=4' https://cloud.seafile.com/api2/search/?q=keyword
+    curl -H 'Authorization: Token e44e3c81b70b07e3a5f580db8ffcbb886f8ee06d' -H 'Accept: application/json; charset=utf-8; indent=4' "https://cloud.seafile.com/api2/search/?q=seafile&search_repo=all&search_ftypes=custom&ftype=Document&input_fexts=md,png"
 
 **Sample response**
-
-    {
-        "has_more": false,
-        "total": 3,
-        "results": [
-            {
-                "repo_id": "691b3e24-d05e-43cd-a9f2-6f32bd6b800e",
-                "name": "api.md",
-                "oid": "8ea78453bb474359cd9d8e2c4c4d8d9cbdcef0a2",
-                "last_modified": 1398045167,
-                "fullpath": "/api.md",
-                "size": 18939
-            },
-            {
-                "repo_id": "c5509062-9bca-4933-a7e0-c6da1d5f82be",
-                "name": "home.md",
-                "oid": "dda57aaffa5179829e064c7d0c142f47a8a65d3b",
-                "last_modified": 1397096831,
-                "fullpath": "/home.md",
-                "size": 1954
-            },
-            {
-                "repo_id": "c5509062-9bca-4933-a7e0-c6da1d5f82be",
-                "name": "\u5e38\u89c1\u5b89\u88c5\u95ee\u9898.md",
-                "oid": "8573f982eeb478b932a55ec13218f4f90a7c5a27",
-                "last_modified": 1397188959,
-                "fullpath": "/\u5e38\u89c1\u5b89\u88c5\u95ee\u9898.md",
-                "size": 1050
-            }
-        ]
-    }
+```
+{
+    "has_more": false,
+    "total": 2,
+    "results": [
+        {
+            "repo_id": "36eeafad-6acd-4c69-a8b7-b3f27af56dc0",
+            "name": "seafile-tutorial.doc",
+            "oid": "b88ab96740ef53249b9d21fb3fa28050842266ba",
+            "last_modified": 1490861602,
+            "fullpath": "/office file/office-2/seafile-tutorial.doc",
+            "is_dir": false,
+            "size": 300544
+        },
+        {
+            "repo_id": "97d4006f-c1e1-4b75-b31c-6ef89d580844",
+            "name": "seafile-tutorial.doc",
+            "oid": "b88ab96740ef53249b9d21fb3fa28050842266ba",
+            "last_modified": 1490861602,
+            "fullpath": "/seafile-tutorial.doc",
+            "is_dir": false,
+            "size": 300544
+        }
+    ]
+}
+```
 
 **Errors**
 
