@@ -41,9 +41,10 @@ The following are LDAP group sync related options. They're in the "[LDAP_SYNC]" 
 
 * **ENABLE_GROUP_SYNC**: set to "true" if you want to enable ldap group syncing
 * **SYNC_INTERVAL**: The interval to sync. Unit is minutes. Default to 60 minutes.
-* **GROUP_OBJECT_CLASS**: This is the name of the class used to search for group objects. In Active Directory, it's usually "group"; in OpenLDAP or others, you may use "groupOfNames" or "groupOfUniqueNames", depends on your LDAP server. The default value is "group".
+* **GROUP_OBJECT_CLASS**: This is the name of the class used to search for group objects. In Active Directory, it's usually "group"; in OpenLDAP or others, you may use "groupOfNames","groupOfUniqueNames" or "posixGroup", depends on your LDAP server. The default value is "group".
 * **GROUP_FILTER**: An additional filter to use when searching group objects. If it's set, the final filter used to run search is "(&(objectClass=GROUP_OBJECT_CLASS)(GROUP_FILTER))"; otherwise the final filter would be "(objectClass=GROUP_OBJECT_CLASS)".
-* **GROUP_MEMBER_ATTR**: The attribute field to use when loading the group's members. For most directory servers, the attributes is "member", which is the default value.
+* **GROUP_MEMBER_ATTR**: The attribute field to use when loading the group's members. For most directory servers, the attributes is "member", which is the default value.For "posixGroup", it should be set to "memberUid".
+* **USER_ATTR_IN_MEMBERUID**: The user attribute set in 'memberUid' option, which is used in "posixGroup".The default value is "uid".
 
 The search base for groups is the "BASE_DN" set in "[LDAP]" section of ccnet.conf. 
 
