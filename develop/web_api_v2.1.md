@@ -5187,7 +5187,6 @@ This api is only supported in pro edition (since 6.0.9).
 
 * org_id
 * email
-* email
 * active, `true` or `false`
 
 **Sample request**
