@@ -311,6 +311,9 @@
         <a href="#admin-only-organization">Organization</a>
         <ul>
             <li><a href="#admin-only-add-organization">Add Organization</a></li>
+            <li><a href="#admin-only-add-organization-user">Add Organization User</a></li>
+            <li><a href="#admin-only-delete-organization-user">Delete Organization User</a></li>
+            <li><a href="#admin-only-modify-organization-user">Modify Organization User</a></li>
         </ul>
     </li>
 </ul>
@@ -5102,3 +5105,112 @@ This api is only supported in pro edition.
 **Sample response**
 
     "success"
+
+### <a id="admin-only-add-organization-user"></a>Add Organization User
+
+This api is only supported in pro edition (since 6.0.9).
+
+**POST** https://cloud.seafile.com/api/v2.1/admin/organizations/{org_id}/users/
+
+**Request parameters**
+
+* org_id
+* email
+* password
+
+**Sample request**
+
+    curl -X POST -d "email=6@org.com&password=6" -H "Authorization: Token 0eb24ce5db35a31f70171eca2f760f03f59fa09a" -H 'Accept: application/json; indent=4' https://cloud.seafile.com/api/v2.1/admin/organizations/160/users/
+
+**Sample response**
+
+```
+{
+    "active": true,
+    "contact_email": "6@org.com",
+    "org_id": 160,
+    "email": "6@org.com",
+    "name": "6"
+}
+```
+
+**Errors**
+
+* 400 org_id invalid.
+* 400 email invalid.
+* 400 password invalid.
+* 400 User already exists.
+* 403 The number of users exceeds the limit.
+* 403 Failed. You can only invite %d members.
+* 404 Organization not found.
+* 500 Fail to add user.
+* 500 Internal Server Error
+
+### <a id="admin-only-delete-organization-user"></a>Delete Organization User
+
+This api is only supported in pro edition (since 6.0.9).
+
+**DELETE** https://cloud.seafile.com/api/v2.1/admin/organizations/{org_id}/users/{email}/
+
+**Request parameters**
+
+* org_id
+* email
+
+**Sample request**
+
+    curl -X DELETE -H "Authorization: Token 0eb24ce5db35a31f70171eca2f760f03f59fa09a" -H 'Accept: application/json; indent=4' https://cloud.seafile.com/api/v2.1/admin/organizations/160/users/6@org.com/
+
+**Sample response**
+
+```
+{
+    "success": true
+}
+```
+
+**Errors**
+
+* 400 org_id invalid.
+* 403 Failed to delete: is an organization creator.
+* 404 Organization not found.
+* 404 User not found.
+* 500 Internal Server Error
+
+### <a id="admin-only-modify-organization-user"></a>Modify Organization User
+
+This api is only supported in pro edition (since 6.0.9).
+
+**PUT** https://cloud.seafile.com/api/v2.1/admin/organizations/{org_id}/users/{email}/
+
+**Request parameters**
+
+* org_id
+* email
+* email
+* active, `true` or `false`
+
+**Sample request**
+
+    curl -X PUT -d "active=false" -H "Authorization: Token 0eb24ce5db35a31f70171eca2f760f03f59fa09a" -H 'Accept: application/json; indent=4' https://cloud.seafile.com/api/v2.1/admin/organizations/160/users/4@org.com/
+
+**Sample response**
+
+```
+{
+    "active": false,
+    "contact_email": "4@org.com",
+    "org_id": 160,
+    "email": "4@org.com",
+    "name": "4"
+}
+```
+
+**Errors**
+
+* 400 org_id invalid.
+* 400 active invalid.
+* 400 active invalid, should be 'true' or 'false'.
+* 404 Organization not found.
+* 404 User not found.
+* 500 Internal Server Error
