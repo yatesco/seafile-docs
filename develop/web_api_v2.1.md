@@ -150,6 +150,7 @@
             <li><a href="#download-file">Download File</a></li>
             <li><a href="#get-file-detail">Get File Detail</a></li>
             <li><a href="#get-file-history">Get File History</a></li>
+            <li><a href="#restore-file-from-history">Restore File From History</a></li>
             <li><a href="#download-file-revision">Download File From a Revision</a></li>
             <li><a href="#create-file">Create File</a></li>
             <li><a href="#rename-file">Rename File</a></li>
@@ -186,6 +187,7 @@
             <li><a href="#rename-directory">Rename Directory</a></li>
             <li><a href="#delete-directory">Delete Directory</a></li>
             <li><a href="#download-directory">Download Directory</a></li>
+            <li><a href="#revert-directory">Revert Directory</a></li>
         </ul>
     </li>
 
@@ -2585,6 +2587,36 @@ For more info, you can see [this official docs](http://wopi.readthedocs.org/en/l
 * 400 Path is missing
 * 404 File not found
 
+### <a id="restore-file-from-history"></a>Restore File From History
+
+**POST** http://192.168.1.124:8000/api/v2.1/repos/7460f7ac-a0ff-4585-8906-bb5a57d2e118/file/?p=/1.md
+
+**Request parameters**
+
+* repo_id
+* p
+* operation
+* commit_id
+
+**Sample request**
+
+    curl -d "operation=revert&commit_id=7ed3ccdc7559d1afddb95bc050230e3d54bbffef" -H "Authorization: Token 0eb24ce5db35a31f70171eca2f760f03f59fa09a" -H 'Accept: application/json; indent=4' "http://192.168.1.124:8000/api/v2.1/repos/7460f7ac-a0ff-4585-8906-bb5a57d2e118/file/?p=/1.md"
+
+**Sample response**
+```
+{
+    "success": true
+}
+```
+
+**Errors**
+
+* 400 commit_id invalid.
+* 403 Permission denied.
+* 403 File is locked
+* 500 Internal Server Error
+* 500 Check file lock error
+
 ### <a id="download-file-revision"></a>Download File From a Revision
 
 **GET** https://cloud.seafile.com/api2/repos/{repo-id}/file/revision/?p=/foo.c&commit_id=a1ec20709675f4dc8db825cdbca296be245d189b
@@ -3226,6 +3258,33 @@ Perform the following two steps to download directory
 
 * 400 parent_dir/dirents invalid.
 * 400 Unable to download directory: size is too large.
+* 404 Library/Folder not found.
+* 403 Permission denied.
+* 500 Internal Server Error
+
+### <a id="revert-directory"></a>Revert Directory
+
+**PUT** http://192.168.1.124:8000/api2/repos/7460f7ac-a0ff-4585-8906-bb5a57d2e118/dir/revert/
+
+* repo_id
+* p
+* commit_id
+
+**Sample request**
+
+    curl -X PUT -d "p=/456&commit_id=b1a33768517f65ac7d618ff078dd27855374c7e0" -H 'Authorization: Token 0eb24ce5db35a31f70171eca2f760f03f59fa09a' -H 'Accept: application/json; charset=utf-8; indent=4' "http://192.168.1.124:8000/api2/repos/7460f7ac-a0ff-4585-8906-bb5a57d2e118/dir/revert/"
+
+**Sample response**
+```
+{
+    "success": true
+}
+```
+
+**Errors**
+
+* 400 path invalid.
+* 400 commit_id invalid.
 * 404 Library/Folder not found.
 * 403 Permission denied.
 * 500 Internal Server Error
