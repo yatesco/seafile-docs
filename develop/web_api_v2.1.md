@@ -2929,6 +2929,7 @@ After getting the upload link, POST to this link for uploading files.
 * file: local file path.
 * parent_dir : path in your Seafile repo that you want to upload local file to.
 * relative_path: sub path of "parent_dir", if this sub path does not exist, Seafile will create it recursively.
+* ret-json: returns a json array including file info if set to `1`.
 
 > NOTE:
 > 1. `parent_dir` must endswith `/`
@@ -2940,13 +2941,29 @@ upload file to `/path-in-seafile-repo/`:
 
     curl -H "Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd" -F file=@local-folder/test.txt -F parent_dir=/path-in-seafile-repo/ http://cloud.seafile.com:8082/upload-api/73c5d117-3bcf-48a0-aa2a-3f48d5274ae3
 
-upload file to `/path-in-seafile-repo/sub_path_1/sub_path_2/`, Seafile will create `sub_path_1/sub_path_2/` recursively if it does not exist:
-
-    curl -H "Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd" -F file=@local-folder/test.txt -F parent_dir=/path-in-seafile-repo/ -F relative_path=sub_path_1/sub_path_2/ http://cloud.seafile.com:8082/upload-api/73c5d117-3bcf-48a0-aa2a-3f48d5274ae3
-
-**Sample response**
+**Sample response for no `ret-json` parameter**
 
     "adc83b19e793491b1c6ea0fd8b46cd9f32e592fc"
+
+upload file to `/path-in-seafile-repo/sub_path_1/sub_path_2/`, Seafile will create `sub_path_1/sub_path_2/` recursively if it does not exist:
+
+    curl -H "Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd" -F file=@local-folder/test.txt -F file=@1.jpg -F parent_dir=/path-in-seafile-repo/ -F relative_path=sub_path_1/sub_path_2/ http://cloud.seafile.com:8082/upload-api/73c5d117-3bcf-48a0-aa2a-3f48d5274ae3?ret-json=1
+
+**Sample response for with `?ret-json=1` parameter**
+```
+[
+    {
+        "name": "test.txt",
+        "id": "4ccd37916552e2943314027931edd0b45240be7c",
+        "size": 2987
+    },
+    {
+        "name": "1.jpg",
+        "id": "12e07dd00c124fa7ea3b645ff9fe183f73eab2a1",
+        "size": 1699246
+    }
+]
+```
 
 **Note**
 
