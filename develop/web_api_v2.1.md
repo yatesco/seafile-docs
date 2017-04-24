@@ -2285,6 +2285,7 @@ success
             "oid": "b88ab96740ef53249b9d21fb3fa28050842266ba",
             "last_modified": 1490861602,
             "fullpath": "/office file/office-2/seafile-tutorial.doc",
+            "repo_name": "123com",
             "is_dir": false,
             "size": 300544
         },
@@ -2294,6 +2295,7 @@ success
             "oid": "b88ab96740ef53249b9d21fb3fa28050842266ba",
             "last_modified": 1490861602,
             "fullpath": "/seafile-tutorial.doc",
+            "repo_name": "123com",
             "is_dir": false,
             "size": 300544
         }
