@@ -2265,7 +2265,7 @@ success
 
 * `search_ftypes`, `all` or `custom`, (`all` for searching all file types, `custom` for only searching the specific file types you defined in `ftype` and `input_fexts`).
 
-* `ftype`, must be in (`Text`, `Document`, `Image`, `Video`, `Audio`, `SVG`, `PDF`, `Markdown`).
+* `ftype`, must be in (`Text`, `Document`, `Image`, `Video`, `Audio`, `PDF`, `Markdown`).
 
 * `input_fexts`, file extensions manually specific.
 
