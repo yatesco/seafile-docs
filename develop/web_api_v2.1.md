@@ -1923,19 +1923,146 @@ Create upload link for directory with password
 
 ### <a id="get-library-history"></a>Get Library History
 
-**GET** https://cloud.seafile.com/api2/repos/{repo-id}/history/
+**GET** https://cloud.seafile.com/api/v2.1/repos/{repo_id}/history/
+
 
 **Request parameters**
 
-* repo-id
+* repo_id
+* page, default 1
+* per_page, default 100
 
 **Sample request**
 
-    curl -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d9b477fd' -H 'Accept: application/json; indent=4' https://cloud.seafile.com/api2/repos/dae8cecc-2359-4d33-aa42-01b7846c4b32/history/
+    curl -H 'Authorization: Token 0eb24ce5db35a31f70171eca2f760f03f59fa09a' -H 'Accept: application/json; charset=utf-8; indent=4' "https://cloud.seafile.com/api/v2.1/repos/7460f7ac-a0ff-4585-8906-bb5a57d2e118/history/"
 
 **Sample response**
+```
+{
+    "data": [
+        {
+            "commit_id": "2b1313e4bbce2b938403c829b114b12b549128a3",
+            "time": "2017-04-10T03:24:09+00:00",
+            "description": "Recovered deleted directory \"456\"",
+            "creator": "lian@lian.com"
+        },
+        {
+            "commit_id": "0be8bba456ece31598557d9f3d5471b5b4d9d7c0",
+            "time": "2017-04-10T03:23:49+00:00",
+            "description": "Removed directory \"456\"",
+            "creator": "lian@lian.com"
+        },
+        {
+            "commit_id": "e6f21a80d60b7f1797434fdab622e562af937f81",
+            "time": "2017-04-10T03:23:45+00:00",
+            "description": "Deleted \"empty.docx\"",
+            "creator": "lian@lian.com"
+        },
+        {
+            "commit_id": "0bddb7401a75a9799209a24fb118e8d49151b6d6",
+            "time": "2017-04-10T03:23:41+00:00",
+            "description": "Deleted \"QQ_account_manager.png\"",
+            "creator": "lian@lian.com"
+        }
+    ],
+    "more": false
+}
+```
 
-    {"commits": [{"rev_file_size": 0, "rev_file_id": null, "ctime": 1398045167, "creator_name": "imwhatiam123@gmail.com", "creator": "0000000000000000000000000000000000000000", "root_id": "ca2625da6be6e211ddd584615ef3bfaa531e66aa", "rev_renamed_old_path": null, "parent_id": "205c469f0830df09b13024601524058757a43128", "new_merge": false, "repo_id": "691b3e24-d05e-43cd-a9f2-6f32bd6b800e", "desc": "Modified \"api.md\"", "id": "eb62721812e0c3122889b5facde971b353ad176b", "conflict": false, "second_parent_id": null}, {"rev_file_size": 0, "rev_file_id": null, "ctime": 1398045158, "creator_name": "imwhatiam123@gmail.com", "creator": "0000000000000000000000000000000000000000", "root_id": "0b7a31adf4ea8b29ad5a5920420b548da11dd32f", "rev_renamed_old_path": null, "parent_id": "2ba85ee6072efea51a3483843ea7de9b6d1d1eb2", "new_merge": false, "repo_id": "691b3e24-d05e-43cd-a9f2-6f32bd6b800e", "desc": "Added \"api.md\"", "id": "205c469f0830df09b13024601524058757a43128", "conflict": false, "second_parent_id": null}], "page_next": false}
+**Errors**
+
+* 403 Permission denied.
+* 404 Library not found.
+* 500 Internal Server Error
+
+### <a id="get-library-trash"></a>Get Library Trash
+
+**GET** https://cloud.seafile.com/api/v2.1/repos/{repo_id}/trash/
+
+
+**Request parameters**
+
+* repo_id
+* path, default '/'.
+* per_page, default 100.
+* scan_stat, An opaque status returned by the last call. In the first call, None must be passed. The last entry of the result list contains a 'scan_stat' attribute. In the next call, pass in the returned 'scan_stat'.
+
+**Sample request**
+
+    curl -H 'Authorization: Token 0eb24ce5db35a31f70171eca2f760f03f59fa09a' -H 'Accept: application/json; charset=utf-8; indent=4' "https://cloud.seafile.com/api/v2.1/repos/7460f7ac-a0ff-4585-8906-bb5a57d2e118/trash/"
+
+**Sample response**
+```
+{
+    "scan_stat": "2b1313e4bbce2b938403c829b114b12b549128a3",
+    "data": [
+        {
+            "commit_id": "2364981a2bef50c16281a664df55af209019a88c",
+            "scan_stat": null,
+            "obj_id": "f86ef37332e89d6a132e27ce857c76e15971b227",
+            "deleted_time": "2017-04-10T03:23:41+00:00",
+            "obj_name": "QQ_account_manager.png",
+            "is_dir": false,
+            "parent_dir": "/",
+            "size": 77970
+        },
+        {
+            "commit_id": "0bddb7401a75a9799209a24fb118e8d49151b6d6",
+            "scan_stat": null,
+            "obj_id": "10ae7309338efe92d9ceddb9d6835463d277da34",
+            "deleted_time": "2017-04-10T03:23:45+00:00",
+            "obj_name": "empty.docx",
+            "is_dir": false,
+            "parent_dir": "/456/",
+            "size": 10682
+        }
+        ...
+    ],
+    "more": true
+}
+```
+
+Get more trash items.
+
+**Sample request**
+
+    curl -H 'Authorization: Token 0eb24ce5db35a31f70171eca2f760f03f59fa09a' -H 'Accept: application/json; charset=utf-8; indent=4' "https://cloud.seafile.com/api/v2.1/repos/7460f7ac-a0ff-4585-8906-bb5a57d2e118/trash/?scan_stat=2b1313e4bbce2b938403c829b114b12b549128a3"
+
+**Sample response**
+```
+{
+    "scan_stat": null,
+    "data": [
+        {
+            "commit_id": "726d2ce009df9176592ab88eca297b5e50c15639",
+            "scan_stat": null,
+            "obj_id": "cfc5e4299a862b366c98eeb7f5a8a1f689d2916a",
+            "deleted_time": "2017-04-10T09:11:02+00:00",
+            "obj_name": "empty.xlsx",
+            "is_dir": false,
+            "parent_dir": "/456/",
+            "size": 8176
+        },
+        {
+            "commit_id": "2b1313e4bbce2b938403c829b114b12b549128a3",
+            "scan_stat": null,
+            "obj_id": "414a75f5c67ca56c480ca2ae9137b7812940c3ce",
+            "deleted_time": "2017-04-10T09:11:01+00:00",
+            "obj_name": "empty.pptx",
+            "is_dir": false,
+            "parent_dir": "/456/",
+            "size": 40506
+        }
+    ],
+    "more": false
+}
+```
+
+**Errors**
+
+* 403 Permission denied.
+* 404 Library not found.
+* 500 Internal Server Error
 
 ### <a id="get-library-history-limit-days"></a>Get Library History Limit Days
 
@@ -2284,6 +2411,8 @@ success
             "name": "seafile-tutorial.doc",
             "oid": "b88ab96740ef53249b9d21fb3fa28050842266ba",
             "last_modified": 1490861602,
+            "content_highlight": "A Brief Tour of <b>Seafile</b> <b>Seafile</b> is a file management and collaboration platform for teams... and organizations. Let&#x27;s show you how <b>Seafile</b> manages and syncs your files, and how you can share your files.... Libraries <b>Seafile</b> organizes your files into file libraries. Each library can be synced and shared... separately. When you log in to <b>Seafile</b> website for the first time, <b>Seafile</b> creates a personal library... to your computer after installing the <b>Seafile</b> client. After installation, you need to login to your",
+
             "fullpath": "/office file/office-2/seafile-tutorial.doc",
             "repo_name": "123com",
             "is_dir": false,
@@ -2293,6 +2422,8 @@ success
             "repo_id": "97d4006f-c1e1-4b75-b31c-6ef89d580844",
             "name": "seafile-tutorial.doc",
             "oid": "b88ab96740ef53249b9d21fb3fa28050842266ba",
+            "content_highlight": "A Brief Tour of <b>Seafile</b> <b>Seafile</b> is a file management and collaboration platform for teams... and organizations. Let&#x27;s show you how <b>Seafile</b> manages and syncs your files, and how you can share your files.... Libraries <b>Seafile</b> organizes your files into file libraries. Each library can be synced and shared... separately. When you log in to <b>Seafile</b> website for the first time, <b>Seafile</b> creates a personal library... to your computer after installing the <b>Seafile</b> client. After installation, you need to login to your",
+            "fullpath": "/sea
             "last_modified": 1490861602,
             "fullpath": "/seafile-tutorial.doc",
             "repo_name": "123com",
@@ -2591,7 +2722,7 @@ For more info, you can see [this official docs](http://wopi.readthedocs.org/en/l
 
 ### <a id="restore-file-from-history"></a>Restore File From History
 
-**POST** http://192.168.1.124:8000/api/v2.1/repos/7460f7ac-a0ff-4585-8906-bb5a57d2e118/file/?p=/1.md
+**POST** https://cloud.seafile.com/api/v2.1/repos/7460f7ac-a0ff-4585-8906-bb5a57d2e118/file/?p=/1.md
 
 **Request parameters**
 
@@ -2602,7 +2733,7 @@ For more info, you can see [this official docs](http://wopi.readthedocs.org/en/l
 
 **Sample request**
 
-    curl -d "operation=revert&commit_id=7ed3ccdc7559d1afddb95bc050230e3d54bbffef" -H "Authorization: Token 0eb24ce5db35a31f70171eca2f760f03f59fa09a" -H 'Accept: application/json; indent=4' "http://192.168.1.124:8000/api/v2.1/repos/7460f7ac-a0ff-4585-8906-bb5a57d2e118/file/?p=/1.md"
+    curl -d "operation=revert&commit_id=7ed3ccdc7559d1afddb95bc050230e3d54bbffef" -H "Authorization: Token 0eb24ce5db35a31f70171eca2f760f03f59fa09a" -H 'Accept: application/json; indent=4' "https://cloud.seafile.com/api/v2.1/repos/7460f7ac-a0ff-4585-8906-bb5a57d2e118/file/?p=/1.md"
 
 **Sample response**
 ```
@@ -3291,7 +3422,7 @@ Perform the following two steps to download directory
 
 ### <a id="revert-directory"></a>Revert Directory
 
-**PUT** http://192.168.1.124:8000/api2/repos/7460f7ac-a0ff-4585-8906-bb5a57d2e118/dir/revert/
+**PUT** https://cloud.seafile.com/api2/repos/7460f7ac-a0ff-4585-8906-bb5a57d2e118/dir/revert/
 
 * repo_id
 * p
@@ -3299,7 +3430,7 @@ Perform the following two steps to download directory
 
 **Sample request**
 
-    curl -X PUT -d "p=/456&commit_id=b1a33768517f65ac7d618ff078dd27855374c7e0" -H 'Authorization: Token 0eb24ce5db35a31f70171eca2f760f03f59fa09a' -H 'Accept: application/json; charset=utf-8; indent=4' "http://192.168.1.124:8000/api2/repos/7460f7ac-a0ff-4585-8906-bb5a57d2e118/dir/revert/"
+    curl -X PUT -d "p=/456&commit_id=b1a33768517f65ac7d618ff078dd27855374c7e0" -H 'Authorization: Token 0eb24ce5db35a31f70171eca2f760f03f59fa09a' -H 'Accept: application/json; charset=utf-8; indent=4' "https://cloud.seafile.com/api2/repos/7460f7ac-a0ff-4585-8906-bb5a57d2e118/dir/revert/"
 
 **Sample response**
 ```
