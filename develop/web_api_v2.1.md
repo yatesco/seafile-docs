@@ -2669,7 +2669,7 @@ For more info, you can see [this official docs](http://wopi.readthedocs.org/en/l
 
 **Errors**
 
-* 403 FORBIDDEN, You do not have permission to move file
+* 403 FORBIDDEN
 * 520 OPERATION FAILED, fail to create file
 
 ### <a id="rename-file"></a>Rename File
@@ -2784,14 +2784,18 @@ For more info, you can see [this official docs](http://wopi.readthedocs.org/en/l
 
 **Sample request**
 
-    curl -v -d "operation=move&dst_repo=affc837f-7fdd-4e91-b88a-32caf99897f2&dst_dir=/" -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' -H 'Accept: application/json; charset=utf-8; indent=4' https://cloud.seafile.com/api2/repos/dae8cecc-2359-4d33-aa42-01b7846c4b32/file/?p=/foo.c
+    curl -v -d "operation=move&dst_repo=affc837f-7fdd-4e91-b88a-32caf99897f2&dst_dir=/123" -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' -H 'Accept: application/json; charset=utf-8; indent=4' https://cloud.seafile.com/api2/repos/dae8cecc-2359-4d33-aa42-01b7846c4b32/file/?p=/foo.c
 
 **Sample response**
 
     ...
     < HTTP/1.1 301 MOVED PERMANENTLY
     ...
-    "success"
+    {
+        "repo_id": "affc837f-7fdd-4e91-b88a-32caf99897f2",
+        "parent_dir": "/123",
+        "obj_name": "foo.c"
+    }
 
 **Success**
 
@@ -2818,14 +2822,18 @@ For more info, you can see [this official docs](http://wopi.readthedocs.org/en/l
 
 **Sample request**
 
-    curl -v -d "dst_repo=73ddb2b8-dda8-471b-b7a7-ca742b07483c&dst_dir=/&file_names=foo.c" -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' https://cloud.seafile.com/api2/repos/c7436518-5f46-4296-97db-2fcba4c8c8db/file/?p=/foo.c
+    curl -v -d "operation=copy&dst_repo=73ddb2b8-dda8-471b-b7a7-ca742b07483c&dst_dir=/123" -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' -H 'Accept: application/json; charset=utf-8; indent=4' https://cloud.seafile.com/api2/repos/c7436518-5f46-4296-97db-2fcba4c8c8db/file/?p=/foo.c
 
 **Sample response**
 
     ...
     < HTTP/1.1 200 OK
     ...
-    "success"
+    {
+        "repo_id": "73ddb2b8-dda8-471b-b7a7-ca742b07483c",
+        "parent_dir": "/123",
+        "obj_name": "foo.c"
+    }
 
 **Success**
 
