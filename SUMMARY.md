@@ -18,6 +18,9 @@
    * [LDAP/AD Integration](deploy/using_ldap.md)
    * [Shibboleth Authentication](deploy/shibboleth_config.md)
    * [Syslog Integration](deploy/using_syslog.md)
+   * Online File Preview and Edit
+       * [LibreOffice Online Integration](deploy/libreoffice_online.md)
+       * [Only Office Integration](deploy/only_office.md)
    * [Upgrade Seafile server](deploy/upgrade.md)
    * Other Deployment Notes
        * [Start Seafile at System Bootup](deploy/start_seafile_at_system_bootup.md)
@@ -52,7 +55,6 @@
    * Online File Preview and Edit
        * [Office/PDF Documents Preview](deploy_pro/office_documents_preview.md)
        * [Office Web App Integration](deploy_pro/office_web_app.md)
-       * [LibreOffice Online Integration](deploy_pro/libreoffice_online.md)
    * [File Search](deploy_pro/details_about_file_search.md)
    * [Virus Scan](deploy_pro/virus_scan.md)
        * [Virus Scan With Kav4fs](deploy_pro/virus_scan_with_kav4fs.md)
