@@ -3355,11 +3355,28 @@ For example, `https://cloud.seafile.com/seafhttp/zip/b2272645-35ee-44ce-8f68-07c
 
 **Sample request**
 
-    curl -d "dst_repo=73ddb2b8-dda8-471b-b7a7-ca742b07483c&dst_dir=/&file_names=foo.c:bar.c:dir1:dir2" -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' https://cloud.seafile.com/api2/repos/c7436518-5f46-4296-97db-2fcba4c8c8db/fileops/copy/
+    curl -d "dst_repo=bdf816e6-aba8-468c-962f-77c2fcfd1d1c&dst_dir=/1&file_names=1.md:2.md:test" -H 'Authorization: Token cbd7705c06846425ed5c46ae0313d5b098d24154' -H 'Accept: application/json; indent=4' "https://cloud.seafile.com/api2/repos/bdf816e6-aba8-468c-962f-77c2fcfd1d1c/fileops/copy/?p=/1/test-2"
 
 **Sample response**
-
-    "success"
+```
+[
+    {
+        "repo_id": "bdf816e6-aba8-468c-962f-77c2fcfd1d1c",
+        "parent_dir": "/1",
+        "obj_name": "1 (2).md"
+    },
+    {
+        "repo_id": "bdf816e6-aba8-468c-962f-77c2fcfd1d1c",
+        "parent_dir": "/1",
+        "obj_name": "2 (2).md"
+    },
+    {
+        "repo_id": "bdf816e6-aba8-468c-962f-77c2fcfd1d1c",
+        "parent_dir": "/1",
+        "obj_name": "test (2)"
+    }
+]
+```
 
 **Errors**
 
@@ -3381,11 +3398,28 @@ For example, `https://cloud.seafile.com/seafhttp/zip/b2272645-35ee-44ce-8f68-07c
 
 **Sample request**
 
-    curl -d "dst_repo=73ddb2b8-dda8-471b-b7a7-ca742b07483c&dst_dir=/&file_names=foo.c:bar.c:dir1:dir2" -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' https://cloud.seafile.com/api2/repos/c7436518-5f46-4296-97db-2fcba4c8c8db/fileops/move/
+    curl -d "dst_repo=bdf816e6-aba8-468c-962f-77c2fcfd1d1c&dst_dir=/1&file_names=1.md:2.md:test" -H 'Authorization: Token cbd7705c06846425ed5c46ae0313d5b098d24154' -H 'Accept: application/json; indent=4' "https://cloud.seafile.com/api2/repos/bdf816e6-aba8-468c-962f-77c2fcfd1d1c/fileops/move/?p=/1/test-2"
 
 **Sample response**
-
-    "success"
+```
+[
+    {
+        "repo_id": "bdf816e6-aba8-468c-962f-77c2fcfd1d1c",
+        "parent_dir": "/1",
+        "obj_name": "1 (3).md"
+    },
+    {
+        "repo_id": "bdf816e6-aba8-468c-962f-77c2fcfd1d1c",
+        "parent_dir": "/1",
+        "obj_name": "2 (3).md"
+    },
+    {
+        "repo_id": "bdf816e6-aba8-468c-962f-77c2fcfd1d1c",
+        "parent_dir": "/1",
+        "obj_name": "test (3)"
+    }
+]
+```
 
 **Errors**
 
@@ -3405,7 +3439,7 @@ For example, `https://cloud.seafile.com/seafhttp/zip/b2272645-35ee-44ce-8f68-07c
 
 **Sample request**
 
-    curl -d "file_names=foo.c:bar.c:dir1:dir2" -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' https://cloud.seafile.com/api2/repos/c7436518-5f46-4296-97db-2fcba4c8c8db/fileops/delete/
+    curl -d "file_names=foo.c:bar.c:dir1:dir2" -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' https://cloud.seafile.com/api2/repos/c7436518-5f46-4296-97db-2fcba4c8c8db/fileops/delete/?p=src_path
 
 **Sample response**
 
