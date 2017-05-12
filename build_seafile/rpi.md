@@ -57,7 +57,7 @@ mkdir -p ~/dev/seahub_thirdpart
 Download these tarballs to `/tmp/`:
 
 - [pytz](https://pypi.python.org/packages/source/p/pytz/pytz-2016.1.tar.gz)
-- [Django](https://www.djangoproject.com/m/releases/1.8/Django-1.8.10.tar.gz)
+- [Django](https://www.djangoproject.com/m/releases/1.8/Django-1.8.18.tar.gz)
 - [django-statici18n](https://pypi.python.org/packages/source/d/django-statici18n/django-statici18n-1.1.3.tar.gz)
 - [djangorestframework](https://pypi.python.org/packages/source/d/djangorestframework/djangorestframework-3.3.2.tar.gz)
 - [django_compressor](https://pypi.python.org/packages/source/d/django_compressor/django_compressor-1.4.tar.gz)
