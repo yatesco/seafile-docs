@@ -204,6 +204,7 @@
     <li>
         <a href="#avatar">Avatar</a>
         <ul>
+            <li><a href="#update-user-avatar">Update User Avatar</a></li>
             <li><a href="#get-user-avatar">Get User Avatar</a></li>
             <li><a href="#get-group-avatar">Get Group Avatar</a></li>
         </ul>
@@ -3654,6 +3655,28 @@ After the task finished, you can manually generate directory download url with t
 For example, `https://cloud.seafile.com/seafhttp/zip/b2272645-35ee-44ce-8f68-07c022107015` is the final url here.
 
 ## <a id="avatar"></a>Avatar
+
+### <a id="update-user-avatar"></a>Update User Avatar
+
+**POST** https://cloud.seafile.com/api/v2.1/user-avatar/
+
+**Request parameters**
+
+* `avatar`: image file
+
+**Sample request**
+
+    curl -H "Authorization: Token cbd7705c06846425ed5c46ae0313d5b098d24154" -F "avatar=@1.jpg" https://cloud.seafile.com/api/v2.1/user-avatar/
+
+**Sample response**
+
+    {"success": true}
+
+**Errors**
+
+* 400 invalid file extension
+* 400 file is too big
+* 500 Internal Server Error
 
 ### <a id="get-user-avatar"></a>Get User Avatar
 
