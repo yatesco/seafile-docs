@@ -100,6 +100,8 @@
                     <li><a href="#share-a-library-to-group">Share a Library to Group</a></li>
                     <li><a href="#unshare-a-library-from-group">Unshare a Library from Group</a></li>
                     <li><a href="#update-permission-of-group-shared-library">Update Permission of Group Shared Library</a></li>
+                    <li><a href="#batch-share-libraries-to-user">Batch Share Libraries to User</a></li>
+                    <li><a href="#batch-share-libraries-to-group">Batch Share Libraries to Group</a></li>
                 </ul>
             <li>
                 <a href="#shared-folders">Shared Folders</a>
@@ -1681,6 +1683,83 @@ Create upload link for directory with password
 * 403 permission invalid.
 * 403 Permission denied.
 * 404 Library not found.
+
+#### <a id="batch-share-libraries-to-user"></a>Batch Share Libraries to User
+
+**POST** https://cloud.seafile.com/api/v2.1/repos-batch/
+
+**Request parameters**
+
+* operation, `share`
+* share_type, `user`
+* username, email of a user
+* permission, default is `rw`
+* repo_id
+
+**Sample request**
+
+    curl -d "operation=share&share_type=user&username=2@org.com&repo_id=b6cfa05d-07af-422b-924e-45202dc1cbb5&repo_id=48aa475d-deb0-40f0-ab9b-22ec84989a58" -H 'Authorization: Token 40c89d06a2beeec672d091156de4cc163c6aa31a' -H 'Accept: application/json; charset=utf-8; indent=4' https://cloud.seafile.com/api/v2.1/repos/batch/
+
+**Sample response**
+
+```
+
+{
+    "failed": [
+        {"repo_id": "3761ade3-100b-4c3b-9508-79b3a510e6f6", "error_msg": "This item has been shared to 1@1.com."}
+    ],
+    "success": [
+        {"username": "1@1.com", "repo_id": "f820bd12-0511-4542-b14b-3e48d8efc294", "permission": "rw"}
+    ]
+}
+```
+
+**Errors**
+
+* 400 permission invalid.
+* 400 share_type invalid.
+* 403 Permission denied.
+* 404 Library not found.
+* 404 User not found.
+* 500 Internal Server Error
+
+#### <a id="batch-share-libraries-to-group"></a>Batch Share Libraries to Group
+
+**POST** https://cloud.seafile.com/api/v2.1/repos-batch/
+
+**Request parameters**
+
+* operation, `share`
+* share_type, `group`
+* group_id
+* permission, default is `rw`
+* repo_id
+
+**Sample request**
+
+    curl -d "operation=share&share_type=group&group_id=540&repo_id=b6cfa05d-07af-422b-924e-45202dc1cbb5&repo_id=48aa475d-deb0-40f0-ab9b-22ec84989a58" -H 'Authorization: Token 40c89d06a2beeec672d091156de4cc163c6aa31a' -H 'Accept: application/json; charset=utf-8; indent=4' https://cloud.seafile.com/api/v2.1/repos/batch/
+
+**Sample response**
+
+```
+{
+    "failed": [
+        {"repo_id": "f820bd12-0511-4542-b14b-3e48d8efc294", "error_msg": "This item has been shared to group-of-lian."}
+    ],
+    "success": [
+        {"permission": "rw", "repo_id": "3761ade3-100b-4c3b-9508-79b3a510e6f6", "group_id": 65, "group_name": "group-of-lian"}
+    ]
+}
+```
+
+**Errors**
+
+* 400 permission invalid.
+* 400 share_type invalid.
+* 403 Permission denied.
+* 404 Library not found.
+* 404 Group not found.
+* 500 Internal Server Error
 
 ### <a id="shared-folders"></a>Shared Folders
 
