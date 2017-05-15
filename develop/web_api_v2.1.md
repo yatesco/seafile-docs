@@ -1686,7 +1686,7 @@ Create upload link for directory with password
 
 #### <a id="batch-share-libraries-to-user"></a>Batch Share Libraries to User
 
-**POST** https://cloud.seafile.com/api/v2.1/repos-batch/
+**POST** https://cloud.seafile.com/api/v2.1/repos/batch/
 
 **Request parameters**
 
@@ -1725,7 +1725,7 @@ Create upload link for directory with password
 
 #### <a id="batch-share-libraries-to-group"></a>Batch Share Libraries to Group
 
-**POST** https://cloud.seafile.com/api/v2.1/repos-batch/
+**POST** https://cloud.seafile.com/api/v2.1/repos/batch/
 
 **Request parameters**
 
