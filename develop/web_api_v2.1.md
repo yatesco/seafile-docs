@@ -117,6 +117,30 @@
     </li>
 
     <li>
+        <a href="#folder-permission">Folder Permission</a>
+        <ul>
+            <li>
+                <a href="#user-folder-permission">User Folder Permission</a>
+                <ul>
+                    <li><a href="#get-user-folder-permission">Get User Folder Permission</a></li>
+                    <li><a href="#set-user-folder-permission">Set User Folder Permission</a></li>
+                    <li><a href="#modify-user-folder-permission">Modify User Folder Permission</a></li>
+                    <li><a href="#delete-user-folder-permission">Delete User Folder Permission</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#group-folder-permission">Group Folder Permission</a>
+                <ul>
+                    <li><a href="#get-group-folder-permission">Get Group Folder Permission</a></li>
+                    <li><a href="#set-group-folder-permission">Set Group Folder Permission</a></li>
+                    <li><a href="#modify-group-folder-permission">Modify Group Folder Permission</a></li>
+                    <li><a href="#delete-group-folder-permission">Delete Group Folder Permission</a></li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+
+    <li>
         <a href="#library">Library</a>
         <ul>
             <li><a href="#get-default-lib">Get Default Library</a></li>
@@ -1878,6 +1902,339 @@ Create upload link for directory with password
 * 403 Permission denied.
 * 404 Library not found.
 * 404 Folder not found.
+* 500 Internal Server Error
+
+## <a id="folder-permission"></a>Folder Permission
+
+### <a id="user-folder-permission"></a>User Folder Permission
+
+#### <a id="get-user-folder-permission"></a>Get User Folder Permission
+
+**GET** http://192.168.1.124:8000/api2/repos/{repo_id}/user-folder-perm/?folder_path=/123
+
+**Request parameters**
+
+* repo_id
+* folder_path
+
+**Sample request**
+
+```
+curl -H 'Authorization: Token cbd7705c06846425ed5c46ae0313d5b098d24154' -H 'Accept: application/json; charset=utf-8; indent=4' "http://192.168.1.124:8000/api2/repos/bdf816e6-aba8-468c-962f-77c2fcfd1d1c/user-folder-perm/?folder_path=/123"
+```
+
+**Sample response**
+
+```
+    [
+        {
+        "repo_id": "bdf816e6-aba8-468c-962f-77c2fcfd1d1c",
+        "folder_path": "/123",
+        "permission": "r",
+        "folder_name": "123",
+        "user_name": "1",
+        "user_email": "1@1.com"
+    },
+    {
+        "repo_id": "bdf816e6-aba8-468c-962f-77c2fcfd1d1c",
+        "folder_path": "/123",
+        "permission": "rw",
+        "folder_name": "123",
+        "user_name": "2",
+        "user_email": "2@1.com"
+    }
+]
+```
+
+**Errors**
+
+* 403 Permission denied.
+* 404 Library not found.
+
+#### <a id="set-user-folder-permission"></a>Set User Folder Permission
+
+**POST** http://192.168.1.124:8000/api2/repos/{repo_id}/user-folder-perm/
+
+**Request parameters**
+
+* repo_id
+* folder_path
+* user_email
+* permission, `r` or `rw`
+
+**Sample request**
+
+```
+curl -d "folder_path=/123&permission=rw&user_email=3@1.com&user_email=2@1.com" -H 'Authorization: Token cbd7705c06846425ed5c46ae0313d5b098d24154' -H 'Accept: application/json; charset=utf-8; indent=4' "http://192.168.1.124:8000/api2/repos/bdf816e6-aba8-468c-962f-77c2fcfd1d1c/user-folder-perm/"
+```
+
+**Sample response**
+
+```
+{
+    "failed": [
+        {
+            "error_msg": "Permission already exists.",
+            "user_email": "2@1.com"
+        }
+    ],
+    "success": [
+        {
+            "repo_id": "bdf816e6-aba8-468c-962f-77c2fcfd1d1c",
+            "folder_path": "/123",
+            "permission": "rw",
+            "folder_name": "123",
+            "user_name": "3",
+            "user_email": "3@1.com"
+        }
+    ]
+}
+```
+
+**Errors**
+
+* 400 folder_path invalid.
+* 400 permission invalid.
+* 403 Permission denied.
+* 404 Library not found.
+* 404 Folder not found.
+
+#### <a id="modify-user-folder-permission"></a>Modify User Folder Permission
+
+**PUT** http://192.168.1.124:8000/api2/repos/{repo_id}/user-folder-perm/
+
+**Request parameters**
+
+* repo_id
+* folder_path
+* user_email
+* permission, `r` or `rw`
+
+**Sample request**
+
+```
+curl -X PUT -d "folder_path=/123&permission=r&user_email=3@1.com" -H 'Authorization: Token cbd7705c06846425ed5c46ae0313d5b098d24154' -H 'Accept: application/json; charset=utf-8; indent=4' "http://192.168.1.124:8000/api2/repos/bdf816e6-aba8-468c-962f-77c2fcfd1d1c/user-folder-perm/"
+```
+
+**Sample response**
+
+```
+{
+    "repo_id": "bdf816e6-aba8-468c-962f-77c2fcfd1d1c",
+    "folder_path": "/123",
+    "permission": "r",
+    "folder_name": "123",
+    "user_name": "3",
+    "user_email": "3@1.com"
+}
+```
+
+**Errors**
+
+* 400 folder_path invalid.
+* 400 permission invalid.
+* 400 user_email invalid.
+* 403 Permission denied.
+* 404 Library not found.
+* 404 Folder not found.
+* 404 User not found.
+* 404 Folder permission not found.
+* 500 Internal Server Error
+
+#### <a id="delete-user-folder-permission"></a>Delete User Folder Permission
+
+**DELETE** http://192.168.1.124:8000/api2/repos/{repo_id}/user-folder-perm/
+
+**Request parameters**
+
+* repo_id
+* folder_path
+* user_email
+
+**Sample request**
+
+```
+curl -X DELETE -d "folder_path=/123&user_email=3@1.com" -H 'Authorization: Token cbd7705c06846425ed5c46ae0313d5b098d24154' -H 'Accept: application/json; charset=utf-8; indent=4' "http://192.168.1.124:8000/api2/repos/bdf816e6-aba8-468c-962f-77c2fcfd1d1c/user-folder-perm/"
+```
+
+**Sample response**
+
+```
+{
+    "success": true
+}
+```
+
+**Errors**
+
+* 400 user_email invalid.
+* 400 folder_path invalid.
+* 403 Permission denied.
+* 404 Library not found.
+* 404 User not found.
+* 500 Internal Server Error
+
+### <a id="group-folder-permission"></a>Group Folder Permission
+
+#### <a id="get-group-folder-permission"></a>Get Group Folder Permission
+
+**GET** http://192.168.1.124:8000/api2/repos/{repo_id}/group-folder-perm/?folder_path=/123
+
+**Request parameters**
+
+* repo_id
+* folder_path
+
+**Sample request**
+
+```
+curl -H 'Authorization: Token cbd7705c06846425ed5c46ae0313d5b098d24154' -H 'Accept: application/json; charset=utf-8; indent=4' "http://192.168.1.124:8000/api2/repos/bdf816e6-aba8-468c-962f-77c2fcfd1d1c/group-folder-perm/?folder_path=/123"
+```
+
+**Sample response**
+
+```
+[
+    {
+        "repo_id": "bdf816e6-aba8-468c-962f-77c2fcfd1d1c",
+        "folder_path": "/123",
+        "permission": "rw",
+        "group_name": "group-2-of-lian",
+        "folder_name": "123",
+        "group_id": 586
+    },
+    {
+        "repo_id": "bdf816e6-aba8-468c-962f-77c2fcfd1d1c",
+        "folder_path": "/123",
+        "permission": "r",
+        "group_name": "group-of-lian",
+        "folder_name": "123",
+        "group_id": 65
+    }
+]
+```
+
+**Errors**
+
+* 403 Permission denied.
+* 404 Library not found.
+
+#### <a id="set-group-folder-permission"></a>Set Group Folder Permission
+
+**POST** http://192.168.1.124:8000/api2/repos/{repo_id}/group-folder-perm/
+
+**Request parameters**
+
+* repo_id
+* folder_path
+* group_id
+* permission, `r` or `rw`
+
+**Sample request**
+```
+curl -d "folder_path=/123&permission=rw&group_id=586&group_id=65" -H 'Authorization: Token cbd7705c06846425ed5c46ae0313d5b098d24154' -H 'Accept: application/json; charset=utf-8; indent=4' "http://192.168.1.124:8000/api2/repos/bdf816e6-aba8-468c-962f-77c2fcfd1d1c/group-folder-perm/"
+```
+
+**Sample response**
+
+```
+{
+    "failed": [
+        {
+            "group_id": 65,
+            "error_msg": "Permission already exists."
+        }
+    ],
+    "success": [
+        {
+            "repo_id": "bdf816e6-aba8-468c-962f-77c2fcfd1d1c",
+            "folder_path": "/123",
+            "permission": "rw",
+            "group_name": "group-2-of-lian",
+            "folder_name": "123",
+            "group_id": 586
+        }
+    ]
+}
+```
+
+**Errors**
+
+* 400 folder_path invalid.
+* 400 permission invalid.
+* 403 Permission denied.
+* 404 Library not found.
+* 404 Folder not found.
+
+#### <a id="modify-group-folder-permission"></a>Modify Group Folder Permission
+
+**PUT** http://192.168.1.124:8000/api2/repos/{repo_id}/group-folder-perm/
+
+**Request parameters**
+
+* repo_id
+* folder_path
+* group_id
+* permission, `r` or `rw`
+
+**Sample request**
+
+```
+curl -X PUT -d "folder_path=/123&permission=rw&group_id=65" -H 'Authorization: Token cbd7705c06846425ed5c46ae0313d5b098d24154' -H 'Accept: application/json; charset=utf-8; indent=4' "http://192.168.1.124:8000/api2/repos/bdf816e6-aba8-468c-962f-77c2fcfd1d1c/group-folder-perm/"
+```
+
+**Sample response**
+
+```
+{
+    "repo_id": "bdf816e6-aba8-468c-962f-77c2fcfd1d1c",
+    "folder_path": "/123",
+    "permission": "rw",
+    "group_name": "group-of-lian",
+    "folder_name": "123",
+    "group_id": 65
+}
+```
+
+**Errors**
+
+* 400 folder_path invalid.
+* 400 permission invalid.
+* 400 group_id invalid.
+* 403 Permission denied.
+* 404 Library not found.
+* 404 Folder not found.
+* 404 Group not found.
+* 404 Folder permission not found.
+* 500 Internal Server Error
+
+#### <a id="delete-group-folder-permission"></a>Delete Group Folder Permission
+
+**DELETE** http://192.168.1.124:8000/api2/repos/{repo_id}/group-folder-perm/
+
+**Request parameters**
+
+* repo_id
+* folder_path
+* group_id
+
+**Sample request**
+
+    curl -X DELETE -d "folder_path=/123&group_id=65" -H 'Authorization: Token cbd7705c06846425ed5c46ae0313d5b098d24154' -H 'Accept: application/json; charset=utf-8; indent=4' "http://192.168.1.124:8000/api2/repos/bdf816e6-aba8-468c-962f-77c2fcfd1d1c/group-folder-perm/"
+
+**Sample response**
+
+    {
+        "success": true
+    }
+
+**Errors**
+
+* 400 group_id invalid.
+* 400 folder_path invalid.
+* 403 Permission denied.
+* 404 Library not found.
+* 404 Group not found.
 * 500 Internal Server Error
 
 ## <a id="library"></a>Library
