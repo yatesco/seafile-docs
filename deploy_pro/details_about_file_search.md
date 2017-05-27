@@ -29,7 +29,7 @@ bin/plugin -install elasticsearch/elasticsearch-transport-thrift/1.6.0
 
 Restart your ES server after this.
 
-- Currently the seafile search module use the default analyzer in your ES server settings. 
+- Currently the seafile search module use the default analyzer in your ES server settings.
 
 
 ### Change the config file
@@ -84,3 +84,12 @@ cd haiwen/seafile-pro-server-2.0.4
 ### <a id="wiki-cannot-search-encrypted-files"></a>Encrypted files cannot be searched
 
 This is because the server cannot index encrypted files, since they are encrypted.
+
+### <a id="how-to-increase-search-process-memory"></a>Increase the heap size for the java search process
+
+The search functionality is based on elasticsearch, which is a java process. To increase the java heap size, you can use the `ES_HEAP_SIZE` environment variable, e.g.:
+
+```sh
+export ES_HEAP_SIZE=4g # default is 1g
+./seafile.sh restart
+```
