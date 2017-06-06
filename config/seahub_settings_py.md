@@ -140,6 +140,13 @@ FILE_PREVIEW_MAX_SIZE = 30 * 1024 * 1024
 # NOTE: since version 4.0.2
 ENABLE_THUMBNAIL = True
 
+# Enable or disable thumbnail for video
+# NOTE: since version 6.1
+ENABLE_VIDEO_THUMBNAIL = False
+
+# Use the frame at 5 second as thumbnail
+THUMBNAIL_VIDEO_FRAME_TIME = 5  
+
 # Absolute filesystem path to the directory that will hold thumbnail files.
 THUMBNAIL_ROOT = '/haiwen/seahub-data/thumbnail/thumb/'
 ```
