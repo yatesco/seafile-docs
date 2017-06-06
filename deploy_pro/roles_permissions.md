@@ -4,6 +4,8 @@ Starting from version 6.0, you can add/edit roles and permission for users. A ro
 
 In version 6.0, we support 10 permissions, more permissions will be added later.
 
+In version 6.1, we added a new permission `role_quota` which can be used to set quota for a certain role of users. For example, we can set the quota of employee to 100G by adding `'role_quota': '100g'`, and leave other role of users to the default quota.
+
 Seafile comes with two build-in roles `default` and `guest`, a default user is a normal user with permissions as followings:
 ```
     'default': {
@@ -17,6 +19,7 @@ Seafile comes with two build-in roles `default` and `guest`, a default user is a
         'can_connect_with_android_clients': True,
         'can_connect_with_ios_clients': True,
         'can_connect_with_desktop_clients': True,
+        'role_quota': '',
     },
 ```
 
@@ -33,6 +36,7 @@ While a guest user can only read files/folders in the system, here are the permi
         'can_connect_with_android_clients': False,
         'can_connect_with_ios_clients': False,
         'can_connect_with_desktop_clients': False,
+        'role_quota': '',
     },
 ```
 
@@ -53,6 +57,7 @@ ENABLED_ROLE_PERMISSIONS = {
         'can_connect_with_android_clients': True,
         'can_connect_with_ios_clients': True,
         'can_connect_with_desktop_clients': True,
+        'role_quota': '',
     },
     'guest': {
         'can_add_repo': False,
@@ -65,6 +70,7 @@ ENABLED_ROLE_PERMISSIONS = {
         'can_connect_with_android_clients': False,
         'can_connect_with_ios_clients': False,
         'can_connect_with_desktop_clients': False,
+        'role_quota': '',
     }
 }
 ```
@@ -109,6 +115,7 @@ ENABLED_ROLE_PERMISSIONS = {
         'can_connect_with_android_clients': True,
         'can_connect_with_ios_clients': True,
         'can_connect_with_desktop_clients': True,
+        'role_quota': '',
     },
     'guest': {
         'can_add_repo': False,
@@ -121,6 +128,7 @@ ENABLED_ROLE_PERMISSIONS = {
         'can_connect_with_android_clients': False,
         'can_connect_with_ios_clients': False,
         'can_connect_with_desktop_clients': False,
+        'role_quota': '',
     },
     'employee': {
         'can_add_repo': True,
@@ -133,6 +141,7 @@ ENABLED_ROLE_PERMISSIONS = {
         'can_connect_with_android_clients': True,
         'can_connect_with_ios_clients': True,
         'can_connect_with_desktop_clients': True,
+        'role_quota': '',
     },
 }
 ```
