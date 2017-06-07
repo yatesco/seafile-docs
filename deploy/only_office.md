@@ -33,9 +33,10 @@ Technically it works also via subfolder if the loadbalancer can handle folder fo
 
 
 ## LOCAL installation
-The following guide shows how to deploy the OnlyOffice Document server locally, which is based on the ["ONLYOFFICE/Docker-DocumentServer" documentation](https://github.com/ONLYOFFICE/Docker-DocumentServer).
+The following guide shows how to deploy the OnlyOffice Document server locally.
+It is based on the ["ONLYOFFICE/Docker-DocumentServer" documentation](https://github.com/ONLYOFFICE/Docker-DocumentServer).
 
-**Requirements of Seafile Server for OnlyOffice DocumentServer via Docker**
+**Requirements for OnlyOffice DocumentServer via Docker**
 https://github.com/ONLYOFFICE/Docker-DocumentServer#recommended-system-requirements
 
 
@@ -61,9 +62,9 @@ docker run -i -t -d -p 88:80 onlyoffice/documentserver --restart=always --name o
 
 
 ### Deployment via SUBFOLDER
-e.g. https://seafile.domain.com/onlyoffice
+e.g. https://seafile.domain.com/onlyofficeds
 - Local proxy to subfolder on already existing Seafile Server (sub)domain.
-- SSL via Seafile Server domain, no additional required !
+- SSL via Seafile Server domain, no additional certificate required !
 
 #### Configure Nginx
 
@@ -95,7 +96,7 @@ Add the following configuration to your seafile nginx .conf file (e.g. ```/etc/n
 ```
 
 ...   
-location /onlyoffice/ {
+location /onlyofficeds/ {
 
         # THIS ONE IS IMPORTANT ! - Trailing slash !
         proxy_pass http://{your Seafile server's domain or IP}:88/;
@@ -108,7 +109,7 @@ location /onlyoffice/ {
         proxy_set_header Connection $proxy_connection;
 
         # THIS ONE IS IMPORTANT ! - Subfolder and NO trailing slash !
-        proxy_set_header X-Forwarded-Host $the_host/onlyoffice;
+        proxy_set_header X-Forwarded-Host $the_host/onlyofficeds;
 
         proxy_set_header X-Forwarded-Proto $the_scheme;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -116,7 +117,36 @@ location /onlyoffice/ {
 ...
 ```
 
-**Example**
+#### Configure Apache
+_To be written...._
+
+### Test that DocumentServer is running via SUBFOLDER
+After the installation process is finished, visit this page to make sure you have deployed OnlyOffice successfully: http{s}://{your Seafile Server's domain or IP}/{your subdolder}/welcome, you will get **Document Server is running** info at this page, then add the following config option to ```seahub_settings.py```.
+
+### Configure Seafile Server for SUBFOLDER
+
+``` python
+# Enable Only Office
+ENABLE_ONLYOFFICE = True
+VERIFY_ONLYOFFICE_CERTIFICATE = True
+ONLYOFFICE_APIJS_URL = 'http{s}://{your Seafile server's domain or IP}/{your subdolder}/web-apps/apps/api/documents/api.js'
+ONLYOFFICE_FILE_EXTENSION = ('doc', 'docx', 'ppt', 'pptx', 'xls', 'xlsx', 'odt', 'fodt', 'odp', 'fodp', 'ods', 'fods')
+```
+
+Then restart the Seafile Server
+
+```
+./seafile.sh restart
+./seahub.sh restart
+
+# or
+service seafile-server restart
+```
+
+When you click on a document you should see the new preview page.
+
+
+**Complete Nginx config file EXAMPLE**
 Complete nginx config file (e.g. ```/etc/nginx/conf.d/seafile.conf```) based on Seafile Server V6.1 including OnlyOffice DocumentServer via subfolder.
 
 ```
@@ -207,7 +237,7 @@ server {
         error_log       /var/log/nginx/seafdav.error.log;
     }
 
-    location /onlyoffice/ {
+    location /onlyofficeds/ {
         # IMPORTANT ! - Trailing slash !
         proxy_pass http://127.0.0.1:88/;
 		
@@ -219,41 +249,13 @@ server {
         proxy_set_header Connection $proxy_connection;
 
         # IMPORTANT ! - Subfolder and NO trailing slash !
-        proxy_set_header X-Forwarded-Host $the_host/onlyoffice;
+        proxy_set_header X-Forwarded-Host $the_host/onlyofficeds;
 		
         proxy_set_header X-Forwarded-Proto $the_scheme;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     }
 }
 ```
-
-#### Configure Apache
-_To be written...._
-
-### Test that DocumentServer is running via SUBFOLDER
-After the installation process is finished, visit this page to make sure you have deployed OnlyOffice successfully: http{s}://{your Seafile Server's domain or IP}/{your subdolder}/welcome, you will get **Document Server is running** info at this page, then add the following config option to ```seahub_settings.py```.
-
-### Configure Seafile Server for SUBFOLDER
-
-``` python
-# Enable Only Office
-ENABLE_ONLYOFFICE = True
-VERIFY_ONLYOFFICE_CERTIFICATE = False
-ONLYOFFICE_APIJS_URL = 'http{s}://{your Seafile server's domain or IP}/{your subdolder}/web-apps/apps/api/documents/api.js'
-ONLYOFFICE_FILE_EXTENSION = ('doc', 'docx', 'ppt', 'pptx', 'xls', 'xlsx', 'odt', 'fodt', 'odp', 'fodp', 'ods', 'fods')
-```
-
-Then restart the Seafile Server
-
-```
-./seafile.sh restart
-./seahub.sh restart
-
-# or
-service seafile-server restart
-```
-
-When you click on a document you should see the new preview page.
 
 
 ### Deployment via LOCAL proxy with SUBDOMAIN
