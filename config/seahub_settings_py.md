@@ -240,6 +240,25 @@ LIBRARY_TEMPLATES = {
 VIRUS_SCAN_NOTIFY_LIST = ['user_a@seafile.com', 'user_b@seafile.com']
 ```
 
+## RESTful API
+
+```
+# API throttling related settings. Enlarger the rates if you got 429 response code during API calls.
+REST_FRAMEWORK = {
+    'DEFAULT_THROTTLE_RATES': {
+        'ping': '600/minute',
+        'anon': '5/minute',
+        'user': '300/minute',
+    },
+    'UNICODE_JSON': False,
+}
+
+# Throtting whitelist used to disable throttle for certain IPs. 
+# e.g. REST_FRAMEWORK_THROTTING_WHITELIST = ['127.0.0.1', '192.168.1.1']
+# Please make sure `REMOTE_ADDR` header is configured in Nginx conf according to https://manual.seafile.com/deploy/deploy_with_nginx.html. 
+REST_FRAMEWORK_THROTTING_WHITELIST = []
+```
+
 ## Note
 
 * You need to restart seahub so that your changes take effect.
