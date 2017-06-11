@@ -26,6 +26,7 @@ Assume you have configured nginx as
         listen       80;
         server_name  seafile.example.com;
         rewrite ^ https://$http_host$request_uri? permanent;	# force redirect http to https
+        server_tokens off;
     }
 
     server {
@@ -34,6 +35,7 @@ Assume you have configured nginx as
         ssl_certificate /etc/ssl/cacert.pem;    	# path to your cacert.pem
         ssl_certificate_key /etc/ssl/privkey.pem;	# path to your privkey.pem
         server_name seafile.example.com;
+        server_tokens off;
         # ......
         fastcgi_param   HTTPS               on;
         fastcgi_param   HTTP_SCHEME         https;
@@ -50,6 +52,7 @@ Here is the sample configuration file:
         listen       80;
         server_name  seafile.example.com;
         rewrite ^ https://$http_host$request_uri? permanent;	# force redirect http to https
+        server_tokens off;
     }
     server {
         listen 443;
@@ -177,6 +180,7 @@ add_header Strict-Transport-Security "max-age=31536000; includeSubDomains";
 ```
 
 Disable exact server version in header. Prevent scans for vulnerable server.
+**This should be added to every server block, as it shall obfuscate the version of nginx.**
 ```nginx
 server_tokens off;
 ```
