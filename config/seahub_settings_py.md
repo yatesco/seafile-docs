@@ -136,6 +136,13 @@ USE_PDFJS = True
 # in seafevents.conf that controls the limit of files that can be previewed.
 FILE_PREVIEW_MAX_SIZE = 30 * 1024 * 1024
 
+# Extensions of previewed text files.
+# NOTE: since version 6.1.1
+TEXT_PREVIEW_EXT = """ac, am, bat, c, cc, cmake, cpp, cs, css, diff, el, h, html,
+htm, java, js, json, less, make, org, php, pl, properties, py, rb,
+scala, script, sh, sql, txt, text, tex, vi, vim, xhtml, xml, log, csv,
+groovy, rst, patch, go"""
+
 # Enable or disable thumbnails
 # NOTE: since version 4.0.2
 ENABLE_THUMBNAIL = True
@@ -149,6 +156,10 @@ THUMBNAIL_VIDEO_FRAME_TIME = 5
 
 # Absolute filesystem path to the directory that will hold thumbnail files.
 THUMBNAIL_ROOT = '/haiwen/seahub-data/thumbnail/thumb/'
+
+# TODO
+# NOTE: since version 6.1.1
+THUMBNAIL_SIZE_FOR_ORIGINAL = 1024
 ```
 
 ## Cloud Mode
@@ -198,6 +209,12 @@ SITE_ROOT = '/'
 # Max number of files when user upload file/folder.
 # Since version 6.0.4
 MAX_NUMBER_OF_FILES_FOR_FILEUPLOAD = 500
+
+# Control the language that send email. Default to user's current language.
+# Since version 6.1.1
+SHARE_LINK_EMAIL_LANGUAGE = ''
+
+
 ```
 
 ## Pro edition only options
