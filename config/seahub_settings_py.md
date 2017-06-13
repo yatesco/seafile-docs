@@ -157,7 +157,7 @@ THUMBNAIL_VIDEO_FRAME_TIME = 5
 # Absolute filesystem path to the directory that will hold thumbnail files.
 THUMBNAIL_ROOT = '/haiwen/seahub-data/thumbnail/thumb/'
 
-# TODO
+# Default size for picture preview. Enlarge this size can improve the preview quality. 
 # NOTE: since version 6.1.1
 THUMBNAIL_SIZE_FOR_ORIGINAL = 1024
 ```
