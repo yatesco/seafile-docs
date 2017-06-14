@@ -86,22 +86,45 @@ https://github.com/ONLYOFFICE/Docker-DocumentServer#recommended-system-requireme
 ### Install Docker
 
 Ubuntu
+
 https://docs.docker.com/engine/installation/linux/ubuntu/
 
 Debian
+
 https://docs.docker.com/engine/installation/linux/debian/
 
 CentOS
+
 https://docs.docker.com/engine/installation/linux/centos/
 
 
 ### Deploy OnlyOffice DocumentServer Docker image
 This downloads and deploys the DocumentServer on the local port 88.
 
-Ubuntu 16.04 / Debian 8 / CentOS 7
+Debian 8 / CentOS 7
 ```
 docker run -i -t -d -p 88:80 onlyoffice/documentserver --restart=always --name oods
 ```
+
+Ubuntu 16.04
+```
+docker run -dit -p 88:80 onlyoffice/documentserver --restart always --name oods
+```
+
+**Docker documentation**
+
+If you have any issues please check the docker documentation
+
+https://docs.docker.com/engine/reference/run/
+
+Regarding Auto-starting the image
+
+https://docs.docker.com/engine/admin/start-containers-automatically/
+
+If you wish to limit the resources that docker uses
+
+https://docs.docker.com/engine/admin/resource_constraints/
+
 
 ### Configure Webserver
 #### Configure Nginx
@@ -209,6 +232,7 @@ server {
         listen       80;
         server_name  seafile.domain.com;
         rewrite ^ https://$http_host$request_uri? permanent;    # force redirect http to https
+        server_tokens off;
 }
 
 server {
