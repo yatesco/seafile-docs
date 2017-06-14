@@ -85,14 +85,11 @@ https://github.com/ONLYOFFICE/Docker-DocumentServer#recommended-system-requireme
 
 ### Install Docker
 
-Ubuntu
-https://docs.docker.com/engine/installation/linux/ubuntu/
+[Ubuntu](https://docs.docker.com/engine/installation/linux/ubuntu/)
 
-Debian
-https://docs.docker.com/engine/installation/linux/debian/
+[Debian](https://docs.docker.com/engine/installation/linux/debian/)
 
-CentOS
-https://docs.docker.com/engine/installation/linux/centos/
+[CentOS](https://docs.docker.com/engine/installation/linux/centos/)
 
 
 ### Deploy OnlyOffice DocumentServer Docker image
@@ -110,14 +107,11 @@ docker run -dit -p 88:80 onlyoffice/documentserver --restart always --name oods
 
 **Docker documentation**
 
-If you have any issues please check the docker documentation
-https://docs.docker.com/engine/reference/run/
+If you have any issues please check the [docker documentation](https://docs.docker.com/engine/reference/run/).
 
-Regarding Auto-starting the image
-https://docs.docker.com/engine/admin/start-containers-automatically/
+[Auto-starting the docker image](https://docs.docker.com/engine/admin/start-containers-automatically/).
 
-If you wish to limit the resources that docker uses
-https://docs.docker.com/engine/admin/resource_constraints/
+If you wish to limit the resources that docker uses check the [docker documentation](https://docs.docker.com/engine/admin/resource_constraints/).
 
 
 ### Configure Webserver
