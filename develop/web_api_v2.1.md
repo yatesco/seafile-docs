@@ -3758,7 +3758,7 @@ request recursive dir list of a folder.
 
 **Sample request**
 
-    curl -d  "operation=mkdir" -v  -H 'Authorization: Tokacd9c6ccb8133606d94ff8e61d99b477fd' -H 'Accept: application/json; charset=utf-8; indent=4' https://cloud.seafile.com/api2/repos/dae8cecc-2359-4d33-aa42-01b7846c4b32/dir/?p=/foo
+    curl -d "operation=mkdir" -v -H 'Authorization: Token 076de58233c09f19e7a5179abff14ad55987350e' -H 'Accept: application/json; charset=utf-8; indent=4' https://cloud.seafile.com/api2/repos/21b941c2-5411-4372-a514-00b62ab99ef2/dir/?p=/foo
 
 **Sample response**
 
