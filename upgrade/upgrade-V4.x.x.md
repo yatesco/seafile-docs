@@ -2,6 +2,14 @@
 These notes just give additional information about changes within each major version.  
 Please always follow the [main installation guide](https://manual.seafile.com/deploy/upgrade.html).
 
+---
+
+## Important release changes
+
+None.
+
+---
+
 ### V4.3.1 - V4.4.6
 
 Nothing to be installed/changed.
