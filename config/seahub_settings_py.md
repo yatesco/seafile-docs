@@ -148,7 +148,7 @@ groovy, rst, patch, go"""
 ENABLE_THUMBNAIL = True
 
 # Enable or disable thumbnail for video. ffmpeg and moviepy should be installed first. 
-# For details, please refer to https://manual.seafile.com/deploy/using_sqlite.html
+# For details, please refer to https://manual.seafile.com/deploy/video_thumbnails.html
 # NOTE: since version 6.1
 ENABLE_VIDEO_THUMBNAIL = False
 
