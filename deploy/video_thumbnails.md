@@ -45,7 +45,7 @@ pip install pillow moviepy
 
 Now configure accordingly in `seahub_settings.py`
 
-```
+```python
 # Enable or disable thumbnail for video. ffmpeg and moviepy should be installed first. 
 # For details, please refer to https://manual.seafile.com/deploy/video_thumbnails.html
 # NOTE: since version 6.1
