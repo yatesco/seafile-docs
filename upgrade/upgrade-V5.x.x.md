@@ -2,7 +2,6 @@
 These notes just give additional information about changes within each major version.  
 Please always follow the [main installation guide](https://manual.seafile.com/deploy/upgrade.html).
 
----
 ## Important release changes
 
 __In Seafile 5.0, we moved all config files to the folder ```/seafile-root/conf```, including:__
