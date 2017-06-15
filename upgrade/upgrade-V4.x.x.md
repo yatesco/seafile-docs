@@ -1,18 +1,16 @@
 # Upgrade Notes V4.x.x
 These notes just give additional information about changes within each major version.  
-Please always follow the [main installation guide](https://manual.seafile.com/deploy/upgrade.html).
-
----
+Please always follow the [main installation guide](deploy/upgrade.md).
 
 ## Important release changes
 
-None.
+- [Thumbnail string to number](V4.3.0)
 
 ---
 
 ### V4.3.1 - V4.4.6
 
-Nothing to be installed/changed.
+There are no other special instructions.
 
 ---
 
@@ -37,4 +35,4 @@ STATIC_URL = MEDIA_URL + '/assets/'
 
 ### V4.0.0 - V4.1.2
 
-Nothing to be installed/changed.
+There are no other special instructions.
