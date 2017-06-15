@@ -4,7 +4,7 @@ Please always follow the [main installation guide](deploy/upgrade.md).
 
 ## Important release changes
 
-- [Thumbnail string to number](V4.3.0)
+- [Thumbnail string to number](upgrade-V4.x.x.md#v4.3.0)
 
 ---
 
