@@ -136,11 +136,19 @@ USE_PDFJS = True
 # in seafevents.conf that controls the limit of files that can be previewed.
 FILE_PREVIEW_MAX_SIZE = 30 * 1024 * 1024
 
+# Extensions of previewed text files.
+# NOTE: since version 6.1.1
+TEXT_PREVIEW_EXT = """ac, am, bat, c, cc, cmake, cpp, cs, css, diff, el, h, html,
+htm, java, js, json, less, make, org, php, pl, properties, py, rb,
+scala, script, sh, sql, txt, text, tex, vi, vim, xhtml, xml, log, csv,
+groovy, rst, patch, go"""
+
 # Enable or disable thumbnails
 # NOTE: since version 4.0.2
 ENABLE_THUMBNAIL = True
 
-# Enable or disable thumbnail for video
+# Enable or disable thumbnail for video. ffmpeg and moviepy should be installed first. 
+# For details, please refer to https://manual.seafile.com/deploy/using_sqlite.html
 # NOTE: since version 6.1
 ENABLE_VIDEO_THUMBNAIL = False
 
@@ -149,6 +157,10 @@ THUMBNAIL_VIDEO_FRAME_TIME = 5
 
 # Absolute filesystem path to the directory that will hold thumbnail files.
 THUMBNAIL_ROOT = '/haiwen/seahub-data/thumbnail/thumb/'
+
+# Default size for picture preview. Enlarge this size can improve the preview quality. 
+# NOTE: since version 6.1.1
+THUMBNAIL_SIZE_FOR_ORIGINAL = 1024
 ```
 
 ## Cloud Mode
@@ -198,6 +210,12 @@ SITE_ROOT = '/'
 # Max number of files when user upload file/folder.
 # Since version 6.0.4
 MAX_NUMBER_OF_FILES_FOR_FILEUPLOAD = 500
+
+# Control the language that send email. Default to user's current language.
+# Since version 6.1.1
+SHARE_LINK_EMAIL_LANGUAGE = ''
+
+
 ```
 
 ## Pro edition only options
@@ -238,6 +256,25 @@ LIBRARY_TEMPLATES = {
 # This list can be any valid email address, not necessarily the emails of Seafile user.
 # Since version 6.0.8
 VIRUS_SCAN_NOTIFY_LIST = ['user_a@seafile.com', 'user_b@seafile.com']
+```
+
+## RESTful API
+
+```
+# API throttling related settings. Enlarger the rates if you got 429 response code during API calls.
+REST_FRAMEWORK = {
+    'DEFAULT_THROTTLE_RATES': {
+        'ping': '600/minute',
+        'anon': '5/minute',
+        'user': '300/minute',
+    },
+    'UNICODE_JSON': False,
+}
+
+# Throtting whitelist used to disable throttle for certain IPs. 
+# e.g. REST_FRAMEWORK_THROTTING_WHITELIST = ['127.0.0.1', '192.168.1.1']
+# Please make sure `REMOTE_ADDR` header is configured in Nginx conf according to https://manual.seafile.com/deploy/deploy_with_nginx.html. 
+REST_FRAMEWORK_THROTTING_WHITELIST = []
 ```
 
 ## Note

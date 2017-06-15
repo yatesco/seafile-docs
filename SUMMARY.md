@@ -20,7 +20,7 @@
    * [Syslog Integration](deploy/using_syslog.md)
    * Online File Preview and Edit
        * [LibreOffice Online Integration](deploy/libreoffice_online.md)
-       * [Only Office Integration](deploy/only_office.md)
+       * [OnlyOffice Integration](deploy/only_office.md)
    * [Upgrade Seafile server](deploy/upgrade.md)
    * Other Deployment Notes
        * [Start Seafile at System Bootup](deploy/start_seafile_at_system_bootup.md)
