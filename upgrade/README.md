@@ -1,6 +1,6 @@
 # Upgrade notes intro
 
-These notes give an overview of changes that have to be done when upgrading to specific version.
+These notes give an overview of changes that have to be done when upgrading to a specific version.
 
 These notes just give additional information about changes within each major version.  
 Please always follow the [main installation guide](https://manual.seafile.com/deploy/upgrade.html).
