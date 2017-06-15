@@ -49,7 +49,7 @@ Now configure accordingly in `seahub_settings.py`
 # Enable or disable thumbnail for video. ffmpeg and moviepy should be installed first. 
 # For details, please refer to https://manual.seafile.com/deploy/video_thumbnails.html
 # NOTE: since version 6.1
-ENABLE_VIDEO_THUMBNAIL = False
+ENABLE_VIDEO_THUMBNAIL = True
 
 # Use the frame at 5 second as thumbnail
 THUMBNAIL_VIDEO_FRAME_TIME = 5  
