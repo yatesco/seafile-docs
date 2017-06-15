@@ -95,15 +95,18 @@ https://github.com/ONLYOFFICE/Docker-DocumentServer#recommended-system-requireme
 ### Deploy OnlyOffice DocumentServer Docker image
 This downloads and deploys the DocumentServer on the local port 88.
 
-Debian 8 / CentOS 7
+Debian 8
 ```
-docker run -i -t -d -p 88:80 onlyoffice/documentserver --restart=always --name oods
+docker run -i -t -d -p 88:80 --restart=always --name oods onlyoffice/documentserver
 ```
 
 Ubuntu 16.04
 ```
-docker run -dit -p 88:80 onlyoffice/documentserver --restart always --name oods
+docker run -dit -p 88:80 --restart always --name oods onlyoffice/documentserver
 ```
+
+*Nothing yet confirmed on CentOS 7, you may try any of the above commands, they may work also.*
+
 
 **Docker documentation**
 
