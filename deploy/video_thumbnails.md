@@ -27,7 +27,7 @@ pip install pillow moviepy
 ```
 
 **Debian Jessie**
-```
+```python
 # Add backports repo to /etc/apt/sources.list
 # e.g. the following repo works (June 2017)
 deb http://httpredir.debian.org/debian jessie-backports main non-free
