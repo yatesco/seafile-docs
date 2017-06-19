@@ -2,6 +2,12 @@
 
 You can follow the document on minor upgrade (http://manual.seafile.com/deploy/upgrade.html).
 
+### 6.1.1 (2017.06.19)
+
+* Add "online preview only" option to share links
+* Enable setting favicon and logo via admin panel
+
+
 ### 6.1.0 beta (2017.06.06)
 
 Web UI Improvement:
@@ -11,7 +17,7 @@ Web UI Improvement:
 3. Move items by drap & drop
 4. Add create docx/xlsx/pptx in web interface
 5. Add OnlyOffice integration
-6. Show which client modify a file in history, this will help to find which client accidentally modified a file or deleted a file. 
+6. Show which client modify a file in history, this will help to find which client accidentally modified a file or deleted a file.
 
 Improvement for admins:
 
@@ -197,7 +203,7 @@ Other
 
 ### 6.0.1 beta
 
-* Enable create a library from a template 
+* Enable create a library from a template
 * Enable office preview by default in installation script
 * [fix] Fix not able to move files via WebDAV interface
 * Check whether the quota will exceed before saving the uploaded file to Seafile via Web UI or API
@@ -247,7 +253,7 @@ Pro only features
 * [fix] Fix search only work on the first page of search result pages
 * Users can invite guests
 * Add role based permission control
-* Add term and conditions: admin can write a document of term and conditions. The user must accept it before using Seafile. 
+* Add term and conditions: admin can write a document of term and conditions. The user must accept it before using Seafile.
 
 ## 5.1
 
@@ -274,7 +280,7 @@ sudo yum install python-urllib3
 * [multi-institution] Enable institution admin to activate/inactive an user
 * [fix] Showing contact email in user auto-completion
 * [fix, multi-tenancy] Fix syncing sub-folder of a shared library
-* [fix, multi-tenancy] Fix file audit page broken when a group corresponding to an item is deleted 
+* [fix, multi-tenancy] Fix file audit page broken when a group corresponding to an item is deleted
 * [fix] Fix seaf-fsck.sh --export fails without database
 * [fix] Fix users with Umlauts in their display name breaks group management and api2/account/info on some special Linux distribution
 * Remove user from groups when a user is deleted.
@@ -331,7 +337,7 @@ sudo yum install python-urllib3
 * [fix] Bug that caused groups cannot be transfered is fixed
 * [fix, admin] Fix page error in display file audit log when the corresponding library is deleted for a log entry
 * [fix] fixed raw downloads not being count towards traffic quota.
-* Show a notification in the client and Seahub when a new library is shared to a group. 
+* Show a notification in the client and Seahub when a new library is shared to a group.
 * Use seafile-data/http-temp to store zip files when downloading a directory or folder
 * [Accessibility] Improve accessiblity of library history page by making links for operations selectable by tab.
 * [Accessibility] Improve accessiblity of dialogs, add missing "labelledby" properties for the whole dialog.
@@ -350,7 +356,7 @@ sudo yum install python-urllib3
 * list all devices in admin panel
 * list device syncing errors in admin panel
 * Support server side file content encryption
-* Support xlsx/pptx editing via OWA 
+* Support xlsx/pptx editing via OWA
 * Add syslog support for seafile.log
 
 ### 5.1.2 (2016.04.21)
@@ -406,8 +412,8 @@ Pro only
 * Support automatic file locking for office files
 * Realtime backup (see http://manual.seafile.com/deploy_pro/real_time_backup.html)
 * Sending emails in backend when importing users via CSV files
-* Support Swift API 
-* seaf-gc support running in multi-thread mode 
+* Support Swift API
+* seaf-gc support running in multi-thread mode
 * [fix] Fix crash problem when visit S3/Swift via HTTPS
 * [fix] Fix handling special characters in LDAP group sync
 
@@ -563,7 +569,7 @@ UI changes:
 Config changes:
 
 * Move all config files to folder `conf`
-* Add web UI to config the server. The config items are saved in database table (seahub-dab/constance_config). They have a higher priority over the items in config files. 
+* Add web UI to config the server. The config items are saved in database table (seahub-dab/constance_config). They have a higher priority over the items in config files.
 
 Fixes
 
@@ -608,9 +614,9 @@ This version contains no database table change.
 * [fix] Delete sharing links when deleting a library
 * [fix] Clean Seafile tables when deleting a library
 * [fix] Add <a> tag to the link in upload folder email notification
-* [fix] Fix a bug in creating a library (after submit a wrong password, the submit button is no longer clickable) 
+* [fix] Fix a bug in creating a library (after submit a wrong password, the submit button is no longer clickable)
 * [fix, pro] Fix a bug in listing FileUpdate audit log
-* [security, pro] Don't online preview for office files in encrypted libraries 
+* [security, pro] Don't online preview for office files in encrypted libraries
 
 ### 4.4.5 (2015.10.30)
 
@@ -642,7 +648,7 @@ LDAP improvements and fixes
 * [fix] Check the validity of system default library template, if it is broken, recreate a new one.
 * [fix] After transfer a library, remove original sharing information
 * [security] Fix possibility to bypass Captcha check
-* [security] More security fixes. 
+* [security] More security fixes.
 * [pro] Enable syncing a sub-sub-folder of a shared sub-folder (For example, if you share library-A/sub-folder-B to a group, other group members can selectively sync sub-folder-B/sub-sub-folder-C)
 * [fix, office preview] Handle the case that "/tmp/seafile-office-output"is removed by operating system
 
@@ -883,7 +889,7 @@ Updates in community edition too
 * Show detailed time when mouse over a relative time
 * Add trashed libraries (deleted libraries will first be put into trashed libraries where system admin can restore)
 * Improve seaf-gc.sh
-* Redesign fsck. 
+* Redesign fsck.
 * Add API to support logout/login an account in the desktop client
 * Add API to generate thumbnails for images files
 * Clean syncing tokens after deleting an account
@@ -976,7 +982,7 @@ Small
 
 ### 3.1.11 (2014.11.03)
 
-* [fix] Fixed ./seaf-gc.sh to run online GC 
+* [fix] Fixed ./seaf-gc.sh to run online GC
 * [fix] Fixed showing libraries with same name in WebDAV extension in some specific Python version
 * [fix] Fixed event timestamp for library creation and library deleting events
 * [fix] Don't allow setting an encrypted library as default library
@@ -1008,7 +1014,7 @@ Small
 
 ### 3.1.7, 3.1.8
 
-* Add support for multi-tenancy 
+* Add support for multi-tenancy
 
 ### 3.1.6 (2014.09.16)
 
@@ -1067,13 +1073,13 @@ Pro edition only:
 Syncing
 
 * Improve performance: easily syncing 10k+ files in a library.
-* Don't need to download files if they are moved to another directory. 
+* Don't need to download files if they are moved to another directory.
 
 Platform
 
 * Rename HttpServer to FileServer to remove confusing.
 * Support log rotate
-* Use unix domain socket in ccnet to listen for local connections. This isolates the access to ccnet daemon for different users. 
+* Use unix domain socket in ccnet to listen for local connections. This isolates the access to ccnet daemon for different users.
 * Delete old PID files when stop Seafile
 * Remove simplejson dependency
 * [Fix] fix listing libraries when some libraries are broken
@@ -1214,7 +1220,7 @@ WebDAV
 
 * Fixed a problem of Seafile WebDAV server
 
-### 2.1.2 
+### 2.1.2
 
 * Fixed a problem of requiring python boto library even if it's not needed.
 
@@ -1340,7 +1346,7 @@ Web
 * [wiki] Add frame and max-width to images
 * Use 127.0.0.1 to read files (markdown, txt, pdf) in file preview
 * [bugfix] Fix pagination in library snapshot page
-* Set the max length of message reply from 128 characters to 2000 characters. 
+* Set the max length of message reply from 128 characters to 2000 characters.
 
 API
 
