@@ -1,9 +1,100 @@
 # Start Seafile at System Bootup
 
-For Ubuntu
-----------
+For systems running systemd
+---------------------------
+- For example Debian 8 and newer, Linux Ubuntu 15.04 and newer
 
-On Ubuntu, we make use of the
+Create systemd service files, change **${seafile\_dir}** to your
+**seafile** installation location and **seafile** to user, who runs
+**seafile** (if appropriate). Then you need to reload systemd's daemons:
+**systemctl daemon-reload**.
+
+### Create systemd service file /etc/systemd/system/seafile.service
+
+    sudo vim /etc/systemd/system/seafile.service
+    
+The content of the file is:
+
+    [Unit]
+    Description=Seafile
+    # add mysql.service or postgresql.service depending on your database to the line below
+    After=network.target
+
+    [Service]
+    Type=oneshot
+    ExecStart=${seafile_dir}/seafile-server-latest/seafile.sh start
+    ExecStop=${seafile_dir}/seafile-server-latest/seafile.sh stop
+    RemainAfterExit=yes
+    User=seafile
+    Group=seafile
+
+    [Install]
+    WantedBy=multi-user.target
+
+### Create systemd service file /etc/systemd/system/seahub.service
+
+    sudo vim /etc/systemd/system/seahub.service
+    
+The content of the file is (please dont forget to change it if you want to run fastcgi):
+
+    [Unit]
+    Description=Seafile hub
+    After=network.target seafile.service
+
+    [Service]
+    # change start to start-fastcgi if you want to run fastcgi
+    ExecStart=${seafile_dir}/seafile-server-latest/seahub.sh start
+    ExecStop=${seafile_dir}/seafile-server-latest/seahub.sh stop
+    User=seafile
+    Group=seafile
+    Type=oneshot
+    RemainAfterExit=yes
+
+    [Install]
+    WantedBy=multi-user.target
+
+### Create systemd service file /etc/systemd/system/seafile-client.service (optional)
+
+You need to create this service file only if you have **seafile**
+console client and you want to run it on system boot.
+
+    sudo vim /etc/systemd/system/seafile-client.service
+    
+The content of the file is:
+
+    [Unit]
+    Description=Seafile client
+    # Uncomment the next line you are running seafile client on the same computer as server
+    # After=seafile.service
+    # Or the next one in other case
+    # After=network.target
+
+    [Service]
+    Type=oneshot
+    ExecStart=/usr/bin/seaf-cli start
+    ExecStop=/usr/bin/seaf-cli stop
+    RemainAfterExit=yes
+    User=seafile
+    Group=seafile
+
+    [Install]
+    WantedBy=multi-user.target
+
+### Enable service start on system boot
+
+    sudo systemctl enable seafile.service
+    sudo systemctl enable seahub.service
+    sudo systemctl enable seafile-client.service   # optional
+
+
+
+For systems using another init system than systemd
+--------------------------------------------------
+
+Ubuntu 14.10 and older
+----------------------
+
+On Ubuntu without systemd we make use of the
 [/etc/init.d/](https://help.ubuntu.com/community/UbuntuBootupHowto)
 scripts to start seafile/seahub at system boot.
 
@@ -82,14 +173,12 @@ and **seafile\_dir** accordingly)
 ### Add seafile-server to rc.d
 
     sudo update-rc.d seafile-server defaults
-    
-### Done
 
-Don't forget to update the value of **script\_path** later if you update
+**Note:** Don't forget to update the value of **script\_path** later if you update
 your seafile server.
 
-For other Debian based Linux
-----------------------------
+Other Debian based Distributions
+--------------------------------
 
 ### Create a script **/etc/init.d/seafile-server**
 
@@ -188,8 +277,8 @@ and **seafile\_dir** accordingly)
 Don't forget to update the value of **seafile\_dir** later if you update
 your seafile server.
 
-For RHEL/CentOS
----------------
+RHEL/CentOS
+-----------
 
 On RHEL/CentOS, the script
 [/etc/rc.local](http://www.centos.org/docs/5/html/Installation_Guide-en-US/s1-boot-init-shutdown-run-boot.html)
@@ -228,10 +317,10 @@ start-fastcgi"**
 -   Done. Don't forget to update the value of **seafile\_dir** later if
     you update your seafile server.
 
-For RHEL/CentOS run as service
-------------------------------
+RHEL/CentOS (run as service)
+----------------------------
 
-On RHEL/CentOS , we make use of the /etc/init.d/ scripts to start
+On RHEL/CentOS we make use of the /etc/init.d/ scripts to start
 seafile/seahub at system boot as service.
 
 ### Create a file **/etc/sysconfig/seafile**
@@ -411,78 +500,3 @@ and run:
 
     service seafile start
     service seahub start
-
-For systems running systemd
----------------------------
-
-Create systemd service files, change **${seafile\_dir}** to your
-**seafile** installation location and **seafile** to user, who runs
-**seafile** (if appropriate). Then you need to reload systemd's daemons:
-**systemctl daemon-reload**.
-
-### Create systemd service file /etc/systemd/system/seafile.service
-
-    [Unit]
-    Description=Seafile
-    # add mysql.service or postgresql.service depending on your database to the line below
-    After=network.target
-
-    [Service]
-    Type=oneshot
-    ExecStart=${seafile_dir}/seafile-server-latest/seafile.sh start
-    ExecStop=${seafile_dir}/seafile-server-latest/seafile.sh stop
-    RemainAfterExit=yes
-    User=seafile
-    Group=seafile
-
-    [Install]
-    WantedBy=multi-user.target
-
-### Create systemd service file /etc/systemd/system/seahub.service
-
-    [Unit]
-    Description=Seafile hub
-    After=network.target seafile.service
-
-    [Service]
-    # change start to start-fastcgi if you want to run fastcgi
-    ExecStart=${seafile_dir}/seafile-server-latest/seahub.sh start
-    ExecStop=${seafile_dir}/seafile-server-latest/seahub.sh stop
-    User=seafile
-    Group=seafile
-    Type=oneshot
-    RemainAfterExit=yes
-
-    [Install]
-    WantedBy=multi-user.target
-
-### Create systemd service file /etc/systemd/system/seafile-client.service (optional)
-
-You need to create this service file only if you have **seafile**
-console client and you want to run it on system boot.
-
-    [Unit]
-    Description=Seafile client
-    # Uncomment the next line you are running seafile client on the same computer as server
-    # After=seafile.service
-    # Or the next one in other case
-    # After=network.target
-
-    [Service]
-    Type=oneshot
-    ExecStart=/usr/bin/seaf-cli start
-    ExecStop=/usr/bin/seaf-cli stop
-    RemainAfterExit=yes
-    User=seafile
-    Group=seafile
-
-    [Install]
-    WantedBy=multi-user.target
-
-### Enable service start on system boot
-
-    sudo systemctl enable seafile.service
-    sudo systemctl enable seahub.service
-    sudo systemctl enable seafile-client.service   # optional
-
-### Done
