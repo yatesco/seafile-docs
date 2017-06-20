@@ -1,3 +1,5 @@
+# Seafile Server Changelog
+
 ## 6.1
 
 If you upgrade from 6.0 and you'd like to use the feature video thumbnail, you need to install ffmpeg package:

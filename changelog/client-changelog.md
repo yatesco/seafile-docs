@@ -1,3 +1,5 @@
+# Seafile Client Changelog
+
 ## Known bugs and limitations
 
 v6.0.4 is the latest stable release. It is compatibile with server 5.x and 6.x.
