@@ -1,3 +1,5 @@
+# SeaDrive Client Changelog
+
 ## Known issues
 
 * In version 0.5.1, we add the feature that the mounted drive is only visible to the current user, so some exe files can't be executed if stored in the drive because it needs admin privilege to run

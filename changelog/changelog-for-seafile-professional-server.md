@@ -1,3 +1,5 @@
+# Seafile Professional Server Changelog
+
 ## 6.1
 
 You can follow the document on minor upgrade (http://manual.seafile.com/deploy/upgrade.html).
