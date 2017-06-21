@@ -1,20 +1,20 @@
 # Seafile Clustering with MariaDB and Ceph
 
-In this document we describe a detailed solution of deploying a high scalable Seafile cluster with MariaDB and Ceph. The document is not a finished. We will improve it continuously as our knowledge grow with several ongoing projects.
+In this document we describe a detailed solution of deploying a highly scalable Seafile cluster with MariaDB and Ceph. The document is not a finished. We will improve it continuously as our knowledge grow with several ongoing projects.
 
 ## Backgrounds
 
-Seafile organizes files using libraries. Each library is a GIT repository like file system tree with each file and folder identified by a unique hash value. These unique IDs are used in the synchronization algorithm and there is no need to store the synchronization state for each file in the database. Tranditional databases like MySQL are not scalable enough to handle tens of millions of records, while object storages like Ceph and Swift are highly scalable. So in theory, Seafile is capable to storing billions of files for synchronization, sharing and a variety of other purposes.
+Seafile organizes files using libraries. Each library is a git repository like file system tree with each file and folder identified by a unique hash value. These unique IDs are used in the synchronization algorithm and there is no need to store the synchronization state for each file in the database. Tranditional databases like MySQL are not scalable enough to handle tens of millions of records, while object storages like Ceph and Swift are highly scalable. So in theory, Seafile is capable of storing billions of files for synchronization, sharing and a variety of other purposes.
 
 While files are saved into object storage, other information like sharing links and permissions are stored in a database. MariaDB Galera can be used to provide a scalable and reliable database storage.
 
 ## Hardware and system requirements
 
-In the minimum, we use three machines to setup the cluster. Each machine should be of
+As a minimum, we use three machines to setup the cluster. Each machine should have at least
 
-* 4 cores with 8GB or more memory
+* 4 cores with 8GB memory
 * 2 SSDs to store the operating system and MariaDB Database on a Raid 1
-* 4 or more SATA disks to store Ceph data
+* 4 SATA disks to store the Ceph data
 
 We use Ubuntu 14.04 server as the operating system. In the following, we denote the three servers node1, node2 and node3.
 
@@ -28,7 +28,7 @@ Note: We highly suggest to get further information on setting up and managing a 
 
 #### Preparation
 
-Choose one node (say, node1) as admin node for installation. Install ceph-deploy on it.
+Choose one node (say, node1) as admin node for the installation. Install `ceph-deploy` on it.
 
 * Add the release key:  
 
@@ -36,7 +36,7 @@ Choose one node (say, node1) as admin node for installation. Install ceph-deploy
 wget -q -O- 'https://ceph.com/git/?p=ceph.git;a=blob_plain;f=keys/release.asc' | sudo apt-key add -
 ```
 
-* Add the Ceph packages to your repository. Replace {ceph-stable-release} with a stable Ceph release (e.g., emperor, firefly, giant etc.). The latest stable release is 'giant'.
+* Add the Ceph packages to your apt sources. Replace {ceph-stable-release} with a stable Ceph release (e.g., emperor, firefly, giant etc.). The latest stable LTS release is 'giant'.
 
 ```
 echo deb http://ceph.com/debian-{ceph-stable-release}/ $(lsb_release -sc) main | sudo tee /etc/apt/sources.list.d/ceph.list
@@ -220,9 +220,3 @@ https://www.digitalocean.com/community/tutorials/how-to-configure-a-galera-clust
 ## Setup Seafile cluster
 
 Next follow http://manual.seafile.com/deploy_pro/deploy_in_a_cluster.html to setup a Seafile cluster.
-
-
-
-
-
-
