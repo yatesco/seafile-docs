@@ -1,8 +1,8 @@
 # Add memcached
 
-Seahub caches items (avatars, profiles, etc) on the file system in /tmp/seahub_cache/ by default. You can replace it with Memcached. 
+Seahub caches items (avatars, profiles, etc) on the file system in /tmp/seahub_cache/ by default. You can use memcached instead to improve the performance.
 
-First, you should make sure `libmemcached` library and development headers are installed in your system. Version 1.0.18 of libmemcached or later should be used.
+First, make sure `libmemcached` library and development headers are installed on your system. Version 1.0.18 of libmemcached or later should be used.
 
 On Ubuntu 16.04 or similar, the version in system repository is new enough. So you can install it directly.
 
@@ -41,7 +41,7 @@ CACHES = {
 
 ```
 
-If you use memcached cluster, please replace the `CACHES` variable with the following. This configuration uses consistent hashing to distribute the keys in memcached. More information can be found on [pylibmc documentation](http://sendapatch.se/projects/pylibmc/behaviors.html) and [django-pylibmc documentation](https://github.com/django-pylibmc/django-pylibmc). Supposed your memcached server addresses are 192.168.1.13[4-6].
+If you use a memcached cluster, please replace the `CACHES` variable with the following. This configuration uses consistent hashing to distribute the keys in memcached. More information can be found on [pylibmc documentation](http://sendapatch.se/projects/pylibmc/behaviors.html) and [django-pylibmc documentation](https://github.com/django-pylibmc/django-pylibmc). Supposed your memcached server addresses are 192.168.1.13[4-6].
 
 ```
 CACHES = {
@@ -56,4 +56,3 @@ CACHES = {
         }
     }
 }
-```
