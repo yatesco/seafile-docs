@@ -3676,7 +3676,7 @@ The id of the updated file
 - 403 Can not access repo
 - 520 above quota
 
-## <a id="directory">Directory
+## <a id="directory"></a>Directory
 
 ### <a id="list-directory-entries"></a>List Directory Entries
 
@@ -3943,7 +3943,7 @@ After the task finished, you can manually generate directory download url with t
 
 For example, `https://cloud.seafile.com/seafhttp/zip/b2272645-35ee-44ce-8f68-07c022107015` is the final url here.
 
-## <a id="multiple-files-directories">Multiple Files / Directories
+## <a id="multiple-files-directories"></a>Multiple Files / Directories
 
 ### <a id="multiple-files-directories-copy"></a>Copy
 

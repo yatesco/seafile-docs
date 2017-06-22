@@ -2044,7 +2044,7 @@ The id of the updated file
 - 403 Can not access repo
 - 520 above quota
 
-### <a id="directory">Directory ##
+### <a id="directory"></a>Directory ##
 
 #### <a id="list-directory-entries"></a>List Directory Entries ###
 
@@ -2233,7 +2233,7 @@ The id of the updated file
 * 404 Library/Folder/Group not found.
 * 500 Failed to get sub repo.
 
-### <a id="multiple-files-directories">Multiple Files / Directories ##
+### <a id="multiple-files-directories"></a>Multiple Files / Directories ##
 
 #### <a id="multiple-files-directories-copy"></a>Copy ###
 
