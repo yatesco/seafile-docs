@@ -1,15 +1,12 @@
-# Seafile
-
-## Upgrade notes
-Please check in the [upgrade notes](deploy/upgrade_notes.md) for any special configuration or changes before/while upgrading.
-
-## Upgrade Manual
+# Upgrade manual
 
 This page is for users who use the pre-compiled seafile server package.
-
 - If you [build seafile server from source](../build_seafile/server.md), please read the **Upgrading Seafile Server** section on that page, instead of this one.
 - After upgrading, you may need to clean [seahub cache](add_memcached.md) if it doesn't behave as expect.
 - If you are running a **cluster**, please read [upgrade a Seafile cluster](../deploy_pro/upgrade_a_cluster.md).
+
+## Upgrade notes
+Please check the [upgrade notes](deploy/upgrade_notes.md) for any special configuration or changes before/while upgrading.
 
 --- 
 
