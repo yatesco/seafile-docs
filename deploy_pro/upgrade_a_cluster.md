@@ -22,6 +22,11 @@ Doing maintanence upgrading is simple, you only need to run the script `./upgrad
 
 ## Specific instructions for each version
 
+### From 6.0 to 6.1
+
+In version 6.1, we upgraded the included ElasticSearch server. The old server listen on port 9500, new server listen on port 9200. Please change your firewall settings.
+
+
 ### From 5.1 to 6.0
 
 In version 6.0, the folder download mechanism has been updated. This requires that, in a cluster deployment, seafile-data/httptemp folder must be in an NFS share. You can make this folder a symlink to the NFS share.

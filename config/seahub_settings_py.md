@@ -148,7 +148,7 @@ groovy, rst, patch, go"""
 ENABLE_THUMBNAIL = True
 
 # Enable or disable thumbnail for video. ffmpeg and moviepy should be installed first. 
-# For details, please refer to https://manual.seafile.com/deploy/using_sqlite.html
+# For details, please refer to https://manual.seafile.com/deploy/video_thumbnails.html
 # NOTE: since version 6.1
 ENABLE_VIDEO_THUMBNAIL = False
 
@@ -175,6 +175,23 @@ CLOUD_MODE = True
 ENABLE_GLOBAL_ADDRESSBOOK = False
 ```
 
+
+## External authentication
+
+```python
+# Enable authentication with ADFS
+# Default is False
+# Since 6.0.9
+ENABLE_ADFS_LOGIN = True
+
+# Enable authentication wit Kerberos
+# Default is False
+ENABLE_KRB5_LOGIN = True
+
+# Enable authentication with Shibboleth
+# Default is False
+ENABLE_SHIBBOLETH_LOGIN = True
+```
 
 ## Other options
 

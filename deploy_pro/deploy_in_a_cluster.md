@@ -18,7 +18,7 @@ This architecture scales horizontally. That means, you can handle more traffic b
 
 There are two main components on the Seafile server node: web server (Nginx/Apache) and Seafile app server. The web server passes requests from the clients to Seafile app server. The Seafile app servers work independently. They don't know about each other's state. That means each app server can fail independently without affecting other app server instances. The load balancer is responsible for detecting failure and re-routing requests.
 
-Even though Seafile app servers work independently, they still have to share some session information. All shared session information are stored in memcached. So all Seafile app servers have to connect to the same memcached server (cluster). More details about memcached configuration is available later.
+Even though Seafile app servers work independently, they still have to share some session information. All shared session information is stored in memcached. Thus, all Seafile app servers have to connect to the same memcached server (cluster). More details about memcached configuration is available later.
 
 All Seafile app servers access the same set of user data. The user data has two parts: One in the MySQL database and the other one in the backend storage cluster (S3, Ceph etc.). All app servers serve the data equally to the clients.
 

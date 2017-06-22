@@ -175,7 +175,7 @@ If you execute script file successfully, you will see these output, and of cours
 ##<a id="List Of Seafile-API"></a>List Of Seafile-API
 This list is based on **seafile-server-3.0.3**, and parameter was omitted.
 
-For more infomation about Seafile-API, please see [api.py](https://github.com/haiwen/seafile/blob/master/python/seaserv/api.py).
+For more infomation about Seafile-API, please see [api.py](https://github.com/haiwen/seafile-server/blob/master/python/seaserv/api.py).
 
 > - seafile_api.add_inner_pub_repo()
 > - seafile_api.cancel_copy_task()

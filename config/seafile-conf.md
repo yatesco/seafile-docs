@@ -2,7 +2,7 @@
 
 **Note**: Since Seafile Server 5.0.0, all config files are moved to the central **conf** folder. [Read More](../deploy/new_directory_layout_5_0_0.md).
 
-## Storage Quota Setting (seafile.conf)
+## Storage Quota Setting
 
 You may set a default quota (e.g. 2GB) for all users. To do this, just add the following lines to `seafile.conf` file
 
@@ -14,7 +14,7 @@ default = 2
 
 This setting applies to all users. If you want to set quota for a specific user, you may log in to seahub website as administrator, then set it in "System Admin" page.
 
-## Default history length limit (seafile.conf)
+## Default history length limit
 
 If you don't want to keep all file revision history, you may set a default history length limit for all libraries.
 
@@ -23,7 +23,18 @@ If you don't want to keep all file revision history, you may set a default histo
 keep_days = days of history to keep
 ```
 
-## Seafile fileserver configuration (seafile.conf)
+## System Trash
+Seafile uses a system trash, where deleted libraries will be moved to. In this way, accidentally deleted libraries can be recovered by system admin.
+<pre>
+[library_trash]
+# How often trashed libraries are scanned for removal, default 1 day.
+scan_days = xx
+
+# How many days to keep trashed libraries, default 30 days.
+expire_days = xx
+</pre>
+
+## Seafile fileserver configuration
 
 The configuration of seafile fileserver is in the `[fileserver]` section of the file `seafile.conf`
 
@@ -88,7 +99,6 @@ When you configure seafile server to use MySQL, the default connection pool size
 # Use larger connection pool
 max_connections = 200
 ```
-
 **Note**: You need to restart seafile and seahub so that your changes take effect.
 ```
 ./seahub.sh restart
