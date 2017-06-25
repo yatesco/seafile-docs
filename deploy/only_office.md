@@ -171,7 +171,7 @@ location /onlyofficeds/ {
         proxy_pass http://{your Seafile server's domain or IP}:88/;
 
         proxy_http_version 1.1;
-        client_max_body_size 100; # Limit Document size to 100MB
+        client_max_body_size 100M; # Limit Document size to 100MB
         proxy_read_timeout 3600s;
         proxy_connect_timeout 3600s;
         proxy_set_header Upgrade $http_upgrade;
@@ -313,7 +313,7 @@ server {
         proxy_pass http://127.0.0.1:88/;
 		
         proxy_http_version 1.1;
-        client_max_body_size 100; # Limit Document size to 100MB
+        client_max_body_size 100M; # Limit Document size to 100MB
         proxy_read_timeout 3600s;
         proxy_connect_timeout 3600s;
         proxy_set_header Upgrade $http_upgrade;
