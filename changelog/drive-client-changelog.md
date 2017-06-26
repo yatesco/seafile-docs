@@ -8,6 +8,10 @@
 
 ## ChangeLog
 
+### 0.7.1 (2017/06/23)
+
+* [fix] Fix a bug that causing client crash
+
 ### 0.7.0 (2017/06/07)
 
 * Add support for multi-users using SeaDrive on a single desktop. But different users must choose different drive letters.

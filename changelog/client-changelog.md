@@ -8,6 +8,23 @@ The Mac Finder sync extension need OSX 10.10+
 
 ## 6.0
 
+### 6.0.7 (2017/06/23)
+
+* [fix] Fix auto-completion in sharing dialog
+* Show contact avatars in auto-completion of sharing dialog
+* [fix] Fix mis-leading error message when uploading a file to a read-only library via cloud file browser
+* Add highlight background color when drag and drop a file/folder to a library
+* [fix] Fix connection error in libcurl
+* [fix] Fix sorting by time in cloud file browser 
+* [fix] Fix sorting by name case sensitive in cloud file browser
+* [fix] Fix drag more than one folder to cloud file browser
+* Add loading more in activity tab and search tab
+* "View sync error" can only be clicked when there are sync errors
+* Move seafile.log, applet.log to seafile.log.old, applet.log.old if they become too large
+* Remove the "?" icon in creating new folder dialog title bar
+
+
+
 ### 6.0.6 (2017/05/08)
 
 * Sort files by numbers if numbers contained in the file name, so "1, 10, 2, 11, 3" will be sorted as "1, 2, 3, 10, 11".
@@ -89,7 +106,7 @@ This version has a few bugs. We will fix it soon.
 * Click notification pop up now open the exact folder containing the modified file.
 * Change "Get Seafile Share Link" to "Get Seafile Download Link"
 * [Fix] Use case-insensitive sorting in cloud file browser
-* [Fix] Don't sync a folder in Windows if it contains invalid characters instead of creating an empty folder with invalid name 
+* [Fix] Don't sync a folder in Windows if it contains invalid characters instead of creating an empty folder with invalid name
 * [Fix] Fix a rare bug where sometimes files are synced as zero length files. This happens when another software doesn't change the file timestamp after changing the content of the file.
 
 ### 5.1.0 (2016/04/11)
@@ -379,7 +396,7 @@ Note: Seafile client now support HiDPI under Windows, you should remove QT_DEVIC
 * Add logout/login support (need server 4.1.0+)
 * fix proxy password disappearance after restarting issue
 * mask proxy password in the setting dialog
-* [Fix] fix unexpected disconnection with proxy servers 
+* [Fix] fix unexpected disconnection with proxy servers
 * [Fix] fix a conflicting case when we have read-only sharing repository to a group
 * update translations
 * support darkmode (OS X)
@@ -473,7 +490,7 @@ You have to update all the clients in all the PCs. If one PC does not use the v3
 * [fix] Improve the deleted folder reappearing problem if it contains ignored files
 * [fix] Add "resync" action
 
- 
+
 ### 3.1.8 (2014/10/28)
 
 * Better support read-only sync. Now local changes will be ignored.
@@ -525,7 +542,7 @@ You have to update all the clients in all the PCs. If one PC does not use the v3
 ### 3.1.2 (2014/08/01)
 
 * Do not show rotate icon when checking update for a library
-* Do not show activity tab if server not supported 
+* Do not show activity tab if server not supported
 * [Mac] show unread messages tray icon on Mac
 * [Mac] Improve UI for Mac
 * [fix] Support rename files from upper case to lower case or vice versa.
@@ -566,7 +583,7 @@ You have to update all the clients in all the PCs. If one PC does not use the v3
 * Send device name to the server
 * [fix] Fixed system shutdown problem
 * [fix] Fixed duplicate entries in recently updated libraries list
-* Remove ongoing library download tasks when removing an account 
+* Remove ongoing library download tasks when removing an account
 * Updated translation
 * [fix] Fix file ID calculation
 
@@ -584,7 +601,7 @@ You have to update all the clients in all the PCs. If one PC does not use the v3
 
 ## 2.1
 
-### 2.1.2 
+### 2.1.2
 
 
 * Show proper error message when failed to login
@@ -612,7 +629,7 @@ You have to update all the clients in all the PCs. If one PC does not use the v3
 * Automatically check for new version on startup
 * Support of file syncing from both inside and outside the LAN
 * [fix] Fix a bug of clicking the tray icon during initialization
-* [fix] fixed a few bugs in merge and handling of empty folders 
+* [fix] fixed a few bugs in merge and handling of empty folders
 * [mac] Fixed the alignment in settings dialog
 
 ## 2.0
@@ -651,7 +668,7 @@ Note: This version contains a bug that you can't login into your private servers
 ### 2.0.4
 
 * Improve memory usage during syncing
-* [Windows] Change system tray icons 
+* [Windows] Change system tray icons
 * [Windows] Hide seafile-data under Seafile folder
 * [fix] Fix remember main window's location
 * Improve the dialog for adding account
@@ -699,7 +716,7 @@ Note: This version contains a bug that you can't login into your private servers
 * Improve local web interface
 * Remove link to official Seafile server
 * Ignore all temporary files created by Microsoft Office
-* Add French and Slovak translation 
+* Add French and Slovak translation
 
 ## 1.7
 
@@ -726,13 +743,13 @@ Note: This version contains a bug that you can't login into your private servers
 
 1.6.2
 
-* [bugfix,mac] Fix a bug in supporting directory names with accents 
+* [bugfix,mac] Fix a bug in supporting directory names with accents
 
 1.6.1
 
 * [bugfix] Prevent running of multiple seaf-daemon instance
 * Improve the efficiency of start-up GC for libraries in merge stage
-* [mac,win] Handle case-conflict files by renaming 
+* [mac,win] Handle case-conflict files by renaming
 
 1.6.0
 
@@ -757,7 +774,7 @@ Note: This version contains a bug that you can't login into your private servers
 1.5.1
 
 * [Seaf-cli] Fix a bug in initializing the config dir.
-* [bugfix] Improve the robustness of DNS looking-up. 
+* [bugfix] Improve the robustness of DNS looking-up.
   Use standard DNS looking-up instead of libevent's non-blocking version.
 
 1.5.0

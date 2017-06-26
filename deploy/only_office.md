@@ -46,7 +46,7 @@ After the installation process is finished, visit this page to make sure you hav
 ### Configure Seafile Server for SUBDOMAIN
 Add the following config option to ```seahub_settings.py```.
 
-```
+```python
 # Enable Only Office
 ENABLE_ONLYOFFICE = True
 VERIFY_ONLYOFFICE_CERTIFICATE = False
@@ -108,6 +108,23 @@ docker run -dit -p 88:80 --restart always --name oods onlyoffice/documentserver
 *Nothing yet confirmed on CentOS 7, you may try any of the above commands, they may work also.*
 
 
+**EXAMPLE: Debian Docker container with MEMORY LIMITS**
+
+In Debian 8 you first have to change some settings in the grub config to support memory limits for docker.  
+```
+# Edit /etc/default/grub
+# Add the following options
+GRUB_CMDLINE_LINUX_DEFAULT="cgroup_enable=memory swapaccount=1"
+
+# Update Grub2 and reboot
+update-grub2 && reboot
+```
+
+Now you can start the docker image with memory limits.  
+`docker run -i -t -d -p 88:80 --restart=always --memory "6g" --memory-swap="6g" --name oods onlyoffice/documentserver`
+
+*These limits are above the minimum recommendation (4G RAM/2GB SWAP) so the DocumentServer's performance keeps up, while multiple users edit documents. Docker SWAP works different from machine SWAP, check the [docker documentation](https://docs.docker.com/engine/admin/resource_constraints/).*
+
 **Docker documentation**
 
 If you have any issues please check the [docker documentation](https://docs.docker.com/engine/reference/run/).
@@ -154,7 +171,7 @@ location /onlyofficeds/ {
         proxy_pass http://{your Seafile server's domain or IP}:88/;
 
         proxy_http_version 1.1;
-        client_max_body_size 100; # Limit Document size to 100MB
+        client_max_body_size 100M; # Limit Document size to 100MB
         proxy_read_timeout 3600s;
         proxy_connect_timeout 3600s;
         proxy_set_header Upgrade $http_upgrade;
@@ -178,7 +195,7 @@ After the installation process is finished, visit this page to make sure you hav
 ### Configure Seafile Server for SUBFOLDER
 Add the following config option to ```seahub_settings.py```:
 
-```
+```python
 # Enable Only Office
 ENABLE_ONLYOFFICE = True
 VERIFY_ONLYOFFICE_CERTIFICATE = True
@@ -296,7 +313,7 @@ server {
         proxy_pass http://127.0.0.1:88/;
 		
         proxy_http_version 1.1;
-        client_max_body_size 100; # Limit Document size to 100MB
+        client_max_body_size 100M; # Limit Document size to 100MB
         proxy_read_timeout 3600s;
         proxy_connect_timeout 3600s;
         proxy_set_header Upgrade $http_upgrade;
