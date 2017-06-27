@@ -1,5 +1,5 @@
 # Firewall settings
 
-By default, you should open 2 ports, 8000 and 8082, in your firewall settings.
+By default the ports `8000` and `8082` need to be opened in the firewall for incoming TCP connections.
 
-If you run Seafile behind Nginx/Apache with HTTPS, you only need to open ports 443.
+If you run Seafile behind Nginx/Apache with HTTPS, you only need to open port 443 TCP.
