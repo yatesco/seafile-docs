@@ -1,6 +1,6 @@
 # Upgrade notes
 
-These notes just give additional information about changes within each major version.  
+These notes give additional information about changes.
 Please always follow the [main upgrade guide](./upgrade.md).
 
 ## Summary
@@ -17,9 +17,11 @@ Please always follow the [main upgrade guide](./upgrade.md).
 
 ## Important release changes
 
-From this version, the Wiki module is hidden by default. Users will not be able to turn it on. From our feedback, this feature is not used by most users.    
-For compatibility with old version, you can turn it on by adding the following line to `seahub_settings.py`:   
-`ENABLE_WIKI = True`
+From this version, the Wiki module is hidden by default. Users will not be able to turn it on. For compatibility with older versions, it can be turned on by adding the following line to `seahub_settings.py`:
+
+```python
+ENABLE_WIKI = True
+```
 
 ---
 
@@ -57,19 +59,15 @@ pip install --upgrade Pillow
 
 ### Seahub does not start
 
-See upgrade notice for V6.0.9.
-
----
-
-## V6.0.9
-
 In case Seahub does not start after the upgrade, install python-requests.
 
 ```bash
-apt-get install python-requests
+sudo apt-get install python-requests
 ```
 
-## V6.0.0 - V6.0.8
+---
+
+## V6.0.0 - V6.0.9
 
 There are no other special instructions.
 
