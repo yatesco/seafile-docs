@@ -28,6 +28,7 @@ Benefits:
     * [Test that DocumentServer is running](deploy/only_office.md#test-that-documentserver-is-running-via-subfolder)
     * [Configure Seafile Server](deploy/only_office.md#configure-seafile-server-for-subfolder)
     * [Complete Nginx config EXAMPLE](deploy/only_office.md#complete-nginx-config-example)
+    * [Complete Apache config EXAMPLE](deploy/only_office.md#complete-apache-config-example)
 
 
 ## Deployment of DocumentServer via SUBDOMAIN
@@ -74,7 +75,11 @@ URL example: https://seafile.domain.com/onlyofficeds
 - Local proxy to subfolder on already existing Seafile Server (sub)domain.
 - SSL via Seafile Server domain, no additional certificate required !
 
-**The subfolder can NOT be ```/onlyoffice/``` as this path is used for communication between Seafile and Document Server !**
+**Do NOT CHANGE the SUBFOLDER if not absolutely required for some reason!**
+
+**The subfolder page is only important for communication between Seafile and the DocumentServer, there is nothing except the welcome page (e.g. no overview or settings). Users will need access to it though for the OnlyOffice document server editor to work properly.**
+
+**```/onlyoffice/``` cannot be used as subfolder as this path is used for communication between Seafile and Document Server !**
 
 The following guide shows how to deploy the OnlyOffice Document server locally.
 *It is based on the ["ONLYOFFICE/Docker-DocumentServer" documentation](https://github.com/ONLYOFFICE/Docker-DocumentServer).*
@@ -85,11 +90,7 @@ https://github.com/ONLYOFFICE/Docker-DocumentServer#recommended-system-requireme
 
 ### Install Docker
 
-[Ubuntu](https://docs.docker.com/engine/installation/linux/ubuntu/)
-
-[Debian](https://docs.docker.com/engine/installation/linux/debian/)
-
-[CentOS](https://docs.docker.com/engine/installation/linux/centos/)
+[Ubuntu](https://docs.docker.com/engine/installation/linux/ubuntu/), [Debian](https://docs.docker.com/engine/installation/linux/debian/), [CentOS](https://docs.docker.com/engine/installation/linux/centos/)
 
 
 ### Deploy OnlyOffice DocumentServer Docker image
@@ -187,7 +188,54 @@ location /onlyofficeds/ {
 ```
 
 #### Configure Apache
-_To be written...._
+_BETA - Requires further testing!_
+
+Add the following configuration to your seafile apache config file (e.g. ```sites-enabled/seafile.conf```) **outside** the ```<VirtualHost >``` directive.
+
+
+```
+...
+
+LoadModule authn_core_module modules/mod_authn_core.so
+LoadModule authz_core_module modules/mod_authz_core.so
+LoadModule unixd_module modules/mod_unixd.so
+LoadModule proxy_module modules/mod_proxy.so
+LoadModule proxy_http_module modules/mod_proxy_http.so
+LoadModule proxy_wstunnel_module modules/mod_proxy_wstunnel.so
+LoadModule headers_module modules/mod_headers.so
+LoadModule setenvif_module modules/mod_setenvif.so
+
+<IfModule unixd_module>
+  User daemon
+  Group daemon
+</IfModule>
+
+...
+```
+
+Add the following configuration to your seafile apache config file (e.g. ```sites-enabled/seafile.conf```) **inside** the ```<VirtualHost >``` directive at the end.
+
+```
+...
+
+Define VPATH /onlyofficeds
+Define DS_ADDRESS {your Seafile server's domain or IP}:88
+
+...
+
+<Location ${VPATH}>
+  Require all granted
+  SetEnvIf Host "^(.*)$" THE_HOST=$1
+  RequestHeader setifempty X-Forwarded-Proto http
+  RequestHeader setifempty X-Forwarded-Host %{THE_HOST}e
+  RequestHeader edit X-Forwarded-Host (.*) $1${VPATH}
+  ProxyAddHeaders Off
+  ProxyPass "http://${DS_ADDRESS}/"
+  ProxyPassReverse "http://${DS_ADDRESS}/"
+</Location>
+
+...
+```
 
 ### Test that DocumentServer is running via SUBFOLDER
 After the installation process is finished, visit this page to make sure you have deployed OnlyOffice successfully: ```http{s}://{your Seafile Server's domain or IP}/{your subdolder}/welcome```, you will get **Document Server is running** info at this page.
@@ -253,6 +301,9 @@ server {
         add_header Strict-Transport-Security "max-age=31536000; includeSubDomains";
         server_tokens off;
 
+    #
+    # seahub
+    #
     location / {
         fastcgi_pass    127.0.0.1:8000;
         fastcgi_param   SCRIPT_FILENAME     $document_root$fastcgi_script_name;
@@ -276,6 +327,9 @@ server {
         client_max_body_size 0;
     }
 
+    #
+    # seafile
+    #
     location /seafhttp {
         rewrite ^/seafhttp(.*)$ $1 break;
         proxy_pass http://127.0.0.1:8082;
@@ -290,6 +344,9 @@ server {
         root /home/user/haiwen/seafile-server-latest/seahub;
     }
 
+    #
+    # seafdav (webdav)
+    #
     location /seafdav {
         fastcgi_pass    127.0.0.1:8080;
         fastcgi_param   SCRIPT_FILENAME     $document_root$fastcgi_script_name;
@@ -307,7 +364,10 @@ server {
         access_log      /var/log/nginx/seafdav.access.log;
         error_log       /var/log/nginx/seafdav.error.log;
     }
-
+    
+    #
+    # onlyofficeds
+    #
     location /onlyofficeds/ {
         # IMPORTANT ! - Trailing slash !
         proxy_pass http://127.0.0.1:88/;
@@ -328,3 +388,85 @@ server {
 }
 ```
 
+### Complete Apache config EXAMPLE
+_BETA - Requires further testing!_
+
+```
+LoadModule authn_core_module modules/mod_authn_core.so
+LoadModule authz_core_module modules/mod_authz_core.so
+LoadModule unixd_module modules/mod_unixd.so
+LoadModule proxy_module modules/mod_proxy.so
+LoadModule proxy_http_module modules/mod_proxy_http.so
+LoadModule proxy_wstunnel_module modules/mod_proxy_wstunnel.so
+LoadModule headers_module modules/mod_headers.so
+LoadModule setenvif_module modules/mod_setenvif.so
+LoadModule ssl_module modules/mod_ssl.so
+
+<IfModule unixd_module>
+  User daemon
+  Group daemon
+</IfModule>
+
+<VirtualHost *:80>
+    ServerName seafile.domain.com
+    ServerAlias domain.com
+    Redirect permanent / https://seafile.domain.com
+</VirtualHost>
+
+<VirtualHost *:443>
+  ServerName seafile.domain.com
+  DocumentRoot /var/www
+
+  SSLEngine On
+  SSLCertificateFile /etc/ssl/cacert.pem
+  SSLCertificateKeyFile /etc/ssl/privkey.pem
+  
+  ## Strong SSL Security
+  ## https://raymii.org/s/tutorials/Strong_SSL_Security_On_Apache2.html
+
+  SSLCipherSuite EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:ECDHE-RSA-AES128-SHA:DHE-RSA-AES128-GCM-SHA256:AES256+EDH:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-AES128-SHA256:ECDHE-RSA-AES256-SHA:DHE-RSA-AES256-SHA256:DHE-RSA-AES128-SHA256:DHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA:ECDHE-RSA-DES-CBC3-SHA:EDH-RSA-DES-CBC3-SHA:AES256-GCM-SHA384:AES128-GCM-SHA256:AES256-SHA256:AES128-SHA256:AES256-SHA:AES128-SHA:DES-CBC3-SHA:HIGH:!aNULL:!eNULL:!EXPORT:!DES:!MD5:!PSK:!RC4
+  SSLProtocol All -SSLv2 -SSLv3
+  SSLCompression off
+  SSLHonorCipherOrder on
+
+  Alias /media  /home/user/haiwen/seafile-server-latest/seahub/media
+
+  <Location /media>
+    Require all granted
+  </Location>
+
+  RewriteEngine On
+
+  #
+  # seafile fileserver
+  #
+  ProxyPass /seafhttp http://127.0.0.1:8082
+  ProxyPassReverse /seafhttp http://127.0.0.1:8082
+  RewriteRule ^/seafhttp - [QSA,L]
+
+  #
+  # seahub
+  #
+  SetEnvIf Request_URI . proxy-fcgi-pathinfo=unescape
+  SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
+  ProxyPass / fcgi://127.0.0.1:8000/
+  
+  #
+  # onlyofficeds
+  #
+  Define VPATH /onlyofficeds
+  Define DS_ADDRESS {your Seafile server's domain or IP}:88
+  
+  <Location ${VPATH}>
+  Require all granted
+  SetEnvIf Host "^(.*)$" THE_HOST=$1
+  RequestHeader setifempty X-Forwarded-Proto http
+  RequestHeader setifempty X-Forwarded-Host %{THE_HOST}e
+  RequestHeader edit X-Forwarded-Host (.*) $1${VPATH}
+  ProxyAddHeaders Off
+  ProxyPass "http://${DS_ADDRESS}/"
+  ProxyPassReverse "http://${DS_ADDRESS}/"
+  </Location>
+  
+</VirtualHost>
+```
