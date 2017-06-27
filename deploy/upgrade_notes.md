@@ -1,7 +1,7 @@
 # Upgrade notes
 
 These notes just give additional information about changes within each major version.  
-Please always follow the [main upgrade guide](deploy/upgrade.md).
+Please always follow the [main upgrade guide](./upgrade.md).
 
 ## Summary
 
@@ -28,11 +28,11 @@ For compatibility with old version, you can turn it on by adding the following l
 ### Video Thumbnails
 
 Enable or disable thumbnail for video. ffmpeg and moviepy should be installed first. 
-For details, please refer to the [manual](deploy/video_thumbnails.md).
+For details, please refer to the [manual](./video_thumbnails.md).
 
 ### OnlyOffice
 The system requires some minor changes to support the OnlyOffice document server.  
-Please follow the instructions [here](../deploy/only_office.md).
+Please follow the instructions [here](./only_office.md).
 
 ### Pip Pillow upgrade
 
