@@ -55,10 +55,21 @@ sudo yum install libjpeg-dev
 pip install --upgrade Pillow
 ```
 
+### Seahub does not start
+
+See upgrade notice for V6.0.9.
 
 ---
 
-## V6.0.0 - V6.0.9
+## V6.0.9
+
+In case Seahub does not start after the upgrade, install python-requests.
+
+```bash
+apt-get install python-requests
+```
+
+## V6.0.0 - V6.0.8
 
 There are no other special instructions.
 
