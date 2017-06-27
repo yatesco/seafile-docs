@@ -25,12 +25,12 @@ If you following the steps on settings up a cluster, node B and node C should ha
 ### Install Dependencies (Java, LibreOffice, poppler)
 
 On Ubuntu/Debian:
-```
+```shell
 sudo apt-get install openjdk-7-jre libreoffice poppler-utils python-uno # or python3-uno for ubuntu 14.04+
 ```
 
 On CentOS/Red Hat:
-```
+```shell
 sudo yum install java-1.7.0-openjdk
 sudo yum install libreoffice libreoffice-headless libreoffice-pyuno
 sudo yum install poppler-utils
@@ -45,7 +45,7 @@ external_es_server = true
 
 Edit **seahub_settings.py** and add a line:
 
-```
+```python
 OFFICE_CONVERTOR_NODE = True
 ```
 
@@ -70,11 +70,11 @@ es_port = 9500
 
 Edit **seahub_settings.py** and add a line:
 
-```
-OFFICE_CONVERTOR_ROOT = http://<ip of node A>
+```python
+OFFICE_CONVERTOR_ROOT = 'http://<ip of node A>'
 ```
 
-Make sure requests to http://<ip of node A> is also handled by seahub. For example , you may need to add this nginx configuration in the background node:
+Make sure requests to http://<ip of node A> is also handled by seahub. For example, you may need to add this nginx configuration in the background node:
 
 ```
 server {
@@ -88,7 +88,7 @@ server {
 
 As a simple test, you can use this command to test if you set it up correctly.
 
-```
+```shell
 curl -v http://<IP of node A>/office-convert/internal/status/
 ```
 
@@ -99,7 +99,7 @@ It should say "400 Bad Request" when you have nginx config updated.
 
 Type the following commands to start the background node (Note, one additional command `seafile-background-tasks.sh` is needed)
 
-```
+```shell
 ./seafile.sh start
 ./seahub.sh start-fastcgi
 ./seafile-background-tasks.sh start
@@ -107,7 +107,7 @@ Type the following commands to start the background node (Note, one additional c
 
 To stop the background node, type:
 
-```
+```shell
 ./seafile-background-tasks.sh stop
 ./seafile.sh stop
 ./seahub.sh stop
