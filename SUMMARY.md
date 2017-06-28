@@ -22,6 +22,7 @@
        * [LibreOffice Online Integration](deploy/libreoffice_online.md)
        * [OnlyOffice Integration](deploy/only_office.md)
    * [Upgrade Seafile server](deploy/upgrade.md)
+       * [Upgrade notes](deploy/upgrade_notes.md)
    * Other Deployment Notes
        * [Start Seafile at System Bootup](deploy/start_seafile_at_system_bootup.md)
        * [Firewall settings](deploy/using_firewall.md)

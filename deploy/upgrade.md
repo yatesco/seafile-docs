@@ -6,7 +6,7 @@ This page is for users who use the pre-compiled seafile server package.
 - If you are running a **cluster**, please read [upgrade a Seafile cluster](../deploy_pro/upgrade_a_cluster.md).
 
 ## Upgrade notes
-Please check the [upgrade notes](./upgrade_notes.md) for any special configuration or changes before/while upgrading.
+Please check the [upgrade notes](upgrade_notes.md) for any special configuration or changes before/while upgrading.
 
 --- 
 
