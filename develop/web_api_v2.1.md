@@ -864,7 +864,6 @@ curl -d "emails=new-member-1@email.com,new-member-2@email.com,new-member-3@email
         }
     ]
 }
-
 ```
 
 #### <a id="get-info-of-a-group-member"></a>Get Info of a Group Member
@@ -1749,7 +1748,6 @@ Create upload link for directory with password
 **Sample response**
 
 ```
-
 {
     "failed": [
         {"repo_id": "3761ade3-100b-4c3b-9508-79b3a510e6f6", "error_msg": "This item has been shared to 1@1.com."}
@@ -5843,6 +5841,7 @@ curl -d 'password=11111111' -H 'Authorization: Token cbd7705c06846425ed5c46ae031
 {
     "success": true
 }
+```
 
 **Errors**
 
@@ -5905,8 +5904,9 @@ curl -H 'Authorization: Token cbd7705c06846425ed5c46ae0313d5b098d24154' -H 'Acce
 **Sample response**
 ```
 {
-    "upload_link": "http://192.168.1.124:8082/upload-api/360fe7d6dc684045b7f6"
+    "upload_link": "http://192.168.1.124:8082/upload-api/b08b20e4-beb2-4c7a-af03-fed6be859330"
 }
+```
 
 After get upload link, you can upload file to the shared dir, for more info, please see <a id="upload-file-1">Upload File</a>.
 
@@ -5935,6 +5935,7 @@ curl -d 'password=11111111' -H 'Authorization: Token cbd7705c06846425ed5c46ae031
 {
     "success": true
 }
+```
 
 **Errors**
 
