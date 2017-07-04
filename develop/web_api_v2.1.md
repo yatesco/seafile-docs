@@ -1250,7 +1250,7 @@ or a empty list `[]` if this file has no download share link.
 * repo-id
 * path (file/folder path)
 * password (not necessary)
-* expire_date (not necessary)
+* expire_days (not necessary)
 
 **Sample request**
 
@@ -1260,7 +1260,7 @@ Create download link for file
 
 Create download link for directory with password and expire date
 
-    curl -d "path=/bar/&repo_id=62ca6cf9-dab6-47e5-badc-bab13d9220ce&password=password&expire_date=6" -H 'Authorization: Token ef12bf1e66a1aa797a1d6556fdc9ae84f1e9249f' -H 'Accept: application/json; indent=4' https://cloud.seafile.com/api/v2.1/share-links/
+    curl -d "path=/bar/&repo_id=62ca6cf9-dab6-47e5-badc-bab13d9220ce&password=password&expire_days=6" -H 'Authorization: Token ef12bf1e66a1aa797a1d6556fdc9ae84f1e9249f' -H 'Accept: application/json; indent=4' https://cloud.seafile.com/api/v2.1/share-links/
 
 **Sample response**
 
