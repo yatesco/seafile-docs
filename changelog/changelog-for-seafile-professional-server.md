@@ -4,6 +4,20 @@
 
 You can follow the document on minor upgrade (http://manual.seafile.com/deploy/upgrade.html).
 
+### 6.1.3 (2017.07.06)
+
+* Add context menu "details" to libraries and folders, so you can get how many files in a library or a folder.
+* Improve search result accuracy
+* [fix] Fix a bug in zip downloading an empty folder
+* Improve performance of multiple file copy and move
+* Admin can delete out-dated guest invitations
+* [fix] Fix a bug in seafile-gc "dry run" option
+* Users can restore deleted libraries by their own
+* Change default block size for files uploaded via web browser to 8MB.
+
+
+### 6.1.2 (deprecated)
+
 ### 6.1.1 (2017.06.19)
 
 * Add "online preview only" option to share links
