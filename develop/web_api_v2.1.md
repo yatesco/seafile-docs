@@ -5789,6 +5789,8 @@ curl -H 'Authorization: Token cbd7705c06846425ed5c46ae0313d5b098d24154' -H 'Acce
 }
 ```
 
+After you get the download link for the (sub) folder, you should use the token in the download link (here's `395e0ea8-3936-4084-b650-64a93d8a313d`) to check if the background compression packaging has been completed by [Query Task Progress](#download-directory-query-task-progress), once it is finished, you can use the download link to download the (sub) folder.
+
 **Sample request for download (sub) file in shared dir**
 ```
 curl -H 'Authorization: Token cbd7705c06846425ed5c46ae0313d5b098d24154' -H 'Accept: application/json; charset=utf-8; indent=4' "http://192.168.1.124:8000/api/v2.1/admin/share-links/db62f56baf1b4460996e/download/?path=/sdf/12.docx&type=file"
@@ -5908,7 +5910,7 @@ curl -H 'Authorization: Token cbd7705c06846425ed5c46ae0313d5b098d24154' -H 'Acce
 }
 ```
 
-After get upload link, you can upload file to the shared dir, for more info, please see <a id="upload-file-1">Upload File</a>.
+After get upload link, you can upload file to the shared dir, for more info, please see [Upload File](#upload-file-1).
 
 **Errors**
 
