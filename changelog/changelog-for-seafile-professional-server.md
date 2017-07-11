@@ -4,6 +4,12 @@
 
 You can follow the document on minor upgrade (http://manual.seafile.com/deploy/upgrade.html).
 
+### 6.1.4 (2017.07.11)
+
+* [API] Improve performance of getting unread notifications.
+* Delete deleted libraries in search index
+* Use user's languange as lang setting for OnlyOffice
+
 ### 6.1.3 (2017.07.06)
 
 * Add context menu "details" to libraries and folders, so you can get how many files in a library or a folder.
