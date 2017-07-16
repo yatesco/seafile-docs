@@ -68,7 +68,7 @@
    * Cluster Deployment
        * [Deploy in a cluster](deploy_pro/deploy_in_a_cluster.md)
        * [Search and background tasks in a cluster](deploy_pro/enable_search_and_background_tasks_in_a_cluster.md)
-       * [Setup with MariaDB and Ceph](deploy_pro/clustering_with_mariadb_ceph.md)
+       * [Memcache and MariaDB Cluster](deploy_pro/memcached_mariadb_cluster.md)
        * [Setup Seafile cluster with NFS](deploy_pro/setup_seafile_cluster_with_nfs.md)
        * [Upgrade a cluster](deploy_pro/upgrade_a_cluster.md)
    * Advanced User Management
