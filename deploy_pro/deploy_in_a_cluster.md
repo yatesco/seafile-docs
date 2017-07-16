@@ -14,11 +14,13 @@ The Seafile cluster solution employs a 3-tier architecture:
 
 This architecture scales horizontally. That means, you can handle more traffic by adding more machines. The architecture is visualized in the following picture.
 
-![seafile-cluster](../images/seafile-cluster.png)
+![seafile-cluster](../images/seafile-cluster-arch.png)
 
 There are two main components on the Seafile server node: web server (Nginx/Apache) and Seafile app server. The web server passes requests from the clients to Seafile app server. The Seafile app servers work independently. They don't know about each other's state. That means each app server can fail independently without affecting other app server instances. The load balancer is responsible for detecting failure and re-routing requests.
 
 Even though Seafile app servers work independently, they still have to share some session information. All shared session information is stored in memcached. Thus, all Seafile app servers have to connect to the same memcached server (cluster). More details about memcached configuration is available later.
+
+The background server is the workhorse for various background tasks, including full-text indexing, office file preview, virus scanning, LDAP syncing. It should usually be run on a dedicated server for better performance. Currently only one background task server can be running in the entire cluster. If more than one background servers are running, they may conflict with each others when doing some tasks. If you need HA for background task server, you can consider using [Keepalived](http://www.keepalived.org/) to build a hot backup for it. More details can be found in [background server setup](enable_search_and_background_tasks_in_a_cluster.md).
 
 All Seafile app servers access the same set of user data. The user data has two parts: One in the MySQL database and the other one in the backend storage cluster (S3, Ceph etc.). All app servers serve the data equally to the clients.
 
@@ -35,9 +37,11 @@ There are a few steps to deploy a Seafile cluster:
 
 ## <a id="wiki-preparation"></a>Preparation
 
-### Hardware
+### Hardware, Database, Memcached
 
-At least 2 Linux server with at least 2GB RAM.
+At least 3 Linux server with at least 4GB RAM. Two servers work as frontend servers, while one server works as background task server.
+
+In small cluster, you can re-use the 3 Seafile servers to run memcached cluster and MariaDB cluster. For larger clusters, you can have 3 more dedicated server to run memcached cluster and MariaDB cluster. Because the load on these two clusters are not high, they can share the hardware to save cost. Documentation about how to setup memcached cluster and MariaDB cluster can be found [here](memcached_mariadb_cluster.md)
 
 ### Install Python libraries
 
@@ -54,50 +58,9 @@ If you receive an error stating "Wheel installs require setuptools >= ...", run 
 sudo pip install setuptools --no-use-wheel --upgrade
 ```
 
-### Setup Memcached
-
-All Seafile server instances will share the same memcached server cluster. Let's assume that the address of memcached server is 192.168.1.134, listening on port 11211 (the default).
-
-By default, memcached only listens on 127.0.0.1. So you have to modify memcached.conf and restart memcached.
-
-```
-# Specify which IP address to listen on. The default is to listen on all IP addresses
-# This parameter is one of the only security measures that memcached has, so make sure
-# it's listening on a firewalled interface.
--l 0.0.0.0
-```
-
-It's also recommended to set a higher limit for memcached's memory, such as 256MB.
-
-```
-# Start with a cap of 64 megs of memory. It's reasonable, and the daemon default
-# Note that the daemon will grow to this size, but does not start out holding this much
-# memory
--m 256
-```
-
-Seafile servers share session information within memcached. If you set up a memcached cluster, please make sure all the seafile server nodes connects to all the memcached nodes.
-
-When setting up a memcached cluster, you can either run one memcached instance on each Seafile server node, or set up separate machines for the memcached cluster. It usually saves you some money if you run memcached on Seafile server nodes.
-
-
-
-### (Optional) Setup MariaDB Cluster
-
-MariaDB cluster helps you to remove single point of failure from the cluster architecture. Every update in the database cluster is synchronously replicated to all instances.
-
-It's recommended that you run one database instance on each Seafile server node. There are a few benefits about this approach:
-
-* The Seafile app server always access its local database instance, which is faster.
-* You don't have to set up another load balancer for the database instances.
-
-This architecture should scale well for a few tens of database nodes, since Seafile has not many write operations to the db. For bigger deployments, you'd better use more sophiscated load balancing techniques for the databases.
-
-Details about setting up MariaDB cluster is covered in [this document](clustering_with_mariadb_ceph.md).
-
 ## <a id="wiki-configure-single-node"></a> Configure a Single Node
 
-You should make sure the config files on every Seafile server are consistent. **It's critical that you don't set up Seafile server on each machine separately. You should set up seafile server on one machine then copy the config directory to the other machines.**
+You should make sure the config files on every Seafile server are consistent.
 
 ### Get the license
 
@@ -107,7 +70,7 @@ Put the license you get under the top level diretory. In our wiki, we use the di
 ### Download/Uncompress Seafile Professional Server
 
 ```
-tar xf seafile-pro-server_2.1.3_x86-64.tar.gz
+tar xf seafile-pro-server_6.1.3_x86-64.tar.gz
 ```
 
 Now you have:
@@ -115,11 +78,11 @@ Now you have:
 ```
 haiwen
 ├── seafile-license.txt
-└── seafile-pro-server-2.1.3/
+└── seafile-pro-server-6.1.3/
 ```
-### Setup Seafile Config
+### Setup Seafile
 
-The setup process of Seafile Professional Server is the same as the Seafile Community Server. See [Download and Setup Seafile Server With MySQL](../deploy/using_mysql.md) in the community wiki.
+Please follow [Download and Setup Seafile Professional Server With MySQL](download_and_setup_seafile_professional_server.md) to setup a single Seafile server node.
 
 Note: **Use the load balancer's address or domain name for the server address. Don't use the local IP address of each Seafile server machine. This assures the user will always access your service via the load balancers.**
 
@@ -162,12 +125,6 @@ Also add following options to seahub_setting.py. These settings tell Seahub to s
 AVATAR_FILE_STORAGE = 'seahub.base.database_storage.DatabaseStorage'
 
 COMPRESS_CACHE_BACKEND = 'django.core.cache.backends.locmem.LocMemCache'
-```
-
-If you enable the thumbnail feature, you'd better set thumbnail storage path to a **shared folder**, so that every node will create/get thumbnail through the same **shared folder**.
-
-```
-THUMBNAIL_ROOT = 'path/to/shared/folder/'
 ```
 
 #### seafevents.conf
@@ -235,8 +192,6 @@ Now you have one node working fine, let's continue to configure more nodes.
 
 Supposed your Seafile installation directory is `/data/haiwen`, compress this whole directory into a tarball and copy the tarball to all other Seafile server machines. You can simply uncompress the tarball and use it.
 
-You have to make sure, on each node, `seafile-data/httptemp` should point to the same NFS share folder.
-
 On each node, run `./seafile.sh` and `./seahub.sh` to start Seafile server.
 
 ## Setup Nginx/Apache and Https
@@ -249,6 +204,10 @@ You'll usually want to use Nginx/Apache and https for web access. You need to se
 * For Apache:
    * [Config Seahub with Apache](../deploy/deploy_with_apache.md)
    * [Enabling Https with Apache](../deploy/https_with_apache.md)
+
+## Start Seafile Service on boot
+
+It would be convenient to setup Seafile service to start on system boot. Follow [this documentation](../deploy/start_seafile_at_system_bootup.md) to set it up on **all nodes**.
 
 ## Firewall Settings
 

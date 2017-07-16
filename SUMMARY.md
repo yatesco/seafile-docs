@@ -67,9 +67,9 @@
        * [Storage Backend Encryption](deploy_pro/seaf_encrypt.md)
    * Cluster Deployment
        * [Deploy in a cluster](deploy_pro/deploy_in_a_cluster.md)
+       * [Search and background tasks in a cluster](deploy_pro/enable_search_and_background_tasks_in_a_cluster.md)
        * [Setup with MariaDB and Ceph](deploy_pro/clustering_with_mariadb_ceph.md)
        * [Setup Seafile cluster with NFS](deploy_pro/setup_seafile_cluster_with_nfs.md)
-       * [Search and background tasks in a cluster](deploy_pro/enable_search_and_background_tasks_in_a_cluster.md)
        * [Upgrade a cluster](deploy_pro/upgrade_a_cluster.md)
    * Advanced User Management
        * [Multi-Institutions Support](deploy_pro/multi_institutions.md)
