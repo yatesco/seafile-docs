@@ -112,3 +112,28 @@ To stop the background node, type:
 ./seafile.sh stop
 ./seahub.sh stop
 ```
+
+You should also configure Seafile background tasks to start on system bootup. For systemd based OS, you can add `/etc/systemd/system/seafile-background-tasks.service`:
+
+```
+[Unit]
+Description=Seafile Background Tasks Server
+After=network.target seahub.service
+
+[Service]
+Type=oneshot
+ExecStart=/opt/seafile/seafile-server-latest/seafile-background-tasks.sh start
+ExecStop=/opt/seafile/seafile-server-latest/seafile-background-tasks.sh stop
+RemainAfterExit=yes
+User=root
+Group=root
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Then enable this task in systemd:
+
+```
+systemctl enable seafile-background-tasks.service
+```
