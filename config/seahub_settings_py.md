@@ -147,18 +147,21 @@ groovy, rst, patch, go"""
 # NOTE: since version 4.0.2
 ENABLE_THUMBNAIL = True
 
-# Enable or disable thumbnail for video. ffmpeg and moviepy should be installed first. 
+# Seafile only generates thumbnails for images smaller than the following size.
+THUMBNAIL_IMAGE_SIZE_LIMIT = 20 # MB
+
+# Enable or disable thumbnail for video. ffmpeg and moviepy should be installed first.
 # For details, please refer to https://manual.seafile.com/deploy/video_thumbnails.html
 # NOTE: since version 6.1
 ENABLE_VIDEO_THUMBNAIL = False
 
 # Use the frame at 5 second as thumbnail
-THUMBNAIL_VIDEO_FRAME_TIME = 5  
+THUMBNAIL_VIDEO_FRAME_TIME = 5
 
 # Absolute filesystem path to the directory that will hold thumbnail files.
 THUMBNAIL_ROOT = '/haiwen/seahub-data/thumbnail/thumb/'
 
-# Default size for picture preview. Enlarge this size can improve the preview quality. 
+# Default size for picture preview. Enlarge this size can improve the preview quality.
 # NOTE: since version 6.1.1
 THUMBNAIL_SIZE_FOR_ORIGINAL = 1024
 ```
@@ -291,9 +294,9 @@ REST_FRAMEWORK = {
     'UNICODE_JSON': False,
 }
 
-# Throtting whitelist used to disable throttle for certain IPs. 
+# Throtting whitelist used to disable throttle for certain IPs.
 # e.g. REST_FRAMEWORK_THROTTING_WHITELIST = ['127.0.0.1', '192.168.1.1']
-# Please make sure `REMOTE_ADDR` header is configured in Nginx conf according to https://manual.seafile.com/deploy/deploy_with_nginx.html. 
+# Please make sure `REMOTE_ADDR` header is configured in Nginx conf according to https://manual.seafile.com/deploy/deploy_with_nginx.html.
 REST_FRAMEWORK_THROTTING_WHITELIST = []
 ```
 
