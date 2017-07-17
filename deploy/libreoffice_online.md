@@ -98,7 +98,7 @@ OFFICE_WEB_APP_EDIT_FILE_EXTENSION = ('ods', 'xls', 'xlsb', 'xlsm', 'xlsx','ppsx
 
 Then restart Seafile.
 
-Click and office file in Seafile web interface, you will see the online preview rendered by LibreOffice online. Here is an example:
+Click an office file in Seafile web interface, you will see the online preview rendered by LibreOffice online. Here is an example:
 
 ![LibreOffice-online](../images/libreoffice-online.png)
 
