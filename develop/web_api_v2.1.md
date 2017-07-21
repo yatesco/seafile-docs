@@ -1,6 +1,5 @@
 # Web API (For Seafile server v5.1.0+)
 
-
 <p>
 <div class="toc">
 <ul>
@@ -362,8 +361,9 @@
         <ul>
             <li><a href="#admin-only-add-organization">Add Organization</a></li>
             <li><a href="#admin-only-add-organization-user">Add Organization User</a></li>
+            <li><a href="#admin-only-get-organization-user-info">Get Organization User Info</a></li>
+            <li><a href="#admin-only-update-organization-user-info">Update Organization User Info</a></li>
             <li><a href="#admin-only-delete-organization-user">Delete Organization User</a></li>
-            <li><a href="#admin-only-modify-organization-user">Modify Organization User</a></li>
         </ul>
     </li>
 </ul>
@@ -6147,18 +6147,18 @@ This api is only supported in pro edition (since 6.0.9).
 * password
 
 **Sample request**
-
-    curl -X POST -d "email=6@org.com&password=6" -H "Authorization: Token 0eb24ce5db35a31f70171eca2f760f03f59fa09a" -H 'Accept: application/json; indent=4' https://cloud.seafile.com/api/v2.1/admin/organizations/160/users/
+    curl -d "username=1@org-3.com&password=1&org_name=org-3&prefix=org-3&quota=100&member_limit=10" -H "Authorization: Token 3f1e23157c3a1fd740e9dc1c5d748929fe319b95" -H 'Accept: application/json; indent=4' http://192.168.1.165/api2/organization/
 
 **Sample response**
-
 ```
 {
-    "active": true,
+    "quota_usage": 0,
+    "name": "6",
+    "org_id": 1,
     "contact_email": "6@org.com",
-    "org_id": 160,
-    "email": "6@org.com",
-    "name": "6"
+    "active": true,
+    "quota_total": -1,
+    "email": "6@org.com"
 }
 ```
 
@@ -6172,6 +6172,83 @@ This api is only supported in pro edition (since 6.0.9).
 * 403 Failed. You can only invite %d members.
 * 404 Organization not found.
 * 500 Fail to add user.
+* 500 Internal Server Error
+
+### <a id="admin-only-get-organization-user-info"></a>Get Organization User Info
+
+This api is only supported in pro edition (since 6.1.5).
+
+**GET** https://cloud.seafile.com/api/v2.1/admin/organizations/{org_id}/users/{email}/
+
+**Request parameters**
+
+* org_id
+* email
+
+**Sample request**
+
+    curl -H "Authorization: Token 3f1e23157c3a1fd740e9dc1c5d748929fe319b95" -H 'Accept: application/json; indent=4' http://192.168.1.165/api/v2.1/admin/organizations/1/users/6@org.com/
+
+**Sample response**
+```
+{
+    "quota_usage": 0,
+    "name": "6",
+    "org_id": 1,
+    "contact_email": "6@org.com",
+    "active": true,
+    "quota_total": -1,
+    "email": "6@org.com"
+}
+```
+
+**Errors**
+
+* 400 org_id invalid.
+* 400 User is not member of organization.
+* 404 Organization not found.
+* 404 User not found.
+* 500 Internal Server Error
+
+### <a id="admin-only-update-organization-user-info"></a>Updage Organization User Info
+
+This api is only supported in pro edition (since 6.1.5).
+
+**PUT** https://cloud.seafile.com/api/v2.1/admin/organizations/{org_id}/users/{email}/
+
+**Request parameters**
+
+* org_id
+* email
+* active, `true` or `false`
+* name
+* contact_email
+* quota_total, integer greater than 0, unit is MB.
+
+**Sample request**
+
+    curl -X PUT -d "active=false&name=name-of-6&contact_email=6-contact@email.com&quota_total=23" -H "Authorization: Token 3f1e23157c3a1fd740e9dc1c5d748929fe319b95" -H 'Accept: application/json; indent=4' http://192.168.1.165/api/v2.1/admin/organizations/1/users/6@org.com/
+
+**Sample response**
+```
+{
+    "quota_usage": 0,
+    "name": "name-of-6",
+    "org_id": 1,
+    "contact_email": "6-contact@email.com",
+    "active": false,
+    "quota_total": 23,
+    "email": "6@org.com"
+}
+```
+
+**Errors**
+
+* 400 org_id invalid.
+* 400 active invalid, should be 'true' or 'false'.
+* 400 Failed to set quota.
+* 404 Organization not found.
+* 404 User not found.
 * 500 Internal Server Error
 
 ### <a id="admin-only-delete-organization-user"></a>Delete Organization User
@@ -6201,43 +6278,6 @@ This api is only supported in pro edition (since 6.0.9).
 
 * 400 org_id invalid.
 * 403 Failed to delete: is an organization creator.
-* 404 Organization not found.
-* 404 User not found.
-* 500 Internal Server Error
-
-### <a id="admin-only-modify-organization-user"></a>Modify Organization User
-
-This api is only supported in pro edition (since 6.0.9).
-
-**PUT** https://cloud.seafile.com/api/v2.1/admin/organizations/{org_id}/users/{email}/
-
-**Request parameters**
-
-* org_id
-* email
-* active, `true` or `false`
-
-**Sample request**
-
-    curl -X PUT -d "active=false" -H "Authorization: Token 0eb24ce5db35a31f70171eca2f760f03f59fa09a" -H 'Accept: application/json; indent=4' https://cloud.seafile.com/api/v2.1/admin/organizations/160/users/4@org.com/
-
-**Sample response**
-
-```
-{
-    "active": false,
-    "contact_email": "4@org.com",
-    "org_id": 160,
-    "email": "4@org.com",
-    "name": "4"
-}
-```
-
-**Errors**
-
-* 400 org_id invalid.
-* 400 active invalid.
-* 400 active invalid, should be 'true' or 'false'.
 * 404 Organization not found.
 * 404 User not found.
 * 500 Internal Server Error

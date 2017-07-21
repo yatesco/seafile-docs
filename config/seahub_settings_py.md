@@ -148,7 +148,7 @@ groovy, rst, patch, go"""
 ENABLE_THUMBNAIL = True
 
 # Seafile only generates thumbnails for images smaller than the following size.
-THUMBNAIL_IMAGE_SIZE_LIMIT = 20 # MB
+THUMBNAIL_IMAGE_SIZE_LIMIT = 30 # MB
 
 # Enable or disable thumbnail for video. ffmpeg and moviepy should be installed first.
 # For details, please refer to https://manual.seafile.com/deploy/video_thumbnails.html
