@@ -38,6 +38,14 @@ Since Community server version 4.2.1 and Pro server 4.2.0, the script supports s
 
 You can find the complete list of supported options in `man fuse`.
 
+##### Special notes for used with Ceph
+
+If you use Ceph (via librados) as storage backend, you need to add the `-f` option to seaf-fuse.sh, to ask the fuse program not to daemonize. Otherwise the fuse program will have strange "frozen" behaviors when accessing files.
+
+```
+./seaf-fuse.sh start -f /data/seafile-fuse
+```
+
 ##### Stop seaf-fuse
 
 ```
