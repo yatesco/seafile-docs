@@ -12,27 +12,16 @@ There are three config files in the community edition:
 
 There is one additional config file in the pro edition:
 
-- `seafevents.conf`: contains settings for search and documents preview
+- [seafevents.conf](seafevents-conf.md): contains settings for search and documents preview
 
 Note: Since version 5.0.0, you can also modify most of the config items via web interface.The config items are saved in database table (seahub-db/constance_config). They have a higher priority over the items in config files.
 
 ![Seafile Config via Web](../images/seafile-server-config.png)
 
-## Config Items
+## Common Customization Tasks
 
-Email:
-
-* [Sending email notifications](sending_email.md)
-* [Customize email notifications](customize_email_notifications.md)
-
-User management
-
-* [User management options](user_options.md)
-
-User quota and download/upload size limits
-
-* [User quota and download/upload size limits options](quota_and_size_options.md)
-
-## Customize Web
-
+* [Options for sending email](sending_email.md)
 * [Customize web inferface](seahub_customization.md)
+* [Desktop Client Cusomization](desktop_customization.md)
+* User Management Options: refer to [seahub_settings.py](seahub_settings_py.md)
+* Quota and Download/Upload Limits: refer to [seafile.conf](seafile-conf.md)

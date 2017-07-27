@@ -108,13 +108,15 @@ cd /data/haiwen/seafile-server-latest/
 
 Current office online preview works with libreoffice 4.0-4.2. If the version of libreoffice installed by `apt-get` is too old or too new, you can solve this by:
 
-- Remove the installed libreoffice:
+Remove the installed libreoffice:
+
 ```
 sudo apt-get remove libreoffice* python-uno python3-uno
 ```
-- Download libreoffice packages from [libreoffice official site](https://downloadarchive.documentfoundation.org/libreoffice/old/)
+Download libreoffice packages from [libreoffice official site](https://downloadarchive.documentfoundation.org/libreoffice/old/)
 
-- Install the downloaded pacakges:
+Install the downloaded pacakges:
+
 ```
 tar xf LibreOffice_4.1.6_Linux_x86-64_deb.tar.gz
 cd LibreOffice_4.1.6.2_Linux_x86-64_deb
@@ -122,7 +124,24 @@ cd DEBS
 sudo dpkg -i *.deb
 ```
 
-- Restart your seafile server and try again. It should work now.
+Restart your seafile server and try again. It should work now.
+
 ```
 ./seafile.sh restart
 ```
+
+- The browser displays "document conversion failed", and in the logs I see messages like `[WARNING] failed to convert xxx to ...`, what should I do?
+
+  Sometimes the libreoffice process need to be restarted, especially if it's the first time seafile server is running on the server.
+
+  Try to kill the libreoffice process:
+  ```sh
+  pkill -f soffice.bin
+  ```
+  Now try re-opening the preview page in the brower again.
+
+  Also if you are deploying seafile in cluster mode, make sure memcached is working on each server.
+
+- The above solution does not solve my problem.
+
+  Please check whether the user you run Seafile can correctly start the libreoffice process. There may be permission problems. For example, if you use www-data user to run Seafile, make sure www-data has a home directory and can write to the home directory.

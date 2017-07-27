@@ -18,7 +18,8 @@ enabled = true
 interval=10m
 
 ## If true, indexes the contents of office/pdf files while updating search index
-## Note: If you change this option from "false" to "true", then you need to clear the search index and update the index again. See the FAQ for details.
+## Note: If you change this option from "false" to "true", then you need to clear the search index and update the index again.
+## Refer to file search manual for details.
 index_office_pdf=false
 
 [SEAHUB EMAIL]
@@ -69,7 +70,7 @@ We list them in the following table, as well as why we choose the default value.
 <td>index_office_pdf</td>
 <td>false</td>
 <td>
-The full text search of office/pdf documents is not enabled by default. This is because it may consume quite some storage for the search index. To turn it on, set this value to "true" and recreate the search index. See the [FAQ For Seafile Professional Server](faq_for_seafile_pro_server.md) for details.
+The full text search of office/pdf documents is not enabled by default. This is because it may consume quite some storage for the search index. To turn it on, set this value to "true" and recreate the search index. See [File Search Details](details_about_file_search.md) for details.
 </td>
 </tr>
 
