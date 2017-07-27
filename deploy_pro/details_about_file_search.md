@@ -4,13 +4,39 @@
 
 ## <a id="search-opt"></a>Search Options
 
-The following options should be set in **seafevents.conf**, and you need to restart seafile and seahub to make them taking effect.
+The following options can be set in **seafevents.conf** to control the behaviors of file search. You need to restart seafile and seahub to make them take effect.
 
 ```
 [INDEX FILES]
-...
-# Enable full-text search for PDF/Word/PPT
-index_office_pdf = false
+## must be "true" to enable search
+enabled = true
+
+## The interval the search index is updated. Can be s(seconds), m(minutes), h(hours), d(days)
+interval=10m
+
+## If true, indexes the contents of office/pdf files while updating search index
+## Note: If you change this option from "false" to "true", then you need to clear the search index and update the index again.
+index_office_pdf=false
+```
+
+## Enable full text search for Office/PDF files
+
+Full text search is not enabled by default to save system resources. If you want to enable it, you need to follow the instructions below.
+
+First you have to set the value of `index_office_pdf` option in `seafevents.conf` to `true`.
+
+Then restart seafile server
+
+```
+  cd /data/haiwen/seafile-pro-server-1.7.0/
+  ./seafile.sh restart
+```
+
+You need to delete the existing search index and recreate it.
+
+```
+  ./pro/pro.py search --clear
+  ./pro/pro.py search --update
 ```
 
 ## Use existing ElasticSearch server
@@ -32,7 +58,7 @@ Restart your ES server after this.
 - Currently the seafile search module use the default analyzer in your ES server settings.
 
 
-### Change the config file
+### Modify the config file
 
 - Edit `seafevents.conf`, add settings in the section **[INDEX FILES]** to specify your ES server host and port:
 

@@ -4,35 +4,7 @@ Note: You can also modify most of the config items via web interface. The config
 
 ##  Sending Email Notifications on Seahub
 
-A few features work better if it can send email notifications, such as notifying users about new messages.
-If you want to setup email notifications, please add the following lines to `seahub_settings.py` (and set your email server).
-
-```python
-EMAIL_USE_TLS = False
-EMAIL_HOST = 'smtp.example.com'        # smtp server
-EMAIL_HOST_USER = 'username@example.com'    # username and domain
-EMAIL_HOST_PASSWORD = 'password'    # password
-EMAIL_PORT = 25
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
-SERVER_EMAIL = EMAIL_HOST_USER
-```
-
-If you are using Gmail as email server, use following lines:
-
-```python
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'username@gmail.com'
-EMAIL_HOST_PASSWORD = 'password'
-EMAIL_PORT = 587
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
-SERVER_EMAIL = EMAIL_HOST_USER
-```
-
-**Note**: If your Email service still can not work, you may checkout the log file `logs/seahub.log` to see what may cause the problem. For complete email notification list, please refer to [Email notification list](customize_email_notifications.md).
-
-**Note2**: If you want to use the Email service without authentication leaf `EMAIL_HOST_PASSWORD` **blank** (`''`).
-
+Refer to [email sending documentation](sending_email.md).
 
 ## Memcached
 
