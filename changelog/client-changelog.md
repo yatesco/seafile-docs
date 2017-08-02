@@ -2,9 +2,28 @@
 
 ## Known bugs and limitations
 
-v6.0.4 is the latest stable release. It is compatibile with server 5.x and 6.x.
+v6.1.0 is the latest stable release. It is compatibile with server 5.x and 6.x.
 
 The Mac Finder sync extension need OSX 10.10+
+
+## 6.1
+
+### 6.1.0 (2017/08/02)
+
+
+* [fix] Fix a bug that library name will be changed back when it is changed in the server
+* [fix] Fix a bug that uploading progress exceeding 100%.
+* [fix] Fix selectively synced subfolder disappear after logout and login again
+* Use new library icons
+* [fix] Fix showing of avatars
+* [fix] Improve UI in Windows with high DPI screens
+* Only allow https for Shibboleth login
+* Clean unused logs in applet.log
+* Remove the function of map a library to a network drive
+* [fix] Fix an issue when uploading a deep empty folder like "A/B/C"
+* Change default block size to 8MB
+* [fix, mac] Popup a notification after user clicking the "Check new version" button in about dialog if the current version is the latest version
+
 
 ## 6.0
 
@@ -15,7 +34,7 @@ The Mac Finder sync extension need OSX 10.10+
 * [fix] Fix mis-leading error message when uploading a file to a read-only library via cloud file browser
 * Add highlight background color when drag and drop a file/folder to a library
 * [fix] Fix connection error in libcurl
-* [fix] Fix sorting by time in cloud file browser 
+* [fix] Fix sorting by time in cloud file browser
 * [fix] Fix sorting by name case sensitive in cloud file browser
 * [fix] Fix drag more than one folder to cloud file browser
 * Add loading more in activity tab and search tab
