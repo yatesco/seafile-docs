@@ -1,7 +1,5 @@
 # Deploy in a cluster
 
-**Note**: Since Seafile Server 5.0.0, all config files are moved to the central **conf** folder. [Read More](../deploy/new_directory_layout_5_0_0.md).
-
 **Update**: Since Seafile Pro server 6.0.0, cluster deployment requires "sticky session" settings in the load balancer. Otherwise sometimes folder download on the web UI can't work properly. Read the "Load Balancer Setting" section below for details.
 
 ## <a id="wiki-arch"></a> Architecture
@@ -126,6 +124,9 @@ AVATAR_FILE_STORAGE = 'seahub.base.database_storage.DatabaseStorage'
 
 COMPRESS_CACHE_BACKEND = 'django.core.cache.backends.locmem.LocMemCache'
 ```
+
+`COMPRESS_CACHE_BACKEND` is needed because the CSS file is created on the fly when any user first visit any page after a new Seafile version being deployed. The CSS file is saved to local disk and the path of the file is saved to cache. If `COMPRESS_CACHE_BACKEND` is not set to use LocMemCache, after one machine in a cluster generating the CSS file, another machine will not generate the file again, which will cause CSS file not found problem in this second machine.
+
 
 #### seafevents.conf
 
