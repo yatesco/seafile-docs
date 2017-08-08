@@ -3,15 +3,12 @@
 <p>
 <div class="toc">
 <ul>
-
 <li>
 <a href="#seafile-web-api">Seafile Web API</a>
 <ul>
-
     <li><a href="#api-basics">API Basics</a></li>
     <li><a href="#status-code">Status Code</a></li>
     <li><a href="#quick-start">Quick Start</a></li>
-
     <li>
         <a href="#account">Account</a>
         <ul>
@@ -19,7 +16,6 @@
             <li><a href="#server-info">Get Server Information</a></li>
         </ul>
     </li>
-
     <li>
         <a href="#starred-files">Starred Files</a>
         <ul>
@@ -28,7 +24,6 @@
             <li><a href="#unstar-a-file">Unstar A File</a></li>
         </ul>
     </li>
-
     <li>
         <a href="#group">Group</a>
         <ul>
@@ -61,7 +56,6 @@
             </li>
         </ul>
     </li>
-
     <li>
         <a href="#share">Share</a>
         <ul>
@@ -114,7 +108,6 @@
             </li>
         </ul>
     </li>
-
     <li>
         <a href="#folder-permission">Folder Permission</a>
         <ul>
@@ -138,7 +131,6 @@
             </li>
         </ul>
     </li>
-
     <li>
         <a href="#library">Library</a>
         <ul>
@@ -167,7 +159,6 @@
             <li><a href="#delete-library-upload-link">Delete Library Upload Link</a></li>
         </ul>
     </li>
-
     <li>
         <a href="#file">File</a>
         <ul>
@@ -203,7 +194,6 @@
             <li><a href="#get-update-blocks-link">Get Update Blocks Link</a></li>
         </ul>
     </li>
-
     <li>
         <a href="#directory">Directory</a>
         <ul>
@@ -215,7 +205,14 @@
             <li><a href="#revert-directory">Revert Directory</a></li>
         </ul>
     </li>
-
+    <li>
+        <a href="#asynchronously-copy-move-file-directory">Asynchronously Copy/Move File/Directory</a>
+        <ul>
+            <li><a href="#asynchronously-copy-move-file-directory-get-task-id">Get Task Id</a></li>
+            <li><a href="#asynchronously-copy-move-file-directory-cancel-task">Cancel Task</a></li>
+            <li><a href="#asynchronously-copy-move-file-directory-query-progress">Query Progress</a></li>
+        </ul>
+    </li>
     <li>
         <a href="#multiple-files-directories">Multiple Files / Directories</a>
         <ul>
@@ -225,7 +222,6 @@
             <li><a href="#multiple-files-directories-download">Download</a></li>
         </ul>
     </li>
-
     <li>
         <a href="#avatar">Avatar</a>
         <ul>
@@ -234,7 +230,6 @@
             <li><a href="#get-group-avatar">Get Group Avatar</a></li>
         </ul>
     </li>
-
     <li>
         <a href="#devices">Devices</a>
         <ul>
@@ -242,14 +237,11 @@
             <li><a href="#unlink-user-device">Unlink User Device</a></li>
         </ul>
     </li>
-
     <li><a href="#get-file-activities">Get File Activities</a></li>
     <li><a href="#get-thumbnail-image">Get Thumbnail Image</a></li>
     <li><a href="#search-user">Search User</a></li>
-
 </ul>
 </li>
-
 <li>
 <a href="#admin-only">Admin Only</a>
 <ul>
@@ -264,7 +256,6 @@
             <li><a href="#admin-only-delete-account">Delete Account</a></li>
         </ul>
     </li>
-
     <li>
         <a href="#admin-only-devices">Devices</a>
         <ul>
@@ -275,7 +266,6 @@
             <li><a href="#admin-only-clean-device-errors">Clean Device Errors</a></li>
         </ul>
     </li>
-
     <li>
         <a href="#admin-only-default-library">Default Library</a>
         <ul>
@@ -283,7 +273,6 @@
             <li><a href="#admin-only-create-user-default-library">Create User Default Library</a></li>
         </ul>
     </li>
-
     <li>
         <a href="#admin-only-libraries">Librairies</a>
         <ul>
@@ -295,7 +284,6 @@
             <li><a href="#admin-only-get-library-dirents">Get Library Dirents</a></li>
         </ul>
     </li>
-
     <li>
         <a href="#admin-only-shares">Shares</a>
         <ul>
@@ -309,7 +297,6 @@
             <li><a href="#admin-only-delete-repo-group-share">Delete Repo Group Share</a></li>
         </ul>
     </li>
-
     <li>
         <a href="#admin-only-groups">Groups</a>
         <ul>
@@ -324,7 +311,6 @@
             <li><a href="#admin-only-update-group-member-role">Update Group Member Role</a></li>
         </ul>
     </li>
-
     <li>
         <a href="#admin-only-shared-links">Shared Links</a>
         <ul>
@@ -345,7 +331,6 @@
             </li>
         </ul>
     </li>
-
     <li>
         <a href="#admin-only-log">Log</a>
         <ul>
@@ -355,7 +340,6 @@
             <li><a href="#admin-only-get-perm-audit-log">Get Permission Audit Log</a></li>
         </ul>
     </li>
-
     <li>
         <a href="#admin-only-organization">Organization</a>
         <ul>
@@ -368,7 +352,6 @@
     </li>
 </ul>
 </li>
-
 </ul>
 </div>
 </p>
@@ -3961,6 +3944,103 @@ After the task finished, you can manually generate directory download url with t
     FILE_SERVER_ROOT/zip/{zip_token}
 
 For example, `https://cloud.seafile.com/seafhttp/zip/b2272645-35ee-44ce-8f68-07c022107015` is the final url here.
+
+## <a id="asynchronously-copy-move-file-directory"></a>Asynchronously Copy/Move File/Directory
+
+### <a id="asynchronously-copy-move-file-directory-get-task-id"></a>Get Task Id
+
+**POST** https://cloud.seafile.com/api/v2.1/copy-move-task/
+
+**Request parameters**
+
+* src_repo_id
+* src_parent_dir
+* src_dirent_name
+* dst_repo_id
+* dst_parent_dir
+* operation, `copy` or `move`
+* dirent_type, `file` or `dir`
+
+**Sample request**
+
+Sample for copy file.
+
+```
+curl -d "src_repo_id=534258e2-761b-465c-9e2c-56e021d3853f&src_parent_dir=/&src_dirent_name=file.md&dst_repo_id=a3fa768d-0f00-4343-8b8d-07b4077881db&dst_parent_dir=/&operation=copy&dirent_type=file" -H 'Authorization: Token ae265ae599a29c238ca25fb63087859798d5f55d' -H 'Accept: application/json; charset=utf-8; indent=4' 'http://192.168.1.124:8000/api/v2.1/copy-move-task/'
+```
+
+**Sample response**
+
+```
+{
+    "task_id": "d1ca2b8c-8ab8-4dd4-8ad7-842130764484"
+}
+```
+
+**Errors**
+
+* 400 path/operation/dirent_type invalid.
+* 404 Library/Folder not found.
+* 403 Permission denied.
+* 500 Internal Server Error
+
+### <a id="asynchronously-copy-move-file-directory-cancel-task"></a>Cancel Task
+
+**DELETE** https://cloud.seafile.com/api/v2.1/copy-move-task/
+
+**Request parameters**
+
+* task_id
+
+**Sample request**
+
+```
+curl -X DELETE -d "task_id=d1ca2b8c-8ab8-4dd4-8ad7-842130764484" -H 'Authorization: Token ae265ae599a29c238ca25fb63087859798d5f55d' -H 'Accept: application/json; charset=utf-8; indent=4' 'http://192.168.1.124:8000/api/v2.1/copy-move-task/'
+```
+
+**Sample response**
+
+```
+{
+    "success": true
+}
+```
+
+**Errors**
+
+* 400 task_id invalid.
+* 500 Internal Server Error
+
+### <a id="asynchronously-copy-move-file-directory-query-progress"></a>Query Progress
+
+**GET** https://cloud.seafile.com/api/v2.1/query-copy-move-progress/
+
+**Request parameters**
+
+* task_id
+
+**Sample request**
+
+```
+curl -H 'Authorization: Token ae265ae599a29c238ca25fb63087859798d5f55d' -H 'Accept: application/json; charset=utf-8; indent=4' 'http://192.168.1.124:8000/api/v2.1/query-copy-move-progress/?task_id=d1ca2b8c-8ab8-4dd4-8ad7-842130764484'
+```
+
+**Sample response**
+
+```
+{
+    "successful": true,
+    "canceled": false,
+    "total": 1,
+    "done": 1,
+    "failed": false
+}
+```
+
+**Errors**
+
+* 400 task_id invalid.
+* 500 Internal Server Error
 
 ## <a id="multiple-files-directories"></a>Multiple Files / Directories
 
