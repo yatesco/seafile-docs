@@ -206,11 +206,11 @@
         </ul>
     </li>
     <li>
-        <a href="#copy-move-file-directory">Copy/Move File/Directory</a>
+        <a href="#asynchronously-copy-move-file-directory">Asynchronously Copy/Move File/Directory</a>
         <ul>
-            <li><a href="#copy-move-file-directory-get-task-id">Get Task Id</a></li>
-            <li><a href="#copy-move-file-directory-cancel-task">Cancel Task</a></li>
-            <li><a href="#copy-move-file-directory-query-progress">Query Progress</a></li>
+            <li><a href="#asynchronously-copy-move-file-directory-get-task-id">Get Task Id</a></li>
+            <li><a href="#asynchronously-copy-move-file-directory-cancel-task">Cancel Task</a></li>
+            <li><a href="#asynchronously-copy-move-file-directory-query-progress">Query Progress</a></li>
         </ul>
     </li>
     <li>
@@ -3945,9 +3945,9 @@ After the task finished, you can manually generate directory download url with t
 
 For example, `https://cloud.seafile.com/seafhttp/zip/b2272645-35ee-44ce-8f68-07c022107015` is the final url here.
 
-## <a id="copy-move-file-directory"></a>Copy/Move File/Directory
+## <a id="asynchronously-copy-move-file-directory"></a>Asynchronously Copy/Move File/Directory
 
-### <a id="copy-move-file-directory-get-task-id"></a>Get Task Id
+### <a id="asynchronously-copy-move-file-directory-get-task-id"></a>Get Task Id
 
 **POST** https://cloud.seafile.com/api/v2.1/copy-move-task/
 
@@ -3984,7 +3984,7 @@ curl -d "src_repo_id=534258e2-761b-465c-9e2c-56e021d3853f&src_parent_dir=/&src_d
 * 403 Permission denied.
 * 500 Internal Server Error
 
-### <a id="copy-move-file-directory-cancel-task"></a>Cancel Task
+### <a id="asynchronously-copy-move-file-directory-cancel-task"></a>Cancel Task
 
 **DELETE** https://cloud.seafile.com/api/v2.1/copy-move-task/
 
@@ -4011,7 +4011,7 @@ curl -X DELETE -d "task_id=d1ca2b8c-8ab8-4dd4-8ad7-842130764484" -H 'Authorizati
 * 400 task_id invalid.
 * 500 Internal Server Error
 
-### <a id="copy-move-file-directory-query-progress"></a>Query Progress
+### <a id="asynchronously-copy-move-file-directory-query-progress"></a>Query Progress
 
 **GET** https://cloud.seafile.com/api/v2.1/query-copy-move-progress/
 
