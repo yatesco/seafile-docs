@@ -1102,7 +1102,7 @@ This api will list all folder/file download share links in all libraries created
 
 This api will list all folder/file download share links in a specific library.
 
-**GET** https://cloud.seafile.com/api/v2.1/share-links/?repo_id={rpeo_id}
+**GET** https://cloud.seafile.com/api/v2.1/share-links/?repo_id={repo_id}
 
 **Request parameters**
 
@@ -2274,42 +2274,155 @@ curl -X PUT -d "folder_path=/123&permission=rw&group_id=65" -H 'Authorization: T
 
 ### <a id="list-libraries"></a>List Libraries
 
-**GET** https://cloud.seafile.com/api2/repos/
+**GET** https://cloud.seafile.com/api2/repos/?type={type}
 
-**Sample request**
+**Request parameters**
 
-    curl -H 'Authorization: Token 24fd3c026886e3121b2ca630805ed425c272cb96' -H 'Accept: application/json; indent=4' https://cloud.seafile.com/api2/repos/
+* type
+    * `mine`, get my owned libraries.
+    * `shared`, get libraries shared to me.
+    * `group`, get group libraries.
+    * `org`, get public libraires.
 
-**Sample response**
+NOTE: If no `type` parameter contained in the url, this api will return all libraries user can access.
 
-    [
+**Sample request for get all libraries I can accessed**
+
+```
+curl -H 'Authorization: Token 24fd3c026886e3121b2ca630805ed425c272cb96' -H 'Accept: application/json; indent=4' https://cloud.seafile.com/api2/repos/
+```
+
+**Sample response for get all libraries I can accessed**
+
+```
+[
     {
         "permission": "rw",
         "encrypted": false,
-        "mtime": 1400054900,
-        "owner": "user@mail.com",
-        "id": "f158d1dd-cc19-412c-b143-2ac83f352290",
+        "mtime_relative": "<time datetime=\"2017-08-12T10:48:42\" is=\"relative-time\" title=\"Sat, 12 Aug 2017 10:48:42 +0800\" >1 minute ago</time>",
+        "mtime": 1502506122,
+        "owner": "1@1.com",
+        "root": "",
+        "id": "b8c8eeaf-a62f-4ece-a2cb-e1c67f49f881",
         "size": 0,
-        "name": "foo",
+        "name": "group-lib",
         "type": "repo",
         "virtual": false,
-        "desc": "new library",
-        "root": "0000000000000000000000000000000000000000"
+        "version": 1,
+        "head_commit_id": "b0a8c797972b83af1054428a397f843612257425",
+        "size_formatted": "0 bytes"
     },
     {
         "permission": "rw",
         "encrypted": false,
-        "mtime": 1400054802,
-        "owner": "user@mail.com",
-        "id": "0536b11a-a5fd-4482-9314-728cb3472f54",
-        "size": 0,
-        "name": "foo",
+        "mtime_relative": "<time datetime=\"2017-08-03T17:42:49\" is=\"relative-time\" title=\"Thu, 3 Aug 2017 17:42:49 +0800\" >8 days ago</time>",
+        "mtime": 1501753369,
+        "owner": "1@1.com",
+        "root": "",
+        "id": "cd0df3ce-7e1b-4fc3-9b76-714c48db47d7",
+        "size": 1449,
+        "name": "My Library",
         "type": "repo",
         "virtual": false,
-        "desc": "new library",
-        "root": "0000000000000000000000000000000000000000"
+        "version": 1,
+        "head_commit_id": "9d47232bb87d39dbbba54fb8f09f9795b2d396e4",
+        "size_formatted": "1.4 KB"
+    },
+    {
+        "owner_nickname": "lian",
+        "permission": "rw",
+        "encrypted": false,
+        "mtime_relative": "<time datetime=\"2017-08-12T10:44:07\" is=\"relative-time\" title=\"Sat, 12 Aug 2017 10:44:07 +0800\" >6 minutes ago</time>",
+        "mtime": 1502505847,
+        "owner": "lian@lian.com",
+        "root": "",
+        "id": "c474a093-19dc-4ddf-b0b0-72b33214ba33",
+        "size": 708833229,
+        "name": "seacloud.cc.124",
+        "share_type": "personal",
+        "type": "srepo",
+        "version": 1,
+        "head_commit_id": "0b11fc08518d0c9acfd15e95a580664896484336",
+        "size_formatted": "676.0 MB"
+    },
+    {
+        "permission": "rw",
+        "encrypted": false,
+        "mtime": 1502506122,
+        "owner": "asdf",
+        "id": "b8c8eeaf-a62f-4ece-a2cb-e1c67f49f881",
+        "size": 0,
+        "name": "group-lib",
+        "root": "",
+        "version": 1,
+        "head_commit_id": "b0a8c797972b83af1054428a397f843612257425",
+        "type": "grepo",
+        "groupid": 1675
+    },
+    {
+        "share_from": "lian@lian.com",
+        "permission": "rw",
+        "encrypted": false,
+        "mtime_relative": "<time datetime=\"2017-08-12T10:33:47\" is=\"relative-time\" title=\"Sat, 12 Aug 2017 10:33:47 +0800\" >16 minutes ago</time>",
+        "mtime": 1502505227,
+        "owner": "Organization",
+        "root": "",
+        "id": "050ef344-45fb-49b6-80e6-e1bf094ab7bd",
+        "size": 0,
+        "name": "public-repo",
+        "share_type": "public",
+        "type": "grepo",
+        "version": 1,
+        "head_commit_id": "b71a95373896eb52e2971d72a869b7c413791b0b",
+        "size_formatted": "0 bytes"
     }
-    ]
+]
+```
+
+**Sample request for get my owned libraries**
+
+```
+curl -H "Authorization: Token 8cc0e7085a24b6abfee721e758b6aab4a90e7321" -H 'Accept: application/json; indent=4' "http://192.168.1.124:8000/api2/repos/?type=mine"
+```
+
+**Sample response for get my owned libraries**
+
+```
+[
+    {
+        "permission": "rw",
+        "encrypted": false,
+        "mtime_relative": "<time datetime=\"2017-08-12T10:48:42\" is=\"relative-time\" title=\"Sat, 12 Aug 2017 10:48:42 +0800\" >19 minutes ago</time>",
+        "mtime": 1502506122,
+        "owner": "1@1.com",
+        "root": "",
+        "id": "b8c8eeaf-a62f-4ece-a2cb-e1c67f49f881",
+        "size": 0,
+        "name": "group-lib",
+        "type": "repo",
+        "virtual": false,
+        "version": 1,
+        "head_commit_id": "b0a8c797972b83af1054428a397f843612257425",
+        "size_formatted": "0 bytes"
+    },
+    {
+        "permission": "rw",
+        "encrypted": false,
+        "mtime_relative": "<time datetime=\"2017-08-03T17:42:49\" is=\"relative-time\" title=\"Thu, 3 Aug 2017 17:42:49 +0800\" >8 days ago</time>",
+        "mtime": 1501753369,
+        "owner": "1@1.com",
+        "root": "",
+        "id": "cd0df3ce-7e1b-4fc3-9b76-714c48db47d7",
+        "size": 1449,
+        "name": "My Library",
+        "type": "repo",
+        "virtual": false,
+        "version": 1,
+        "head_commit_id": "9d47232bb87d39dbbba54fb8f09f9795b2d396e4",
+        "size_formatted": "1.4 KB"
+    }
+]
+```
 
 ### <a id="get-library-info"></a>Get Library Info
 
