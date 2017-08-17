@@ -52,6 +52,7 @@
    * LDAP/AD Integration
        * [LDAP Configuration for Seafile Pro](deploy_pro/using_ldap_pro.md)
        * [Importing Groups from LDAP](deploy_pro/ldap_group_sync.md)
+       * [Importing Roles from LDAP](deploy_pro/ldap_role_sync.md)
        * [ADFS Integration](deploy_pro/adfs.md)
    * Online File Preview and Edit
        * [Office/PDF Documents Preview](deploy_pro/office_documents_preview.md)

@@ -10,6 +10,7 @@ Install Seafile Pro Edition
 
 - [Configure LDAP in Seafile Pro](using_ldap_pro.md)
 - [Syncing Groups from LDAP/AD](ldap_group_sync.md)
+- [Syncing Roles from LDAP/AD](ldap_role_sync.md)
 
 ## Migration and Upgrading
 
