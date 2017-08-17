@@ -172,7 +172,13 @@ SHIBBOLETH_AFFILIATION_ROLE_MAP = {
     'employee@uni-mainz.de': 'staff',
     'member@uni-mainz.de': 'staff',
     'student@uni-mainz.de': 'student',
-    'employee@hu-berlin.de': 'guest'
+    'employee@hu-berlin.de': 'guest',
+    # Since 6.1.7 pro, we support wildcards matching.
+    'patterns': (  
+        ('*@hu-berlin.de', 'guest1'),
+        ('*@*.de', 'guest2'),
+        ('*', 'guest'),
+    ),
 }
 ```
 
