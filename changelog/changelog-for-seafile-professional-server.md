@@ -4,6 +4,28 @@
 
 You can follow the document on minor upgrade (http://manual.seafile.com/deploy/upgrade.html).
 
+### 6.1.7 (2017.08.17)
+
+* [fix] Fix a bug when concurrent uploading/creating files (in the old version, when a user uploading/deleting multiple files in cloud file browser, it had a high chance to get “internal server error” message)
+* [fix] Fix thumbnails for some images that 90 degrees rotated
+* [fix] Fix support for resumable file upload
+* [fix] Fix MySQL connection pool in Ccnet
+* [fix] Use original GIF file when view GIF files
+* [fix, API] Check if name is valid when creating folder/file
+* Remove deleted libraries in search index
+* Use 30MB as the default value of THUMBNAIL_IMAGE_SIZE_LIMIT
+* [API] Improve performance when move or copy multiple files/folders
+* [admin] Support syncing user role from AD/LDAP attribute (https://manual.seafile.com/deploy_pro/ldap_role_sync.html)
+* [admin] Support deleting all outdated invitations at once
+* [admin] Improve access log
+* [admin] Support upload seafile-license.txt via web interface (only for single machine deployment)
+* [admin] Admin can cancel two-factor authentication of a user
+* [admin, role] Show user’s role in LDAP(Imported) table
+* [admin, role] Add wildcard support in role mapping for Shibboleth login
+* [admin] Improve performance in getting total file number, used space and total number of devices
+* [admin] Admin can add users to an institution via Web UI
+* [admin] Admin can choose a user’s role when creating a user
+
 ### 6.1.4 (2017.07.11)
 
 * [API] Improve performance of getting unread notifications.
