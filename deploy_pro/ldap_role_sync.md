@@ -15,12 +15,12 @@ reload(sys)
 sys.setdefaultencoding('utf8')
 
 def ldap_role_mapping(role):
-    if 'Coder' in role:
-        return 'slave labour'
-    if 'Programmer' in role:
-        return 'slave labour'
-    if 'Boss' in role:
-        return 'King'
+    if 'staff' in role:
+        return 'Staff'
+    if 'guest' in role:
+        return 'Guest'
+    if 'manager' in role:
+        return 'Manager'
 ```
 you can rewrite this function (in python) to make your own mapping rules. If the file or function doesn't exist, all roles in `ROLE_NAME_ATTR` will be synced.
 
