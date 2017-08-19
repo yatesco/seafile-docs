@@ -4,6 +4,10 @@
 
 You can follow the document on minor upgrade (http://manual.seafile.com/deploy/upgrade.html).
 
+### 6.1.8 (2017.08.18)
+
+* [fix] Fix license checking
+
 ### 6.1.7 (2017.08.17)
 
 * [fix] Fix a bug when concurrent uploading/creating files (in the old version, when a user uploading/deleting multiple files in cloud file browser, it had a high chance to get “internal server error” message)
