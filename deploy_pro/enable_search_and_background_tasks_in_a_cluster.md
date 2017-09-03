@@ -65,7 +65,7 @@ On nodes B and C, you need to:
 [INDEX FILES]
 external_es_server = true
 es_host = <ip of node A>
-es_port = 9500
+es_port = 9200
 ```
 
 Edit **seahub_settings.py** and add a line:
@@ -74,7 +74,7 @@ Edit **seahub_settings.py** and add a line:
 OFFICE_CONVERTOR_ROOT = 'http://<ip of node A>'
 ```
 
-Make sure requests to http://<ip of node A> is also handled by seahub. For example, you may need to add this nginx configuration in the background node:
+Make sure requests to http://<ip of node A> is also handled by Seahub. For example, you may need to add this Nginx configuration in the background node:
 
 ```
 server {
@@ -92,7 +92,7 @@ As a simple test, you can use this command to test if you set it up correctly.
 curl -v http://<IP of node A>/office-convert/internal/status/
 ```
 
-It should say "400 Bad Request" when you have nginx config updated.
+It should say "400 Bad Request" when you have Nginx config updated.
 
 
 ## Start the background node
