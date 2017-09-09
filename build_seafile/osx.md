@@ -1,37 +1,6 @@
 # Mac OS X
 
-## Option 1: Homebrew (conflicting with macports)
-
-###Setup homebrew environment
-
-1. Install xcode
-
-  - Download Xcode from [website](https://developer.apple.com/xcode/downloads/) or
-    [App Store](http://itunes.apple.com/us/app/xcode/id497799835?ls=1&mt=12)
-  - Xcode Command Line Utilities might be enough to build seafile, but it is left untested yet.
-
-2. Install homebrew
-
-  - Execute this from Terminal
-  ``ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
-  - Make sure you have a clean homebrew environment. You can double-check it
-    by ``brew doctor``
-
-> visit http://brew.sh/ for more
-
-Then install seafile from homebrew
-  ```
-  brew tap Chilledheart/seafile
-  brew install seafile-client
-  ```
-
-If you face any installation issue, please report it with your homebrew logs
-- [Homebrew Troubleshooting](https://github.com/Homebrew/homebrew/wiki/Troubleshooting)
-
-If it is an issue while using homebrewed seafile, please report it with your seafile logs
-- [Seafile FAQ](../faq.md)
-
-## Option 2: Macports (conflicting with homebrew)
+## Install Macports
 
 ###Setup macports environment
 
