@@ -1,5 +1,10 @@
 # Mac OS X
 
+### Install QT 5.6.2:
+
+* Download it from https://download.qt.io/archive/qt/5.6/5.6.2/qt-opensource-mac-x64-clang-5.6.2.dmg
+* Double click the downloaded dmg file to start the installer, and install it to its default location.
+
 ## Install Macports
 
 ###Setup macports environment
@@ -35,6 +40,9 @@
         export CPPFLAGS="-I/opt/local/include"
         export LDFLAGS="-L/opt/local/lib -L/usr/local/lib -Wl,-headerpad_max_install_names"
 
+        QT_BASE=$HOME/Qt5.6.2/5.6/clang_64
+        export PATH=$QT_BASE/bin:$PATH
+        export PKG_CONFIG_PATH=$QT_BASE/lib/pkgconfig:$PKG_CONFIG_PATH
 
 Compiling libsearpc
 ------------------
