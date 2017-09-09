@@ -22,7 +22,7 @@
 3. Install following libraries and tools using `port`
 
         sudo port install autoconf automake pkgconfig libtool glib2 \
-        libevent vala openssl git jansson
+        libevent vala openssl git jansson cmake
 
 4. Install python
 
