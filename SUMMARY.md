@@ -66,6 +66,7 @@
        * [Migrate to Ceph](deploy_pro/migrate_to_ceph.md)
        * [OpenStack Swift Backend](deploy_pro/setup_with_swift.md)
        * [Storage Backend Encryption](deploy_pro/seaf_encrypt.md)
+       * [Data migration](deploy_pro/migrate.md)
    * Cluster Deployment
        * [Deploy in a cluster](deploy_pro/deploy_in_a_cluster.md)
        * [Search and background tasks in a cluster](deploy_pro/enable_search_and_background_tasks_in_a_cluster.md)
