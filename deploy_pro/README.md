@@ -24,6 +24,7 @@ Install Seafile Pro Edition
 - [Setup Seafile Professional Server With Ceph](setup_with_Ceph.md)
 - [Migrate from File System to Ceph](migrate_to_ceph.md)
 - [Storage Backend Encryption](seaf_encrypt.md)
+- [Data migration between different backends](migrate.md)
 
 ## Config Options
 
