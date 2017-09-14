@@ -1,5 +1,50 @@
 # Seafile Server Changelog
 
+## 6.2
+
+From 6.2, It is recommended to use WSGI mode for communication between Seahub and Nginx/Apache. You will need to change the config file of Nginx/Apache.
+
+The configuration of Nginx is as following:
+
+```
+location / {
+         proxy_pass         http://127.0.0.1:8000;
+         proxy_set_header   Host $host;
+         proxy_set_header   X-Real-IP $remote_addr;
+         proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
+         proxy_set_header   X-Forwarded-Host $server_name;
+         proxy_read_timeout  1200s;
+
+         # used for view/edit office file via Office Online Server
+         client_max_body_size 0;
+
+         access_log      /var/log/nginx/seahub.access.log;
+         error_log       /var/log/nginx/seahub.error.log;
+    }
+```
+
+The configuration of Apache is as following:
+
+```
+    # seahub
+    SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
+    ProxyPass / http://127.0.0.1:8000/
+    ProxyPassReverse / http://127.0.0.1:8000/
+```
+
+### 6.2.0 beta (2017/09/14)
+
+* Redesign login page, adding a background image:
+* Add two factor authentication
+* Add the ability of tagging a snapshot of a library (Use `ENABLE_REPO_SNAPSHOT_LABEL = True` to turn the feature on)
+* [Admin] Add an option to enable users to share a library to any groups in the system.
+* Use WSGI as the default mode for deploying Seahub.
+* Add a field Reference ID to support changing users primary ID in Shibboleth or LDAP
+* Improved performance of loading library list
+* Support adding a custom user search function (https://github.com/haiwen/seafile-docs/commit/115f5d85cdab7dc272da81bcc8e8c9b91d85506e)
+* Other small UI improvements
+
+
 ## 6.1
 
 If you upgrade from 6.0 and you'd like to use the feature video thumbnail, you need to install ffmpeg package:
