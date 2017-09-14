@@ -14,18 +14,16 @@ On Ubuntu you can use:
 
 ```bash
 sudo a2enmod rewrite
-sudo a2enmod proxy_fcgi
 sudo a2enmod proxy_http
 ```
 
 
-On raspbian install fcgi like [this](http://raspberryserver.blogspot.co.at/2013/02/installing-lamp-with-fastcgi-php-fpm.html)
 
 ## Deploy Seahub/FileServer With Apache
 
 Seahub is the web interface of Seafile server. FileServer is used to handle raw file uploading/downloading through browsers. By default, it listens on port 8082 for HTTP request.
 
-Here we deploy Seahub using fastcgi, and deploy FileServer with reverse proxy. We assume you are running Seahub using domain '''www.myseafile.com'''.
+Here we deploy Seahub and FileServer with reverse proxy. We assume you are running Seahub using domain '''www.myseafile.com'''.
 
 Modify Apache config file:
 (`sites-enabled/000-default`) for ubuntu/debian, (`vhost.conf`) for centos/fedora
@@ -54,9 +52,9 @@ Modify Apache config file:
     #
     # seahub
     #
-    SetEnvIf Request_URI . proxy-fcgi-pathinfo=unescape
     SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
-    ProxyPass / fcgi://127.0.0.1:8000/
+    ProxyPass / http://127.0.0.1:8000/
+    ProxyPassReverse / http://127.0.0.1:8000/
 </VirtualHost>
 ```
 
@@ -86,7 +84,7 @@ FILE_SERVER_ROOT = 'http://www.myseafile.com/seafhttp'
 ```bash
 sudo service apache2 restart
 ./seafile.sh start
-./seahub.sh start # or "./seahub.sh start-fastcgi" if you're using fastcgi
+./seahub.sh start
 ```
 
 ## Troubleshooting
