@@ -54,9 +54,9 @@ Then modify your Apache configuration file. Here is a sample:
   #
   # seahub
   #
-  SetEnvIf Request_URI . proxy-fcgi-pathinfo=unescape
   SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
-  ProxyPass / fcgi://127.0.0.1:8000/
+  ProxyPass / http://127.0.0.1:8000/
+  ProxyPassReverse / http://127.0.0.1:8000/
 </VirtualHost>
 ```
 
@@ -82,5 +82,5 @@ FILE_SERVER_ROOT = 'https://www.myseafile.com/seafhttp'
 
 ```bash
 ./seafile.sh start
-./seahub.sh start # or "./seahub.sh start-fastcgi" if you're using fastcgi
+./seahub.sh start
 ```
