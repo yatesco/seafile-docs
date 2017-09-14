@@ -21,7 +21,7 @@ The following options affect user registration, password and session.
 ENABLE_SIGNUP = False
 
 # Activate or deactivate user when registration complete. Default is `True`.
-# If set to `False`, new users need to be activated by admin in admin pa
+# If set to `False`, new users need to be activated by admin in admin panel.
 ACTIVATE_AFTER_REGISTRATION = False
 
 # Whether to send email when a system admin adding a new member. Default is `True`.
