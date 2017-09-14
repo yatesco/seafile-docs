@@ -34,8 +34,9 @@ The configuration of Apache is as following:
 
 ### 6.2.0 beta (2017/09/14)
 
-* Redesign login page, adding a background image:
+* Redesign login page, adding a background image.
 * Add two factor authentication
+* Clean the list of languages
 * Add the ability of tagging a snapshot of a library (Use `ENABLE_REPO_SNAPSHOT_LABEL = True` to turn the feature on)
 * [Admin] Add an option to enable users to share a library to any groups in the system.
 * Use WSGI as the default mode for deploying Seahub.
