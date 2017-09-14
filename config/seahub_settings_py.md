@@ -21,7 +21,7 @@ The following options affect user registration, password and session.
 ENABLE_SIGNUP = False
 
 # Activate or deactivate user when registration complete. Default is `True`.
-# If set to `False`, new users need to be activated by admin in admin panel.
+# If set to `False`, new users need to be activated by admin in admin pa
 ACTIVATE_AFTER_REGISTRATION = False
 
 # Whether to send email when a system admin adding a new member. Default is `True`.
@@ -70,6 +70,8 @@ SESSION_SAVE_EVERY_REQUEST = False
 ENABLE_WIKI = True
 ```
 
+# Enable 'repo snapshot label' feature
+ENABLE_REPO_SNAPSHOT_LABEL = False
 
 ## Library options
 
