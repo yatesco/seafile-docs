@@ -2,7 +2,10 @@
 
 ## 6.2
 
-From 6.2, It is recommended to use WSGI mode for communication between Seahub and Nginx/Apache. You will need to change the config file of Nginx/Apache.
+From 6.2, It is recommended to use WSGI mode for communication between Seahub and Nginx/Apache. Two steps are needed if you'd like to switch to WSGI mode:
+
+1. Change the config file of Nginx/Apache.
+2. Restart Seahub with `./seahub.sh start` instead of `./seahub.sh start-fastcgi`
 
 The configuration of Nginx is as following:
 
