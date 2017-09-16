@@ -8,6 +8,16 @@
 
 ## ChangeLog
 
+### 0.8.0 (2017/09/16)
+
+* [fix] Reuse old drive letter after SeaDrive crash
+* [fix] Fix rename library back to old name when it is changed in the server
+* [fix] Fix sometimes network can not reconnected after network down
+* Change default block size to 8MB
+* Make auto-login as default
+* Remount SeaDrive it is unmounted after Windows
+
+
 ### 0.7.1 (2017/06/23)
 
 * [fix] Fix a bug that causing client crash
@@ -54,7 +64,7 @@
 
 * Improve stability
 * Support file locking
-* Support sub-folder permission 
+* Support sub-folder permission
 * [fix] Fix 1TB limitation
 * User can choose disk letter in settings dialog
 * Support remote wipe
