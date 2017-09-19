@@ -22,6 +22,11 @@ interval=10m
 ## Refer to file search manual for details.
 index_office_pdf=false
 
+## The default size limit for doc, docx, ppt, pptx, xls, xlsx and pdf files. Files larger than this will not be indexed.
+## Since version 6.2.0
+## Unit: MB
+office_file_size_limit = 10
+
 [SEAHUB EMAIL]
 
 ## must be "true" to enable user email notifications when there are new unread notifications
