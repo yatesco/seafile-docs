@@ -8,6 +8,15 @@ The Mac Finder sync extension need OSX 10.10+
 
 ## 6.1
 
+### 6.1.1 (2017/09/20)
+
+* Improve support for syncing EML files (Don't sync EML files if only timestamp changed)
+* Improve support for Copy/Paste files in cloud file browser
+* [Mac] Fix opening file history from Mac
+* [fix] Fix memory leak in Windows extension handler
+* [fix] Fix re-login with Shibboleth
+* UI/UX improvements for cloud file browser
+
 ### 6.1.0 (2017/08/02)
 
 

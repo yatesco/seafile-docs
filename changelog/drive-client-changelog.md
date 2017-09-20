@@ -15,7 +15,7 @@
 * [fix] Fix sometimes network can not reconnected after network down
 * Change default block size to 8MB
 * Make auto-login as default
-* Remount SeaDrive it is unmounted after Windows
+* Remount SeaDrive when it is unmounted after Windows hibernate
 
 
 ### 0.7.1 (2017/06/23)
