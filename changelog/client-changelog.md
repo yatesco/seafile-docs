@@ -16,6 +16,7 @@ The Mac Finder sync extension need OSX 10.10+
 * [fix] Fix memory leak in Windows extension handler
 * [fix] Fix re-login with Shibboleth
 * UI/UX improvements for cloud file browser
+* [fix, Windows] Fix a bug in detecting whether there is an old instance of Seafile running
 
 ### 6.1.0 (2017/08/02)
 
