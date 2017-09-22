@@ -35,6 +35,18 @@ The configuration of Apache is as following:
     ProxyPassReverse / http://127.0.0.1:8000/
 ```
 
+### 6.2.1 (2017/09/22)
+
+* [fix] Fix upgrade script for SQLite database
+* Add Czech language
+* [UI] Move password setting to a separate section
+* [UI] Add divider to file operation menu
+* [UI] Use high DPI icon in favorites page
+* [UI] Focus on password fields by default
+* [UI] Show feedback message when restore a library to a snapshot
+* [fix] Don't import settings in seafile.conf to database
+
+
 ### 6.2.0 beta (2017/09/14)
 
 * Redesign login page, adding a background image.
