@@ -64,6 +64,7 @@ Download these tarballs to `/tmp/`:
 - [jsonfield](https://pypi.python.org/packages/source/j/jsonfield/jsonfield-1.0.3.tar.gz)
 - [django-post_office](https://pypi.python.org/packages/source/d/django-post_office/django-post_office-2.0.6.tar.gz)
 - [gunicorn](http://pypi.python.org/packages/source/g/gunicorn/gunicorn-19.4.5.tar.gz)
+- [futures](https://pypi.python.org/packages/cc/26/b61e3a4eb50653e8a7339d84eeaa46d1e93b92951978873c220ae64d0733/futures-3.1.1.tar.gz)
 - [flup](http://pypi.python.org/packages/source/f/flup/flup-1.0.2.tar.gz)
 - [chardet](https://pypi.python.org/packages/source/c/chardet/chardet-2.3.0.tar.gz)
 - [python-dateutil](https://labix.org/download/python-dateutil/python-dateutil-1.5.tar.gz)
