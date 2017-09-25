@@ -64,7 +64,6 @@ Download these tarballs to `/tmp/`:
 - [jsonfield](https://pypi.python.org/packages/source/j/jsonfield/jsonfield-1.0.3.tar.gz)
 - [django-post_office](https://pypi.python.org/packages/source/d/django-post_office/django-post_office-2.0.6.tar.gz)
 - [gunicorn](http://pypi.python.org/packages/source/g/gunicorn/gunicorn-19.4.5.tar.gz)
-- [futures](https://pypi.python.org/packages/cc/26/b61e3a4eb50653e8a7339d84eeaa46d1e93b92951978873c220ae64d0733/futures-3.1.1.tar.gz)
 - [flup](http://pypi.python.org/packages/source/f/flup/flup-1.0.2.tar.gz)
 - [chardet](https://pypi.python.org/packages/source/c/chardet/chardet-2.3.0.tar.gz)
 - [python-dateutil](https://labix.org/download/python-dateutil/python-dateutil-1.5.tar.gz)
@@ -74,6 +73,9 @@ Download these tarballs to `/tmp/`:
 - [jdcal](https://pypi.python.org/packages/source/j/jdcal/jdcal-1.2.tar.gz)
 - [et_xmlfile](https://pypi.python.org/packages/source/e/et_xmlfile/et_xmlfile-1.0.1.tar.gz)
 - [openpyxl](https://pypi.python.org/packages/source/o/openpyxl/openpyxl-2.3.0.tar.gz)
+- [futures](https://pypi.python.org/packages/cc/26/b61e3a4eb50653e8a7339d84eeaa46d1e93b92951978873c220ae64d0733/futures-3.1.1.tar.gz)
+- [django-formtools](https://pypi.python.org/packages/a8/07/947dfe63dff1f2be5f84eb7f0ff5f712bb1dc730a6499b0aa0be5c8f194e/django-formtools-2.0.tar.gz)
+- [qrcode](https://pypi.python.org/packages/87/16/99038537dc58c87b136779c0e06d46887ff5104eb8c64989aac1ec8cba81/qrcode-5.3.tar.gz)
 
 Install all these libaries to `/home/pi/dev/seahub_thirdpart`:
 
