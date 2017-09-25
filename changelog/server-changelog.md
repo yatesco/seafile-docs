@@ -35,6 +35,12 @@ The configuration of Apache is as following:
     ProxyPassReverse / http://127.0.0.1:8000/
 ```
 
+### 6.2.2 (2017/09/25)
+
+* [fix] Fix register button can't be clicked in login page
+* [fix] Fix login_success field not exist in sysadmin_extra_userloginlog
+
+
 ### 6.2.1 (2017/09/22)
 
 * [fix] Fix upgrade script for SQLite database
