@@ -46,6 +46,13 @@ host = 0.0.0.0
 port = 8082
 ```
 
+Since Community Edition 6.2 and Pro Edition 6.1.9, you can set the number of worker threads to server http requests. Default value is 10, which is a good value for most use cases.
+
+```
+[fileserver]
+worker_threads = 15
+```
+
 Change upload/download settings.
 
 ```
