@@ -4,6 +4,17 @@
 
 You can follow the document on minor upgrade (http://manual.seafile.com/deploy/upgrade.html).
 
+### 6.1.9 （2017.09.28）
+
+* [fix] Fix some bugs in realtime backup server
+* Add option to set up Seafile HTTP server thread number
+* [fix] Fix create new file API when create a file with a same name with exist file
+* [fix] Fix a bug in permission check in file syncing
+* Add more detailed log information when permission check error
+* [fix] Add log to the size of queue of library size calculation
+* [fix] Use customized logo when sending email notifications
+
+
 ### 6.1.8 (2017.08.18)
 
 * [fix] Fix license checking
