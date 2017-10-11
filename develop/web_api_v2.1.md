@@ -184,7 +184,7 @@
                 </ul>
             </li>
             <li>
-                <a href="#update-file">Update file</a>
+                <a href="#update-file">Update File</a>
                 <ul>
                     <li><a href="#get-update-link">Get Update Link</a></li>
                     <li><a href="#update-file-1">Update File</a></li>
@@ -192,6 +192,16 @@
             </li>
             <li><a href="#get-upload-blocks-link">Get Upload Blocks Link</a></li>
             <li><a href="#get-update-blocks-link">Get Update Blocks Link</a></li>
+            <li>
+                <a href="#file-comments">File Comment</a>
+                <ul>
+                    <li><a href="#get-comment">Get Comment</a></li>
+                    <li><a href="#delete-comment">Delete Comment</a></li>
+                    <li><a href="#list-comments">List Comments</a></li>
+                    <li><a href="#post-comments">Post Comments</a></li>
+                    <li><a href="#statistics-comments">Statistics comments</a></li>
+                </ul>
+            </li>
         </ul>
     </li>
     <li>
@@ -239,9 +249,11 @@
     </li>
     <li>
         <a href="#snapshot-label">Snapshot Label</a>
-        <li><a href="#get-snapshot-label">Get Snapshot Label</a></li>
-        <li><a href="#create-new-snapshot-label">Create New Snapshot Label</a></li>
-        <li><a href="#update-snapshot-label">Update Snapshot Label</a></li>
+        <ul>
+            <li><a href="#get-snapshot-label">Get Snapshot Label</a></li>
+            <li><a href="#create-new-snapshot-label">Create New Snapshot Label</a></li>
+            <li><a href="#update-snapshot-label">Update Snapshot Label</a></li>
+        </ul>
     </li>
     <li><a href="#get-file-activities">Get File Activities</a></li>
     <li><a href="#get-thumbnail-image">Get Thumbnail Image</a></li>
@@ -3811,6 +3823,169 @@ The id of the updated file
 
 - 403 Can not access repo
 - 520 above quota
+
+### <a id="file-comments"></a>File Comments
+
+#### <a id="get-comment"></a>Get Comment
+
+**GET** https://cloud.seafile.com/api2/repos/{repo_id}/file/comments/{pk}/
+
+* rpeo_id
+* pk
+
+**Sample request**
+
+    curl -H "Authorization: Token 05b05e30ee979e333ff33a437988820494fb0afd"  https://cloud.seafile.com/api2/repos/4674c2bb-3702-4dd0-b768-8952db27ac87/file/comments/1/
+
+**Sample response**
+
+    {
+        "comment": "1\n2",
+        "repo_id": "4674c2bb-3702-4dd0-b768-8952db27ac87",
+        "item_name": "qwe",
+        "created_at": "2017-10-10T02:42:11+00:00",
+        "parent_path": "/",
+        "avatar_url": "http://172.16.3.128:8000/media/avatars/default.png",
+        "user_login_id": "",
+        "user_name": "admin",
+        "id": 1,
+        "user_email": "admin@admin.com"
+    }
+
+**Errors**
+
+* 400 Wrong comment id
+* 403 Can not access repo
+
+#### <a id="delete-comment"></a>Delete Comment
+
+**Delete** https://cloud.seafile.com/api2/repos/{repo_id}/file/comments/{pk}/
+
+* rpeo_id
+* pk
+
+**Sample request**
+
+    curl -X DELETE -H "Authorization: Token 05b05e30ee979e333ff33a437988820494fb0afd"  https://cloud.seafile.com/api2/repos/4674c2bb-3702-4dd0-b768-8952db27ac87/file/comments/1/
+
+**Sample response**
+
+    None
+
+**Errors**
+
+* 400 Wrong comment id
+* 403 Can not access repo
+* 403 Permission denied
+
+#### <a id="list-comments"></a>List Comments
+
+**GET** https://cloud.seafile.com/api2/repos/{repo_id}/file/comments/?p=/doc/doc
+
+* rpeo_id
+* p
+
+**Sample request**
+
+    curl -H "Authorization: Token 05b05e30ee979e333ff33a437988820494fb0afd"  https://cloud.seafile.com/api2/repos/4674c2bb-3702-4dd0-b768-8952db27ac87/file/comments/?p=%2Fdoc%2Fdoc
+
+**Sample response**
+
+    {
+        "comments": [
+            {
+                "comment": "1",
+                "repo_id": "4674c2bb-3702-4dd0-b768-8952db27ac87",
+                "item_name": "doc",
+                "created_at": "2017-10-11T02:49:42+00:00",
+                "parent_path": "/doc",
+                "avatar_url": "http://172.16.3.128:8000/media/avatars/default.png",
+                "user_login_id": "",
+                "user_name": "admin",
+                "id": 7,
+                "user_email": "admin@admin.com"
+            },
+            {
+                "comment": "123",
+                "repo_id": "4674c2bb-3702-4dd0-b768-8952db27ac87",
+                "item_name": "doc",
+                "created_at": "2017-10-11T02:49:44+00:00",
+                "parent_path": "/doc",
+                "avatar_url": "http://172.16.3.128:8000/media/avatars/default.png",
+                "user_login_id": "",
+                "user_name": "admin",
+                "id": 8,
+                "user_email": "admin@admin.com"
+            }
+        ]
+    }
+
+**Errors**
+
+* 400 Wrong path
+* 403 Can not access repo
+
+#### <a id="post-comments"></a>Post Comments
+
+**POST** https://cloud.seafile.com/api2/repos/{repo_id}/file/comments/?p=/doc/doc
+
+* rpeo_id
+* p
+* comment
+
+**Sample request**
+
+    curl -X POST -d "comment=hello" -H "Authorization: Token 05b05e30ee979e333ff33a437988820494fb0afd"  https://cloud.seafile.com/api2/repos/4674c2bb-3702-4dd0-b768-8952db27ac87/file/comments/?p=%2Fdoc%2Fdoc
+
+**Sample response**
+
+    {
+        "comment": "hello",
+        "repo_id": "4674c2bb-3702-4dd0-b768-8952db27ac87",
+        "item_name": "doc",
+        "created_at": "2017-10-11T03:32:37+00:00",
+        "parent_path": "/doc",
+        "avatar_url": "http://172.16.3.128:8000/media/avatars/default.png",
+        "user_login_id": "",
+        "user_name": "admin",
+        "id": 10,
+        "user_email": "admin@admin.com"
+    }
+
+**Errors**
+
+* 400 Wrong path
+* 400 Comment can not be empty
+* 403 Can not access repo
+* 404 File not found
+* 500 Internal error
+
+
+#### <a id="statistics-comments"></a>Statistics Comments
+
+**GET** https://cloud.seafile.com/api2/repos/{repo_id}/file/comments/counts/?p=/doc/doc
+
+* rpeo_id
+* p
+
+**Sample request**
+
+    curl -H "Authorization: Token 05b05e30ee979e333ff33a437988820494fb0afd"  https://cloud.seafile.com/api2/repos/4674c2bb-3702-4dd0-b768-8952db27ac87/file/comments/counts/?p=%2Fdoc%2Fdoc
+
+**Sample response**
+
+    [
+        {
+            "doc": 3
+        }
+    ]
+
+**Errors**
+
+* 400 Wrong path
+* 403 Can not access repo
+* 404 Parent dir not found
+* 500 Internal error
 
 ## <a id="directory"></a>Directory
 
