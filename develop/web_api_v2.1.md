@@ -199,7 +199,7 @@
                     <li><a href="#delete-comment">Delete Comment</a></li>
                     <li><a href="#list-comments">List Comments</a></li>
                     <li><a href="#post-comments">Post Comments</a></li>
-                    <li><a href="#statistics-comments">Statistics comments</a></li>
+                    <li><a href="#get-number-of-comments">Get Number of Comments</a></li>
                 </ul>
             </li>
         </ul>
@@ -3840,16 +3840,16 @@ The id of the updated file
 **Sample response**
 
     {
-        "comment": "1\n2",
+        "comment": "welcome",
         "repo_id": "4674c2bb-3702-4dd0-b768-8952db27ac87",
-        "item_name": "qwe",
-        "created_at": "2017-10-10T02:42:11+00:00",
+        "item_name": "q",
+        "created_at": "2017-10-10T02:42:20+00:00",
         "parent_path": "/",
-        "avatar_url": "http://172.16.3.128:8000/media/avatars/default.png",
-        "user_login_id": "",
+        "avatar_url": "https://cloud.seafile.com/media/avatars/default.png",
         "user_name": "admin",
-        "id": 1,
-        "user_email": "admin@admin.com"
+        "id": 3,
+        "user_email": "admin@admin.com",
+        "user_contact_email": "admin@admin.com"
     }
 
 **Errors**
@@ -3894,28 +3894,40 @@ The id of the updated file
     {
         "comments": [
             {
-                "comment": "1",
+                "comment": "word",
                 "repo_id": "4674c2bb-3702-4dd0-b768-8952db27ac87",
                 "item_name": "doc",
                 "created_at": "2017-10-11T02:49:42+00:00",
                 "parent_path": "/doc",
-                "avatar_url": "http://172.16.3.128:8000/media/avatars/default.png",
-                "user_login_id": "",
+                "avatar_url": "https://cloud.seafile.com/media/avatars/default.png",
                 "user_name": "admin",
                 "id": 7,
-                "user_email": "admin@admin.com"
+                "user_email": "admin@admin.com",
+                "user_contact_email": "admin@admin.com"
             },
             {
-                "comment": "123",
+                "comment": "help",
                 "repo_id": "4674c2bb-3702-4dd0-b768-8952db27ac87",
                 "item_name": "doc",
                 "created_at": "2017-10-11T02:49:44+00:00",
                 "parent_path": "/doc",
-                "avatar_url": "http://172.16.3.128:8000/media/avatars/default.png",
-                "user_login_id": "",
+                "avatar_url": "https://cloud.seafile.com/media/avatars/default.png",
                 "user_name": "admin",
                 "id": 8,
-                "user_email": "admin@admin.com"
+                "user_email": "admin@admin.com",
+                "user_contact_email": "admin@admin.com"
+            },
+            {
+                "comment": "test",
+                "repo_id": "4674c2bb-3702-4dd0-b768-8952db27ac87",
+                "item_name": "doc",
+                "created_at": "2017-10-11T03:32:37+00:00",
+                "parent_path": "/doc",
+                "avatar_url": "https://cloud.seafile.com/media/avatars/default.png",
+                "user_name": "admin",
+                "id": 10,
+                "user_email": "admin@admin.com",
+                "user_contact_email": "admin@admin.com"
             }
         ]
     }
@@ -3943,13 +3955,13 @@ The id of the updated file
         "comment": "hello",
         "repo_id": "4674c2bb-3702-4dd0-b768-8952db27ac87",
         "item_name": "doc",
-        "created_at": "2017-10-11T03:32:37+00:00",
+        "created_at": "2017-10-11T06:43:31+00:00",
         "parent_path": "/doc",
-        "avatar_url": "http://172.16.3.128:8000/media/avatars/default.png",
-        "user_login_id": "",
+        "avatar_url": "https://cloud.seafile.com/media/avatars/default.png",
         "user_name": "admin",
-        "id": 10,
-        "user_email": "admin@admin.com"
+        "id": 11,
+        "user_email": "admin@admin.com",
+        "user_contact_email": "admin@admin.com"
     }
 
 **Errors**
@@ -3961,22 +3973,27 @@ The id of the updated file
 * 500 Internal error
 
 
-#### <a id="statistics-comments"></a>Statistics Comments
+#### <a id="get-number-of-comments"></a>Get Number of Comments
 
-**GET** https://cloud.seafile.com/api2/repos/{repo_id}/file/comments/counts/?p=/doc/doc
+**GET** https://cloud.seafile.com/api2/repos/{repo_id}/file/comments/counts/?p=/doc
 
 * rpeo_id
 * p
 
 **Sample request**
 
-    curl -H "Authorization: Token 05b05e30ee979e333ff33a437988820494fb0afd"  https://cloud.seafile.com/api2/repos/4674c2bb-3702-4dd0-b768-8952db27ac87/file/comments/counts/?p=%2Fdoc%2Fdoc
+`get the number of file comment correspoding to the file under the folder`
+
+    curl -H "Authorization: Token 05b05e30ee979e333ff33a437988820494fb0afd"  -sS 'https://cloud.seafile.com/api2/repos/4674c2bb-3702-4dd0-b768-8952db27ac87/file/comments/counts/?p=/doc'
 
 **Sample response**
 
     [
         {
             "doc": 3
+        },
+        {
+            "pdfs": 1
         }
     ]
 
@@ -3984,7 +4001,7 @@ The id of the updated file
 
 * 400 Wrong path
 * 403 Can not access repo
-* 404 Parent dir not found
+* 404 Folder not found
 * 500 Internal error
 
 ## <a id="directory"></a>Directory
