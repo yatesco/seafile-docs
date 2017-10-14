@@ -1,5 +1,60 @@
 # Seafile Professional Server Changelog
 
+## 6.2
+
+From 6.2, It is recommended to use WSGI mode for communication between Seahub and Nginx/Apache. Two steps are needed if you'd like to switch to WSGI mode:
+
+1. Change the config file of Nginx/Apache.
+2. Restart Seahub with `./seahub.sh start` instead of `./seahub.sh start-fastcgi`
+
+The configuration of Nginx is as following:
+
+```
+location / {
+         proxy_pass         http://127.0.0.1:8000;
+         proxy_set_header   Host $host;
+         proxy_set_header   X-Real-IP $remote_addr;
+         proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
+         proxy_set_header   X-Forwarded-Host $server_name;
+         proxy_read_timeout  1200s;
+
+         # used for view/edit office file via Office Online Server
+         client_max_body_size 0;
+
+         access_log      /var/log/nginx/seahub.access.log;
+         error_log       /var/log/nginx/seahub.error.log;
+    }
+```
+
+The configuration of Apache is as following:
+
+```
+    # seahub
+    SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
+    ProxyPass / http://127.0.0.1:8000/
+    ProxyPassReverse / http://127.0.0.1:8000/
+```
+
+### 6.2.0 beta (2017.10.16)
+
+
+* Add report charts for daily active users, daily file operations, and usage space
+* Add "admin" permision when sharing a library to another user/group
+* Redesign login page, adding a background image.
+* Clean the list of languages
+* Add the ability of tagging a snapshot of a library (Use `ENABLE_REPO_SNAPSHOT_LABEL = True` to turn the feature on)
+* [Admin] Add an option to enable users to share a library to any groups in the system.
+* Use WSGI as the default mode for deploying Seahub.
+* Add a field Reference ID to support changing users primary ID in Shibboleth or LDAP
+* Improved performance of loading library list
+* Use multi-threads in search indexing
+* [fix] Fix a bug when indexing a PDF larger than 10MB
+* Support adding a custom user search function
+ (https://github.com/haiwen/seafile-docs/commit/115f5d85cdab7dc272da81bcc8e8c9b91d85506e)
+* Other small UI improvements
+* [fix] Fix ADFS support
+
+
 ## 6.1
 
 You can follow the document on minor upgrade (http://manual.seafile.com/deploy/upgrade.html).
