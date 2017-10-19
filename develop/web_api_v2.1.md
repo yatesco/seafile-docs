@@ -13,6 +13,7 @@
         <a href="#account">Account</a>
         <ul>
             <li><a href="#check-account-info">Check Account Info</a></li>
+            <li><a href="#client-login">Get Client Login URL</a></li>
             <li><a href="#server-info">Get Server Information</a></li>
         </ul>
     </li>
@@ -437,6 +438,24 @@ you should use `--data-urlencode` if you want to process some special characters
     "total": 104857600,
     "email": "user@example.com"
     }
+
+**Errors**
+
+* 403 Invalid token
+
+### <a id="client-login"></a>Get Client Login URL
+
+**GET** https://cloud.seafile.com/api2/client-login/
+
+**Sample request**
+
+    curl -H "Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd" https://cloud.seafile.com/api2/client-login/
+
+**Sample response**
+
+    NOTE: if user have two way authentication enabled server will respond empty JSON object ({})
+
+    "https://cloud.seafile.com/client-login/?token=000f1f83d612836c65fed087fb9c4ca40852d0f9"
 
 **Errors**
 
