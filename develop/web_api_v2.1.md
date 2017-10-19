@@ -457,7 +457,9 @@ you should use `--data-urlencode` if you want to process some special characters
 
 - if user have two way authentication enabled server will respond empty JSON object (`{}`)
 
-    "https://cloud.seafile.com/client-login/?token=000f1f83d612836c65fed087fb9c4ca40852d0f9"
+```
+"https://cloud.seafile.com/client-login/?token=000f1f83d612836c65fed087fb9c4ca40852d0f9"
+```
 
 **Errors**
 
