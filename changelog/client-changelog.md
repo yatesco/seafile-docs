@@ -8,6 +8,17 @@ The Mac Finder sync extension need OSX 10.10+
 
 ## 6.1
 
+### 6.1.2 (2017/10/28)
+
+* [Win] Update system tray icon
+* Return error if repo name contains invalid characters when syncing a library
+* Update local folder name when repo name is changed.
+* Leave a shared library
+* [fix] Fix open cloud file browser from activity view
+* [fix] Fix loading more events in activity tab
+* [fix, cloud file browser] Always watching local cached files after uploading failed when file changed
+* [fix, cloud file browser] Use local cached version if it is changed locally
+
 ### 6.1.1 (2017/09/20)
 
 * Improve support for syncing EML files (Don't sync EML files if only timestamp changed)
