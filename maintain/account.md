@@ -13,4 +13,5 @@ In a private server, the default settings doesn't support users to reset their p
 #### Forgot Admin Account or Password?
 
 You may run `reset-admin.sh` script under seafile-server directory. This script would help you reset the admin account and password.
+Your data 'll not bee deleted from the admin account, this only unlock and/or changes the password for the admin account.
 
