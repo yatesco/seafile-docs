@@ -14,6 +14,17 @@ Fail2ban will check this log file and will ban all failed authentications with a
 
 ## Installation
 
+#### Change to right Time Zone in seahub_settings.py
+
+***WARNING: Without this your Fail2Ban filter will not work.***
+
+You need to add the following settings to seahub_settings.py but change it to your own time zone.
+```
+ # TimeZone
+ TIME_ZONE = 'Europe/Stockholm'
+
+```
+
 #### Copy and edit jail.local file
 
 ***WARNING: this file may override some parameters from your `jail.conf` file***
@@ -131,3 +142,6 @@ To unban your IP address, just execute this command :
 sudo fail2ban-client set seafile unbanip 1.2.3.4
 ```
 
+## Note
+
+As three (3) failed attempts to login will result in one line added in seahub.log a Fail2Ban jail with the settings maxretry = 3 is the same as nine (9) failed attempts to login.
