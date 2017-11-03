@@ -8,6 +8,16 @@ The Mac Finder sync extension need OSX 10.10+
 
 ## 6.1
 
+### 6.1.3 (2017/11/03)
+
+* [fix] Fix system tray icon
+* Change "Shibbeloth Login" to "Single Sign On"
+* [fix] Fix MacOS client using discrete GPU
+* [cloud file browser] Improve file uploading after modification
+* [cloud file browser, fix] Don't show quota exceeded when server return 502 error
+* [cloud file browser] Show number of files in current folder
+
+
 ### 6.1.2 (2017/10/28)
 
 * [Win] Update system tray icon
