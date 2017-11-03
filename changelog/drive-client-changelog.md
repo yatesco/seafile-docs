@@ -8,6 +8,12 @@
 
 ## ChangeLog
 
+### 0.8.1 (2017/11/03)
+
+* Use "REMOVABLE" when mount the drive disk
+* Prevent creating "System Volume Information"
+* Some UI fixes
+
 ### 0.8.0 (2017/09/16)
 
 * [fix] Reuse old drive letter after SeaDrive crash
