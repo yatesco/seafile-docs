@@ -92,7 +92,7 @@ After repairing, in the library history, seaf-fsck includes the list of files an
 
 ### Best Practice for Repairing a Library
 
-To check all libraries and find out which library is corrupted, the system admin can run seaf-fsck.sh without any argument and save the output to a log file. Search for keyword "Fail" in the log file to locate corrupted libraries.
+To check all libraries and find out which library is corrupted, the system admin can run seaf-fsck.sh without any argument and save the output to a log file. Search for keyword "Fail" in the log file to locate corrupted libraries. You can run seaf-fsck to check all libraries when your Seafile server is running. It won't damage or change any files.
 
 When the system admin find a library is corrupted, he/she should run seaf-fsck.sh with "--repair" for the library. After the command fixes the library, the admin should inform user to recover files from other places. There are two ways:
 
