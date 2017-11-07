@@ -77,14 +77,16 @@ LOGGING = {
     },
     'loggers': {
         # root logger
-        '': {
+        # All logs printed by Seahub and any third party libraries will be handled by this logger.
+        '': {
             'handlers': ['console', 'syslog'],
             'level': 'INFO', # Logs when log level is higher than info. Level can be any one of DEBUG, INFO, WARNING, ERROR, CRITICAL.
             'disabled': False
         },
+        # This logger recorded logs printed by Django Framework. For example, when you see 5xx page error, you should check the logs recorded by this logger.
         'django.request': {
             'handlers': ['console', 'syslog'],
-            'level': 'DEBUG',
+            'level': 'INFO',
             'propagate': False,
         },
     },
