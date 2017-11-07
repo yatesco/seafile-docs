@@ -77,13 +77,13 @@ LOGGING = {
     },
     'loggers': {
         # root logger
-        # Record the project log info.
-        '': {
+        # All logs printed by Seahub and any third party libraries will be handled by this logger.
+        '': {
             'handlers': ['console', 'syslog'],
             'level': 'INFO', # Logs when log level is higher than info. Level can be any one of DEBUG, INFO, WARNING, ERROR, CRITICAL.
             'disabled': False
         },
-        # Record the Django Framework request log. For example, the request state record is recorded at 400, 403, 404, 405, 412 or 500.
+        # This logger recorded logs printed by Django Framework. For example, when you see 5xx page error, you should check the logs recorded by this logger.
         'django.request': {
             'handlers': ['console', 'syslog'],
             'level': 'INFO',
