@@ -17,6 +17,7 @@
    * [Enabling Https with Apache](deploy/https_with_apache.md)
    * [LDAP/AD Integration](deploy/using_ldap.md)
    * [Shibboleth Authentication](deploy/shibboleth_config.md)
+   * [OAuth Authentication](deploy/oauth.md)
    * [Syslog Integration](deploy/using_syslog.md)
    * Online File Preview and Edit
        * [LibreOffice Online Integration](deploy/libreoffice_online.md)
