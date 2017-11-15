@@ -45,7 +45,7 @@ The configuration of Apache is as following:
 * [fix] Fix Shibboleth login redirection issue, see https://forum.seafile.com/t/shared-links-via-shibboleth/4067/19
 * [fix] In some case failed to unshare a folder.
 * [fix] LDAP search issue.
-* [fix] Filename displayed issue in Safari.
+* [fix] Fix Safari downloaded file names are encoded like 'test-%2F%4B.doc' if it contains special characters.
 * [fix] Disable client encrypt library creation when creating encrypt library is disabled on server.
 
 ### 6.2.2 (2017/09/25)
