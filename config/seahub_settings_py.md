@@ -70,8 +70,12 @@ SESSION_SAVE_EVERY_REQUEST = False
 ENABLE_WIKI = True
 ```
 
-# Enable 'repo snapshot label' feature
+## `repo snapshot label` feature
+
+```
+# Turn on this option to let users to add a label to a library snapshot. Default is `False`
 ENABLE_REPO_SNAPSHOT_LABEL = False
+```
 
 ## Library options
 
