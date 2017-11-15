@@ -35,6 +35,19 @@ The configuration of Apache is as following:
     ProxyPassReverse / http://127.0.0.1:8000/
 ```
 
+### 6.2.3 (2017/11/15)
+
+* Support OAuth.
+* WSGI uses 5 processors by default instead of 3 processors each with 5 threads
+* [share] Add "click to select" feature for download/upload links.
+* [Admin] Show/edit contact email in admin panel.
+* [Admin] Show upload links in admin panel.
+* [fix] Fix Shibboleth login redirection issue, see https://forum.seafile.com/t/shared-links-via-shibboleth/4067/19
+* [fix] In some case failed to unshare a folder.
+* [fix] LDAP search issue.
+* [fix] Filename displayed issue in Safari.
+* [fix] Disable client encrypt library creation when creating encrypt library is disabled on server.
+
 ### 6.2.2 (2017/09/25)
 
 * [fix] Fix register button can't be clicked in login page
