@@ -70,8 +70,11 @@ SESSION_SAVE_EVERY_REQUEST = False
 ENABLE_WIKI = True
 ```
 
-# Enable 'repo snapshot label' feature
+## Enable 'repo snapshot label' feature
+
+```
 ENABLE_REPO_SNAPSHOT_LABEL = False
+```
 
 ## Library options
 
