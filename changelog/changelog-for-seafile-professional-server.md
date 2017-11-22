@@ -34,29 +34,29 @@ The configuration of Apache is as following:
     ProxyPass / http://127.0.0.1:8000/
     ProxyPassReverse / http://127.0.0.1:8000/
 ```
-### 6.2.1 (2017.11.22)
 
-* Support OAuth.
-* [share] Add "click to select" feature for download/upload links.
-* [Admin] Show/edit contact email in admin panel.
-* [Admin] Show upload links in admin panel.
+### 6.2.1 beta (2017.11.22)
+
+* [new] Support OAuth.
+* [new] Support Swift v1 protocol.
+* [new, admin] Add option to turn on statistic module
+* [new] Enable publish library update events to message queue (like Redis)
+* [improve, ui] Add "click to select" feature for download/upload links.
+* [improve, ui] improved accessibility for some form elements, such as login inputs, and etc.
+* [improve, api] Add `repo_owner` field to library search web api.
+* [improve, admin] Show/edit contact email in admin panel.
+* [improve, admin] Show upload links in admin panel.
+* [improve, admin] Improve license display.
+* [improve, admin] Share with admin permission recorded in audit log.
+* [improve, admin] Add permission audit log when remove library from group.
+* [improve, search] Set timeout for extracting contents from doc/pdf.
+* [improve, search] Search indexing no longer depend on Seafile service. It reads information from database directly.
 * [fix] Fix Shibboleth login redirection issue, see https://forum.seafile.com/t/shared-links-via-shibboleth/4067/19
 * [fix] In some case failed to unshare a folder.
 * [fix] LDAP search issue.
 * [fix] Fix Safari downloaded file names are encoded like 'test-%2F%4B.doc' if it contains special characters.
 * [fix] Disable client encrypt library creation when creating encrypt library is disabled on server.
-* Support Tempauth and Swauth service for swift.
-* [form] improved accessibility for some form elements, such as login inputs, and etc.
-* [system admin] statistic: remove statistic for '24 hours'.
 * [fix] Failed to get snapshot labels when libraries are deleted.
-* Set timeout for extracting contents from doc/pdf.
-* Improve license display.
-* Enable publish library update events to message queue (like Redis)
-* Share with admin permission recorded in statistics.
-* Add permission audit log when remove library from group.
-* Add `repo_owner` field to library search web api.
-* WSGI uses 3 processors each with 5 threads.
-* Search indexing no longer depend on Seafile service. It reads information from database directly.
 
 
 ### 6.2.0 beta (2017.10.16)
