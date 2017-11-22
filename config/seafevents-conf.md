@@ -10,13 +10,13 @@ In the file `seafevents.conf`:
 ## Leads to additional SQL tables being filled up, make sure your SQL server is able to handle it.
 enabled = true
 
-[INDEX FILES]
-## must be "true" to enable search
-enabled = true
-
 [STATISTICS]
 ## must be "true" to enable statistics
 enabled = false
+
+[INDEX FILES]
+## must be "true" to enable search
+enabled = true
 
 ## The interval the search index is updated. Can be s(seconds), m(minutes), h(hours), d(days)
 interval=10m
