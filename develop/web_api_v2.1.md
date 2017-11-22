@@ -254,6 +254,7 @@
             <li><a href="#get-snapshot-label">Get Snapshot Label</a></li>
             <li><a href="#create-new-snapshot-label">Create New Snapshot Label</a></li>
             <li><a href="#update-snapshot-label">Update Snapshot Label</a></li>
+            <li><a href="#delete-snapshot-label">Delete Snapshot Label</a></li>
         </ul>
     </li>
     <li><a href="#get-file-activities">Get File Activities</a></li>
@@ -4874,6 +4875,32 @@ curl -X PUT -d "repo_id=7377c95d-b303-4914-a555-306651cc4cbf&commit_id=4c03938da
 **Errors**
 
 * 400 repo_id/commit_id/tag_names invalid.
+* 403 Permission denied(need rw permission).
+
+### <a id="delete-snapshot-label"></a>Delete Snapshot Label
+**Delete** https://cloud.seafile.com/api/v2.1/revision-tags/tagged-items/
+
+**Request parameters**
+* repo_id
+* tag_name
+
+**Sample request**
+
+Sample for update snapshot label.
+
+```
+curl -X DELETE -H 'Authorization: Token 88aaa1e6fe35d0444868b4c67f8ca1766cf82f55' -H 'Accept: application/json; indent=4' -sS 'http://cloud.seafile.com/api/v2.1/revision-tags/tagged-items/?repo_id=7377c95d-b303-4914-a555-306651cc4cbf&tag_names=v3'
+```
+
+**Sample response**
+
+```
+{}
+```
+
+**Errors**
+
+* 400 repo_id/tag_names invalid.
 * 403 Permission denied(need rw permission).
 
 ## <a id="get-file-activities"></a>Get File Activities
