@@ -14,6 +14,10 @@ enabled = true
 ## must be "true" to enable search
 enabled = true
 
+[STATISTICS]
+## must be "true" to enable statistics
+enabled = false
+
 ## The interval the search index is updated. Can be s(seconds), m(minutes), h(hours), d(days)
 interval=10m
 
