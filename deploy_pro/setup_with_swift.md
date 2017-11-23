@@ -60,7 +60,9 @@ memcached_options = --SERVER=192.168.1.134:11211 --POOL-MIN=10 --POOL-MAX=100
 
 The above config is just an example. You should replace the options according to your own environment.
 
-Seafile only supports Swift with Keystone as authentication mechanism. Currently only the v2.0 auth protocol is supported. The `auth_host` option is the address and port of Keystone service.The `region` option is used to select publicURL,if you don't configure it, use the first publicURL in returning authenticated information.
+Seafile supports Swift with Keystone as authentication mechanism. The `auth_host` option is the address and port of Keystone service.The `region` option is used to select publicURL,if you don't configure it, use the first publicURL in returning authenticated information.
+
+Seafile also supports Tempauth and Swauth since professional edition 6.2.1. The `auth_ver` option should be set to `v1.0`, `tenant` and `region` are no longer needed.
 
 It's recommended to create separate containers for commit, fs, and block objects.
 
