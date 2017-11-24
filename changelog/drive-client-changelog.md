@@ -8,6 +8,11 @@
 
 ## ChangeLog
 
+### 0.8.3 (2017/11/24)
+
+* [fix] Fix deleted folder recreated issue
+* Improve UI of downloading/uploading list dialog
+
 ### 0.8.1 (2017/11/03)
 
 * Use "REMOVABLE" when mount the drive disk
