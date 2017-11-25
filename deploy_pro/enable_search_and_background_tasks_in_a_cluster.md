@@ -137,3 +137,41 @@ Then enable this task in systemd:
 ```
 systemctl enable seafile-background-tasks.service
 ```
+
+## The final configuration of the background node
+
+If you have completed all of the configuration of the background node, I hope you can compare some of the major configuration parameters.Make sure there are no omissions, which will help ensure that the cluster is running properly.
+
+For **seafile.conf**:
+
+```
+[cluster]
+enabled = true
+memcached_options = --SERVER=<IP of memcached node> --POOL-MIN=10 --POOL-MAX=100
+```
+
+For **seahub_settings.py**:
+
+```
+OFFICE_CONVERTOR_NODE = True
+
+AVATAR_FILE_STORAGE = 'seahub.base.database_storage.DatabaseStorage'
+COMPRESS_CACHE_BACKEND = 'django.core.cache.backends.locmem.LocMemCache'
+```
+
+For **seafevents.conf**:
+
+```
+[INDEX FILES]
+enabled = true
+interval = 10m
+
+[OFFICE CONVERTER]
+enabled = true
+workers = 1
+## how many pages are allowed to be previewed online. Default is 50 pages
+max-pages = 50
+## the max size of documents allowed to be previewed online, in MB. Default is 10 MB
+## Previewing a large file (for example >30M) online is likely going to freeze the browser.
+max-size = 10
+```

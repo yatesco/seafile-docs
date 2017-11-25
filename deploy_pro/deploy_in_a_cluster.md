@@ -271,3 +271,44 @@ listen seafile 0.0.0.0:80
 Now you should be able to test your cluster. Open https://seafile.example.com in your browser and enjoy. You can also synchronize files with Seafile clients.
 
 If the above works, the next step would be [Enable search and background tasks in a cluster](enable_search_and_background_tasks_in_a_cluster.md).
+
+## The final configuration of the front-end nodes
+
+If you have completed all the configuration of the front-end node, I hope you can compare some of the major configuration parameters.Make sure there is no omission, which will be helpful to ensure your cluster is running properly.
+
+For **seafile.conf**:
+
+```
+[cluster]
+enabled = true
+memcached_options = --SERVER=<IP of memcached node> --POOL-MIN=10 --POOL-MAX=100
+```
+
+For **seahub_settings.py**:
+
+```
+AVATAR_FILE_STORAGE = 'seahub.base.database_storage.DatabaseStorage'
+COMPRESS_CACHE_BACKEND = 'django.core.cache.backends.locmem.LocMemCache'
+
+OFFICE_CONVERTOR_ROOT = 'http://<ip of node background>'
+```
+
+For **seafevents.conf**:
+
+```
+[INDEX FILES]
+enabled = true
+interval = 10m
+external_es_server = true
+es_host = <IP of background node>
+es_port = 9200
+
+[OFFICE CONVERTER]
+enabled = true
+workers = 1
+## how many pages are allowed to be previewed online. Default is 50 pages
+max-pages = 50
+## the max size of documents allowed to be previewed online, in MB. Default is 10 MB
+## Previewing a large file (for example >30M) online is likely going to freeze the browser.
+max-size = 10
+```
