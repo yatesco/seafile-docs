@@ -140,7 +140,7 @@ systemctl enable seafile-background-tasks.service
 
 ## The final configuration of the background node
 
-If you have completed all of the configuration of the background node, I hope you can compare some of the major configuration parameters.Make sure there are no omissions, which will help ensure that the cluster is running properly.
+Here is the summary of configurations at the background node that related to clustering setup.
 
 For **seafile.conf**:
 

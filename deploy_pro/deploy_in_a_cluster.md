@@ -274,7 +274,7 @@ If the above works, the next step would be [Enable search and background tasks i
 
 ## The final configuration of the front-end nodes
 
-If you have completed all the configuration of the front-end node, I hope you can compare some of the major configuration parameters.Make sure there is no omission, which will be helpful to ensure your cluster is running properly.
+Here is the summary of configurations at the front-end node that related to clustering setup.
 
 For **seafile.conf**:
 
