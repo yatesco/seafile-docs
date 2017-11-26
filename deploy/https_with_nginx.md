@@ -261,7 +261,7 @@ Add the HSTS header. If you already visited the https version the next time your
 add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
 ```
 
-### Obuscate nginx version
+### Obfuscate nginx version
 
 Disable exact server version in header. Prevent scans for vulnerable server.
 **This should be added to every server block, as it shall obfuscate the version of nginx.**
