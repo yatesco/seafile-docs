@@ -166,6 +166,16 @@ rm librados.so.2 libstdc++.so.6 libnspr4.so
 
 You can also run `seaf-fsck.sh`. It will print detailed message if Ceph library incompatible.
 
+### Virus scan and search index doesn't work with HTTPS S3
+
+The `use_https = true` options in seafile.conf config are working just for regular file operations to S3, but not indexing or AV scanning.
+
+Create ‘/etc/boto.cfg’ and add the following:
+
+[Boto]
+is_secure = True
+
+Then the issue can be resolved.
 
 
 ### GC error when removing blocks in Ceph
