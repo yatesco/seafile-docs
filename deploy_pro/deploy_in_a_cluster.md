@@ -149,7 +149,7 @@ es_host = background.seafile.com
 es_port = 9200
 ```
 
-Note: `enable = true` should be left unchanged. For versions older than 9.1, `es_port` was 9500.
+Note: `enable = true` should be left unchanged. For versions older than 6.1, `es_port` was 9500.
 
 
 ### Update Seahub Database
