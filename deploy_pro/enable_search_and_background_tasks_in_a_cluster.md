@@ -54,7 +54,7 @@ Edit **seafile.conf** to enable virus scan according to [virus scan document](vi
 
 ### Edit the firewall rules
 
-In your firewall rules for node A, you should open the port 9200 (for search requests). For versions older than 9.1, `es_port` was 9500.
+In your firewall rules for node A, you should open the port 9200 (for search requests). For versions older than 6.1, `es_port` was 9500.
 
 ## Configure Other Nodes
 
