@@ -146,10 +146,10 @@ interval = 10m
 index_office_pdf = true
 external_es_server = true
 es_host = background.seafile.com
-es_port = 9500
+es_port = 9200
 ```
 
-Note: `enable = true` should be left unchanged.
+Note: `enable = true` should be left unchanged. For versions older than 6.1, `es_port` was 9500.
 
 
 ### Update Seahub Database
