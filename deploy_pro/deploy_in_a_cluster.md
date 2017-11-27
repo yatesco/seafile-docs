@@ -284,7 +284,7 @@ enabled = true
 memcached_options = --SERVER=<IP of memcached node> --POOL-MIN=10 --POOL-MAX=100
 ```
 
-The `enalbed` option will prevent the start of background tasks by `./seafile.sh start` in the front-end node. The tasks should be explicitly started by `./seafile-background-tasks.sh start` at the back-end node.
+The `enabled` option will prevent the start of background tasks by `./seafile.sh start` in the front-end node. The tasks should be explicitly started by `./seafile-background-tasks.sh start` at the back-end node.
 
 For **seahub_settings.py**:
 
@@ -315,4 +315,6 @@ max-pages = 50
 max-size = 10
 ```
 
-The `[INDEX FILES]` section is needed to let the front-end node know the file search feature is enabled. The `[OFFICE CONVERTER]` section is needed to let the front-end node know the office preview feature is enabled.
+The `[INDEX FILES]` section is needed to let the front-end node know the file search feature is enabled. The `external_es_server = true` is to tell the front-end node not to start the ElasticSearch but to use the ElasticSearch server at the back-end node.
+
+The `[OFFICE CONVERTER]` section is needed to let the front-end node know the office preview feature is enabled.
