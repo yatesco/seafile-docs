@@ -274,7 +274,7 @@ If the above works, the next step would be [Enable search and background tasks i
 
 ## The final configuration of the front-end nodes
 
-Here is the summary of configurations at the front-end node that related to clustering setup.
+Here is the summary of configurations at the front-end node that related to cluster setup.
 
 For **seafile.conf**:
 
@@ -283,6 +283,8 @@ For **seafile.conf**:
 enabled = true
 memcached_options = --SERVER=<IP of memcached node> --POOL-MIN=10 --POOL-MAX=100
 ```
+
+The `enalbed` option will prevent the start of background tasks by `./seafile.sh start` in the front-end node. The tasks should be explicitly started by `./seafile-background-tasks.sh start` at the back-end node.
 
 For **seahub_settings.py**:
 
@@ -312,3 +314,5 @@ max-pages = 50
 ## Previewing a large file (for example >30M) online is likely going to freeze the browser.
 max-size = 10
 ```
+
+The `[INDEX FILES]` section is needed to let the front-end node know the file search feature is enabled. The `[OFFICE CONVERTER]` section is needed to let the front-end node know the office preview feature is enabled.
