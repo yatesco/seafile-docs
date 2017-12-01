@@ -8,6 +8,12 @@
 
 ## ChangeLog
 
+### 0.8.4 (2017/12/01)
+
+* [fix] Fix Word/Excel files can't be saved in Windows 10
+* Add "download" context menu to explicitly download a file
+* Change "Shibboleth" to "Single Sign On"
+
 ### 0.8.3 (2017/11/24)
 
 * [fix] Fix deleted folder recreated issue
