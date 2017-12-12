@@ -35,6 +35,19 @@ The configuration of Apache is as following:
     ProxyPassReverse / http://127.0.0.1:8000/
 ```
 
+### 6.2.2 (2017.12.12)
+
+* [improve] Improve performance of file history page.
+* [improve] show be shared folders when copy/move file/folder to “Other Libraries”.
+* [impvore] Remove the white edge of webpage when previewing file via OnlyOffice.
+* [improve] Show two file history records at least.
+* [Multi-tenancy] fix bug when listing librarier/folders shared to group.
+* [Multi-tenancy] fix bug when deleting an organization.
+* [fix] fix bug when previewing excel file with “&” character in its name.
+* [fix] Don’t check if user exists when deleting a group memeber in admin panel.
+* [OAuth] Don’t overwrite public registration settings when login an unexisted user.
+* [Audit] Recording file access/update log when preview/edit a file via OnlyOffice.
+
 ### 6.2.1 beta (2017.11.22)
 
 * [new] Support OAuth.
