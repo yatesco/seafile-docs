@@ -22,6 +22,10 @@ Doing maintanence upgrading is simple, you only need to run the script `./upgrad
 
 ## Specific instructions for each version
 
+### From 6.1 to 6.2
+
+No special upgrade operations.
+
 ### From 6.0 to 6.1
 
 In version 6.1, we upgraded the included ElasticSearch server. The old server listen on port 9500, new server listen on port 9200. Please change your firewall settings.
