@@ -39,7 +39,7 @@ The configuration of Apache is as following:
 
 * [improve] Improve performance of file history page.
 * [improve] show be shared folders when copy/move file/folder to “Other Libraries”.
-* [impvore] Remove the white edge of webpage when previewing file via OnlyOffice.
+* [improve] Remove the white edge of webpage when previewing file via OnlyOffice.
 * [improve] Show two file history records at least.
 * [Multi-tenancy] fix bug when listing librarier/folders shared to group.
 * [Multi-tenancy] fix bug when deleting an organization.
