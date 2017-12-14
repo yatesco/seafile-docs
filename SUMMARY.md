@@ -77,6 +77,7 @@
    * Advanced User Management
        * [Multi-Institutions Support](deploy_pro/multi_institutions.md)
        * [Roles and Permissions](deploy_pro/roles_permissions.md)
+       * [Administrator Roles and Permissions](deploy_pro/admin_roles_permissions.md)
        * [Multi-Tenancy Support](deploy_pro/multi_tenancy.md)
    * Advanced Authentication
        * [Two-factor Authenticatioin](deploy_pro/two_factor_authentication.md)
