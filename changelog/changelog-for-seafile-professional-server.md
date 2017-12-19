@@ -2,7 +2,7 @@
 
 ## 6.2
 
-From 6.2, It is recommended to use WSGI mode for communication between Seahub and Nginx/Apache. Two steps are needed if you'd like to switch to WSGI mode:
+From 6.2, It is recommended to use proxy mode for communication between Seahub and Nginx/Apache. Two steps are needed if you'd like to switch to WSGI mode:
 
 1. Change the config file of Nginx/Apache.
 2. Restart Seahub with `./seahub.sh start` instead of `./seahub.sh start-fastcgi`
@@ -34,6 +34,14 @@ The configuration of Apache is as following:
     ProxyPass / http://127.0.0.1:8000/
     ProxyPassReverse / http://127.0.0.1:8000/
 ```
+
+### 6.2.3 (2017.12.19)
+
+* [fix] Fix a bug in file search indexing.
+* [fix, admin] Fix a bug of statistic module in a cluster.
+* [new, admin] Support search share link.
+* [improve, ui] Add transition to show/hide of feedback messages.
+* Other small UI improvements.
 
 ### 6.2.2 (2017.12.12)
 
