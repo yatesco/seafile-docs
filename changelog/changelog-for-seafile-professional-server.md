@@ -53,7 +53,7 @@ The configuration of Apache is as following:
 * [improve] show be shared folders when copy/move file/folder to “Other Libraries”.
 * [improve] Remove the white edge of webpage when previewing file via OnlyOffice.
 * [improve] Show two file history records at least.
-* [Multi-tenancy] fix bug when listing librarier/folders shared to group.
+* [Multi-tenancy] fix bug when listing libraries/folders shared to group.
 * [Multi-tenancy] fix bug when deleting an organization.
 * [fix] fix bug when previewing excel file with “&” character in its name.
 * [fix] Don’t check if user exists when deleting a group memeber in admin panel.
