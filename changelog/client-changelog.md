@@ -8,6 +8,26 @@ The Mac Finder sync extension need OSX 10.10+
 
 ## 6.1
 
+### 6.1.4 (2017/12/20)
+
+cloud file browser
+
+* Don't use resumable upload feature when updating a file
+* Show an icon to indicate that a file is cached
+* Show a warning icon when a file failed to upload to the server after changing
+* User can re-upload a local modified file that failed to upload
+* Add a command to open local cache folder
+* Improve error messages when uploading a file or a folder
+* [mac] Fix a bug that a doc/xls file uploaded automatically after downloading
+* Some ui fixes and improvements
+
+others
+
+* Don't show the connection status of 127.0.0.1
+* Disable editing of local syncing path, users can only choose a path
+* Some ui fixes and improvements
+
+
 ### 6.1.3 (2017/11/03)
 
 * [fix] Fix system tray icon
