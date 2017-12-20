@@ -35,6 +35,10 @@ The configuration of Apache is as following:
     ProxyPassReverse / http://127.0.0.1:8000/
 ```
 
+### 6.2.4 (2017.12.20)
+
+* [fix] Fix a bug in file search index clearing command
+
 ### 6.2.3 (2017.12.19)
 
 * [fix] Fix a bug in file search indexing.
