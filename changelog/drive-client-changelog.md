@@ -8,6 +8,14 @@
 
 ## ChangeLog
 
+### 0.8.5 (2017/01/03)
+
+* [fix] Fix SeaDrive over RDP in Windows 10/7
+* [fix] Fix SeaDrive shell extension memory leak
+* [fix] Fix duplicated folder/files shown in Finder.app (macOS)
+* [fix] Fix file cache status icon for MacOS
+
+
 ### 0.8.4 (2017/12/01)
 
 * [fix] Fix Word/Excel files can't be saved in Windows 10
