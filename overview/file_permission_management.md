@@ -9,7 +9,7 @@ Read-only libraries can be synced to local desktop. The modifications at the cli
 
 ## Cascading permission/Sub-folder permissions (Pro edition)
 
-Sharing controls whether a user or group can see a library, while sub-foler permissions are used to modify permissions on specific folders.
+Sharing controls whether a user or group can see a library, while sub-folder permissions are used to modify permissions on specific folders.
 
 Supposing you share a library as read-only to a group and then want specific sub-folders to be read-write for a few users, you can set read-write permissions on sub-folders for some users and groups.
 
