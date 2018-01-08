@@ -8,7 +8,7 @@
 
 ## ChangeLog
 
-### 0.8.5 (2017/01/03)
+### 0.8.5 (2018/01/03)
 
 * [fix] Fix SeaDrive over RDP in Windows 10/7
 * [fix] Fix SeaDrive shell extension memory leak
