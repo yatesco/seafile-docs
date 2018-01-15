@@ -30,6 +30,9 @@ SEND_EMAIL_ON_ADDING_SYSTEM_MEMBER = True
 # Whether to send email when a system admin resetting a user's password. Default is `True`.
 SEND_EMAIL_ON_RESETTING_USER_PASSWD = True
 
+# Send system admin notify email when user registration is complete. Default is `False`.
+NOTIFY_ADMIN_AFTER_REGISTRATION = True
+
 # Remember days for login. Default is 7
 LOGIN_REMEMBER_DAYS = 7
 
