@@ -35,6 +35,23 @@ The configuration of Apache is as following:
     ProxyPassReverse / http://127.0.0.1:8000/
 ```
 
+### 6.2.4 (2018/01/16)
+
+* [new] Add the feature "remember this device" after two-factor authentication
+* [new] Add option to notify the admin after new user registration (NOTIFY_ADMIN_AFTER_REGISTRATION)
+* [fix] Fix a bug in modify permission for a a shared sub-folder
+* [fix] Fix support for PostgreSQL
+* [fix] Fix a bug in SQLite database support
+* [fix] Fix support for uploading 500+ files via web interface (caused by API rate throttle)
+* [improve, ui] Add transition to show/hide of feedback messages.
+* [improve] Improve performance of file history page.
+* [improve] Show two file history records at least.
+* [improve] show be shared folders when copy/move file/folder to “Other Libraries”.
+* [improve] Remove the white edge of webpage when previewing file via OnlyOffice.
+* [fix] Don’t check if user exists when deleting a group member in admin panel.
+* [OAuth] Don’t overwrite public registration settings when login a nonexistent user.
+* Other UI improvements.
+
 ### 6.2.3 (2017/11/15)
 
 * Support OAuth.
