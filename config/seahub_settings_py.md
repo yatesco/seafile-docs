@@ -324,6 +324,39 @@ def custom_search_user(request, emails):
 
 > **NOTE**, you should NOT change the name of `custom_search_user` and `seahub_custom_functions/__init__.py`
 
+Since version 6.2.5 pro, if you enable the **ENABLE_SHARE_TO_ALL_GROUPS** feather on sysadmin settings page, you can also define a custom function to return the groups a user can share library to.
+
+For example, if you want to let a user to share library to both its groups and the groups of user `test@test.com`, you can define a `custom_get_groups` function in `{seafile install path}/conf/seahub_custom_functions/__init__.py`
+
+Code example:
+
+```
+import os
+import sys
+
+current_path = os.path.dirname(os.path.abspath(__file__))
+seaserv_dir = os.path.join(current_path, \
+        '../../seafile-server-latest/seafile/lib64/python2.7/site-packages')
+sys.path.append(seaserv_dir)
+
+def custom_get_groups(request):
+
+    from seaserv import ccnet_api
+
+    groups = []
+    username = request.user.username
+
+    # for current user
+    groups += ccnet_api.get_groups(username)
+
+    # for 'test@test.com' user
+    groups += ccnet_api.get_groups('test@test.com')
+
+    return groups
+```
+
+> **NOTE**, you should NOT change the name of `custom_get_groups` and `seahub_custom_functions/__init__.py`
+
 ## Note
 
 * You need to restart seahub so that your changes take effect.
