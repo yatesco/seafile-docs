@@ -209,6 +209,7 @@
         <a href="#directory">Directory</a>
         <ul>
             <li><a href="#list-directory-entries">List Directory Entries</a></li>
+            <li><a href="#get-directory-detail">Get Directory Detail</a></li>
             <li><a href="#create-new-directory">Create New Directory</a></li>
             <li><a href="#rename-directory">Rename Directory</a></li>
             <li><a href="#delete-directory">Delete Directory</a></li>
@@ -2965,7 +2966,7 @@ success
 
 * `per_page`, optional.
 
-* `search_repo`, `all` or a *repo_id*, (`all` for searching in all libraries), optional.
+* `search_repo`, `all`, `mine`, `shared`, `group`, `public` or a *repo_id*, (`all` for searching in all libraries, etc.), optional. For searching in shared libraries, you can also pass `shared_from` or `not_shared_from` parameter beside `shared` to filter shared libraries.
 
 * `search_ftypes`, `all` or `custom`, (`all` for searching all file types, `custom` for only searching the specific file types you defined in `ftype` and `input_fexts`).
 
@@ -4143,6 +4144,41 @@ request recursive dir list of a folder.
 * 404 The path is not exist.
 * 440 Repo is encrypted, and password is not provided.
 * 520 Operation failed..
+
+### <a id="get-directory-detail"></a>Get Directory Detail
+
+**GET** http://192.168.1.113:8000/api/v2.1/repos/{repo_id}/dir/detail/?path={path}
+
+* repo_id
+* path, should not be `/`.
+
+**Sample request**
+
+```
+curl -H "Authorization: Token e71c00e93af863ba9bcddb61a46bb4de11d713fc" -H 'Accept: application/json; indent=4' "http://192.168.1.113:8000/api/v2.1/repos/d4f596ed-09ea-4ac6-8d59-12acbd089097/dir/detail/?path=Develop"
+```
+
+**Sample response**
+
+```
+{
+    "repo_id": "d4f596ed-09ea-4ac6-8d59-12acbd089097",
+    "name": "Develop",
+    "file_count": 4,
+    "dir_count": 1,
+    "mtime": "2018-01-05T17:45:41+08:00",
+    "path": "/Develop/",
+    "size": 397888
+}
+```
+
+**Errors**
+
+* 400 path invalid.
+* 403 Permission denied.
+* 404 Folder not found.
+* 404 Library not found.
+* 500 Internal Server Error
 
 ### <a id="create-new-directory"></a>Create New Directory
 
