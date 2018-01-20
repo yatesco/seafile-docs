@@ -306,6 +306,7 @@
             <li><a href="#admin-only-delete-a-library">Delete a Library</a></li>
             <li><a href="#admin-only-transfer-a-library">Transfer a Library</a></li>
             <li><a href="#admin-only-get-library-dirents">Get Library Dirents</a></li>
+            <li><a href="#admin-only-copy-library-dirent">Copy Library Dirent</a></li>
         </ul>
     </li>
     <li>
@@ -5688,6 +5689,8 @@ Available for Seafile v6.0.0+
 
 ### <a id="admin-only-get-library-dirents"></a>Get Library Dirents
 
+If you want to use this api, you must set `ENABLE_SYS_ADMIN_VIEW_REPO` to `True` in `../conf/seahub_settings.py`, for more info please see [this manual](https://manual.seafile.com/config/seahub_settings_py.html#pro-edition-only-options).
+
 **GET** https://cloud.seafile.com/api/v2.1/admin/libraries/{repo_id}/dirents/?parent_dir={parent_dir}
 
 * repo-id
@@ -5734,6 +5737,40 @@ Available for Seafile v6.0.0+
 * 403 Permission error, only administrator can perform this action
 * 404 Library not found.
 * 404 Folder not found.
+* 500 Internal Server Error
+
+### <a id="admin-only-copy-library-dirent"></a>Copy Library Dirent
+
+If you want to use this api, you must set `ENABLE_SYS_ADMIN_VIEW_REPO` to `True` in `../conf/seahub_settings.py`, for more info please see [this manual](https://manual.seafile.com/config/seahub_settings_py.html#pro-edition-only-options).
+
+**PUT** https://cloud.seafile.com/api/v2.1/admin/libraries/{repo_id}/dirent/?path={path}
+
+* `repo_id`, source library id when copy file/folder.
+* `path`, full path of source file/folder.
+* `dst_repo_id`, destination library id. (source library id will be used if not provided.)
+* `dst_dir`, destination folder's path. (root path '/'  will be used if not provided.)
+
+**Sample request**
+
+```
+curl -X PUT -d "dst_repo_id=0d38067b-ca3f-4160-8e1c-504feae25fd5&dst_dir=/Develop/" -H "Authorization: Token e71c00e93af863ba9bcddb61a46bb4de11d713fc" -H 'Accept: application/json; indent=4' "http://192.168.1.113:8000/api/v2.1/admin/libraries/d4f596ed-09ea-4ac6-8d59-12acbd089097/dirent/?path=/Test/"
+```
+
+**Sample response**
+
+```
+{
+    "success": true
+}
+```
+
+**Errors**
+
+* 400 path invalid.
+* 403 Feature disabled.
+* 403 Permission error, only administrator can perform this action
+* 404 Library not found.
+* 404 File/Folder not found.
 * 500 Internal Server Error
 
 ## <a id="admin-only-shares"></a>Shares
