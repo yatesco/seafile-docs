@@ -35,6 +35,33 @@ The configuration of Apache is as following:
     ProxyPassReverse / http://127.0.0.1:8000/
 ```
 
+### 6.2.5 (2018.01.20)
+
+* [fix, important] Fix a performance bug in search index
+* [fix, important] Fix a memory leak in listing folder with locked files
+* [new] Notify the inviter when a guest register
+* [new] Add the feature "remember this device" after two-factor authentication
+* [new] Don't allow to move, delete or rename a file when a file is locked
+* [new] Add option to notify the admin after new user registration (NOTIFY_ADMIN_AFTER_REGISTRATION)
+* [new, UI] Support inviting multiple guests at once
+* [new] Support customize the list of groups that a user can see when sharing a library
+* [new, API] Support search files in my libraries, shared libraries, shared to all libraries
+* [fix] Fix OAuth bug
+* [fix] Fix a bug that file preview can't work in Debian 9
+* [fix, multi-tenancy] Fix permission of a shared sub-folder can't be changed
+* [fix] Fix a bug in modify permission for a shared sub-folder
+* [fix] Improve performance in checking folder permission and file lock
+* [fix] Improve the performance of returning a user's all group libraries
+* [fix] Fix support for uploading 500+ files via web interface (caused by API rate throttle)
+* [fix] Fix API get_shared_repo_by_path()
+* [fix] Add more log when failed to zip a file
+* Don't use memcache when read object in the Python part
+* Update license file check
+* [multi-tenancy, API] Return origin_repo_name when listing libraries
+* Add cancel zip API
+* [fix] Fix some configuration bugs in seafevents module
+
+
 ### 6.2.4 (2017.12.20)
 
 * [fix] Fix a bug in file search index clearing command

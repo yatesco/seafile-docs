@@ -46,10 +46,10 @@ The configuration of Apache is as following:
 * [improve, ui] Add transition to show/hide of feedback messages.
 * [improve] Improve performance of file history page.
 * [improve] Show two file history records at least.
-* [improve] show be shared folders when copy/move file/folder to “Other Libraries”.
+* [fix] show shared sub-folders when copy/move file/folder to “Other Libraries”.
 * [improve] Remove the white edge of webpage when previewing file via OnlyOffice.
 * [fix] Don’t check if user exists when deleting a group member in admin panel.
-* [OAuth] Don’t overwrite public registration settings when login a nonexistent user.
+* [fix, oauth] Don’t overwrite public registration settings when login a nonexistent user.
 * Other UI improvements.
 
 ### 6.2.3 (2017/11/15)
