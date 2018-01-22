@@ -37,7 +37,6 @@ The configuration of Apache is as following:
 
 ### 6.2.6 (2018.01.22)
 
-Note: This version does not work on Ubuntu 14.04
 
 * [fix, important] Fix a performance bug in search index
 * [fix, important] Fix a memory leak in listing folder with locked files
@@ -60,7 +59,7 @@ Note: This version does not work on Ubuntu 14.04
 * Don't use memcache when read object in the Python part
 * Update license file check
 * [multi-tenancy, API] Return origin_repo_name when listing libraries
-* Add cancel zip API
+* Add cancel zip download API
 * [fix] Fix some configuration bugs in seafevents module
 
 
