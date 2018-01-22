@@ -35,7 +35,9 @@ The configuration of Apache is as following:
     ProxyPassReverse / http://127.0.0.1:8000/
 ```
 
-### 6.2.5 (2018.01.20)
+### 6.2.6 (2018.01.22)
+
+Note: This version does not work on Ubuntu 14.04
 
 * [fix, important] Fix a performance bug in search index
 * [fix, important] Fix a memory leak in listing folder with locked files
@@ -60,6 +62,9 @@ The configuration of Apache is as following:
 * [multi-tenancy, API] Return origin_repo_name when listing libraries
 * Add cancel zip API
 * [fix] Fix some configuration bugs in seafevents module
+
+
+### 6.2.5 (deprecated)
 
 
 ### 6.2.4 (2017.12.20)
