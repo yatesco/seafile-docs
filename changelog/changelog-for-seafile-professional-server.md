@@ -35,9 +35,9 @@ The configuration of Apache is as following:
     ProxyPassReverse / http://127.0.0.1:8000/
 ```
 
-### 6.2.6 (2018.01.22)
+### 6.2.7 (2018.01.22)
 
-
+* [fix, security]
 * [fix, important] Fix a performance bug in search index
 * [fix, important] Fix a memory leak in listing folder with locked files
 * [new] Notify the inviter when a guest register
@@ -63,7 +63,7 @@ The configuration of Apache is as following:
 * [fix] Fix some configuration bugs in seafevents module
 
 
-### 6.2.5 (deprecated)
+### 6.2.5, 6.2.6 (deprecated)
 
 
 ### 6.2.4 (2017.12.20)
