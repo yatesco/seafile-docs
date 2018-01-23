@@ -37,9 +37,9 @@ The configuration of Apache is as following:
 
 ### 6.2.7 (2018.01.22)
 
-* [fix, security]
 * [fix, important] Fix a performance bug in search index
 * [fix, important] Fix a memory leak in listing folder with locked files
+* [fix, security] Fix creating of demo account
 * [new] Notify the inviter when a guest register
 * [new] Add the feature "remember this device" after two-factor authentication
 * [new] Don't allow to move, delete or rename a file when a file is locked

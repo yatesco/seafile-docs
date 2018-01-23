@@ -35,6 +35,14 @@ The configuration of Apache is as following:
     ProxyPassReverse / http://127.0.0.1:8000/
 ```
 
+### 6.2.5 (2018/01/23)
+
+* [fix] Fix OAuth bug
+* [fix] Improve the performance of returning a user's all group libraries
+* [new] Support customize the list of groups that a user can see when sharing a library
+* [fix, security] Fix creating of demo account
+
+
 ### 6.2.4 (2018/01/16)
 
 * [new] Add the feature "remember this device" after two-factor authentication
@@ -47,7 +55,7 @@ The configuration of Apache is as following:
 * [improve] Improve performance of file history page.
 * [improve] Show two file history records at least.
 * [fix] show shared sub-folders when copy/move file/folder to “Other Libraries”.
-* [improve] Remove the white edge of webpage when previewing file via OnlyOffice.
+* [fix] Remove the white edge of webpage when previewing file via OnlyOffice.
 * [fix] Don’t check if user exists when deleting a group member in admin panel.
 * [fix, oauth] Don’t overwrite public registration settings when login a nonexistent user.
 * Other UI improvements.
