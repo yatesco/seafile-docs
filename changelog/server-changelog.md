@@ -40,7 +40,6 @@ The configuration of Apache is as following:
 * [fix] Fix OAuth bug
 * [fix] Improve the performance of returning a user's all group libraries
 * [new] Support customize the list of groups that a user can see when sharing a library
-* [fix, security] Fix creating of demo account
 
 
 ### 6.2.4 (2018/01/16)
