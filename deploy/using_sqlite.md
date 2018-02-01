@@ -61,7 +61,6 @@ The Seafile server package requires the following packages have been installed i
 
 - python 2.7
 - python-setuptools
-- python-imaging
 - python-ldap
 - python-urllib3
 - sqlite3
@@ -69,7 +68,7 @@ The Seafile server package requires the following packages have been installed i
 ```
 #on Debian/Ubuntu 14.04 server
 apt-get update
-apt-get install python2.7 libpython2.7 python-setuptools python-imaging python-ldap python-urllib3 sqlite3
+apt-get install python2.7 libpython2.7 python-setuptools python-ldap python-urllib3 sqlite3
 ```
 
 ```
@@ -77,16 +76,18 @@ apt-get install python2.7 libpython2.7 python-setuptools python-imaging python-l
 # As the default python binary on Ubuntu 16.04 server is python 3, we need to install python (python 2) first.
 apt-get update
 apt-get install python
-apt-get install python2.7 libpython2.7 python-setuptools python-imaging python-ldap python-urllib3 ffmpeg python-pip sqlite3
-pip install pillow moviepy
+apt-get install python2.7 libpython2.7 python-setuptools python-ldap python-urllib3 ffmpeg python-pip sqlite3
+pip install Pillow==4.3.0
+pip install moviepy  # used in movie file thumbnails
 ```
 
 ```
 # on CentOS 7
 yum -y install epel-release
 rpm --import http://li.nux.ro/download/nux/RPM-GPG-KEY-nux.ro
-yum -y install python-imaging MySQL-python python-memcached python-ldap python-urllib3 ffmpeg ffmpeg-devel
-pip install pillow moviepy
+yum -y install MySQL-python python-memcached python-ldap python-urllib3 ffmpeg ffmpeg-devel
+pip install Pillow==4.3.0
+pip install moviepy  # used in movie file thumbnails
 ```
 
 #### Setup
