@@ -35,6 +35,18 @@ The configuration of Apache is as following:
     ProxyPassReverse / http://127.0.0.1:8000/
 ```
 
+### 6.2.8 (2018.02.02)
+
+* [fix] Fix command pro/pro.py --test
+* All logs that went to seahub_django_request.log go to seahub.log
+* Print gunicorn error to runtime/error.log
+* [fix] Don't allow to generate share links via API for encrypted libraries
+* [new] Support online preview for tiff and eps files
+* [new, API] Add api to allow admin to copy files between libraries
+* [new] Allow system admin to share a library as "admin" to another user in admin panel
+* Other UI fixes and improvements
+
+
 ### 6.2.7 (2018.01.22)
 
 * [fix, important] Fix a performance bug in search index
