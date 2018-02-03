@@ -78,6 +78,7 @@
                     <li><a href="#create-upload-link">Create Upload Link</a></li>
                     <li><a href="#delete-upload-link">Delete Upload Link</a></li>
                     <li><a href="#send-upload-link-email">Send Upload Link Email</a></li>
+                    <li><a href="#upload-link-upload">Upload File</a></li>
                 </ul>
             </li>
             <li>
@@ -1466,6 +1467,34 @@ Create upload link for directory with password
 * 403 Permission denied.
 * 403 Sending shared link failed. Email service is not properly configured, please contact administrator.
 * 404 token/library not found
+
+#### <a id="upload-link-upload"></a>Upload File
+
+**GET** http://192.168.1.113:8000/api/v2.1/upload-links/{token}/upload/
+
+**Request parameters**
+
+* token
+
+**Sample request**
+```
+curl -H 'Accept: application/json; indent=4' "http://192.168.1.113:8000/api/v2.1/upload-links/08452f9b1e454ea78e66/upload/"
+```
+
+**Sample response**
+```
+{
+    "upload_link": "http://192.168.1.113:8082/upload-api/4b75c020-d175-4d8e-a233-37d98609bef3"
+}
+```
+
+After get upload link, you can upload file to the shared dir, for more info, please see [Upload File](#upload-file-1).
+
+**Errors**
+
+* 404 Library not found.
+* 404 Upload link not found.
+* 404 Folder not found.
 
 ### <a id="shared-libraries"></a>Shared Libraries
 
