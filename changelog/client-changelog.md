@@ -8,6 +8,13 @@ The Mac Finder sync extension need OSX 10.10+
 
 ## 6.1
 
+### 6.1.5 (2018/02/06)
+
+* Add "trust this device" function to two-step authentication
+* Add search files inside a library
+* Some UI improvements
+
+
 ### 6.1.4 (2017/12/20)
 
 cloud file browser
