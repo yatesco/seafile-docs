@@ -29,6 +29,3 @@ The "source code" of this manual is hosted on GitHub: https://github.com/haiwen/
 * Twitter: @seafile https://twitter.com/seafile
 * Forum: https://forum.seafile.com
 
-## More Documents
-
-* [Wiki containing general information of Seafile](https://seacloud.cc/group/3/wiki/)
