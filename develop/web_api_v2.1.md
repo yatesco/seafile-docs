@@ -206,6 +206,14 @@
         </ul>
     </li>
     <li>
+        <a href="#file-review">File Review</a>
+        <ul>
+            <li><a href="#list-file-reviews">List File Reviews</a></li>
+            <li><a href="#add-file-review">Add File Review</a></li>
+            <li><a href="#update-file-review-status">Update File Review Status</a></li>
+        </ul>
+    </li>
+    <li>
         <a href="#directory">Directory</a>
         <ul>
             <li><a href="#list-directory-entries">List Directory Entries</a></li>
@@ -4060,6 +4068,142 @@ The id of the updated file
 * 403 Can not access repo
 * 404 Folder not found
 * 500 Internal error
+
+## <a id="file-review"></a>File Review
+
+### <a id="list-file-reviews"></a>List File Reviews
+
+**GET** https://cloud.seafile.com/api/v2.1/reviews/
+
+* repo_id
+* path
+
+**Sample request**
+
+```
+curl -H "Authorization: Token e71c00e93af863ba9bcddb61a46bb4de11d713fc" -H 'Accept: application/json; indent=4' "http://192.168.1.113:8000/api/v2.1/reviews/?repo_id=3f66b5ca-b620-4b17-813f-b013e7e571e5&path=123.md"
+```
+
+**Sample response**
+
+```
+[
+    {
+        "status": "finished",
+        "cancel_time": "",
+        "repo_id": "3f66b5ca-b620-4b17-813f-b013e7e571e5",
+        "review_id": 11,
+        "obj_id": "233c19f9c7bb920e4b63472ed3a0c0c1f9bd41fa",
+        "finish_time": "2018-03-05T18:26:31+08:00",
+        "start_time": "2018-03-05T18:25:56+08:00",
+        "reviewer": "lian@lian.com",
+        "reviewer_name": "lian",
+        "path": "/123.md",
+        "reviewer_contact_email": "lian@lian.com"
+    },
+    {
+        "status": "started",
+        "cancel_time": "",
+        "repo_id": "3f66b5ca-b620-4b17-813f-b013e7e571e5",
+        "review_id": 12,
+        "obj_id": "233c19f9c7bb920e4b63472ed3a0c0c1f9bd41fa",
+        "finish_time": "",
+        "start_time": "2018-03-05T18:26:08+08:00",
+        "reviewer": "lian@lian.com",
+        "reviewer_name": "lian",
+        "path": "/123.md",
+        "reviewer_contact_email": "lian@lian.com"
+    }
+]
+```
+
+**Errors**
+
+* 400 repo_id invalid.
+* 400 path invalid.
+* 403 Permission denied.
+* 404 File not found.
+* 404 Library not found.
+* 500 Internal Server Error
+
+### <a id="add-file-review"></a>Add File Review
+
+**POST** https://cloud.seafile.com/api/v2.1/reviews/
+
+* repo_id
+* path
+
+**Sample request**
+
+```
+curl -d "repo_id=3f66b5ca-b620-4b17-813f-b013e7e571e5&path=123.md" -H "Authorization: Token e71c00e93af863ba9bcddb61a46bb4de11d713fc" -H 'Accept: application/json; indent=4' "http://192.168.1.113:8000/api/v2.1/reviews/"
+```
+
+**Sample response**
+
+```
+{
+    "status": "started",
+    "cancel_time": "",
+    "repo_id": "3f66b5ca-b620-4b17-813f-b013e7e571e5",
+    "review_id": 13,
+    "obj_id": "233c19f9c7bb920e4b63472ed3a0c0c1f9bd41fa",
+    "finish_time": "",
+    "start_time": "2018-03-05T18:36:44+08:00",
+    "reviewer": "lian@lian.com",
+    "reviewer_name": "lian",
+    "path": "/123.md",
+    "reviewer_contact_email": "lian@lian.com"
+}
+```
+
+**Errors**
+
+* 400 repo_id invalid.
+* 400 path invalid.
+* 403 Permission denied.
+* 404 File not found.
+* 404 Library not found.
+* 500 Internal Server Error
+
+### <a id="update-file-review-status"></a>Update File Review Status
+
+**PUT** https://cloud.seafile.com/api/v2.1/reviews/{review_id}/
+
+* review_id
+
+**Sample request**
+
+```
+curl -X PUT -d "status=finished" -H "Authorization: Token e71c00e93af863ba9bcddb61a46bb4de11d713fc" -H 'Accept: application/json; indent=4' "http://192.168.1.113:8000/api/v2.1/reviews/5/"
+```
+
+**Sample response**
+
+```
+{
+    "status": "finished",
+    "cancel_time": "",
+    "repo_id": "3f66b5ca-b620-4b17-813f-b013e7e571e5",
+    "review_id": 13,
+    "obj_id": "233c19f9c7bb920e4b63472ed3a0c0c1f9bd41fa",
+    "finish_time": "2018-03-05T18:37:16+08:00",
+    "start_time": "2018-03-05T18:36:44+08:00",
+    "reviewer": "lian@lian.com",
+    "reviewer_name": "lian",
+    "path": "/123.md",
+    "reviewer_contact_email": "lian@lian.com"
+}
+```
+
+**Errors**
+
+* 400 repo_id invalid.
+* 400 path invalid.
+* 403 Permission denied.
+* 404 File not found.
+* 404 Library not found.
+* 500 Internal Server Error
 
 ## <a id="directory"></a>Directory
 
