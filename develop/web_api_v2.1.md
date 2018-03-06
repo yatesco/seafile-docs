@@ -211,6 +211,8 @@
             <li><a href="#list-file-reviews">List File Reviews</a></li>
             <li><a href="#add-file-review">Add File Review</a></li>
             <li><a href="#update-file-review-status">Update File Review Status</a></li>
+            <li><a href="#list-file-review-comments">List File Review Comments</a></li>
+            <li><a href="#add-file-review-comment">Add File Review Comment</a></li>
         </ul>
     </li>
     <li>
@@ -4203,6 +4205,90 @@ curl -X PUT -d "status=finished" -H "Authorization: Token e71c00e93af863ba9bcddb
 * 403 Permission denied.
 * 404 File not found.
 * 404 Library not found.
+* 500 Internal Server Error
+
+### <a id="list-file-review-comments"></a>List File Review Comments
+
+**GET** https://cloud.seafile.com/api/v2.1/reviews/{review_id}/comments/
+
+* review_id
+
+**Sample request**
+
+```
+curl -H "Authorization: Token e71c00e93af863ba9bcddb61a46bb4de11d713fc" -H 'Accept: application/json; indent=4' "http://192.168.1.113:8000/api/v2.1/reviews/15/comments/"
+```
+
+**Sample response**
+
+```
+[
+    {
+        "content": "lian test review comment",
+        "comment_id": 1,
+        "review_id": 15,
+        "time": "2018-03-06T16:35:37+08:00"
+    },
+    {
+        "content": "lian test review comment",
+        "comment_id": 2,
+        "review_id": 15,
+        "time": "2018-03-06T16:35:39+08:00"
+    },
+    {
+        "content": "lian test review comment",
+        "comment_id": 3,
+        "review_id": 15,
+        "time": "2018-03-06T16:35:40+08:00"
+    },
+    {
+        "content": "lian test review comment",
+        "comment_id": 4,
+        "review_id": 15,
+        "time": "2018-03-06T16:36:16+08:00"
+    },
+    {
+        "content": "lian test review comment",
+        "comment_id": 5,
+        "review_id": 15,
+        "time": "2018-03-06T16:37:19+08:00"
+    }
+]
+```
+
+**Errors**
+
+* 404 Review not found.
+* 500 Internal Server Error
+
+### <a id="add-file-review-comment"></a>Add File Review Comment
+
+**POST** https://cloud.seafile.com/api/v2.1/reviews/{review_id}/comments/
+
+* review_id
+* content
+
+**Sample request**
+
+```
+curl -d "content=lian test review comment" -H "Authorization: Token e71c00e93af863ba9bcddb61a46bb4de11d713fc" -H 'Accept: application/json; indent=4' "http://192.168.1.113:8000/api/v2.1/reviews/15/comments/"
+```
+
+**Sample response**
+
+```
+{
+    "content": "lian test review comment",
+    "comment_id": 6,
+    "review_id": 15,
+    "time": "2018-03-06T17:55:55+08:00"
+}
+```
+
+**Errors**
+
+* 400 content invalid.
+* 404 Review not found.
 * 500 Internal Server Error
 
 ## <a id="directory"></a>Directory
