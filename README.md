@@ -1,4 +1,4 @@
-# Introduction
+# Introduction ![](/images/tools-button.png)
 
 Seafile is an open source cloud storage system with file encryption and group sharing.
 
@@ -18,7 +18,9 @@ The different components of Seafile project are released under different license
 * Seafile Android client: GPLv3
 * Desktop syncing client: GPLv2
 * Seafile Server core: AGPLv3
-* Seahub \(Seafile server Web UI\): Apache License v2
+* Seahub \(Seafile server Web UI\): Apache License v
+
+# 
 
 ## About this manual
 
