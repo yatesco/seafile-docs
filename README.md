@@ -1,4 +1,4 @@
-# Introduction ![](/images/tools-button.png)
+# Introduction
 
 Seafile is an open source cloud storage system with file encryption and group sharing.
 
