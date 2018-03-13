@@ -8,6 +8,14 @@ The Mac Finder sync extension need OSX 10.10+
 
 ## 6.1
 
+### 6.1.6 (2018/03/13)
+
+* [fix] Fix crash during login
+* [cloud file browser] Only show search button when the server is pro edition
+* Show detailed path when a library can't be synced because a file is locked
+* [fix] Fix a crash during file syncing caused by files with illegal file name
+* [fix] Fix a bug that causing crash during loading libraries
+
 ### 6.1.5 (2018/02/06)
 
 * Add "trust this device" function to two-step authentication

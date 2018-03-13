@@ -37,7 +37,6 @@ The configuration of Apache is as following:
 
 ### 6.2.9 (2018.02.10)
 
-* [new] Add online preview for SVG files
 * [fix] Support setting region for Swift backend
 * [fix] Notify the admin when an invited people registered
 * [new, API] Add API for cleaning trash
@@ -45,7 +44,7 @@ The configuration of Apache is as following:
 * [fix] Remove redundant warning message in seahub.log
 * [fix] Add API for upload files via upload link
 * [fix] Fix inconsistency in showing user's space usage in multi-tenancy mode
-
+* [new] Add online preview for SVG files
 
 ### 6.2.8 (2018.02.02)
 
