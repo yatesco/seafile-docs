@@ -2968,6 +2968,8 @@ success
 
 * `search_repo`, `all`, `mine`, `shared`, `group`, `public` or a *repo_id*, (`all` for searching in all libraries, etc.), optional. For searching in shared libraries, you can also pass `shared_from` or `not_shared_from` parameter beside `shared` to filter shared libraries.
 
+* `search_path`, path of specifiy library.(This option works only when search_repo is a single repo_id.)
+
 * `search_ftypes`, `all` or `custom`, (`all` for searching all file types, `custom` for only searching the specific file types you defined in `ftype` and `input_fexts`).
 
 * `ftype`, must be in (`Text`, `Document`, `Image`, `Video`, `Audio`, `PDF`, `Markdown`).
@@ -3040,6 +3042,47 @@ curl -H 'Authorization: Token 076de58233c09f19e7a5179abff14ad55987350e' -H 'Acce
     ]
 }
 ```
+
+**Sample request**
+
+    Search for files in a library specified directory.
+    
+    curl -H 'Authorization: Token 076de58233c09f19e7a5179abff14ad55987350e' -H 'Accept: application/json; charset=utf-8; indent=4' "https://cloud.seafile.com/api2/search/?q=a&search_repo=2628a63b-cfad-41f5-a748-392ec9287686&search_path=/testtest"
+
+**Sample response**
+
+    {
+        "has_more": false,
+        "total": 2,
+        "results": [
+            {
+                "repo_owner_name": "admin",
+                "repo_id": "2628a63b-cfad-41f5-a748-392ec9287686",
+                "name": "3a",
+                "repo_owner_contact_email": "admin@admin.com",
+                "repo_owner_email": "admin@admin.com",
+                "last_modified": 1520836447,
+                "content_highlight": "",
+                "fullpath": "/testtest/3a",
+                "repo_name": "dev",
+                "is_dir": false,
+                "size": 0
+            },
+            {
+                "repo_owner_name": "admin",
+                "repo_id": "2628a63b-cfad-41f5-a748-392ec9287686",
+                "name": "1a",
+                "repo_owner_contact_email": "admin@admin.com",
+                "repo_owner_email": "admin@admin.com",
+                "last_modified": 1520836462,
+                "content_highlight": "",
+                "fullpath": "/testtest/1a",
+                "repo_name": "dev",
+                "is_dir": false,
+                "size": 0
+            }
+        ]
+    }
 
 **Errors**
 
