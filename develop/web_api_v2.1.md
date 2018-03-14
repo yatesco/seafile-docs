@@ -2972,6 +2972,20 @@ success
 
 * `ftype`, must be in (`Text`, `Document`, `Image`, `Video`, `Audio`, `PDF`, `Markdown`).
 
+> TEXT: ('ac', 'am', 'bat', 'c', 'cc', 'cmake', 'cpp', 'cs', 'css', 'diff', 'el', 'h', 'html', 'htm', 'java', 'js', 'json', 'less', 'make', 'org', 'php', 'pl', 'properties', 'py', 'rb', 'scala', 'script', 'sh', 'sql', 'txt', 'text', 'tex', 'vi', 'vim', 'xhtml', 'xml', 'log', 'csv', 'groovy', 'rst', 'patch', 'go'),
+>
+> DOCUMENT: ('doc', 'docx', 'ppt', 'pptx', 'odt', 'fodt', 'odp', 'fodp'),
+>
+> IMAGE: ('gif', 'jpeg', 'jpg', 'png', 'ico', 'bmp', 'tif', 'tiff', 'eps'),
+>
+> VIDEO: ('mp4', 'ogv', 'webm', 'mov'),
+>
+> AUDIO: ('mp3', 'oga', 'ogg'),
+>
+> PDF: ('pdf',),
+>
+> MARKDOWN: ('markdown', 'md'),
+
 * `input_fexts`, file extensions manually specific.
 
 * `with_permission`, `true` or `false`. Whether return permission info of the file or not, default is `false`.
