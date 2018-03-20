@@ -38,8 +38,8 @@ The configuration of Apache is as following:
 ### 6.2.10 (2018.3.20)
 
 * Improve performance of file search
-* [fix] Fix a bug in daily active user statistics 
-* [fix] Fix copy files large than 2GB via seaf-fuse
+* [fix] Fix a bug in daily active user statistics
+* [fix] Fix copy files larger than 2GB via seaf-fuse
 * Show 403 error when visit share link if share link creator no longer has access permission to library.
 * [API] Add api for uploading file via upload share link.
 * [API] Support search file/folder in a specific library and folder via api.
@@ -47,8 +47,8 @@ The configuration of Apache is as following:
 * [fix] Fix bug when creating personal/group wiki.
 * [fix] Fix bug when searching specific extension file.
 * [fix] Fix a bug in Two-Factor Authentication.
-* [fix] Fix bug when getting encrpted library history.
-* [fix] Fix UI bug of "New Library" and "More" botton.
+* [fix] Fix bug when getting encrypted library history.
+* [fix] Fix UI bug of "New Library" and "More" buttons.
 * [fix] Fix bug of using truncated image file as avatar.
 * Change value of `per_page` parameter to 10 when search file via api.
 * Support indexing files in background after file uploading via API
