@@ -38,6 +38,7 @@ The configuration of Apache is as following:
 ### 6.2.10 (2018.3.20)
 
 * Improve performance of file search
+* [fix] Fix a bug in daily active user statistics 
 * [fix] Fix copy files large than 2GB via seaf-fuse
 * Show 403 error when visit share link if share link creator no longer has access permission to library.
 * [API] Add api for uploading file via upload share link.
