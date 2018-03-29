@@ -8,6 +8,12 @@ The Mac Finder sync extension need OSX 10.10+
 
 ## 6.1
 
+### 6.1.7 (2018/03/29)
+
+* [fix] Fix file searching
+* [cloud file browser] Support showing indexing progress after uploading a large file
+
+
 ### 6.1.6 (2018/03/13)
 
 * [fix] Fix crash during login
