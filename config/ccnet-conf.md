@@ -46,3 +46,12 @@ When you configure ccnet to use MySQL, the default connection pool size is 100, 
 # Use larger connection pool
 MAX_CONNECTIONS = 200
 ```
+
+## Changing name of table 'Group'
+
+There is a table named 'Group' in ccnet database, however, 'Group' is the key word in some of databases, you can configure this table name to avoid conflicts if necessary:
+```
+[GROUP]
+TABLE_NAME=new_group_name
+```
+
