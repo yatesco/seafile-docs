@@ -12,6 +12,14 @@ Seahub caches items(avatars, profiles, etc) on file system by default(/tmp/seahu
 
 Refer to ["add memcached"](../deploy/add_memcached.md).
 
+## Security settings
+
+```python
+# For security consideration, please set to match the host/domain of your site, e.g., ALLOWED_HOSTS = ['.example.com'].
+# Please refer https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts for details.
+ALLOWED_HOSTS = ['.myseafile.com']
+```
+
 ## User management options
 
 The following options affect user registration, password and session.
