@@ -3797,6 +3797,7 @@ After getting the upload link, POST to this link for uploading files.
 * parent_dir : path in your Seafile repo that you want to upload local file to.
 * relative_path: sub path of "parent_dir", if this sub path does not exist, Seafile will create it recursively.
 * ret-json: returns a json array including file info if set to `1`.
+* need_idx_progress: return a `task_id` to check progress of file uploading if set to `true`.
 
 > NOTE:
 > 1. `parent_dir` must endswith `/`
@@ -3806,15 +3807,21 @@ After getting the upload link, POST to this link for uploading files.
 
 upload file to `/path-in-seafile-repo/`:
 
-    curl -H "Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd" -F file=@local-folder/test.txt -F parent_dir=/path-in-seafile-repo/ http://cloud.seafile.com:8082/upload-api/73c5d117-3bcf-48a0-aa2a-3f48d5274ae3
+```
+curl -H "Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd" -F file=@local-folder/test.txt -F parent_dir=/path-in-seafile-repo/ http://cloud.seafile.com:8082/upload-api/73c5d117-3bcf-48a0-aa2a-3f48d5274ae3
+```
 
 **Sample response for no `ret-json` parameter**
 
-    "adc83b19e793491b1c6ea0fd8b46cd9f32e592fc"
+```
+adc83b19e793491b1c6ea0fd8b46cd9f32e592fc
+```
 
 upload file to `/path-in-seafile-repo/sub_path_1/sub_path_2/`, Seafile will create `sub_path_1/sub_path_2/` recursively if it does not exist:
 
-    curl -H "Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd" -F file=@local-folder/test.txt -F file=@1.jpg -F parent_dir=/path-in-seafile-repo/ -F relative_path=sub_path_1/sub_path_2/ http://cloud.seafile.com:8082/upload-api/73c5d117-3bcf-48a0-aa2a-3f48d5274ae3?ret-json=1
+```
+curl -H "Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd" -F file=@local-folder/test.txt -F file=@1.jpg -F parent_dir=/path-in-seafile-repo/ -F relative_path=sub_path_1/sub_path_2/ http://cloud.seafile.com:8082/upload-api/73c5d117-3bcf-48a0-aa2a-3f48d5274ae3?ret-json=1
+```
 
 **Sample response for with `?ret-json=1` parameter**
 ```
@@ -3832,6 +3839,35 @@ upload file to `/path-in-seafile-repo/sub_path_1/sub_path_2/`, Seafile will crea
 ]
 ```
 
+**Sample request for with `?need_idx_progress=true` parameter**
+
+upload file to `/path-in-seafile-repo/`:
+
+```
+curl -H "Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd" -F file=@local-folder/test.txt -F parent_dir=/path-in-seafile-repo/ http://cloud.seafile.com:8082/upload-api/73c5d117-3bcf-48a0-aa2a-3f48d5274ae3?need_idx_progress=true
+```
+
+**Sample response for with `?need_idx_progress=true` parameter**
+```
+d319a3f4-40da-4d58-9d3f-07864061f633
+```
+
+Then use the `task_id` above to get the progress of file uploading.
+
+**Sample request get progress of file uploading**
+```
+http://192.168.1.113:8082/idx_progress?task_id=d319a3f4-40da-4d58-9d3f-07864061f633
+```
+
+**Sample response**
+```
+{
+    "indexed": 1244,
+    "total": 1244,
+    "status": 0,
+    "ret_json": "[{\"name\": \"seafile-license (1).txt\", \"id\": \"cb8d8eaa4e540d30550a26e399b1207ef798bc67\", \"size\": 1244}]"
+}
+```
 **Note**
 
 - New uploaded file name will be 'test(1).text' if a file with name 'test.txt' already exists in parent directory
