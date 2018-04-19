@@ -35,6 +35,25 @@ The configuration of Apache is as following:
     ProxyPassReverse / http://127.0.0.1:8000/
 ```
 
+### 6.2.11 (2018.4.19)
+
+* Update multi storage backend feature, add STORAGE_CLASS_MAPPING_POLICY setting.
+* [fix] Fix bug when search file by path.
+* [fix] A user that can't create a library can sync a sub-folder of a library now.
+* Add title when view file via OOS.
+* Check if enable LIBRARY_TEMPLATES feature when creating library.
+* [api] Enable return all files recursively under a folder.
+* Preserve share links when admin transfer a library from a user to another user.
+* Add setting to disable user change password.
+* Add setting to disable group dissussion.
+* Add setting to disable file comment.
+* Restart both ccnet-server and seaf-server if seaf-server is down.
+* Fix a bug that some cases elasticsearch be started repeatly.
+* Don’t start seafile if failed to mount http-temp dir.
+* Don’t deactive user if failed to get users from ldap server.
+* [fix] Fix online preview can't work in background node caused by wrong Python path.
+
+
 ### 6.2.10 (2018.3.20)
 
 * Improve performance of file search
