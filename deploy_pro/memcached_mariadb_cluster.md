@@ -8,9 +8,9 @@ Seafile servers share session information within memcached. So when you set up a
 
 The simplest way is to use a single-node memcached server. But when this server fails, some functions in the web UI of Seafile cannot work. So for HA, it's usually desirable to have more than one memcached servers.
 
-### For Seafile Server bofore 6.3 version
+### For Seafile Server bofore 6.2.11 version
 
-For Seafile servers before 6.3 version, we recommend to use an architecture in which the cache items are distributed across all memcached nodes.
+For Seafile servers before 6.2.11 version, we recommend to use an architecture in which the cache items are distributed across all memcached nodes.
 
 Unlike other cluster architecture, when you create a memcached cluster with multiple nodes, the key distribution in memcached cluster is controlled by the memcached clients. So there is no special configuration on the memcached server for building a cluster. But there are a few things to take care when building a memcached cluster:
 
@@ -21,7 +21,7 @@ Unlike other cluster architecture, when you create a memcached cluster with mult
 
 Seafile servers, work as memcached clients, are designed to automatically migrate keys to living memcached nodes when a memcached node fails. But there are some tricky cases when the Seafile servers cannot automatically recover from errors of memcahced servers. That's why we change the recommended architecture since 6.3 version.
 
-### Seafile server 6.3 or newer
+### Seafile server 6.2.11 or newer
 
 In this new recommended architecture, you setup two independent memcached servers, in active/standby mode. A floating IP address (or Virtual IP address in some context) is assigned to the current active node. When the active node goes down, Keepalived will migrate the virtual IP to the standby node. So you actually use a single node memcahced, but use Keepalived (or other alternatives) to provide high availability.
 
