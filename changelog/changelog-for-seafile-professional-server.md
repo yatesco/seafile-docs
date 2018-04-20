@@ -35,6 +35,10 @@ The configuration of Apache is as following:
     ProxyPassReverse / http://127.0.0.1:8000/
 ```
 
+### 6.2.12 (2018.4.20)
+
+* [fix] Fix a bug in seafevents
+
 ### 6.2.11 (2018.4.19)
 
 * Update multi storage backend feature, add STORAGE_CLASS_MAPPING_POLICY setting.
