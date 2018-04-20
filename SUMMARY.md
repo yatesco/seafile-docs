@@ -60,6 +60,7 @@
     * [Office Online Server Integration](deploy_pro/office_web_app.md)
   * [File Search](deploy_pro/details_about_file_search.md)
   * [Virus Scan](deploy_pro/virus_scan.md)
+    * [Run ClamAV as a Daemon](deploy_pro/deploy_clamav_as_daemon.md)
     * [Virus Scan With Kav4fs](deploy_pro/virus_scan_with_kav4fs.md)
   * Storage Backends
     * [Amazon S3 Backend](deploy_pro/setup_with_amazon_s3.md)
