@@ -31,7 +31,6 @@
             <li><a href="#add-a-group">Add a Group</a></li>
             <li><a href="#get-info-of-a-group">Get Info of a Group</a></li>
             <li><a href="#rename-a-group">Rename a Group</a></li>
-            <li><a href="#transfer-a-group">Transfer a Group</a></li>
             <li><a href="#delete-a-group">Delete a Group</a></li>
             <li><a href="#quit-group">Quit Group</a></li>
             <li>
@@ -52,6 +51,14 @@
                     <li><a href="#get-group-messages">Get Group Messages</a></li>
                     <li><a href="#send-a-group-message">Send A Group Message</a></li>
                     <li><a href="#delete-a-group-message">Delete A Group Message</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#group-owned-libraries">Group Owned Libraries</a>
+                <ul>
+                    <li><a href="#add-group-owned-library">Add Group Owned Library</a></li>
+                    <li><a href="#delete-group-owned-library">Delete Group Owned Library</a></li>
+                    <li><a href="#modify-group-owned-library-sub-folder-permission">Modify Group Owned Library Sub-Folder Permission</a></li>
                 </ul>
             </li>
         </ul>
@@ -327,6 +334,7 @@
             <li><a href="#admin-only-get-all-groups">Get all Groups</a></li>
             <li><a href="#admin-only-delete-a-group">Delete a Group</a></li>
             <li><a href="#admin-only-transfer-a-group">Transfer a Group</a></li>
+            <li><a href="#admin-only-set-group-quota">Set Group Quota</a></li>
             <li><a href="#admin-only-get-group-libraries">Get Group Libraries</a></li>
             <li><a href="#admin-only-delete-group-library">Delete Group Library</a></li>
             <li><a href="#admin-only-get-group-members">Get Group Members</a></li>
@@ -1054,6 +1062,103 @@ curl -X DELETE -H 'Authorization: Token 444d2bbf1fc78ffbeedc4704c9f41e32d926ac94
 
 * 400 Discussion id not found.
 * 403 Permission denied.
+
+### <a id="group-owned-libraries"></a>Group Owned Libraries
+
+#### <a id="add-group-owned-library"></a>Add Group Owned Library
+
+**POST** http://192.168.1.113:8000/api/v2.1/groups/{group_id}/group-owned-libraries/
+
+**Request parameters**
+
+* `group_id`
+* `repo_name`
+* `password`
+* `permission`, default `rw`.
+
+**Sample request**
+
+```
+curl -d "repo_name=group-owned-repo-4&permission=r" -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' "http://192.168.1.113:8000/api/v2.1/groups/53/group-owned-libraries/"
+```
+
+**sample response**
+
+```
+{
+    "repo_id": "9bc59af9-265e-4110-a0e2-619450a5cb35",
+    "permission": "r",
+    "encrypted": false,
+    "owner_email": "53@seafile_group",
+    "mtime": "2018-04-23T17:25:37+08:00",
+    "repo_name": "group-owned-repo-4",
+    "size": 0
+}
+```
+
+**Errors**
+
+* 400 repo_name/permission invalid.
+* 403 NOT allow to create encrypted library..
+* 403 Permission denied.
+* 404 Group not found.
+
+#### <a id="delete-group-owned-library"></a>Delete Group Owned Library
+
+**DELETE** http://192.168.1.113:8000/api/v2.1/groups/{group_id}/group-owned-libraries/{repo_id}/
+
+**Request parameters**
+
+* `group_id`
+* `repo_id`
+
+**Sample request**
+
+```
+curl -X DELETE -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' "http://192.168.1.113:8000/api/v2.1/groups/53/group-owned-libraries/9bc59af9-265e-4110-a0e2-619450a5cb35/"
+```
+
+**sample response**
+
+```
+{"success":true}
+```
+
+**Errors**
+
+* 403 Permission denied.
+* 404 Group/Library not found.
+* 500 Internal Server Error
+
+#### <a id="modify-group-owned-library-sub-folder-permission"></a>Modify Group Owned Library Sub-Folder Permission
+
+**PUT** http://192.168.1.113:8000/api/v2.1/groups/{group_id}/group-owned-libraries/{repo_id}/
+
+**Request parameters**
+
+* `group_id`
+* `repo_id`
+* `path`, path of sub folder.
+* `permission`: `r` or `rw`.
+
+**Sample request**
+
+```
+curl -X PUT -d "path=/tmp/&permission=r" -H 'Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd' "http://192.168.1.113:8000/api/v2.1/groups/53/group-owned-libraries/9bc59af9-265e-4110-a0e2-619450a5cb35/"
+```
+
+**sample response**
+
+```
+{"success":true}
+```
+
+**Errors**
+
+* 400 path/permission invalid.
+* 403 Permission denied.
+* 404 Group/Library/Folder not found.
+* 500 Internal Server Error
 
 ## <a id="share"></a>Share
 
@@ -6204,6 +6309,38 @@ Available for Seafile v6.0.0+
 
 * 403 Permission error, only administrator can perform this action
 * 404 User not found.
+* 500 Internal Server Error
+
+### <a id="admin-only-set-group-quota"></a>Set Group Quota
+
+Available for Seafile v6.3
+
+**PUT** https://cloud.seafile.com/api/v2.1/admin/groups/{group_id}/
+
+**Request parameters**
+
+* `quota`: integer, `-2` means no quota limit.
+
+**Sample request**
+
+    curl -X PUT -d "quota=100" -H 'Authorization: Token 444d2bbf1fc78ffbeedc4704c9f41e32d926ac94' https://cloud.seafile.com/api/v2.1/admin/groups/1528/
+
+**Sample response**
+
+```
+{
+    "owner": "1@1.com",
+    "created_at": "2016-08-04T17:34:05+08:00",
+    "id": 1528,
+    "name": "test_group",
+    "quota": 100
+}
+```
+
+**Errors**
+
+* 400 Quota invalid.
+* 403 Permission error, only administrator can perform this action
 * 500 Internal Server Error
 
 ### <a id="admin-only-get-group-libraries"></a>Get Group Libraries
