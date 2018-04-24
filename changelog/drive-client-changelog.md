@@ -10,12 +10,12 @@
 
 ### 0.9.0 (2018/04/24)
 
-* Separate libraries into "My Libraries", "Group Libraries", "Shared libraries"
-* [fix] Fix a bug in cleaning of cache
-* [Win] Update the kernal drive
+* Libraries are displayed under three folders "My Libraries", "Group Libraries", "Shared libraries"
+* [fix] Fix a bug in cleaning cache
+* [Win] Update the kernel drive
 * Improve the syncing notification message
-* [Mac] Include the kernal drive with the Seafile package
-* [Mac] Add finder sidebar shortcut
+* [Mac] Include the kernal drive with the SeaDrive package
+* [Mac] Add Finder sidebar shortcut
 * Add file search
 
 
