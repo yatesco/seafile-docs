@@ -8,9 +8,20 @@
 
 ## ChangeLog
 
+### 0.9.0 (2018/04/24)
+
+* Separate libraries into "My Libraries", "Group Libraries", "Shared libraries"
+* [fix] Fix a bug in cleaning of cache
+* [Win] Update the kernal drive
+* Improve the syncing notification message
+* [Mac] Include the kernal drive with the Seafile package
+* [Mac] Add finder sidebar shortcut
+* Add file search
+
+
 ### 0.8.6 \(2018/03/19\)
 
-* \[fix\] Fix compatibility with Visio and other applications by implementing a missing system API 
+* \[fix\] Fix compatibility with Visio and other applications by implementing a missing system API
 
 ### 0.8.5 \(2018/01/03\)
 
@@ -140,6 +151,3 @@
 ### 0.1.0 \(2016/09/02\)
 
 * Initial release
-
-
-
