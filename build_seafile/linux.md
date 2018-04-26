@@ -2,7 +2,7 @@
 
 #### Preparation
 
-The following list is what you need to install on your development machine. __You should install all of them before you build seafile__.
+The following list is what you need to install on your development machine. __You should install all of them before you build Seafile__.
 
 Package names are according to Ubuntu 14.04. For other Linux distros, please find their corresponding names yourself.
 
@@ -23,14 +23,15 @@ Package names are according to Ubuntu 14.04. For other Linux distros, please fin
 * valac
 * cmake
 * python-simplejson (for seaf-cli)
+* libssl-dev
 
 ```bash
-sudo apt-get install autoconf automake libtool libevent-dev libcurl4-openssl-dev libgtk2.0-dev uuid-dev intltool libsqlite3-dev valac libjansson-dev cmake qtchooser qtbase5-dev libqt5webkit5-dev qttools5-dev qttools5-dev-tools
+sudo apt-get install autoconf automake libtool libevent-dev libcurl4-openssl-dev libgtk2.0-dev uuid-dev intltool libsqlite3-dev valac libjansson-dev cmake qtchooser qtbase5-dev libqt5webkit5-dev qttools5-dev qttools5-dev-tools libssl-dev
 ```
 For a fresh Fedora 20 / 23 installation, the following will install all dependencies via YUM:
 
 ```bash
-$ sudo yum install wget gcc libevent-devel openssl-devel gtk2-devel libuuid-devel sqlite-devel jansson-devel intltool cmake libtool vala gcc-c++ qt5-qtbase-devel qt5-qttools-devel qt5-qtwebkit-devel libcurl-devel
+$ sudo yum install wget gcc libevent-devel openssl-devel gtk2-devel libuuid-devel sqlite-devel jansson-devel intltool cmake libtool vala gcc-c++ qt5-qtbase-devel qt5-qttools-devel qt5-qtwebkit-devel libcurl-devel openssl-devel
 ```
 
 #### Building
@@ -52,6 +53,9 @@ For example, if the latest released seafile client is 5.0.7, then just use the *
 - seafile-client-5.0.7.tar.gz
 
 ```sh
+# without alias wget= might not work
+shopt -s expand_aliases
+
 export version=5.0.7
 alias wget='wget --content-disposition -nc'
 wget https://github.com/haiwen/libsearpc/archive/v3.0-latest.tar.gz
