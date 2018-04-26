@@ -4,7 +4,7 @@ Seahub caches items (avatars, profiles, etc) on the file system in /tmp/seahub_c
 
 First, make sure `libmemcached` library and development headers are installed on your system.
 
-On Ubuntu 16.04 or CentOS 7, you can install it.
+On Ubuntu 16.04 (`apt-get install python-dev`) and CentOS 7 (`yum install python-devel`) you can install it using the systems package manager.
 
 ```
 sudo apt-get install libmemcached-dev
