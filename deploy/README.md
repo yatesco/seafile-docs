@@ -10,9 +10,9 @@ Here we describe how to deploy Seafile from prebuild binary packages.
 
 In production environment we recommend using MySQL as the database and config Seafile web behing Nginx or Apache. For those who are not familiar with Nginx and Apache. We recommend Nginx, since it is easier to config than Apache.
 
-Note: We have prepared an installation script [Deploy Seafile with an installation script](https://github.com/haiwen/seafile-server-installer). The installer offer a quick and easy way to set up a production ready Seafile Server using MariaDB, Memcached and NGINX as a reverse proxy in under 5 minutes.
+Note: We provide three options for deploying seafile services. The first option is through [docker deployment](deploy_with_docker.md), which is the way we mainly recommend. The second option is to install through the [installation script](https://github.com/haiwen/seafile-server-installer), this way will be relatively simple.
 
-You can also install Seafile manually without the installation script as following:
+You can also manually install Seafile without selecting the above options as shown below:
 
 Basic:
 
