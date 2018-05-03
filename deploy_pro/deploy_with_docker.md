@@ -10,13 +10,13 @@ If you are not familiar with docker commands, please refer to [docker documentat
 
 ### Getting Started
 
-Login the seafile private registry:
+Login the Seafile private registry:
 
 ```sh
 docker login {host}
 ```
 
-You can see the private registry information on the [customer center download page](https://customer.seafile.com/downloads/)
+You can find the private registry information on the [customer center download page](https://customer.seafile.com/downloads/)
 
 To run the seafile server container:
 
