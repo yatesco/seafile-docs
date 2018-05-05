@@ -8,6 +8,14 @@
 
 ## ChangeLog
 
+### 0.9.2 (2018/05/05)
+
+* Fix a bug that causing SeaDrive crash
+
+### 0.9.1 (2018/04/24)
+
+* Fix a bug that causing crash when file search menu is clicked
+
 ### 0.9.0 (2018/04/24)
 
 * Libraries are displayed under three folders "My Libraries", "Group Libraries", "Shared libraries"
