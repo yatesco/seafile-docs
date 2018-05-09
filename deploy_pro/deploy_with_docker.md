@@ -25,7 +25,7 @@ docker run -d --name seafile \
   -e SEAFILE_SERVER_HOSTNAME=seafile.example.com \
   -v /opt/seafile-data:/shared \
   -p 80:80 \
-  {host}/seafileltd/seafile:latest
+  {host}/seafileltd/seafile-pro:latest
 ```
 
 Wait for a few minutes for the first time initialization, then visit `http://seafile.example.com` to open Seafile Web UI.
@@ -46,7 +46,7 @@ docker run -d --name seafile \
   -e SEAFILE_ADMIN_PASSWORD=a_very_secret_password \
   -v /opt/seafile-data:/shared \
   -p 80:80 \
-  {host}/seafileltd/seafile:latest
+  {host}/seafileltd/seafile-pro:latest
 ```
 
 If you forget the admin password, you can add a new admin account and then go to the sysadmin panel to reset user password.
@@ -57,7 +57,7 @@ If you set `SEAFILE_SERVER_LETSENCRYPT` to `true`, the container would request a
 
 e.g.
 
-```
+```sh
 docker run -d --name seafile \
   -e SEAFILE_SERVER_LETSENCRYPT=true \
   -e SEAFILE_SERVER_HOSTNAME=seafile.example.com \
@@ -66,10 +66,11 @@ docker run -d --name seafile \
   -v /opt/seafile-data:/shared \
   -p 80:80 \
   -p 443:443 \
-  {host}/seafileltd/seafile:latest
+  {host}/seafileltd/seafile-pro:latest
 ```
 
 If you want to use your own SSL certificate:
+
 - create a folder `/opt/seafile-data/ssl`, and put your certificate and private key under the ssl directory.
 - Assume your site name is `seafile.example.com`, then your certificate must have the name `seafile.example.com.crt`, and the private key must have the name `seafile.example.com.key`.
 
@@ -79,7 +80,7 @@ The config files are under `shared/seafile/conf`. You can modify the configurati
 
 After modification, you need to restart the container:
 
-```
+```sh
 docker restart seafile
 ```
 
@@ -93,7 +94,7 @@ The system logs are under `/shared/logs/var-log`, or `/opt/seafile-data/logs/var
 
 Ensure the container is running, then enter this command:
 
-```
+```sh
 docker exec -it seafile /opt/seafile/seafile-server-latest/reset-admin.sh
 ```
 
@@ -108,18 +109,16 @@ Placeholder spot for shared volumes. You may elect to store certain persistent i
 - /shared/db: This is the data directory for mysql server
 - /shared/seafile: This is the directory for seafile server configuration and data.
 - /shared/logs: This is the directory for logs.
-    - /shared/logs/var-log: This is the directory that would be mounted as `/var/log` inside the container. For example, you can find the nginx logs in `shared/logs/var-log/nginx/`.
-    - /shared/logs/seafile: This is the directory that would contain the log files of seafile server processes. For example, you can find seaf-server logs in `shared/logs/seafile/seafile.log`.
+  - /shared/logs/var-log: This is the directory that would be mounted as `/var/log` inside the container. For example, you can find the nginx logs in `shared/logs/var-log/nginx/`.
+  - /shared/logs/seafile: This is the directory that would contain the log files of seafile server processes. For example, you can find seaf-server logs in `shared/logs/seafile/seafile.log`.
 - /shared/ssl: This is directory for certificate, which does not exist by default.
-- /shared/bootstrap.conf: This file does not exist by default. You can create it by your self, and write the configuration of files similar to the `samples` folder.
-
 
 ### Upgrading Seafile Server
 
 TO upgrade to latest version of seafile server:
 
 ```sh
-docker pull {host}/seafileltd/seafile:latest
+docker pull {host}/seafileltd/seafile-pro:latest
 docker rm -f seafile
 docker run -d --name seafile \
   -e SEAFILE_SERVER_LETSENCRYPT=true \
@@ -129,7 +128,7 @@ docker run -d --name seafile \
   -v /opt/seafile-data:/shared \
   -p 80:80 \
   -p 443:443 \
-  {host}/seafileltd/seafile:latest
+  {host}/seafileltd/seafile-pro:latest
 ```
 
 If you are one of the early users who use the `launcher` script, you should refer to [upgrade from old format](https://github.com/haiwen/seafile-docker/blob/master/upgrade_from_old_format.md) document.
