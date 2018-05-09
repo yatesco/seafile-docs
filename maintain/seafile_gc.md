@@ -84,7 +84,7 @@ seaf-gc.sh [repo-id1] [repo-id2] ...
 
 If libraries ids are specified, only those libraries will be checked for garbage.
 
-As described before, there are two types of garbage blocks to be removed. Sometimes just removing the first type (those belong to deleted libraries) of unused blocks is good enough. In this case, the GC program won't bother to check the libraries for outdated historic blocks. The "-r" option implements this feature:
+As described before, there are two types of garbage blocks to be removed. Sometimes just removing the first type of blocks (those that belong to deleted libraries) is good enough. In this case, the GC program won't bother to check the libraries for outdated historic blocks. The "-r" option implements this feature:
 
 ```
 seaf-gc.sh -r
