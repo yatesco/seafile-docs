@@ -5267,10 +5267,11 @@ At least one of followings:
 * name
 * note
 * storage, the unit is MB.
+* role.
 
 **Sample request**
 
-    curl -v -X PUT -d "password=654321&is_staff=true&storage=100" -H "Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd" -H 'Accept: application/json; indent=4' https://cloud.seafile.com/api2/accounts/user@mail.com/
+    curl -v -X PUT -d "password=654321&is_staff=true&storage=100&role=guest" -H "Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd" -H 'Accept: application/json; indent=4' https://cloud.seafile.com/api2/accounts/user@mail.com/
 
 **Sample response**
 
