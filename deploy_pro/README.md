@@ -27,10 +27,6 @@ Install Seafile Pro Edition
 - [Storage Backend Encryption](seaf_encrypt.md)
 - [Data migration between different backends](migrate.md)
 
-## Config Options
-
-- [Seafile Professional Server Configurable Options](configurable_options.md)
-
 ## Search
 
 - [Details about File Search](details_about_file_search.md)
