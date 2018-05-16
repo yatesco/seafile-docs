@@ -3015,6 +3015,8 @@ success
 
 * `with_permission`, `true` or `false`. Whether return permission info of the file or not, default is `false`.
 
+* `obj_type`, the type of the search object.`None`: all type, `file`: only file, `dir`: only dir.
+
 **Sample request**
 ```
 curl -H 'Authorization: Token 076de58233c09f19e7a5179abff14ad55987350e' -H 'Accept: application/json; charset=utf-8; indent=4' "https://cloud.seafile.com/api2/search/?q=seafile&search_repo=all&search_ftypes=custom&ftype=Document&input_fexts=md,png&per_page=3&page=3&with_permission=true"
@@ -3102,6 +3104,46 @@ curl -H 'Authorization: Token 076de58233c09f19e7a5179abff14ad55987350e' -H 'Acce
                 "fullpath": "/testtest/1a",
                 "repo_name": "dev",
                 "is_dir": false,
+                "size": 0
+            }
+        ]
+    }
+
+**Sample request**
+
+    Search for dir in a library.
+    curl -H 'Authorization: Token 076de58233c09f19e7a5179abff14ad55987350e' -H 'Accept: application/json; charset=utf-8; indent=4' "https://cloud.seafile.com/api2/search/?q=a&obj_type=dir"
+
+**Sample response**
+
+    {
+        "has_more": false,
+        "total": 2,
+        "results": [
+            {
+                "repo_owner_name": "admin",
+                "repo_id": "2628a63b-cfad-41f5-a748-392ec9287686",
+                "name": "3a",
+                "repo_owner_contact_email": "admin@admin.com",
+                "repo_owner_email": "admin@admin.com",
+                "last_modified": 1520836447,
+                "content_highlight": "",
+                "fullpath": "/testtest/3a",
+                "repo_name": "dev",
+                "is_dir": true,
+                "size": 0
+            },
+            {
+                "repo_owner_name": "admin",
+                "repo_id": "2628a63b-cfad-41f5-a748-392ec9287686",
+                "name": "1a",
+                "repo_owner_contact_email": "admin@admin.com",
+                "repo_owner_email": "admin@admin.com",
+                "last_modified": 1520836462,
+                "content_highlight": "",
+                "fullpath": "/testtest/1a",
+                "repo_name": "dev",
+                "is_dir": true,
                 "size": 0
             }
         ]
