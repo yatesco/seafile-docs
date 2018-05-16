@@ -3036,6 +3036,7 @@ curl -H 'Authorization: Token 076de58233c09f19e7a5179abff14ad55987350e' -H 'Acce
             "fullpath": "/\u4e1c\u98ce\u65e5\u4ea7/Archived/seafile \u8fd0\u7ef4.docx",
             "repo_name": "\u4ee3\u7ef4\u5ba2\u6237",
             "is_dir": false,
+            "repo_type": 'mine',
             "size": 494490
         },
         {
@@ -3048,6 +3049,7 @@ curl -H 'Authorization: Token 076de58233c09f19e7a5179abff14ad55987350e' -H 'Acce
             "fullpath": "/\u4ea7\u54c1\u4f7f\u7528\u6587\u6863/seafile-tutorial.doc",
             "repo_name": "seafile-dev",
             "is_dir": false,
+            "repo_type": 'mine',
             "size": 414208
         },
         {
@@ -3060,6 +3062,7 @@ curl -H 'Authorization: Token 076de58233c09f19e7a5179abff14ad55987350e' -H 'Acce
             "fullpath": "/\u90e8\u7f72\u548c\u8fd0\u7ef4/seafile_vm.md",
             "repo_name": "seafile-dev",
             "is_dir": false,
+            "repo_type": 'shared',
             "size": 3255
         }
     ]
