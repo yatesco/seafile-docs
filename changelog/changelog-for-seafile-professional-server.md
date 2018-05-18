@@ -35,6 +35,25 @@ The configuration of Apache is as following:
     ProxyPassReverse / http://127.0.0.1:8000/
 ```
 
+### 6.2.13 (2018.5.18)
+
+* [new] Support only return files or folders when search file via api.
+* [fix] Fix notification display behavior on some page.
+* [fix] Recreate folder when failed because of `file already exists` error for the first time.
+* [fix] Fix bug of saving file via onlyoffice.
+* [fix] Fix bug when set user’s reference id to ‘’ via admin api.
+* [fix] Fix bug of group info page display in organization admin panel.
+* [improve] Disable full email search if current user is a guest user.
+* [improve] Return library type when search file via api.
+* [improve] Add user auth info to cookie when login via OAuth.
+* [improve] Return timestamp instead of time string when get user clean up library trash event via api.
+* [improve] Check quota when copy/move file/folder.
+* [improve] Distinguish file or folder when send library/folder notice/email.
+* [improve] Sort by parent folder’s name when get file/folder recursively.
+* [improve] Remove unused Python imports in ADFS module.
+* [improve] Optimizate library udpate event.
+* [improve] Remove seahub gunicorn access log.
+
 ### 6.2.12 (2018.4.20)
 
 * [fix] Fix a bug in seafevents
