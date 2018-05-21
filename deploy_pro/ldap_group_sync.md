@@ -12,6 +12,8 @@ The importing or syncing process maps groups from LDAP directory server to group
 
 Some LDAP servers, such as AD, allows setting a group as member of another group. This is called "nested group". Our process supports syncing nested groups. Supposed group B is a member of group A, the result would be: every member of group B will be imported as a member of both group A and group B.
 
+Since version 6.3.0, in addition to supporting syncing nested groups, we also support importing groups from OU to the Seafile's Departments. This will preserve the hierarchical relationship between departments or groups in the OU. 
+
 There are two modes of operation:
 
 * Periodical: the syncing process will be executed in a fixed interval
@@ -40,6 +42,10 @@ Before enabling LDAP group sync, you should have configured LDAP authentication.
 The following are LDAP group sync related options. They're in the "[LDAP_SYNC]" section of [ccnet.conf](../config/ccnet-conf.md).
 
 * **ENABLE_GROUP_SYNC**: set to "true" if you want to enable ldap group syncing
+* **IMPORT_BY_OU**: set to "true" if you want to sync groups by OU; need Seafile-pro-6.3.0 and above version
+* **IMPORT_GROUP_STRUCTURE**: you may be want to preserve the hierarchical relationship between departments or groups in the OU, when import groups from OU to Seafile. set to "true"; need Seafile-pro-6.3.0 and above version
+* **DEL_GROUP_IF_NOT_FOUND**: set to "true", will deleted the groups if not found it in the OU; need Seafile-pro-6.3.0 and above version
+* **CREATE_GROUP_REPO**: set to "true", if you want to automatically create a Department Libraries when imoprt groups from OU; need Seafile-pro-6.3.0 and above version
 * **SYNC_INTERVAL**: The interval to sync. Unit is minutes. Default to 60 minutes.
 * **GROUP_OBJECT_CLASS**: This is the name of the class used to search for group objects. In Active Directory, it's usually "group"; in OpenLDAP or others, you may use "groupOfNames","groupOfUniqueNames" or "posixGroup", depends on your LDAP server. The default value is "group".
 * **GROUP_FILTER**: An additional filter to use when searching group objects. If it's set, the final filter used to run search is "(&(objectClass=GROUP_OBJECT_CLASS)(GROUP_FILTER))"; otherwise the final filter would be "(objectClass=GROUP_OBJECT_CLASS)".
@@ -48,7 +54,9 @@ The following are LDAP group sync related options. They're in the "[LDAP_SYNC]" 
 
 The search base for groups is the "BASE_DN" set in "[LDAP]" section of ccnet.conf. 
 
-Here is an example configuration for Active Directory:
+### Sync nested groups
+
+Here is an example configuration for syncing nested groups in Active Directory:
 
 ```
 [LDAP]
@@ -65,7 +73,7 @@ SYNC_INTERVAL = 60
 
 For AD, you usually don't need to configure other options except for "ENABLE_GROUP_SYNC". That's because the default values for other options are the usual values for AD. If you have special settings in your LDAP server, just set the corresponding options.
 
-Here is an example configuration for OpenLDAP:
+Here is an example configuration for syncing nested groups in OpenLDAP:
 
 ```
 [LDAP]
@@ -77,6 +85,56 @@ LOGIN_ATTR = mail
 
 [LDAP_SYNC]
 ENABLE_GROUP_SYNC = true
+SYNC_INTERVAL = 60
+GROUP_OBJECT_CLASS = groupOfNames
+```
+
+### Sync OU groups
+
+If you want to sync groups by OU, in addition to `ENABLE_GROUP_SYNC = true`, you should add the following options:
+
+* **IMPORT_BY_OU=true**: Specify to import groups from the OU.(Must be configured)
+* **IMPORT_GROUP_STRUCTURE=true**：Preserve the hierarchical relationship between departments or groups in the OU.(Recommended configure)
+* **DEL_GROUP_IF_NOT_FOUND=true**：Will deleted the groups if not found it in the OU.(Carefully configure)
+* **CREATE_GROUP_REPO=true**：Automatically create a Department Libraries when imoprt groups from OU.(Recommended configure)
+
+Here is an example configuration for syncing OU groups in Active Directory:
+
+```
+[LDAP]
+HOST = ldap://192.168.1.123/
+BASE = cn=users,dc=example,dc=com
+USER_DN = administrator@example.local
+PASSWORD = secret
+LOGIN_ATTR = mail
+
+[LDAP_SYNC]
+ENABLE_GROUP_SYNC = true
+IMPORT_BY_OU = true
+IMPORT_GROUP_STRUCTURE = true
+DEL_GROUP_IF_NOT_FOUND = true
+CREATE_GROUP_REPO = true
+SYNC_INTERVAL = 60
+```
+
+Same as syncing nested groups, if you use OpenLDAP or others, you should assign the `GROUP_OBJECT_CLASS`, this depends on your LDAP server.
+
+Here is an example configuration for syncing OU groups in OpenLDAP:
+
+```
+[LDAP]
+HOST = ldap://192.168.1.123/
+BASE = cn=users,dc=example,dc=com
+USER_DN = administrator@example.local
+PASSWORD = secret
+LOGIN_ATTR = mail
+
+[LDAP_SYNC]
+ENABLE_GROUP_SYNC = true
+IMPORT_BY_OU = true
+IMPORT_GROUP_STRUCTURE = true
+DEL_GROUP_IF_NOT_FOUND = true
+CREATE_GROUP_REPO = true
 SYNC_INTERVAL = 60
 GROUP_OBJECT_CLASS = groupOfNames
 ```
