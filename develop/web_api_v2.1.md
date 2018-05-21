@@ -192,7 +192,7 @@
                     <li><a href="#update-file-1">Update File</a></li>
                 </ul>
             </li>
-            <li><a href="#get-upload-blocks-link">Get Upload Blocks Link</a></li>
+            <li><a href="#get-upload-blocks-link">Uploading Large File in Blocks</a></li>
             <li><a href="#get-update-blocks-link">Get Update Blocks Link</a></li>
             <li>
                 <a href="#file-comments">File Comment</a>
@@ -3922,26 +3922,75 @@ The id of the updated file
 - 440 Invalid filename
 - 500 Internal server error
 
-### <a id="get-upload-blks-link"></a>Get Upload Blocks Link
+### <a id="get-upload-blocks-link"></a>Uploading Large File in Blocks
 
-**GET** https://cloud.seafile.com/api2/repos/{repo-id}/upload-blks-link/
+#### Step 1, POST the block list to Seahub
+
+**POST** https://cloud.seafile.com/api2/repos/{repo-id}/upload-blks-link/?p=/parent-folder-path
 
 **Request parameters**
 
-* repo-id
+* `repo-id`.
+* `p`, parent folder path, default is `/`.
+* `blklist`: string of block ids, seperated by `,`, for example:
 
 **Sample request**
 
-    curl -H "Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd" https://cloud.seafile.com/api2/repos/99b758e6-91ab-4265-b705-925367374cf0/upload-blks-link/
+```
+curl -d 'blklist=1faee57feb464aa1f61165722c93a5075d1993ff,0cfc000bbde26a7b9d4754103501af76a7a' -H "Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd" https://cloud.seafile.com/api2/repos/99b758e6-91ab-4265-b705-925367374cf0/upload-blks-link/?p=/parent-folder-path
+```
 
 **Sample response**
 
-    "https://cloud.seafile.com/seafhttp/upload-blks-api/569213db-7297-457a-907d-e2259a277c05"
+The response is in json format containing the following fields:
 
-**Errors**
+* rawblksurl: the url to upload raw blocks to file server
+* commiturl: the url to commit file in file server
+* blklist: the block id list of the missing blocks
 
-- 403 Can not access repo
-- 520 above quota
+```
+{
+    "blklist": [
+        "1faee57feb464aa1f61165722c93a5075d1993ff",
+        "0cfc000bbde26a7b9d4754103501af76a7a36f89"
+    ],
+    "commiturl": "https://dev.seafile.com/seafhttp/upload-blks-api/389479a2-01fb-4073-8cd3-8f5115e78fc9?commitonly=true&ret-json=true",
+    "rawblksurl": "https://dev.seafile.com/seafhttp/upload-raw-blks-api/389479a2-01fb-4073-8cd3-8f5115e78fc9"}
+```
+
+#### Step 2, upload missing blocks to rawblksurl
+
+```
+POST http://server-address:8082/upload-raw-blks-api/<token>
+```
+
+The content of the request is in multipart form-data format.
+
+```
+------WebKitFormBoundaryWWPdItXjNGBDlSuZ
+Content-Disposition: form-data; name="file"; filename=<block id>
+Content-Type: text/xml
+
+
+------WebKitFormBoundaryWWPdItXjNGBDlSuZ--
+
+```
+
+Each block is sent in a file field. You should set `filename` attribute to the id of each block.
+
+### Step 3, let the server to commit the file
+
+```
+POST commiturl: `http://server-address:8082/upload-blks-api/<token>?commitonly=true&ret-json=true`
+```
+
+The content is in multipart form-data format. Fields and corresponding values are:
+
+* parent_dir: parent directory path
+* file_name: file name
+* file_size: file size in bytes
+* replace: whether overwrite file with the same name. 1 for replace, 0 for not replace.
+* blockids: block id list of the file in JSON list format
 
 ### <a id="get-update-blks-link"></a>Get Update Blocks Link
 
