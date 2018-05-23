@@ -3937,7 +3937,7 @@ The id of the updated file
 **Sample request**
 
 ```
-curl -d 'blklist=1faee57feb464aa1f61165722c93a5075d1993ff,0cfc000bbde26a7b9d4754103501af76a7a' -H "Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd" https://cloud.seafile.com/api2/repos/99b758e6-91ab-4265-b705-925367374cf0/upload-blks-link/?p=/parent-folder-path
+curl -H "Authorization: Token 2bac21cab9eb0c4baac10d1e6fc3cf590f0dcf17" -d 'blklist=1faee57feb464aa1f61165722c93a5075d1993ff,0cfc000bbde26a7b9d4754103501af76a7a' http://192.168.1.113:8000/api2/repos/d4f596ed-09ea-4ac6-8d59-12acbd089097/upload-blks-link/?p=/
 ```
 
 **Sample response**
@@ -3948,21 +3948,34 @@ The response is in json format containing the following fields:
 * commiturl: the url to commit file in file server
 * blklist: the block id list of the missing blocks
 
+
 ```
 {
     "blklist": [
         "1faee57feb464aa1f61165722c93a5075d1993ff",
-        "0cfc000bbde26a7b9d4754103501af76a7a36f89"
-    ],
-    "commiturl": "https://dev.seafile.com/seafhttp/upload-blks-api/389479a2-01fb-4073-8cd3-8f5115e78fc9?commitonly=true&ret-json=true",
-    "rawblksurl": "https://dev.seafile.com/seafhttp/upload-raw-blks-api/389479a2-01fb-4073-8cd3-8f5115e78fc9"}
+        "0cfc000bbde26a7b9d4754103501af76a7a"],
+    "commiturl": "http://192.168.1.113:8082/upload-blks-api/8bd0ae30-e543-4e03-84ce-03a3cc79e14a?commitonly=true&ret-json=true",
+    "rawblksurl": "http://192.168.1.113:8082/upload-raw-blks-api/8bd0ae30-e543-4e03-84ce-03a3cc79e14a"
+}
 ```
+
+**Errors**
+
+* 403 Permission denied.
+* 404 Folder not found.
+* 404 Library not found.
+* 443 Out of quota.
+* 500 Internal Server Error
 
 #### Step 2, upload missing blocks to rawblksurl
 
 ```
 POST http://server-address:8082/upload-raw-blks-api/<token>
 ```
+
+**Request parameters**
+
+* filename: file block id.
 
 The content of the request is in multipart form-data format.
 
@@ -3973,10 +3986,28 @@ Content-Type: text/xml
 
 
 ------WebKitFormBoundaryWWPdItXjNGBDlSuZ--
-
 ```
 
 Each block is sent in a file field. You should set `filename` attribute to the id of each block.
+
+**Sample request**
+
+```
+curl -F file=@1.txt -F filename=1faee57feb464aa1f61165722c93a5075d1993ff https://dev.seafile.com/seafhttp/upload-raw-blks-api/389479a2-01fb-4073-8cd3-8f5115e78fc9
+```
+
+**Success**
+
+   Response code 200 if everything is ok
+
+**Errors**
+
+* 400 Invalid URL | Access denied | Duplicate progress id | Invalid Seafile-Content-Range
+* 440 Invalid filename
+* 441 File already exists
+* 442 File size is too large
+* 443 Out of quota
+* 500 Internal error
 
 ### Step 3, let the server to commit the file
 
@@ -3986,11 +4017,40 @@ POST commiturl: `http://server-address:8082/upload-blks-api/<token>?commitonly=t
 
 The content is in multipart form-data format. Fields and corresponding values are:
 
+**Request parameters**
+
 * parent_dir: parent directory path
 * file_name: file name
 * file_size: file size in bytes
 * replace: whether overwrite file with the same name. 1 for replace, 0 for not replace.
 * blockids: block id list of the file in JSON list format
+
+**Sample request**
+
+```
+curl -d "parent_dir=/&file_name=1.md&file_size=1234&replace=0&blockids=["1faee57feb464aa1f61165722c93a5075d1993ff","0cfc000bbde26a7b9d4754103501af76a7a36f89"]" -H 'Accept: application/json; charset=utf-8; indent=4' https://dev.seafile.com/seafhttp/upload-blks-api/389479a2-01fb-4073-8cd3-8f5115e78fc9?commitonly=true&ret-json=true
+```
+
+**Sample response**
+
+If you set 'ret-json' into url arguments, new_file_id will be returned
+
+```
+{
+    "id": "4ccd37916552e2943314027931edd0b45240be7c"
+}
+```
+
+**Errors**
+
+* 400 Invalid URL | Access denied | Duplicate progress id | Invalid Seafile-Content-Range
+* 440 Invalid filename
+* 441 File already exists
+* 442 File size is too large
+* 443 Out of quota
+* 446 Block missing
+* 403 Permission denied
+* 500 Internal error
 
 ### <a id="get-update-blks-link"></a>Get Update Blocks Link
 
