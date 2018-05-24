@@ -12,7 +12,7 @@ The importing or syncing process maps groups from LDAP directory server to group
 
 Some LDAP servers, such as AD, allows setting a group as member of another group. This is called "nested group". Our process supports syncing nested groups. Supposed group B is a member of group A, the result would be: every member of group B will be imported as a member of both group A and group B.
 
-Since version 6.3.0, in addition to supporting syncing nested groups, we also support importing groups from OU to the Seafile's Departments. This will preserve the hierarchical relationship between departments or groups in the OU. 
+Since version 6.3.0, in addition to syncing nested groups, we also support importing groups from OU to the Seafile's Departments. This will map the hierarchical relationship of the OUs to departments hierarchy. 
 
 There are two modes of operation:
 
@@ -42,7 +42,7 @@ Before enabling LDAP group sync, you should have configured LDAP authentication.
 The following are LDAP group sync related options. They're in the "[LDAP_SYNC]" section of [ccnet.conf](../config/ccnet-conf.md).
 
 * **ENABLE_GROUP_SYNC**: set to "true" if you want to enable ldap group syncing
-* **IMPORT_GROUP_STRUCTURE**: you may be want to preserve the hierarchical relationship between departments or groups in the OU, when import groups from OU to Seafile. set to "true"; need Seafile-pro-6.3.0 and above version
+* **IMPORT_GROUP_STRUCTURE**: you may want to preserve the hierarchical relationship of the OU, when import groups from OU to Seafile. set to "true"; need Seafile-pro-6.3.0 and above version
 * **DEL_GROUP_IF_NOT_FOUND**: set to "true", will deleted the groups if not found it in the OU; need Seafile-pro-6.3.0 and above version
 * **CREATE_GROUP_REPO**: set to "true", if you want to automatically create a Department Libraries when imoprt groups from OU; need Seafile-pro-6.3.0 and above version
 * **GROUP_OBJECT_CLASS**: This is the name of the class used to search for group objects. In Active Directory, it's usually "group"; in OpenLDAP or others, you may use "groupOfNames","groupOfUniqueNames" or "posixGroup", depends on your LDAP server. The default value is "group". And **since version 6.3.0**, we have added **"organizationalUnit"**, if you want to import groups by OU, you should and only set `GROUP_OBJECT_CLASS=organizationalUnit`.
@@ -53,7 +53,7 @@ The following are LDAP group sync related options. They're in the "[LDAP_SYNC]" 
 
 The search base for groups is the "BASE_DN" set in "[LDAP]" section of ccnet.conf. 
 
-### Sync nested groups
+### Sync groups from LDAP or AD
 
 Here is an example configuration for syncing nested groups in Active Directory:
 
@@ -88,14 +88,14 @@ SYNC_INTERVAL = 60
 GROUP_OBJECT_CLASS = groupOfNames
 ```
 
-### Sync OU groups
+### Sync OU to departments
 
 If you want to sync groups by OU, in addition to `ENABLE_GROUP_SYNC = true`, you should add the following options:
 
 * **GROUP_OBJECT_CLASS=organizationalUnit**: Specify to import groups from the OU.(Must be configured)
-* **IMPORT_GROUP_STRUCTURE=true**：Preserve the hierarchical relationship between departments or groups in the OU.(Recommended configure)
-* **DEL_GROUP_IF_NOT_FOUND=true**：Will deleted the groups if not found it in the OU.(Carefully configure)
-* **CREATE_GROUP_REPO=true**：Automatically create a Department Libraries when imoprt groups from OU.(Recommended configure)
+* **IMPORT_GROUP_STRUCTURE=true**：Preserve the hierarchical relationship between departments or groups in the OU.(Recommended)
+* **DEL_GROUP_IF_NOT_FOUND=true**：Will deleted the groups if not found it in the OU.(Use with caution)
+* **CREATE_GROUP_REPO=true**：Automatically create a Department Libraries when imoprt groups from OU.(Recommended)
 
 Here is an example configuration for syncing OU groups:(Do not need to distinguish between AD and OpenLDAP.)
 
@@ -111,7 +111,7 @@ LOGIN_ATTR = mail
 ENABLE_GROUP_SYNC = true
 GROUP_OBJECT_CLASS = organizationalUnit
 IMPORT_GROUP_STRUCTURE = true
-DEL_GROUP_IF_NOT_FOUND = true
+DEL_GROUP_IF_NOT_FOUND = false
 CREATE_GROUP_REPO = true
 SYNC_INTERVAL = 60
 ```
