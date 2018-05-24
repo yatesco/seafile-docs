@@ -42,12 +42,11 @@ Before enabling LDAP group sync, you should have configured LDAP authentication.
 The following are LDAP group sync related options. They're in the "[LDAP_SYNC]" section of [ccnet.conf](../config/ccnet-conf.md).
 
 * **ENABLE_GROUP_SYNC**: set to "true" if you want to enable ldap group syncing
-* **IMPORT_BY_OU**: set to "true" if you want to sync groups by OU; need Seafile-pro-6.3.0 and above version
 * **IMPORT_GROUP_STRUCTURE**: you may be want to preserve the hierarchical relationship between departments or groups in the OU, when import groups from OU to Seafile. set to "true"; need Seafile-pro-6.3.0 and above version
 * **DEL_GROUP_IF_NOT_FOUND**: set to "true", will deleted the groups if not found it in the OU; need Seafile-pro-6.3.0 and above version
 * **CREATE_GROUP_REPO**: set to "true", if you want to automatically create a Department Libraries when imoprt groups from OU; need Seafile-pro-6.3.0 and above version
+* **GROUP_OBJECT_CLASS**: This is the name of the class used to search for group objects. In Active Directory, it's usually "group"; in OpenLDAP or others, you may use "groupOfNames","groupOfUniqueNames" or "posixGroup", depends on your LDAP server. The default value is "group". And **since version 6.3.0**, wo have added **"organizationalUnit"**, if you want to import groups by OU, you should and only set `GROUP_OBJECT_CLASS=organizationalUnit`.
 * **SYNC_INTERVAL**: The interval to sync. Unit is minutes. Default to 60 minutes.
-* **GROUP_OBJECT_CLASS**: This is the name of the class used to search for group objects. In Active Directory, it's usually "group"; in OpenLDAP or others, you may use "groupOfNames","groupOfUniqueNames" or "posixGroup", depends on your LDAP server. The default value is "group".
 * **GROUP_FILTER**: An additional filter to use when searching group objects. If it's set, the final filter used to run search is "(&(objectClass=GROUP_OBJECT_CLASS)(GROUP_FILTER))"; otherwise the final filter would be "(objectClass=GROUP_OBJECT_CLASS)".
 * **GROUP_MEMBER_ATTR**: The attribute field to use when loading the group's members. For most directory servers, the attributes is "member", which is the default value.For "posixGroup", it should be set to "memberUid".
 * **USER_ATTR_IN_MEMBERUID**: The user attribute set in 'memberUid' option, which is used in "posixGroup".The default value is "uid".
@@ -93,12 +92,12 @@ GROUP_OBJECT_CLASS = groupOfNames
 
 If you want to sync groups by OU, in addition to `ENABLE_GROUP_SYNC = true`, you should add the following options:
 
-* **IMPORT_BY_OU=true**: Specify to import groups from the OU.(Must be configured)
+* **GROUP_OBJECT_CLASS=organizationalUnit**: Specify to import groups from the OU.(Must be configured)
 * **IMPORT_GROUP_STRUCTURE=true**：Preserve the hierarchical relationship between departments or groups in the OU.(Recommended configure)
 * **DEL_GROUP_IF_NOT_FOUND=true**：Will deleted the groups if not found it in the OU.(Carefully configure)
 * **CREATE_GROUP_REPO=true**：Automatically create a Department Libraries when imoprt groups from OU.(Recommended configure)
 
-Here is an example configuration for syncing OU groups in Active Directory:
+Here is an example configuration for syncing OU groups:(Do not need to distinguish between AD and OpenLDAP.)
 
 ```
 [LDAP]
@@ -110,33 +109,11 @@ LOGIN_ATTR = mail
 
 [LDAP_SYNC]
 ENABLE_GROUP_SYNC = true
-IMPORT_BY_OU = true
+GROUP_OBJECT_CLASS = organizationalUnit
 IMPORT_GROUP_STRUCTURE = true
 DEL_GROUP_IF_NOT_FOUND = true
 CREATE_GROUP_REPO = true
 SYNC_INTERVAL = 60
-```
-
-Same as syncing nested groups, if you use OpenLDAP or others, you should assign the `GROUP_OBJECT_CLASS`, this depends on your LDAP server.
-
-Here is an example configuration for syncing OU groups in OpenLDAP:
-
-```
-[LDAP]
-HOST = ldap://192.168.1.123/
-BASE = cn=users,dc=example,dc=com
-USER_DN = administrator@example.local
-PASSWORD = secret
-LOGIN_ATTR = mail
-
-[LDAP_SYNC]
-ENABLE_GROUP_SYNC = true
-IMPORT_BY_OU = true
-IMPORT_GROUP_STRUCTURE = true
-DEL_GROUP_IF_NOT_FOUND = true
-CREATE_GROUP_REPO = true
-SYNC_INTERVAL = 60
-GROUP_OBJECT_CLASS = groupOfNames
 ```
 
 **NOTE** Periodical sync won't happen immediately after you restart seafile server. It gets scheduled after the first sync interval. For example if you set sync interval to 30 minutes, the first auto sync will happen after 30 minutes you restarts. To sync immediately, you need to manually trigger it. This is covered in the next section.
