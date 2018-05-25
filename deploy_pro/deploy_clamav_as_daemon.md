@@ -17,21 +17,22 @@ User root
 ```
 
 ### Start the clamav-daemon
+
 ```
 systemctl start clamav-daemon
 ```
 
-Test the software
+* Test the software
 
 ```
 $ curl https://www.eicar.org/download/eicar.com.txt | clamdscan -
 ```
 
 The output must include:
+
 ```
 stream: Eicar-Test-Signature FOUND
 ```
-
 
 ## For CentOS 7
 
@@ -44,14 +45,15 @@ yum install clamav-server clamav-data clamav-filesystem clamav-lib clamav-update
 
 ### Run freshclam
 
-1. Configure the freshclam to updating database
+* Configure the freshclam to updating database
 
 ```
 cp /etc/freshclam.conf /etc/freshclam.conf.bak
 sed -i '/^Example/d' /etc/freshclam.conf
 ```
 
-2. Create the init script
+* Create the init script
+
 ```
 cat > /usr/lib/systemd/system/clam-freshclam.service << 'EOF'
 # Run the freshclam as daemon
@@ -71,7 +73,8 @@ WantedBy=multi-user.target
 EOF
 ```
 
-3. Boot up
+* Boot up
+
 ```
 systemctl enable clam-freshclam.service
 systemctl start clam-freshclam.service
@@ -95,7 +98,7 @@ LocalSocket /var/run/clamd.sock
 
 ### Run Clamd
 
-1. Create the init script
+* Create the init script
 
 ```
 cat > /etc/init.d/clamd << 'EOF'
@@ -125,20 +128,21 @@ EOF
 chmod +x /etc/init.d/clamd
 ```
 
-2. Boot up
+* Boot up
 
 ```
 chkconfig clamd on
 service clamd start
 ```
 
-3. Test the software
+* Test the software
 
 ```
 $ curl https://www.eicar.org/download/eicar.com.txt | clamdscan -
 ```
 
 The output must include:
+
 ```
 stream: Eicar-Test-Signature FOUND
 ```
