@@ -167,7 +167,8 @@
             <li><a href="#view-file-through-owa">View File Through Owa</a></li>
             <li><a href="#download-file">Download File</a></li>
             <li><a href="#get-file-detail">Get File Detail</a></li>
-            <li><a href="#get-file-history">Get File History</a></li>
+            <li><a href="#get-file-history">Get File History (Deprecated)</a></li>
+            <li><a href="#get-file-history-v2.1">Get File History</a></li>
             <li><a href="#restore-file-from-history">Restore File From History</a></li>
             <li><a href="#download-file-revision">Download File From a Revision</a></li>
             <li><a href="#create-file">Create File</a></li>
@@ -3407,6 +3408,8 @@ For more info, you can see [this official docs](http://wopi.readthedocs.org/en/l
 
 ### <a id="get-file-history"></a>Get File History
 
+This is an deprecated api, please use the new one below.
+
 **GET** https://cloud.seafile.com/api2/repos/{repo-id}/file/history/?p=/foo.c
 
 **Request parameters**
@@ -3464,6 +3467,109 @@ For more info, you can see [this official docs](http://wopi.readthedocs.org/en/l
 
 * 400 Path is missing
 * 404 File not found
+
+### <a id="get-file-history-v2.1"></a>Get File History
+
+**GET** http://192.168.1.113:8000/api/v2.1/repos/{repo_id)/file/history/?path={path}
+
+**Request parameters**
+
+* `repo-id`
+* `path`, file path.
+* `commit_id`, commit id used for get more file history. If not passed, Seafile will use library's head commit id as its default value and return the latest history.
+
+**Sample request**
+
+```
+curl -H 'Authorization: Token 2bac21cab9eb0c4baac10d1e6fc3cf590f0dcf17' -H 'Accept: application/json; charset=utf-8; indent=4' http://192.168.1.113:8000/api/v2.1/repos/f26331a8-8acd-4c3d-9c73-352c595c36c8/file/history/?path=/Work/Seafile/for-test-web-api.md
+```
+
+**Sample response**
+
+```
+{
+    "next_start_commit": "bf642ec4272a28dd4a785c67932e2e42bc4508cb",
+    "data": [
+        {
+            "commit_id": "ec91c5ec26b7f5f0d0711c8c40201b9047801b0f",
+            "rev_file_id": "1e09388a46d7654e463a4513c96c19c82e38228c",
+            "ctime": "2018-03-16T15:24:03+08:00",
+            "creator_name": "lian",
+            "creator_email": "lian@lian.com",
+            "rev_renamed_old_path": null,
+            "creator_avatar_url": "/media/avatars/default.png",
+            "path": "/Work/Seafile/for-test-web-api.md",
+            "creator_contact_email": "lian@lian.com",
+            "size": 15829,
+            "description": "Modified \"for-test-web-api.md\""
+        },
+        {
+            "commit_id": "d6dcffa32d2b73741de26ac19d45759f2269ae32",
+            "rev_file_id": "1292177376d527288389186cac6f55869a9f82c6",
+            "ctime": "2018-02-02T16:17:13+08:00",
+            "creator_name": "lian",
+            "creator_email": "lian@lian.com",
+            "rev_renamed_old_path": null,
+            "creator_avatar_url": "/media/avatars/default.png",
+            "path": "/Work/Seafile/for-test-web-api.md",
+            "creator_contact_email": "lian@lian.com",
+            "size": 15829,
+            "description": "Modified \"for-test-web-api.md\""
+        }
+    ]
+}
+```
+
+If `next_start_commit`'s value is `false`, means that all file history has been returned.
+
+For the sample response, `next_start_commit`'s value is `bf642ec4272a28dd4a785c67932e2e42bc4508cb`, so if you want to get more file history, send a request with `commit_id` parameter.
+
+```
+curl -H 'Authorization: Token 2bac21cab9eb0c4baac10d1e6fc3cf590f0dcf17' -H 'Accept: application/json; charset=utf-8; indent=4' "http://192.168.1.113:8000/api/v2.1/repos/f26331a8-8acd-4c3d-9c73-352c595c36c8/file/history/?path=/Work/Seafile/for-test-web-api.md&commit_id=bf642ec4272a28dd4a785c67932e2e42bc4508cb"
+```
+
+Then more file history returned.
+
+```
+{
+    "next_start_commit": "8747a025a7034e445fcfe3d351ac94b4d332564f",
+    "data": [
+        {
+            "commit_id": "82fc46eb0fc35cec7db64845d4db7ab6bfae70bc",
+            "rev_file_id": "a1c31c771ff069edd80acc8b3ae16c3428b8ad36",
+            "ctime": "2018-01-30T17:27:59+08:00",
+            "creator_name": "lian",
+            "creator_email": "lian@lian.com",
+            "rev_renamed_old_path": null,
+            "creator_avatar_url": "/media/avatars/default.png",
+            "path": "/Work/Seafile/for-test-web-api.md",
+            "creator_contact_email": "lian@lian.com",
+            "size": 15829,
+            "description": "Modified \"for-test-web-api.md\""
+        },
+        {
+            "commit_id": "ce12a11a0a2e1cf5dd2bc8a453b1ef2b12511ed1",
+            "rev_file_id": "059fb6daa974f528d0be3c6e7072d5c71fd65a34",
+            "ctime": "2018-01-20T12:26:06+08:00",
+            "creator_name": "lian",
+            "creator_email": "lian@lian.com",
+            "rev_renamed_old_path": null,
+            "creator_avatar_url": "/media/avatars/default.png",
+            "path": "/Work/Seafile/for-test-web-api.md",
+            "creator_contact_email": "lian@lian.com",
+            "size": 15831,
+            "description": "Modified \"for-test-web-api.md\""
+        }
+    ]
+}
+```
+
+**Errors**
+
+* 400 path invalid.
+* 403 Permission denied.
+* 404 Library/File not found.
+* 500 Internal Server Error
 
 ### <a id="restore-file-from-history"></a>Restore File From History
 
