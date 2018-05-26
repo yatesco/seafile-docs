@@ -1,5 +1,28 @@
 # Seafile Server Changelog
 
+## 6.3
+
+In version 6.3, Django is upgraded to version 1.11. Django 1.8, which is used in version 6.2, is deprecated in 2018 April.
+
+With this upgrade, the fast-cgi mode is no longer supported. You need to config Seafile behind Nginx/Apache in WSGI mode.
+
+### 6.3.0 beta
+
+* UI Improvements: moving buttons to top bar, improve scrolling in file/library list
+* Update Django to 1.11, remove fast-cgi support
+* Update jQuery to version 3.3.1
+* Update pdf.js
+* Add invite people link to share dialog if the feature is enabled
+* Remove login log after delete a user
+* \[admin] Support customize site title, site name, CSS via Web UI
+* \[beta] Wiki, users can create public wikis
+* Add an option to define the listening address for WSGI mode
+* \[fix] Fix a bug that causing seaf-fsck crash
+* \[fix] Fix support for uploading folder via ‘Cloud file browser’
+* \[fix] Cancel Zip download task at the server side when user close zip download dialog
+* Other fixes
+
+
 ## 6.2
 
 From 6.2, It is recommended to use WSGI mode for communication between Seahub and Nginx/Apache. Two steps are needed if you'd like to switch to WSGI mode:
