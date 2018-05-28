@@ -216,6 +216,7 @@
             <li><a href="#delete-directory">Delete Directory</a></li>
             <li><a href="#download-directory">Download Directory</a></li>
             <li><a href="#revert-directory">Revert Directory</a></li>
+            <li><a href="#move-directory-merge">Move Directory Merge</a></li>
         </ul>
     </li>
     <li>
@@ -4521,6 +4522,38 @@ Perform the following two steps to download directory
 * 400 commit_id invalid.
 * 404 Library/Folder not found.
 * 403 Permission denied.
+* 500 Internal Server Error
+
+### <a id="move-directory-merge"></a>Move Directory Merge
+
+**POST** http://192.168.1.113:8000/api/v2.1/move-folder-merge/
+
+* src_repo_id
+* src_parent_dir
+* src_dirent_name
+* dst_repo_id
+* dst_parent_dir
+
+**Sample request**
+
+```
+curl -d 'src_repo_id=09b7d3c0-5f0d-49be-9318-7ca136f386cd&src_parent_dir=/&src_dirent_name=1&dst_repo_id=d4aac5b9-28d4-4372-a4b3-d6de171402df&dst_parent_dir=/' -H 'Authorization: Token 2bac21cab9eb0c4baac10d1e6fc3cf590f0dcf17' -H 'Accept: application/json; charset=utf-8; indent=4' "http://192.168.1.113:8000/api/v2.1/move-folder-merge/"
+```
+
+**Sample response**
+
+```
+{
+    "success": true
+}
+```
+
+**Errors**
+
+* 400 parameter invalid.
+* 404 Library/Folder not found.
+* 403 Permission denied.
+* 443 Out of quota.
 * 500 Internal Server Error
 
 ##### <a id="download-directory-query-task-progress"></a>Query Task Progress
