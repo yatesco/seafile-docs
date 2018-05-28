@@ -96,6 +96,8 @@
                     <li><a href="#update-permission-of-group-shared-library">Update Permission of Group Shared Library</a></li>
                     <li><a href="#batch-share-libraries-to-user">Batch Share Libraries to User</a></li>
                     <li><a href="#batch-share-libraries-to-group">Batch Share Libraries to Group</a></li>
+                    <li><a href="#batch-copy-items">Batch Copy Items</a></li>
+                    <li><a href="#batch-move-items">Batch Move Items</a></li>
                 </ul>
             <li>
                 <a href="#shared-folders">Shared Folders</a>
@@ -1834,6 +1836,132 @@ Create upload link for directory with password
 * 404 Library not found.
 * 404 Group not found.
 * 500 Internal Server Error
+
+#### <a id="batch-copy-items"></a>Batch Copy Items
+
+**POST** http://192.168.1.113:8000/api/v2.1/repos/batch-copy-item/
+
+**Request parameters**
+
+Content type of parameter must be `application/json` and passed through POST request's body.
+
+```
+{
+    "src_repo_id":"",
+    "dst_repo_id":"",
+    "paths":[
+        {"src_path":"","dst_path":""},
+        {"src_path":"","dst_path":""},
+    ]
+}
+```
+
+**Sample request**
+
+```
+curl -d '{"src_repo_id":"d4aac5b9-28d4-4372-a4b3-d6de171402df", "dst_repo_id":"09b7d3c0-5f0d-49be-9318-7ca136f386cd", "paths":[{"src_path":"/folder-1","dst_path":"/"},{"src_path":"/file-1","dst_path":"/"},{"src_path":"/file-2","dst_path":"/dst-folder"}]}' -H 'Authorization: Token 2bac21cab9eb0c4baac10d1e6fc3cf590f0dcf17' -H 'Accept: application/json; charset=utf-8; indent=4' -H 'Content-Type: application/json' "http://192.168.1.113:8000/api/v2.1/repos/batch-copy-item/"
+```
+
+**Sample response**
+
+```
+{
+    "failed": [
+        {
+            "src_repo_id": "d4aac5b9-28d4-4372-a4b3-d6de171402df",
+            "dst_path": "/dst-folder/",
+            "dst_repo_id": "09b7d3c0-5f0d-49be-9318-7ca136f386cd",
+            "src_path": "/file-2/",
+            "error_msg": "Folder /dst-folder/ not found."
+        }
+    ],
+    "success": [
+        {
+            "src_repo_id": "d4aac5b9-28d4-4372-a4b3-d6de171402df",
+            "dst_path": "/",
+            "dst_repo_id": "09b7d3c0-5f0d-49be-9318-7ca136f386cd",
+            "src_path": "/folder-1/",
+            "dst_obj_name": "folder-1 (2)"
+        },
+        {
+            "src_repo_id": "d4aac5b9-28d4-4372-a4b3-d6de171402df",
+            "dst_path": "/",
+            "dst_repo_id": "09b7d3c0-5f0d-49be-9318-7ca136f386cd",
+            "src_path": "/file-1/",
+            "dst_obj_name": "file-1 (2)"
+        }
+    ]
+}
+```
+
+**Errors**
+
+* 400 src_repo_id/dst_repo_id/paths invalid.
+* 403 Permission denied.
+* 404 Library not found.
+
+#### <a id="batch-move-items"></a>Batch Move Items
+
+**POST** http://192.168.1.113:8000/api/v2.1/repos/batch-move-item/
+
+**Request parameters**
+
+Content type of parameter must be `application/json` and passed through POST request's body.
+
+```
+{
+    "src_repo_id":"",
+    "dst_repo_id":"",
+    "paths":[
+        {"src_path":"","dst_path":""},
+        {"src_path":"","dst_path":""},
+    ]
+}
+```
+
+**Sample request**
+
+```
+curl -d '{"src_repo_id":"d4aac5b9-28d4-4372-a4b3-d6de171402df", "dst_repo_id":"09b7d3c0-5f0d-49be-9318-7ca136f386cd", "paths":[{"src_path":"/folder-1","dst_path":"/"},{"src_path":"/file-1","dst_path":"/"},{"src_path":"/file-2","dst_path":"/dst-folder"}]}' -H 'Authorization: Token 2bac21cab9eb0c4baac10d1e6fc3cf590f0dcf17' -H 'Accept: application/json; charset=utf-8; indent=4' -H 'Content-Type: application/json' "http://192.168.1.113:8000/api/v2.1/repos/batch-move-item/"
+```
+
+**Sample response**
+
+```
+{
+    "failed": [
+        {
+            "src_repo_id": "d4aac5b9-28d4-4372-a4b3-d6de171402df",
+            "dst_path": "/dst-folder/",
+            "dst_repo_id": "09b7d3c0-5f0d-49be-9318-7ca136f386cd",
+            "src_path": "/file-2/",
+            "error_msg": "Folder /dst-folder/ not found."
+        }
+    ],
+    "success": [
+        {
+            "src_repo_id": "d4aac5b9-28d4-4372-a4b3-d6de171402df",
+            "dst_path": "/",
+            "dst_repo_id": "09b7d3c0-5f0d-49be-9318-7ca136f386cd",
+            "src_path": "/folder-1/",
+            "dst_obj_name": "folder-1 (4)"
+        },
+        {
+            "src_repo_id": "d4aac5b9-28d4-4372-a4b3-d6de171402df",
+            "dst_path": "/",
+            "dst_repo_id": "09b7d3c0-5f0d-49be-9318-7ca136f386cd",
+            "src_path": "/file-1/",
+            "dst_obj_name": "file-1 (4)"
+        }
+    ]
+}
+```
+
+**Errors**
+
+* 400 src_repo_id/dst_repo_id/paths invalid.
+* 403 Permission denied.
+* 404 Library not found.
 
 ### <a id="shared-folders"></a>Shared Folders
 
