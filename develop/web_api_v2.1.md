@@ -307,6 +307,11 @@
             <li><a href="#admin-only-delete-a-library">Delete a Library</a></li>
             <li><a href="#admin-only-transfer-a-library">Transfer a Library</a></li>
             <li><a href="#admin-only-get-library-dirents">Get Library Dirents</a></li>
+            <li><a href="#admin-only-get-all-deleted-librares">Get All Deleted Libraries</a></li>
+            <li><a href="#admin-only-get-deleted-librares-by-owner">Get Deleted Libraries by Owner</a></li>
+            <li><a href="#admin-only-clean-deleted-library">Clean Deleted Library</a></li>
+            <li><a href="#admin-only-restore-deleted-library">Restore Deleted Library</a></li>
+            <li><a href="#admin-only-clean-all-deleted-libraries">Clean ALl Deleted Libraries</a></li>
         </ul>
     </li>
     <li>
@@ -5927,6 +5932,181 @@ Available for Seafile v6.0.0+
 * 403 Permission error, only administrator can perform this action
 * 404 Library not found.
 * 404 Folder not found.
+* 500 Internal Server Error
+
+### <a id="admin-only-get-all-deleted-librares"></a>Get All Deleted Libraries
+
+**GET** http://192.168.1.113:8000/api/v2.1/admin/trash-libraries/
+
+* `page`, default 1.
+* `per_page`, default 100.
+
+**Sample request**
+
+```
+curl -H 'Authorization: Token 2bac21cab9eb0c4baac10d1e6fc3cf590f0dcf17' -H 'Accept: application/json; charset=utf-8; indent=4' "http://192.168.1.113:8000/api/v2.1/admin/trash-libraries/"
+```
+
+**Sample response**
+
+```
+{
+    "page_info": {
+        "current_page": 1,
+        "has_next_page": false
+    },
+    "repos": [
+        {
+            "owner": "1@1.com",
+            "delete_time": "2018-06-04T17:24:55+08:00",
+            "name": "a-stor-2",
+            "id": "ed46b580-8df7-4a2b-bb45-c3d179cfc668"
+        },
+        {
+            "owner": "1@1.com",
+            "delete_time": "2018-06-04T17:24:54+08:00",
+            "name": "a-st",
+            "id": "560d9b7b-fd24-4ce3-9e4a-20a953bee1b9"
+        },
+        {
+            "owner": "lian@lian.com",
+            "delete_time": "2018-06-04T17:21:35+08:00",
+            "name": "dst",
+            "id": "09b7d3c0-5f0d-49be-9318-7ca136f386cd"
+        },
+        {
+            "owner": "lian@lian.com",
+            "delete_time": "2018-06-04T17:21:32+08:00",
+            "name": "k",
+            "id": "fbf4b69c-5a46-41a3-a9a3-58c1274ec536"
+        },
+        {
+            "owner": "lian@lian.com",
+            "delete_time": "2018-06-04T17:21:29+08:00",
+            "name": "src",
+            "id": "d4aac5b9-28d4-4372-a4b3-d6de171402df"
+        }
+    ]
+}
+```
+
+**Errors**
+
+* 403 Permission error, only administrator can perform this action
+* 500 Internal Server Error
+
+
+### <a id="admin-only-get-deleted-librares-by-owner"></a>Get Deleted Libraries by Owner
+
+**GET** http://192.168.1.113:8000/api/v2.1/admin/trash-libraries/?owner={owner}
+
+* `owner`, library owner's email.
+
+**Sample request**
+
+```
+curl -H 'Authorization: Token 2bac21cab9eb0c4baac10d1e6fc3cf590f0dcf17' -H 'Accept: application/json; charset=utf-8; indent=4' "http://192.168.1.113:8000/api/v2.1/admin/trash-libraries/?owner=1@1.com"
+```
+
+**Sample response**
+
+```
+{
+    "repos": [
+        {
+            "owner": "1@1.com",
+            "delete_time": "2018-06-04T17:24:55+08:00",
+            "name": "a-stor-2",
+            "id": "ed46b580-8df7-4a2b-bb45-c3d179cfc668"
+        },
+        {
+            "owner": "1@1.com",
+            "delete_time": "2018-06-04T17:24:54+08:00",
+            "name": "a-st",
+            "id": "560d9b7b-fd24-4ce3-9e4a-20a953bee1b9"
+        }
+    ],
+    "search_owner": "1@1.com"
+}
+```
+
+**Errors**
+
+* 403 Permission error, only administrator can perform this action
+* 500 Internal Server Error
+
+### <a id="admin-only-clean-deleted-library"></a>Clean Deleted Library
+
+**DELETE** http://192.168.1.113:8000/api/v2.1/admin/trash-libraries/{repo_id}/
+
+* `repo_id`, deleted library's id.
+
+**Sample request**
+
+```
+curl -X DELETE -H 'Authorization: Token 2bac21cab9eb0c4baac10d1e6fc3cf590f0dcf17' -H 'Accept: application/json; charset=utf-8; indent=4' "http://192.168.1.113:8000/api/v2.1/admin/trash-libraries/560d9b7b-fd24-4ce3-9e4a-20a953bee1b9/"
+```
+
+**Sample response**
+
+```
+{
+    "success": true
+}
+```
+
+**Errors**
+
+* 403 Permission error, only administrator can perform this action
+* 500 Internal Server Error
+
+### <a id="admin-only-restore-deleted-library"></a>Restore Deleted Library
+
+**PUT** http://192.168.1.113:8000/api/v2.1/admin/trash-libraries/d4aac5b9-28d4-4372-a4b3-d6de171402df/
+
+* `repo_id`, deleted library's id.
+
+**Sample request**
+
+```
+curl -X PUT -H 'Authorization: Token 2bac21cab9eb0c4baac10d1e6fc3cf590f0dcf17' -H 'Accept: application/json; charset=utf-8; indent=4' "http://192.168.1.113:8000/api/v2.1/admin/trash-libraries/d4aac5b9-28d4-4372-a4b3-d6de171402df/"
+```
+
+**Sample response**
+
+```
+{
+    "success": true
+}
+```
+
+**Errors**
+
+* 403 Permission error, only administrator can perform this action
+* 404 Library does not exist in trash.
+* 500 Internal Server Error
+
+### <a id="admin-only-clean-all-deleted-libraries"></a>Clean ALl Deleted Libraries
+
+**DELETE** http://192.168.1.113:8000/api/v2.1/admin/trash-libraries/
+
+**Sample request**
+
+```
+curl -X DELETE -H 'Authorization: Token 2bac21cab9eb0c4baac10d1e6fc3cf590f0dcf17' -H 'Accept: application/json; charset=utf-8; indent=4' "http://192.168.1.113:8000/api/v2.1/admin/trash-libraries/"
+```
+
+**Sample response**
+
+```
+{
+    "success": true
+}
+```
+
+**Errors**
+
+* 403 Permission error, only administrator can perform this action
 * 500 Internal Server Error
 
 ## <a id="admin-only-shares"></a>Shares
