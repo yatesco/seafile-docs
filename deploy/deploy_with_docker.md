@@ -126,6 +126,81 @@ docker run -d --name seafile \
 
 If you are one of the early users who use the `launcher` script, you should refer to [upgrade from old format](https://github.com/haiwen/seafile-docker/blob/master/upgrade_from_old_format.md) document.
 
+### Backup and Recovery
+
+#### Struct
+
+We assume your seafile volumns path is in `/shared`. And you want to backup to `/backup` directory.
+You can create a layout similar to the following in /backup directory:
+
+```struct
+/backup
+---- databases/  contains database backup files
+---- data/  contains backups of the data directory
+```
+
+The data files to be backed up:
+
+```struct
+/shared/seafile/conf  # configuration files
+/shared/seafile/pro-data  # data of es
+/shared/seafile/seafile-data # data of seafile
+/shared/seafile/seahub-data # data of seahub
+```
+
+#### Backup
+
+Steps:
+
+  1. Backup the databases;
+  2. Backup the seafile data directory;
+
+[Backup Order: Database First or Data Directory First](../maintain/backup_recovery.md#backup-order-info)
+
+* backing up Database:
+
+  ```bash
+  # It's recommended to backup the database to a separate file each time. Don't overwrite older database backups for at least a week.
+  cd /backup/databases
+  docker exec -it seafile mysqldump  -uroot --opt ccnet_db > ccnet_db.sql
+  docker exec -it seafile mysqldump  -uroot --opt seafile_db > seafile_db.sql
+  docker exec -it seafile mysqldump  -uroot --opt seahub_db > seahub_db.sql
+  ```
+
+* Backing up Seafile library data:
+
+  * To directly copy the whole data directory
+
+    ```bash
+    cp -R /shared/seafile /backup/data/
+    cd /backup/data && rm -rf ccnet
+    ```
+  * Use rsync to do incremental backup
+
+    ```bash
+    rsync -az /shared/seafile /backup/data/
+    cd /backup/data && rm -rf ccnet
+    ```
+
+### Recovery
+
+* Restore the databases:
+
+  ```bash
+  cp /backup/data/ccnet_db.sql /shared/ccnet_db.sql
+  cp /backup/data/seafile_db.sql /shared/seafile_db.sql
+  cp /backup/data/seahub_db.sql /shared/seahub_db.sql
+  docker exec -it seafile /bin/sh -c "mysql -uroot ccnet_db < /shared/ccnet_db.sql"
+  docker exec -it seafile /bin/sh -c "mysql -uroot seafile_db < /shared/seafile_db.sql"
+  docker exec -it seafile /bin/sh -c "mysql -uroot seahub_db < /shared/seahub_db.sql"
+  ```
+
+* Restore the seafile data:
+
+  ```bash
+  cp -R /backup/data/* /shared/seafile/
+  ```
+
 ### Troubleshooting
 
 You can run docker commands like "docker logs" or "docker exec" to find errors.
