@@ -374,6 +374,9 @@
         <a href="#admin-only-organization">Organization</a>
         <ul>
             <li><a href="#admin-only-add-organization">Add Organization</a></li>
+            <li><a href="#admin-only-get-organization-info">Get Organization Info</a></li>
+            <li><a href="#admin-only-update-organization-info">Update Organization Info</a></li>
+            <li><a href="#admin-only-delete-organization">Delete Organization</a></li>
             <li><a href="#admin-only-add-organization-user">Add Organization User</a></li>
             <li><a href="#admin-only-get-organization-user-info">Get Organization User Info</a></li>
             <li><a href="#admin-only-update-organization-user-info">Update Organization User Info</a></li>
@@ -7208,11 +7211,128 @@ This api is only supported in pro edition.
 
 **Sample request**
 
-    curl -v -X POST -d "username=example@example.com&password=example&org_name=example&prefix=example&quota=100&member_limit=10" -H "Authorization: Token ccdff90e4d1efe76b2b3d91c06b027a5cff189d4" -H 'Accept: application/json; indent=4' https://cloud.seafile.com/api2/organization/
+```
+curl -v -X POST -d "username=example@example.com&password=example&org_name=example&prefix=example&quota=100&member_limit=10" -H "Authorization: Token ccdff90e4d1efe76b2b3d91c06b027a5cff189d4" -H 'Accept: application/json; indent=4' https://cloud.seafile.com/api2/organization/
+```
 
 **Sample response**
 
-    "success"
+```
+"success"
+```
+
+**Errors**
+
+* 400 Missing argument
+* 400 Email is not valid
+* 400 Quota is not valid
+* 400 URL prefix can only be letters(a-z), numbers, and the underscore character
+* 400 A user with this email already exists
+* 400 An organization with this prefix already exists
+* 403 Feature is not enabled.
+
+### <a id="admin-only-get-organization-info"></a>Get Organization Info
+
+**GET** http://192.168.1.113:8000/api/v2.1/admin/organizations/{org_id}/
+
+**Request parameters**
+
+* org_id
+
+**Sample request**
+
+```
+curl -H 'Authorization: Token 2bac21cab9eb0c4baac10d1e6fc3cf590f0dcf17' -H 'Accept: application/json; charset=utf-8; indent=4' "http://192.168.1.113:8000/api/v2.1/admin/organizations/3/"
+```
+
+**Sample response**
+```
+{
+    "org_name": "123123",
+    "ctime": "2018-06-04T16:54:08+08:00",
+    "creator_name": "1234",
+    "max_user_number": 1232,
+    "creator_email": "1234@1.com",
+    "org_id": 3,
+    "quota": -2,
+    "creator_contact_email": "1234@1.com",
+    "org_url_prefix": "123"
+}
+```
+
+**Errors**
+
+* 400 org_id invalid.
+* 403 Feature is not enabled.
+* 404 Organization not found.
+* 500 Internal Server Error
+
+### <a id="admin-only-update-organization-info"></a>Update Organization Info
+
+**PUT** http://192.168.1.113:8000/api/v2.1/admin/organizations/{org_id}/
+
+**Request parameters**
+
+* org_id
+* org_name
+* max_user_number
+* quota
+
+**Sample request**
+
+```
+curl -X PUT -d "org_name=new_org_name&max_user_number=321&quota=4565" -H 'Authorization: Token 2bac21cab9eb0c4baac10d1e6fc3cf590f0dcf17' -H 'Accept: application/json; charset=utf-8; indent=4' "http://192.168.1.113:8000/api/v2.1/admin/organizations/3/"
+```
+
+**Sample response**
+```
+{
+    "org_name": "new_org_name",
+    "ctime": "2018-06-04T16:54:08+08:00",
+    "creator_name": "1234",
+    "max_user_number": 321,
+    "creator_email": "1234@1.com",
+    "org_id": 3,
+    "quota": 4565000000,
+    "creator_contact_email": "1234@1.com",
+    "org_url_prefix": "123"
+}
+```
+
+**Errors**
+
+* 400 org_id/max_user_number/quota invalid.
+* 403 Feature is not enabled.
+* 404 Organization not found.
+* 500 Internal Server Error
+
+### <a id="admin-only-delete-organization"></a>Delete Organization
+
+**DELETE** http://192.168.1.113:8000/api/v2.1/admin/organizations/{org_id}/
+
+**Request parameters**
+
+* org_id
+
+**Sample request**
+
+```
+curl -X DELETE  -H 'Authorization: Token 2bac21cab9eb0c4baac10d1e6fc3cf590f0dcf17' -H 'Accept: application/json; charset=utf-8; indent=4' "http://192.168.1.113:8000/api/v2.1/admin/organizations/3/"
+```
+
+**Sample response**
+```
+{
+    "success": true
+}
+```
+
+**Errors**
+
+* 400 org_id invalid.
+* 403 Feature is not enabled.
+* 404 Organization not found.
+* 500 Internal Server Error
 
 ### <a id="admin-only-add-organization-user"></a>Add Organization User
 
