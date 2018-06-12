@@ -186,6 +186,15 @@
                 </ul>
             </li>
             <li>
+                <a href="#resumable-upload-file">Resumable Upload File</a>
+                <ul>
+                    <li><a href="#resumable-check-if-enabled">Check If Enable Resumable Upload</a></li>
+                    <li><a href="#resumable-get-upload-link">Get Upload Link</a></li>
+                    <li><a href="#resumable-get-bytes-already-upload">Get Bytes Already Uploaded</a></li>
+                    <li><a href="#resumable-upload-file-1">Upload File</a></li>
+                </ul>
+            </li>
+            <li>
                 <a href="#update-file">Update File</a>
                 <ul>
                     <li><a href="#get-update-link">Get Update Link</a></li>
@@ -3869,6 +3878,195 @@ upload file to `/path-in-seafile-repo/sub_path_1/sub_path_2/`, Seafile will crea
     400 Bad request
     440 Invalid filename
     500 Internal server error
+
+### <a id="resumable-upload-file"></a>Resumable Upload File
+
+Can only be used when size of file to be uploaded bigger than 100MB.
+
+#### <a id="resumable-check-if-enabled"></a>Check If Enable Resumable Upload
+
+**GET** http://192.168.1.113:8000/api/v2.1/repos/{repo_id}/file-uploaded-bytes/?parent_dir={parent_dir}&file_name={file_name}
+
+**Request parameters**
+
+* repo_id
+* parent_dir
+* file_name
+
+**Sample request**
+
+```
+curl -v -H 'Authorization: Token e71c00e93af863ba9bcddb61a46bb4de11d713fc' -H 'Accept: application/json; charset=utf-8; indent=4' "http://192.168.1.113:8000/api/v2.1/repos/09b7d3c0-5f0d-49be-9318-7ca136f386cd/file-uploaded-bytes/?parent_dir=/&file_name=test.md"
+```
+
+**Sample response**
+
+```
+*   Trying 192.168.1.113...
+* Connected to 192.168.1.113 (192.168.1.113) port 8000 (#0)
+> GET /api/v2.1/repos/09b7d3c0-5f0d-49be-9318-7ca136f386cd/file-uploaded-bytes/?parent_dir=/&file_name=test.md HTTP/1.1
+> Host: 192.168.1.113:8000
+> User-Agent: curl/7.50.1
+> Authorization: Token e71c00e93af863ba9bcddb61a46bb4de11d713fc
+> Accept: application/json; charset=utf-8; indent=4
+>
+* HTTP 1.0, assume close after body
+< HTTP/1.0 200 OK
+< Date: Fri, 01 Jun 2018 08:59:27 GMT
+< Server: WSGIServer/0.1 Python/2.7.12+
+< Content-Length: 26
+< Content-Language: en
+< Accept-Ranges: bytes
+< Vary: Accept, Accept-Language, Cookie
+< Allow: GET, HEAD, OPTIONS
+< Content-Type: application/json; charset=utf-8; indent=4
+<
+{
+    "uploadedBytes": 0
+* Closing connection 0
+}
+```
+
+If the response has this header `Accept-Ranges: bytes`, means that Seafile server supports resumable upload file.
+
+**Errors**
+
+- 400 parent_dir/file_name invalid.
+- 404 Library/Folder not found.
+- 500 Internal server error
+
+#### <a id="resumable-get-upload-link"></a>Get Upload Link
+
+Same as <a href="#get-upload-link">Get Upload Link</a>
+
+#### <a id="resumable-get-bytes-already-upload"></a>Get Bytes Already Uploaded
+
+**GET** http://192.168.1.113:8000/api/v2.1/repos/{repo_id}/file-uploaded-bytes/?parent_dir={parent_dir}&file_name={file_name}
+
+**Request parameters**
+
+* repo_id
+* parent_dir
+* file_name
+
+**Sample request**
+
+```
+curl -v -H 'Authorization: Token e71c00e93af863ba9bcddb61a46bb4de11d713fc' -H 'Accept: application/json; charset=utf-8; indent=4' "http://192.168.1.113:8000/api/v2.1/repos/09b7d3c0-5f0d-49be-9318-7ca136f386cd/file-uploaded-bytes/?parent_dir=/path-in-seafile-repo/&file_name=test.md"
+```
+
+**Sample response**
+
+File has not been uploaded before.
+
+```
+{
+    "uploadedBytes": 0
+}
+```
+
+File has already been uploaded 149946368 bytes. If you want to continue uploading this file, upload it begin with 149946368 bytes.
+
+```
+{
+    "uploadedBytes": 149946368
+}
+```
+
+**Errors**
+
+- 400 parent_dir/file_name invalid.
+- 404 Library/Folder not found.
+- 500 Internal server error
+
+#### <a id="resumable-upload-file-1"></a>Upload File
+
+After getting the upload link and `uploadedBytes`, POST to this link for uploading files.
+
+**POST** http://cloud.seafile.com:8082/upload-api/73c5d117-3bcf-48a0-aa2a-3f48d5274ae3
+
+**Request parameters**
+
+* file: local file path.
+* parent_dir : path in your Seafile repo that you want to upload local file to.
+
+**Sample request**
+
+upload file to `/path-in-seafile-repo/`:
+
+```
+curl -H "Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd" -H "Content-Range: bytes 149946368-150994943/1587609600" -F file=@test.md -F parent_dir=/path-in-seafile-repo/ http://cloud.seafile.com:8082/upload-api/73c5d117-3bcf-48a0-aa2a-3f48d5274ae3
+```
+
+* `149946368-150994943` means is now uploading 149946368-150994943 bytes.
+* `1587609600` is file's total bytes.
+
+Example of Request Payload
+
+```
+------WebKitFormBoundaryiUPBhwtLnoqOBFlA
+Content-Disposition: form-data; name="parent_dir"
+
+/
+------WebKitFormBoundaryiUPBhwtLnoqOBFlA
+Content-Disposition: form-data; name="file"; filename="ubuntu-16.04.3-desktop-amd64.iso"
+Content-Type: application/x-cd-image
+
+...file content...
+```
+
+**Sample response**
+
+```
+{
+    "success": true
+}
+```
+
+After the whole file is uploaded, Seafile will do some background index task for this file, it will take time if the file is very large.
+
+If you don't want to wait, you can pass a `need_idx_progress` parameter when you send file upload request.
+
+**Sample request**
+
+upload file to `/path-in-seafile-repo/`:
+
+```
+curl -H "Authorization: Token f2210dacd9c6ccb8133606d94ff8e61d99b477fd" -H "Content-Range: bytes 149946368-150994943/1587609600" -F file=@test.md -F parent_dir=/path-in-seafile-repo/ "http://cloud.seafile.com:8082/upload-api/73c5d117-3bcf-48a0-aa2a-3f48d5274ae3?need_idx_progress=true"
+```
+
+A task id will be returned.
+
+```
+b6a30c27-73ea-415f-bff1-cd4025585b00
+```
+
+Then, you can use this task id to check the background index task progress.
+
+```
+{
+    "indexed":602,
+    "total":602,
+    "status":0,
+    "ret_json":"[
+        {
+            \"name\": \"book.json\",
+            \"id\": \"dfb70f907118e0a96c249316281de429d485d8b2\",
+            \"size\": 602
+        }
+    ]"
+}
+```
+
+Note: You should upload up to 1MB of file content every request.
+
+**Errors**
+
+```
+400 Bad request
+440 Invalid filename
+500 Internal server error
+```
 
 ### <a id="update-file"></a>Update file
 
