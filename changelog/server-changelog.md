@@ -6,7 +6,7 @@ In version 6.3, Django is upgraded to version 1.11. Django 1.8, which is used in
 
 With this upgrade, the fast-cgi mode is no longer supported. You need to config Seafile behind Nginx/Apache in WSGI mode.
 
-### 6.3.0 beta
+### 6.3.0 beta (2018/05/26)
 
 * UI Improvements: moving buttons to top bar, improve scrolling in file/library list
 * Update Django to 1.11, remove fast-cgi support

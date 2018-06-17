@@ -1,12 +1,16 @@
 # SeaDrive Client Changelog
 
-## Known issues
-
-* In version 0.5.1, we add the feature that the mounted drive is only visible to the current user, so some exe files can't be executed if stored in the drive because it needs admin privilege to run
-* In version 0.5.1, rename a non-cached folder or file will lead to sync error.
-* In version 0.5.0 Copy exe files to SeaDrive on Win 7 will freeze the explorer
-
 ## ChangeLog
+
+### 0.9.3 (2018/06/19)
+
+* [Win] Show syncing status at the top level folders
+* [fix] Fix sometimes logout/login lead to empty drive folder
+* Support change cache folder
+* Add "open file/open folder" in search window
+* Set automatical login to true in SSO mode
+* [Mac] Fix compability with AirDrop
+
 
 ### 0.9.2 (2018/05/05)
 
