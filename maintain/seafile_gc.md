@@ -185,4 +185,8 @@ Add the following line (change the location of your script accordingly!)
 
     0 2 * * Sun /opt/haiwen/seafile/cleanupScript.sh
     
-The script wil then run every Sunday at 2:00 AM.
+The script will then run every Sunday at 2:00 AM.
+
+## GC in the [seafile docker container](https://github.com/haiwen/seafile-docker)
+
+To perform garbage collection inside the seafile docker container, you must run the `/scripts/gc.sh` script. Simply run `docker exec <whatever-your-seafile-container-is-called> /scripts/gc.sh`.
