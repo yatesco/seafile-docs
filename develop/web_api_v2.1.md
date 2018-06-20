@@ -165,6 +165,7 @@
         <a href="#file">File</a>
         <ul>
             <li><a href="#view-file-through-owa">View File Through Owa</a></li>
+            <li><a href="#view-file-through-smart-link">View File Through Smart Link</a></li>
             <li><a href="#download-file">Download File</a></li>
             <li><a href="#get-file-detail">Get File Detail</a></li>
             <li><a href="#get-file-history">Get File History</a></li>
@@ -3367,6 +3368,38 @@ For more info, you can see [this official docs](http://wopi.readthedocs.org/en/l
 * 403 Office Web App feature not enabled.
 * 403 Office Web App feature only supported in professional edition.
 * 404 File/Library not found.
+* 500 Internal Server Error
+
+### <a id="view-file-through-smart-link"></a>View File Through Smart Link
+
+**GET** "http://192.168.1.113:8000/api/v2.1/smart-link/?repo_id={repo_id}&path={path}&is_dir={is_dir}"
+
+**Request parameters**
+
+* `repo_id`
+* `path`, path of file/folder.
+* `is_dir`, `true` or `false`.
+
+**Sample request for view**
+
+```
+curl -H "Authorization: Token 1cb7908b876d9b1708c757a347f2e6346456ab91" -H 'Accept: application/json; indent=4' "http://192.168.1.113:8000/api/v2.1/smart-link/?repo_id=d4f596ed-09ea-4ac6-8d59-12acbd089097&path=/8.md&is_dir=false"
+```
+
+**Sample response**
+
+```
+{
+    "smart_link": "http://192.168.1.113:8000/smart-link/3eb1657f-db82-4329-a05e-9c087022fb2f/8.md"
+}
+```
+
+**Errors**
+
+* 400 repo_id/path/is_dir invalid.
+* 400 is_dir can only be 'true' or 'false'.
+* 403 Permission denied.
+* 404 Library/Foldef/File/ not found.
 * 500 Internal Server Error
 
 ### <a id="download-file"></a>Download File
